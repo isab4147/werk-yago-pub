@@ -1,0 +1,310 @@
+\section{Trabalho e potencial eletrostático}
+
+\frame{
+	\frametitle{Trabalho da força elétrica}
+	\begin{block}{Analogia mecânica}
+		Trabalho e energia são grandezas diretamente proporcionais. Essa é a definição para o trabalho quando se estuda a energia mecânica.
+		Vemos também na energia mecânica que o trabalho é realizado por uma força constante e paralela ao deslocamento de um corpo correspondente à variação de energia mecânica sofrida pelo corpo.
+	\end{block}
+}
+
+\frame{
+	\frametitle{Trabalho da força elétrica}
+	\begin{block}{Definição}
+		Consideremos o campo elétrico gerado por uma carga elétrica pontual $Q$, fixa num ponto $O$. Uma carga elétrica de prova $q$ é transportada do ponto $A$ para o ponto $B$ do campo, ao longo de uma linha de força. O trabalho $\tau_{A,B}$ realizado pela força elétrica, no deslocamento da carga elétrica $q$ do ponto A até o ponto $B$ é dado por: \\
+		$$\boxed{\tau_{AB} = q \left( K \dfrac{Q}{d_A} - K \dfrac{Q}{d_B}\right) }$$
+	\end{block}
+
+	\centering
+	\input{Figuras/Ch09/tikz3.tex}
+%	\centerline{\includegraphics[width=0.6\linewidth]{Figuras/Ch09/trabalho1.PNG}}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de uma carga pontual $Q$}
+	\begin{block}{Motivação}
+		Podemos dizer que o potencial elétrico é uma grandeza física que foi proposta a fim de descrever campos elétricos escalarmente. Portanto, podemos dizer que o conceito de potencial elétrico expressa o efeito de um campo elétrico em termos da posição dentro desse campo.
+		\begin{itemize}
+			\item Sendo uma \textbf{grandeza escalar}, necessita apenas, para ficar totalmente definida, da intensidade e de uma unidade de medida. Portanto, não requer nem direção, nem sentido.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de uma carga pontual $Q$}
+	\begin{block}{Fórmula}
+		As grandezas $K \ \dfrac{Q}{d_A}$ e $K \ \dfrac{Q}{d_B}$ são chamados potenciais elétricos nos pontos $A$ e $B$ do campo elétrico gerado pela carga elétrica $Q$ e são indicadas, respectivamente por $V_A$ e $V_B$
+		\begin{itemize}
+			\item Quando $d_B$ tende a infinito, o trabalho tem seu valor máximo ($= V_A$)
+		\end{itemize}
+		$$\boxed{V = K \ \dfrac{Q}{d}}$$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de uma carga pontual $Q$}
+	\begin{block}{Diferença de potencial}
+		A diferença $V_A - V_B$ é indicada pela letra $U$ e é denominada \textbf{diferença de potencial} (d.d.p.) entre os pontos $A$ e $B$ ou \textbf{tensão elétrica} entre os pontos $A$ e $B$.
+		\vspace{0.3cm}
+		\begin{itemize}
+			\item Da fórmula inicial de trabalho, temos:
+		\end{itemize}
+		$$\tau_{AB} = q \Bigg(K \ \dfrac{Q}{d_A} - K \ \dfrac{Q}{d_B}\Bigg) = q(V_A - V_B) \implies \boxed{\tau_{AB} = q \times U}$$
+		\begin{itemize}
+			\item A unidade de tensão pelo SI é o Joule por Coulomb (\si{\joule\per\coulomb}). A essa unidade convencionou-se dar o nome de \textbf{Volt} (\si{\volt}).
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de uma carga pontual $Q$}
+	\begin{block}{Exemplo \#01}
+		Uma carga pontual $Q = \SI{2.8e-5}{\coulomb}$ está colocada no vácuo. Considere um ponto $A$ distante de \SI{20}{\centi\meter} dessa carga, e outro ponto $B$ distante de \SI{30}{\centi\meter}. (a) Determine os potenciais elétricos nos pontos $A$ e $B$ e a d.d.p. entre eles. (b) Encontre o trabalho da força elétrica que age em uma carga de prova $q = \SI{2.0}{\nano\coulomb}$ ao ser deslocada de $A$ para $B$.
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de uma carga pontual $Q$}
+	\begin{block}{Resolução}
+		(a)
+		\begin{align*}
+		V_A &= K \ \dfrac{Q}{d_A} = \num{9e9} \dfrac{\num{2.8e-5}}{\num{0,2}} = \SI{12.6e5}{\volt}\\
+		V_B &= K \ \dfrac{Q}{d_B} = \num{9e9} \dfrac{\num{2.8e-5}}{\num{0,3}} = \SI{8.4e5}{\volt}
+		\end{align*}
+		Deste modo
+		\[ U = V_A - V_B = \num{12.6e5} - \num{8.4e5} = \SI{4.2e5}{\volt} \]
+		
+		(b) $\tau_{A,B} = q \cdot U = \num{2e-9}\cdot \num{4,2e5} = \SI{8.4e-4}{\joule}$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de várias cargas}
+	\begin{block}{Definição}
+		Consideremos um campo elétrico que seja gerado por $n$ cargas puntiformes. Na região do campo, consideremos um ponto geométrico $P$, como mostra a figura. Qual o potencial elétrico resultante em $P$ e gerado pelas $n$ cargas elétricas?
+	\end{block}
+
+	\centering
+	
+	\setmyunit{1cm}
+	
+	\begin{tikzpicture}
+		\filldraw[black] (0,0) circle (1pt) node[above] {$ P $};
+		
+		\draw[dashed] (0,0) -- node[midway, above] {$ d_1 $} +(-30:-2);
+		\draw[fill=white] (0,0) +(-30:-2) circle (0.25) node[above=0.25] {$ Q_1 $};
+		
+		\draw[dashed] (0,0) -- node[midway, above] {$ d_2 $} +(0:-2);
+		\draw[fill=white] (0,0) +(0:-2) circle (0.25) node[above=0.25] {$ Q_2 $};
+		
+		\draw[dashed] (0,0) -- node[midway, above] {$ d_3 $} +(30:-2);
+		\draw[fill=white] (0,0) +(30:-2) circle (0.25) node[above=0.25] {$ Q_3 $};
+		
+		\draw (0,0) +(55:-2) node[rotate=-40] {\Large $ \cdots $};
+		
+		\draw[dashed] (0,0) -- node[midway, left] {$ d_n $} +(90:-2);
+		\draw[fill=white] (0,0) +(90:-2) circle (0.25) node[left=0.25] {$ Q_n $};
+	\end{tikzpicture}
+%	\centerline{\includegraphics[width=0.45\linewidth]{Figuras/Ch09/potencial1.jpg}}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de várias cargas}
+	\begin{block}{Fórmula}
+		Em primeiro lugar, deve-se calcular o potencial que cada carga cria \textbf{isoladamente} em $P$, usando a seguinte equação:
+		$$V_1 = K \ \dfrac{Q_1}{d_1} \hspace{0.8cm} V_2 = K \ \dfrac{Q_2}{d_2} \hspace{0.8cm} ... \hspace{0.8cm} V_n = K \ \dfrac{Q_n}{d_n}$$
+		Em seguida, \textbf{soma-se os potenciais obtidos}, levando em conta o sinal positivo ou negativo de cada um:
+		$$\boxed{V = V_1 + V_2 + ... + V_n}$$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de várias cargas}
+	\begin{block}{Exemplo \#01}
+		Duas cargas pontuais $Q_1 = 2,0 \ \si{\micro}$C e $Q_2 = -4,0 \ \si{\micro}$C estão colocadas no vácuo a $90$ cm uma da outra. Determine o potencial no ponto médio da reta que une as duas cargas.
+	\end{block}
+
+	\begin{block}{Resolução}
+		(a)
+		\begin{align*}
+			V_1 &= K \ \dfrac{Q_1}{d_1} = \num{9e9} \ \dfrac{\num{2.0e-6}}{\num{0,45}} = \SI{4.0e4}{\volt} \\
+			V_2 &= K \ \dfrac{Q_2}{d_2} = \num{9e9} \ \dfrac{(\num{-4.0e-6})}{\num{0,45}} = \SI{-8.0e4}{\volt}
+		\end{align*}
+		Deste modo \[ V = V_1 + V_2 = \num{4.0e4} - \num{8.0e4} = \SI{-4.0e4}{\volt} \]
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo elétrico uniforme}
+	\begin{block}{Definição}
+		Considere uma carga elétrica positiva $q$ num ponto $A$ de um campo elétrico uniforme. A carga se desloca de $A$ para $B$ sob ação de uma força $F$ constante.
+	\end{block}
+
+	\centering
+	
+	\setmyunit{1cm}
+	\begin{tikzpicture}
+		\draw (0,0) rectangle (0.5,-4) (6,0) rectangle +(0.5,-4);
+		
+		\draw (2,-0.25) rectangle +(0.15,-0.15) node[pos=.5] {$ \cdot $};
+		\draw (4,-0.25) rectangle +(0.15,-0.15) node[pos=.5] {$ \cdot $};
+		
+		\foreach \y in {0.25,0.75,...,3.75} {
+			\draw (0.25,-\y) node {\Large $ + $};
+			
+			\draw[red,-Latex] (0.5,-\y) -- (6,-\y);
+			
+			\draw (6.25,-\y) node {\Large $ - $};
+		}
+	
+		\draw[blue] (2,-0.15) node[above] {$ V_A $} -- (2,-3.85) (4,-0.15) node[above] {$ V_B $} -- (4,-3.85);
+		\draw[dashed] (2,-3.85) -- +(0,-0.4) (4,-3.85) -- +(0,-0.4);
+		
+		\draw[<->] (2,-4.15) -- +(2,0) node[midway,above] {$ d $};
+		
+		\filldraw[fill=white] (2,-2) circle (0.25) node[] {$ q $};
+		\draw[-Latex] ($ (2,-2)+(0.25,0) $) -- +(0.5,0);
+		
+		\draw[red] (5.5,-1) node {$ \vec{E} $};
+	\end{tikzpicture}
+%	\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch09/uniforme.png}}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo elétrico uniforme}
+	\begin{block}{Definição}
+		Durante o deslocamento, a força elétrica realiza um trabalho $\tau_{AB}$, e como $F$ é constante, o trabalho pode ser calculado por: \\
+		$$\tau_{AB} = F \times d$$ \\
+		Porém, $F = q \times E$, então: \\
+		$$\boxed{\tau_{AB} = q \times E \times d}$$ \\
+		\vspace{0.3cm}
+		Comparando com $\tau_{AB} = q \times U$, temos que $\boxed{U = E \times d}$, sendo $U = V_A - V_B$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo elétrico uniforme}
+	\begin{block}{Comportamento do potencial elétrico}
+		De $E = U/d$, podemos verificar que a unidade de campo elétrico pode ser dada por \si{\volt\per\meter}. Verifica-se ainda, que o potencial em $A$ é maior que $B$. Isso significa que o potencial no campo elétrico uniforme \textbf{decresce} linearmente desde a placa positiva até a negativa.
+	\end{block}
+
+	\centering
+	\setmyunit{1cm}
+	\begin{tikzpicture}
+		\draw[->,name path=Ox] (-0.5,0) -- (3,0) node[right] {$ d(\si{\meter}) $};
+		\draw[->] (0,-1.5) -- (0,2) node[above] {$ v(\si{\volt}) $};
+		
+		\node[below left] at (0,0) {$ 0 $};
+		
+		\draw[name path=sl line] (0,1.5) -- (3,-1.5);
+		
+		\path[name path=pAx] (0,1) -- +(2,0);
+		\path[name intersections={of=sl line and pAx, by=A}];
+		
+		\path[name path=pBx] (0,-1) -- +(3,0);
+		\path[name intersections={of=sl line and pBx, by=B}];
+
+		\draw[dashed] (0,1) node[left] {$ 20 $} -- (A) node[above right] {$ A $} -- (A|-0,0);
+		
+		\draw[dashed] (0,-1) node[left] {$ -20 $} -- (B) node[right] {$ B $} -- (B|-0,0);
+		
+	\end{tikzpicture}
+%	\centerline{\includegraphics[width=0.45\linewidth]{Figuras/Ch09/uniforme2.jpg}}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de um condutor esférico eletrizado}
+	\begin{block}{Caso $\#$01: ponto $A$ interno}
+		Como vimos anteriormente, a intensidade do vetor campo elétrico no interior de um condutor carregado de eletricidade e em equilíbrio eletrostático é sempre \textbf{nulo}.
+		\begin{itemize}
+			\item Assim, se colocarmos uma partícula eletrizada com carga $q$ sobre um ponto $A$ dentro da esfera e ela for deslocada para um ponto $B$, também interno à esfera, nenhum trabalho ($\tau_{AB}$) será realizado sobre ela e pela equação: $V_A - V_B = \tau_{AB}/q$, temos que $V_A = V_B$. \\
+
+			\item Se $V_A$ fosse diferente de $V_B$ haveria fluxo de cargas entre esses dois pontos, e isso não pode ocorrer quando a esfera está em equilíbrio eletrostático. \\
+
+			\item Dessa forma, podemos dizer que \textbf{no interior de uma esfera eletrizada em equilíbrio eletrostático, todos os pontos têm o mesmo potencial elétrico}.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de um condutor esférico eletrizado}
+	\begin{block}{Caso $\#$02: ponto $B$ pertencente à esfera}
+		Quando temos um ponto $B$ exatamente na superfície da esfera ocorre novamente que o trabalho realizado para levar uma carga $q$ de $A$ até $B$ é igual a zero, dessa forma podemos concluir que \textbf{o potencial elétrico em qualquer ponto situado no interior de uma esfera eletrizada em equilíbrio eletrostático é igual ao potencial em sua superfície}.
+		\begin{itemize}
+			\item Devemos lembrar que esferas eletrizadas nessas condições de equilíbrio eletrostático podem ser consideradas como se tivessem toda sua carga concentrada em seu centro. \\
+		\end{itemize}
+		$$\boxed{V = K \ \dfrac{Q}{R}}$$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de um condutor esférico eletrizado}
+	\begin{block}{Caso $\#$03: ponto $C$ externo}
+		Se tivermos um ponto $C$ localizado externamente à esfera a uma distância $d$ do seu centro (dessa forma $d > R$), o potencial elétrico da esfera em $C$ pode ser calculado pela equação:
+		$$\boxed{V = K \ \dfrac{Q}{d}}$$
+	\end{block}
+}
+
+\frame{
+	\frametitle{Potencial elétrico no campo de um condutor esférico eletrizado}
+	\begin{block}{Resumindo...}
+		O potencial para pontos no interior da esfera ($d \leq R$) é constante, e para pontos fora da esfera ($d > R$) decresce de forma inversamente proporcional à distância ($d$).
+	\end{block}
+	
+	\setmyunit{1cm}
+	
+	\begin{minipage}{0.15\linewidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\draw (0,0) circle (1);
+			
+			\draw (0,0) -- node[above,xshift=-5pt] {$ R $} (20:1);
+			
+			\foreach \x in {0,30,...,330}
+				\draw (\x:0.8) node {$ + $};
+		\end{tikzpicture}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.38\linewidth}
+		\centering
+		
+		\input{Figuras/Ch09/tikz1.tex}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.38\linewidth}
+		\centering
+		
+		\input{Figuras/Ch09/tikz2.tex}
+	\end{minipage}
+
+%	\centerline{\includegraphics[width=1.1\linewidth]{Figuras/Ch09/potencialesfera.png}}
+}
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+
+		01. Uma partícula eletrizada com carga $q = \SI{3.0}{\micro\coulomb}$ é colocada em repouso num ponto $A$ de um campo elétrico uniforme de intensidade $E = \SI{2.0e3}{\volt\per\meter}$, Num dado intervalo de tempo, ela se desloca para um ponto $B$. Sabendo que a d.d.p. entre os pontos $A$ e $B$ é $U = \SI{40}{\volt}$, determine: (a) o trabalho realizado pela força elétrica sobre a partícula; (b) a energia cinética da partícula ao atingir o ponto B; (c) o deslocamento realizado pela partícula; (d) a intensidade da força elétrica que age na partícula.
+
+		\vspace{0.5cm}
+
+		02. (FUVEST)  Uma esfera condutora de raio igual a \SI{1.6}{\centi\meter}, inicialmente neutra, tem massa igual a \SI{2.13225}{\gram} quando medida numa balança eletrônica digital de grande precisão. Supondo a esfera neutra, que quantidade de elétrons deve ser retirada desta esfera para que o potencial elétrico em seu interior seja de \SI{0.90}{\volt}?
+
+	\end{block}
+}
+
+
+\section*{Referências}
+
+\frame{
+	\frametitle{Referências e Exercícios Complementares}
+	\begin{itemize}
+		\item Física, Ciência e Tecnologia – Vol 3. PENTEADO, Paulo César M; TORRES, Carlos Magno A. Ed. Moderna (2006)
+	\end{itemize}
+	%\centering{\alert{Página 36 - \textbf{1.6.1 até 1.6.5, 1.6.17 até 1.6.19}}} \\
+	%https://www.youtube.com/watch?v=IUgS7Uw-qBI
+	\centering{\alert{Lista de exercícios 09}}
+}

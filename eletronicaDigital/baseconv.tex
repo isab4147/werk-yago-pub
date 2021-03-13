@@ -1,0 +1,186 @@
+% TO BASE 10
+
+% FROM https://tex.stackexchange.com/questions/400806/n-base-to-decimal-calculations-in-latex
+% From https://tex.stackexchange.com/a/400571/4686
+\newcommand{\tablenode}[2]
+{\tikz[baseline=(#1.base),remember picture]\node[inner sep=0pt,name=#1]{#2};}
+
+\makeatletter
+% Works with bases up to 16, using ABCDEF as digits for 10, ..., 15
+% (we use that TeX understand "A, ..., "F; for higher bases we would
+% need macros converting from the base-b digit to the base-10 number)
+\newcommand\ConvertFromBase[2]{%
+	\begingroup
+	\ttfamily
+	\edef\my@base{#1}%   allow #1 to be a macro
+	\edef\my@number{#2}% allow #2 to be a macro
+	\gdef\my@total{0}%
+	\gdef\my@power{1}%
+	\edef\my@nbofdigits{\expandafter\xintLength\expandafter{\my@number}}%
+	% make fun things with colors
+	\definecolorseries{foo}{rgb}{last}{red}{blue}%
+	\resetcolorseries[\my@nbofdigits]{foo}%
+	% input number
+	\global\let\my@nodeindex\my@nbofdigits
+	\begin{tabular}{@{}*{\my@nbofdigits}{c@{}}c@{}}
+		\xintFor* ##1 in {\my@number}\do{%
+			\tablenode{A\my@nodeindex}{\textcolor{foo!!+}{##1}}%
+			\xdef\my@nodeindex{\the\numexpr\my@nodeindex-1}% step by -1
+			&}%
+		${}_{\my@base}$
+	\end{tabular} %<-- deliberate space
+	% make fun things with colors
+	\definecolorseries{foo}{rgb}{last}{blue}{red}%
+	\resetcolorseries[\my@nbofdigits]{foo}%
+	% output conversion
+	% \my@nodeindex is at 0
+	\begin{tabular}[t]{@{}l@{}c@{}r@{}}
+		&\\
+		\xintFor* ##1 in % \xintReverseOrder does not expand its argument
+		% \xintReverseDigits does but it works only with 0..9 digits
+		% we could use \xintReverseOrder{#2}, if we did not need
+		% to allow #2 to be a macro itself.
+		{\expandafter\xintReverseOrder\expandafter{\my@number}}\do{%
+			\xdef\my@nodeindex{\the\numexpr\my@nodeindex+1}% step by +1
+			\tablenode{B\my@nodeindex}
+			{\textcolor{foo}{##1}${}\cdot\my@base^{\the\numexpr\my@nodeindex-1}$}%
+			&${}={}$&%
+			% use " notation to allow also A, B, C, D, E, F (only uppercase)
+			\edef\my@partial{\xintiiMul{\the\numexpr"##1\relax}{\my@power}}%
+			\xdef\my@total{\xintiiAdd{\my@total}{\my@partial}}%
+			\xdef\my@power{\xintiiMul{\my@base}{\my@power}}%
+			\textcolor{foo!!+}{$\my@partial$}\\}%
+		\cline{3-3}
+		&&\textcolor{red}{$\my@total$}
+	\end{tabular}%<-- no space here
+	% workaround the fact that foo!!+ from xcolor steps twice when used
+	% with tikz's \draw (I guess once from the arrow, once from the arrow tip)
+	\resetcolorseries[\numexpr2*\my@nbofdigits\relax]{foo}%
+	% DRAWING THE ARROWS
+	%
+	% YOU NEED TO COMPILE AT LEAST TWICE FOR THE START AND END
+	% NODE LOCATIONS TO STABILIZE
+	%
+	\begin{tikzpicture}[remember picture, overlay, >=stealth]
+	% tikz natural language:
+	% (this loop uses first the nodes for the least significant digits
+	%  and ends up with the ones for the most significant digits)
+	\foreach\my@nodeindex in {1, 2, ..., \my@nbofdigits}
+	{\draw [->,very thick,{foo!!+}] 
+		(A\my@nodeindex.south) to[out=270,in=180] (B\my@nodeindex.west);}%
+	% or again with an \xintFor loop
+	%  \xintFor* ##1 in {\xintSeq{1}{\my@nbofdigits}}\do{%
+	%     \draw [->,very thick,{foo!!+}] 
+	%           (A##1.south) to[out=270,in=180] (B##1.west);%
+	%    }%
+	\end{tikzpicture}%<-- no space here
+	\endgroup
+}
+\makeatother
+
+
+% INTEGERS
+
+\newcount\total
+\newcount\lasttotal
+\newcount\targetbase
+
+\def\basetenconversiontable#1#2{%
+    \begin{tikzpicture}[every node/.style={minimum width=1cm, minimum height=0.5cm}, x=1cm,y=0.5cm]
+    %
+    \total=#1%
+    \targetbase=#2
+    \def\newnumber{}
+    %
+    \pgfmathloop
+    \ifnum\total<1
+    \else
+        %
+        \ifnum\pgfmathcounter>1
+            \node at (\pgfmathcounter, -\pgfmathcounter+1) (tmp) {\the\targetbase};
+            \draw (tmp.north west) |- (tmp.south east);
+            %
+            \node at (\pgfmathcounter-1, -\pgfmathcounter) (tmp) {\pgfmathparse{int(\total*\targetbase)}\pgfmathresult};
+            \draw (tmp.south west) -- (tmp.south east);
+            %
+            \pgfmathparse{int(\lasttotal-\total*\targetbase)}%
+            \let\digit=\pgfmathresult
+            \node at (\pgfmathcounter-1, -\pgfmathcounter-1) [text=red] {\digit};
+            \edef\newnumber{\digit\newnumber}
+        \fi
+        %
+        \ifnum\total<\targetbase
+                \edef\newnumber{\the\total\newnumber}
+            \node at (\pgfmathcounter, -\pgfmathcounter) [text=red]  {\the\total};
+        \else
+            \node at (\pgfmathcounter, -\pgfmathcounter) {\the\total};
+        \fi
+        \lasttotal=\total
+        \divide\total by\targetbase
+    \repeatpgfmathloop    
+    \draw [->] (\pgfmathcounter-1,-\pgfmathcounter-1) -- ++(-0.5,0); 
+    \node [anchor=west] at (1, -\pgfmathcounter-2) {$#1=\newnumber_{\the\targetbase}$};
+    \end{tikzpicture}   
+}
+
+% FRAC
+
+\newcommand\MiniConvert[1]{\ifcase #1
+	0\or 1\or 2\or 3\or 4\or 5\or 6\or 7\or 8\or 9\or A\or B\or C\or D\or E\or
+	F\or G\or H\or I\or J\or K\or L\or M\or N\or O\or P\or Q\or R\or S\or T\or
+	U\or V\or W\or X\or Y\or Z\else\ERROR\fi}%
+\newcommand\ConvertitEnBaseB[3][25]{% #1 MUST BE OF THE 0.<decimal digits> type
+	% (we can not use 1/5 because numprint's \np macro does not like the /)
+	% the dot will be converted into a comma by \np macro
+	% computes 25 digits by default. Abort earlier if all become zeros.
+	% #3 = base < 36
+	\def\ConvertiDots{\dots}%
+	\noindent Número para converter para a base #3: \np{#2}.\par
+	\def\Converti{0,}%<<<< LOCALIZE TO YOUR LANGUAGE
+	\edef\ConvertitNombre{\xintRaw{#2}}%
+	\xintiloop[1+1]
+	\edef\ConvertitBFoisNombre{\xintMul{#3}{\ConvertitNombre}}%
+	\edef\ConvertitBFoisNombrePartieInt
+	{\xintTTrunc{\ConvertitBFoisNombre}}%
+	\edef\ConvertitBFoisNombrePartieFrac
+	{\xintTFrac{\ConvertitBFoisNombre}}%
+	$#3\times\np{\PolDecToString{\ConvertitNombre}}
+	= \boxed{\ConvertitBFoisNombrePartieInt} +
+	\np{\PolDecToString{\ConvertitBFoisNombrePartieFrac}}$
+	\hfill
+	\llap{${}\longrightarrow{}$\MiniConvert\ConvertitBFoisNombrePartieInt}\par
+	\edef\Converti{\Converti\MiniConvert{\ConvertitBFoisNombrePartieInt}}%
+	\let\ConvertitNombre\ConvertitBFoisNombrePartieFrac
+	\xintifZero{\ConvertitNombre}
+	{\xintbreakiloopanddo\let\ConvertiDots\empty.}%
+	{}%
+	\ifnum#1>\xintiloopindex\space
+	\repeat
+	\noindent\mbox{}\hfill$\np{#2}=[$\Converti\ConvertiDots$]_{#3}$\par
+}
+\newcommand\ConvertitFracEnBaseB[3][25]{%
+	% #1 MUST BE OR EXPAND TO A/B WITH 0 < A < B
+	% computes 25 digits by default. Abort earlier if all become zeros.
+	\def\ConvertiDots{\dots}%
+	\edef\ConvertitNombre{\xintIrr{#2}}%
+	\def\Converti{0,}%<<<< LOCALIZE TO YOUR LANGUAGE
+	\noindent Número para converter para a base #3: \ConvertitNombre.\par
+	\xintiloop[1+1]
+	\edef\ConvertitBFoisNombre{\xintMul{#3}{\ConvertitNombre}}%
+	\edef\ConvertitBFoisNombrePartieInt
+	{\xintTTrunc{\ConvertitBFoisNombre}}%
+	\edef\ConvertitBFoisNombrePartieFrac
+	{\xintTFrac{\ConvertitBFoisNombre}}% does \xintREZ, not good for us
+	$#3\times\xintFrac{\xintRawWithZeros\ConvertitNombre}
+	= \boxed{\ConvertitBFoisNombrePartieInt} +
+	\xintFrac{\xintRawWithZeros\ConvertitBFoisNombrePartieFrac}$\par
+	\hfill
+	\llap{${}\longrightarrow{}$\MiniConvert\ConvertitBFoisNombrePartieInt}\par
+	\edef\Converti{\Converti\MiniConvert{\ConvertitBFoisNombrePartieInt}}%
+	\let\ConvertitNombre\ConvertitBFoisNombrePartieFrac
+	\xintifZero{\ConvertitNombre}
+	{\xintbreakiloopanddo\let\ConvertiDots\empty.}%
+	{}%
+	\ifnum#1>\xintiloopindex\space
+	\repeat
+	\noindent\mbox{}\hfill$\xintFrac{#2}=[$\Converti\ConvertiDots$]_{#3}$\par}

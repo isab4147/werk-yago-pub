@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+		\draw (0,0) circle (1) node[above=1.01] {$ (Q) $};
+		\draw[dotted] (0,0) circle (2);
+		
+		\draw[dashed] (0,0) -- node[above,near end] {$ d $} (30:2);
+		\draw[-Latex] (30:2) -- +(30:0.5) node[right] {$ \vec{E} $};
+
+		\draw[-Latex] (0,0) -- node[above] {$ R $} (-45:1) -- +(-45:1) node[right] {$ \vec{E} $};
+		
+		\filldraw (0,0) circle (2pt) node["$ A $" left] {} (-45:1) circle (2pt) node["$ B $" below] {} (30:2) circle (2pt) node["$ C $" above] {};
+	\end{tikzpicture}

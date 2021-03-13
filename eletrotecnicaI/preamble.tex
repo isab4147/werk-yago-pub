@@ -1,0 +1,344 @@
+\mode<presentation>
+{
+ \usetheme{JuanLesPins}
+ \usefonttheme{serif}
+ \usecolortheme{beaver}
+ \setbeamercovered{invisible} \setbeamertemplate{blocks}[rounded][shadow=true] 
+ \setbeamertemplate{navigation symbols}{} 
+ \setbeamertemplate{footline}[frame number]
+ \usecolortheme[RGB={122,4,24}]{structure}
+}
+
+\setcounter{tocdepth}{1}
+
+
+%\usepackage{fancybox}
+%\usepackage{graphicx}
+%\usepackage{colortbl}
+%\usepackage{textcomp}
+%\usepackage{multirow}
+%\usepackage{calligra}
+%\usepackage{srcltx}
+%\usepackage{enumerate}
+%\newcommand{\degree}{\ensuremath{^\circ}}
+%\newcommand{\xmark}{\ding{55}}
+%\usepackage{multimedia}
+%\usepackage{esvect}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%
+
+% BASICAO
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[useregional]{datetime2}
+
+% Para usar com PDFTEX
+%\usepackage[brazilian]{babel}
+%\usepackage[utf8]{inputenc}
+
+% Para usar com XELATEX
+\usepackage{polyglossia}
+\setdefaultlanguage{brazil}
+
+
+% FIGURAS
+\usepackage{graphicx,float}
+\usepackage{booktabs, longtable}
+
+
+% TABELAS E DIAGRAMAÇÃO
+\usepackage{enumerate}
+\usepackage{multirow,multicol}
+\usepackage{makecell}
+\usepackage{array}
+%\usepackage{fancybox}
+%\usepackage{colortbl}
+
+\renewcommand{\arraystretch}{1.2}
+
+% ?????????????
+
+% Fonte Courier?
+%\usepackage{courier}
+
+% Simbolos
+%\usepackage{textcomp}
+
+% Texto caligrafico
+%\usepackage{calligra}
+
+% Conexão entre pdfs e dvis
+%\usepackage{srcltx}
+
+% Para delimitar environments de tipo float
+%\usepackage{cprotect}
+
+% Para texto literal (programação)
+%\usepackage{verbatim}
+
+% Pegar números relacionados a referências para uso
+%\usepackage{refcount}
+
+% Para colocar relógios de ponteiro
+%\usepackage{tdclock}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% COISAS MATEMATICAS %%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amssymb,amsfonts,xfrac,cancel,bm,mathtools}
+
+% Notação de ângulos para complexos
+%\usepackage{steinmetz}
+
+% Notação de derivadas
+%\usepackage[thinc]{esdiff}
+%\usepackage{commath}
+
+% Setinhas para notação de vetor
+%\usepackage{esvect}
+
+% Negrito para notação de vetor
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+% Fonte para notação em rsfs
+%\usepackage{mathrsfs}
+
+% Para mapas de karnaugh
+%\usepackage{karnaugh-map}
+
+
+% setup do (circui)tikz
+\usepackage[american, nooldvoltagedirection, siunitx,
+cuteinductors]{circuitikz}
+
+% Comando para mudar escala das tikzpictures \setmyunit{length}
+\newcommand{\setmyunit}[1]{\tikzset{every picture/.style={x=#1, y=#1}}}
+
+\setmyunit{2cm}
+
+% Unidades (inclusa no circuitikz)
+%\usepackage{siunitx}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc,
+patterns, arrows.meta, decorations.pathmorphing,decorations.pathreplacing,angles,quotes,intersections}
+
+
+\tikzset{ang/.style={draw, angle radius=15pt,angle eccentricity=1.3}}
+
+%\newlength{\ladderskip}
+%\setlength{\ladderskip}{5\tikzcircuitssizeunit} % 5\tikzcircuitssizeunit = 35pt
+%\newlength{\ladderrungsep}
+%\setlength{\ladderrungsep}{.2\ladderskip}
+%\def\ladderrungend#1{\pgftransformyshift{-#1\ladderskip-\ladderrungsep}}
+%\newcommand{\powerrails}[1][0.7]{\draw let \p1=(laddertopright) in
+%	(0,\y1+#1\ladderskip) -- (0,\ladderskip)
+%	(\x1,\y1+#1\ladderskip) -- (\x1,\ladderskip);}
+
+% Cores (inclusa no tikz)
+%\usepackage{xcolor}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% COISAS DOIDAS %%%%%%%%%%%%%%%%%
+
+% setup do siunitx
+\sisetup{per-mode=symbol,output-decimal-marker={,},math-micro=\text{µ},text-micro=µ,exponent-product = \cdot,math-ohm=\Omega,
+	text-ohm=\ensuremath{\Omega}}
+
+% MATLAB
+%\usepackage{xspace}
+%\newcommand{\MATLAB}{\textsc{Matlab}\xspace}
+
+% Notação de negação lógica
+\newcommand{\notted}[1]{%
+	\overline{#1}%
+}
+
+% Padrões de linhas que não funcionam no overleaf
+
+%\pgfdeclarepatternformonly{south east lines}{\pgfqpoint{-0pt}{-0pt}}{\pgfqpoint{3pt}{3pt}}{\pgfqpoint{3pt}{3pt}}{
+%	\pgfsetlinewidth{0.4pt}
+%	\pgfpathmoveto{\pgfqpoint{0pt}{3pt}}
+%	\pgfpathlineto{\pgfqpoint{3pt}{0pt}}
+%	\pgfpathmoveto{\pgfqpoint{.2pt}{-.2pt}}
+%	\pgfpathlineto{\pgfqpoint{-.2pt}{.2pt}}
+%	\pgfpathmoveto{\pgfqpoint{3.2pt}{2.8pt}}
+%	\pgfpathlineto{\pgfqpoint{2.8pt}{3.2pt}}
+%	\pgfusepath{stroke}}
+%
+%\pgfdeclarepatternformonly{south west lines}{\pgfqpoint{-0pt}{-0pt}}{\pgfqpoint{3pt}{3pt}}{\pgfqpoint{3pt}{3pt}}{
+%	\pgfsetlinewidth{0.4pt}
+%	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+%	\pgfpathlineto{\pgfqpoint{3pt}{3pt}}
+%	\pgfpathmoveto{\pgfqpoint{2.8pt}{-.2pt}}
+%	\pgfpathlineto{\pgfqpoint{3.2pt}{.2pt}}
+%	\pgfpathmoveto{\pgfqpoint{-.2pt}{2.8pt}}
+%	\pgfpathlineto{\pgfqpoint{.2pt}{3.2pt}}
+%	\pgfusepath{stroke}}
+
+
+% cor do fundo do block
+%\definecolor{mWhite}{RGB}{239, 230, 231}
+
+% Definições de funções trinométricas em pt-br
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\cossec}{cossec}
+
+% QED branco
+%\newcommand*{\QEDB}{\hfill\ensuremath{\square}}
+
+% estilos para diagrama de blocos
+%\newcommand{\deftkzbds}{
+%	\tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em]
+%	\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+%	\tikzstyle{input} = [coordinate]
+%	\tikzstyle{output} = [coordinate]
+%	\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+%}
+
+% tipo de coluna matemática centralizada
+%\newcolumntype{C}{>{$}c<{$}}
+
+% para marcar ponto na tela e desenhar sobre
+\newcommand{\tikzmark}[1]{\tikz[baseline,remember picture] \coordinate (#1) {};}
+
+% unidades uteis para siuntix
+
+\DeclareSIUnit{\voltef}{V_{ef}}
+\DeclareSIUnit{\cons}{\newton\meter\squared\per\coulomb\squared}
+%\DeclareSIUnit{\lbf}{lbf}
+%\DeclareSIUnit{\kgf}{kgf}
+%\DeclareSIUnit{\kgfp}{\kgf \per \centi\meter\squared}
+%\DeclareSIUnit{\mca}{mca}
+%\DeclareSIUnit{\barp}{bar}
+%\DeclareSIUnit{\pol}{pol}
+%\DeclareSIUnit{\psip}{psi}
+%\DeclareSIUnit{\atm}{atm}
+%\DeclareSIUnit{\HP}{HP}
+%\DeclareSIUnit{\psid}{\lbf\per\pol\squared}
+%\DeclareSIUnit{}{}
+
+% Usar para diminuir espaçamento antes/depois da equação (\useshortskip)
+%\usepackage{nccmath}
+%\usepackage{xpatch}
+%\xpatchcmd{\NCC@ignorepar}{%
+%	\abovedisplayskip\abovedisplayshortskip}
+%{%
+%	\abovedisplayskip\abovedisplayshortskip%
+%	\belowdisplayskip\belowdisplayshortskip}
+%{}{}
+%
+%\usepackage{chngcntr}
+%\counterwithin*{equation}{section}
+%\newcounter{saveenumi}
+%\newcommand{\saveenumerate}{%
+%	\stepcounter{saveenumi}%
+%	\label{saveenumi-\thesaveenumi}}
+%\newcommand{\restoreenumerate}{%
+%	\setcounterref{enumi}{saveenumi-\thesaveenumi}}
+
+% Símbolo para graus (usar \ang{degrees} do package siunitx)
+%\newcommand{\degree}{\ensuremath{^\circ}}
+
+% X de errado e certinho correspondente
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% \itemequation[label]{text before}{equation}
+
+%\makeatletter
+%\newcommand*{\itemequation}[3][]{%
+%  \item
+%  \begingroup
+%    \refstepcounter{equation}%
+%    \ifx\\#1\\%
+%    \else
+%      \label{#1}%
+%    \fi
+%    \sbox0{#2}%
+%    \sbox2{$\displaystyle#3\m@th$}%
+%    \sbox4{ \@eqnnum}%
+%    \dimen@=.5\dimexpr\linewidth-\wd2\relax
+%    % Warning for overlapping
+%    \let\CenterInSpace=N%
+%    \ifcase
+%    \ifdim\wd0>\dimen@
+%          \z@
+%        \else
+%          \ifdim\wd4>\dimen@
+%            \z@
+%          \else
+%            \@ne
+%          \fi
+%        \fi
+%      \let\CenterInSpace=Y%
+%    \fi
+%    \ifdim\dimexpr\wd0+\wd2+\wd4\relax>\linewidth
+%      \@latex@warning{Equation is too large}%
+%    \fi
+%    \noindent
+%    \rlap{\copy0}%
+%    \ifx\CenterInSpace Y%
+%      \rlap{\hbox to \linewidth{\kern\wd0\hss\copy2\hss\kern\wd4}}%
+%    \else
+%      \rlap{\hbox to \linewidth{\hfill\copy2\hfill}}%
+%    \fi
+%    \hbox to \linewidth{\hfill\copy4}%
+%    \hspace{0pt}% allow linebreak
+%  \endgroup
+%  \ignorespaces
+%}
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% RODAPÉ %%%%%%%%%%%%%%%%%
+
+\setbeamercolor{footline}{fg=white}
+\setbeamertemplate{footline}
+{\begin{tikzpicture}
+    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=1cm]{Figuras/Capa/macaefooter.png}};
+    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / \inserttotalframenumber};
+\end{tikzpicture}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% INFORMAÇÕES DO CURSO %%%%%%%%%%
+
+\title[Eletrotécnica I] {Eletrotécnica I}
+
+\subtitle {Notas de aula}
+
+\author{Prof. Yago Pessanha Corrêa}
+
+\institute[MSP/IFF] 
+{
+	Laboratório de Mecatrônica e Processamento de Sinais (MSP) \\
+	Instituto Federal de Educação, Ciência e Tecnologia Fluminense (IFFluminense) \\
+	Cursos Técnicos em Automação, Eletrônica e Eletromecânica \\
+	\vspace*{.1cm} {\tt \textbf{yago.correa@iff.edu.br}}\\
+}
+
+%\tddate
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% SUMÁRIO %%%%%%%%%%%%%%%%%
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Sumário}
+    \tableofcontents[currentsection]
+  \end{frame}
+}

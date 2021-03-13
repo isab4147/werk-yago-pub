@@ -1,0 +1,130 @@
+\ExplSyntaxOn
+\NewDocumentCommand{\binmult}{mm}
+ {
+  \david_binmult:nn { #1 } { #2 }
+ }
+
+\int_new:N \l_david_binmult_first_int
+\int_new:N \l_david_binmult_second_int
+\int_new:N \l_david_binmult_bits_int
+\int_new:N \l__david_binmult_cycle_int
+
+\tl_new:N \l_david_binmult_first_tl
+\tl_new:N \l_david_binmult_second_tl
+\tl_new:N \l_david_binmult_second_rev_tl
+\tl_new:N \l_david_binmult_product_tl
+\tl_new:N \l_david_binmult_tablebody_tl
+
+\seq_new:N \l_david_binmult_partial_products_seq
+\seq_new:N \l_david_binmult_partial_descr_seq
+
+\cs_new_protected:Nn \__david_binmult_pad:Nn
+ {% #1 should be a tl, #2 an integer denomination
+  \prg_replicate:nn { \int_max:nn { #2 - \tl_count:N #1 } { 0 } }
+   {
+    \tl_put_left:Nn #1 { 0 }
+   }
+ }
+
+\cs_new_protected:Nn \david_binmult:nn
+ {
+  % store the data
+  \int_set:Nn \l_david_binmult_first_int { #1 }
+  \int_set:Nn \l_david_binmult_second_int { #2 }
+  \tl_set:Nx \l_david_binmult_first_tl { \int_to_bin:n { #1 } }
+  \tl_set:Nx \l_david_binmult_second_tl { \int_to_bin:n { #2 } }
+  \tl_set:Nx \l_david_binmult_product_tl { \int_to_bin:n { #1 * #2 } }
+  % pad the factors
+  \int_set:Nn \l_david_binmult_bits_int
+   {
+    \int_max:nn { \tl_count:N \l_david_binmult_first_tl } 
+                { \tl_count:N \l_david_binmult_second_tl }
+   }
+  % pad the product
+  \__david_binmult_pad:Nn \l_david_binmult_product_tl
+   {
+    2*\l_david_binmult_bits_int-1
+   }
+  \__david_binmult_pad:Nn \l_david_binmult_first_tl { \l_david_binmult_bits_int }
+  \__david_binmult_pad:Nn \l_david_binmult_second_tl { \l_david_binmult_bits_int }
+  \tl_set_eq:NN \l_david_binmult_second_rev_tl \l_david_binmult_second_tl
+  \tl_reverse:N \l_david_binmult_second_rev_tl
+  % compute the partial products
+  \seq_clear:N \l_david_binmult_partial_products_seq
+  \seq_clear:N \l_david_binmult_partial_descr_seq
+  \int_zero:N \l__david_binmult_cycle_int
+  \tl_map_inline:Nn \l_david_binmult_second_rev_tl
+   {
+    \int_compare:nTF { ##1 = 0 }
+     {
+      \seq_put_right:Nx \l_david_binmult_partial_products_seq
+       {
+        \prg_replicate:nn { \l_david_binmult_bits_int } { 0 }
+        \prg_replicate:nn { \l__david_binmult_cycle_int } { \exp_not:N \hphantom {0} }
+       }
+     }
+     {
+      \seq_put_right:Nx \l_david_binmult_partial_products_seq
+       {
+        \tl_use:N \l_david_binmult_first_tl
+        \prg_replicate:nn { \l__david_binmult_cycle_int } { \exp_not:N \hphantom {0} }
+       }
+     }
+    \seq_put_right:Nx \l_david_binmult_partial_descr_seq
+     {
+      [
+      $\tl_use:N \l_david_binmult_first_tl \times ##1$
+      \int_case:nnF { \l__david_binmult_cycle_int }
+       {
+        {0}{}
+        {1}{,~movido~para~a~esquerda}
+       }
+       {,~movido~para~a~esquerda~\david_binmult_number:n { \l__david_binmult_cycle_int }~posições}
+      ]
+     }
+    \int_incr:N \l__david_binmult_cycle_int
+   }
+  % build the tabular
+  \tl_clear:N \l_david_binmult_tablebody_tl
+  \tl_put_right:Nn \l_david_binmult_tablebody_tl
+   {
+    & $\tl_use:N \l_david_binmult_first_tl$ & [$#1$~em~decimal] \\
+    & ${\times}\;\tl_use:N \l_david_binmult_second_tl$ & [$#2$~em~decimal] \\
+    \cmidrule(r){2-2}
+   }
+  \int_step_inline:nnnn { 1 } { 1 } { \seq_count:N \l_david_binmult_partial_products_seq }
+   {
+    \tl_put_right:Nx \l_david_binmult_tablebody_tl
+     {
+      $+$ &
+      \seq_item:Nn \l_david_binmult_partial_products_seq { ##1 } &
+      \seq_item:Nn \l_david_binmult_partial_descr_seq { ##1 } \exp_not:N \\
+     }
+   }
+  \tl_put_right:Nn \l_david_binmult_tablebody_tl
+   {
+    \cmidrule(r){1-2}
+    & $\tl_use:N \l_david_binmult_product_tl$ & [$\int_to_arabic:n { #1 * #2 }$~em~decimal]
+   }
+  % print the table 
+  \begin{tabular}{@{} c r l @{}}
+  \tl_use:N \l_david_binmult_tablebody_tl
+  \end{tabular}
+ }
+
+\cs_new:Nn \david_binmult_number:n
+ {
+  \int_case:nn { #1 }
+   {
+    {0}{zero}
+    {1}{uma}
+    {2}{duas}
+    {3}{três}
+    {4}{quatro}
+    {5}{cinco}
+    {6}{seis}
+    {7}{sete}
+    {8}{oito}
+   }
+ }
+\ExplSyntaxOff

@@ -1,0 +1,299 @@
+\section{Circuitos integrados}
+
+\frame{
+	\frametitle{Introdução}
+	\begin{block}{Definição}
+		Os circuitos integrados são circuitos eletrônicos funcionais, constituídos por um conjunto de transistores, diodos, resistências e condensadores, fabricados num mesmo processo, sobre uma substância comum semicondutora de silício que se designa vulgarmente por chip.
+	\end{block}
+
+	\vspace{0.5cm}
+	
+	\centerline{\includegraphics[width=1\linewidth]{Figuras/Ch10/CI1.PNG}}
+}
+
+\frame{
+	\frametitle{Vantagens e limitações}
+	\begin{block}{Vantagens}
+		\begin{itemize}
+			\item Redução de custos, peso e tamanho.
+			\item Maior velocidade de trabalho.
+			\item Menor consumo de energia.
+			\item Redução dos erros de montagem.
+			\item Melhoria das características técnicas do circuito.
+			\item Simplifica ao máximo a produção industrial.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Vantagens e limitações}
+	\begin{block}{Limitações}
+		\begin{itemize}
+			\item Limitação nos valores das resistências e condensadores.
+			\item Reduzida potência de dissipação.
+			\item Limitações nas tensões de funcionamento.
+			\item Impossibilidade de integrar num chip bobinas ou indutâncias.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Escala de integração e nanotecnologia}
+	\begin{block}{}
+		As portas não são vendidas individualmente, mas
+		agrupadas em um circuito integrado (chip). Variam de acordo com seu tamanho:
+		
+		\begin{itemize}
+			\item \textbf{SSI (Small Scale Integration)} - 1 a 12 portas.
+			\item \textbf{MSI (Medium Scale Integration)} - 13 a 99 portas.
+			\item \textbf{LSI (Large Scale Integration)} - 100 a \num{9999} portas.
+			\item \textbf{VLSI (Very Large Scale Integration)} - \num{10000} a \num{99999} portas.
+			\item \textbf{ULSI (Ultra Large Scale Integration)} - Acima de \num{100000} portas.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Como funciona?}
+	\centerline{\includegraphics[height=0.9\textheight]{Figuras/Ch10/CI21.jpg}}
+}
+
+\frame{
+	\frametitle{Como funciona?}
+	\centerline{\includegraphics[height=0.9\textheight]{Figuras/Ch10/CI22.jpg}}
+}
+
+\frame{
+	\frametitle{Como funciona?}
+	\centerline{\includegraphics[height=0.9\textheight]{Figuras/Ch10/CI23.jpg}}
+}
+
+\frame{
+	\frametitle{Como funciona?}
+	\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch10/CI3.jpg}}
+}
+
+\frame{
+	\frametitle{Famílias: TTL x CMOS}
+	\begin{block}{Introdução}
+		\begin{itemize}
+			\item Tipo de estrutura interna.
+			\item Cada família utiliza determinados componentes em seus blocos.
+			\item Diferentes características.
+		\end{itemize}
+	\end{block}
+	\centerline{\includegraphics[width=0.5\linewidth]{Figuras/Ch10/TTLcmos.png}}
+}
+
+\frame{
+	\frametitle{Conceitos - Níveis de tensão}
+	\begin{block}{}
+		\begin{itemize}
+			\item Níveis $1$ e $0$ dentro de faixas.
+		\end{itemize}
+	\end{block}
+	
+	\centering
+	\scalebox{0.8}{\input{Figuras/Ch10/Tikz1.tex}}
+
+%	\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch10/tensao.png}}
+}
+
+\frame{
+	\frametitle{Conceitos - Níveis de corrente}
+	\begin{block}{De modo semelhante ao nível de tensão:}
+		\begin{itemize}
+			\item $I_{IL}$: valor de corrente máxima no terminal de entrada quando é aplicado nível 0
+			\item $I_{OL}$: valor de corrente máxima que a saída pode receber quando em nível 0
+			\item $I_{IH}$: valor de corrente máxima no terminal de entrada quando é aplicado nível 1
+			\item $I_{OH}$: valor de corrente máxima que a saída pode receber quando em nível 1
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Conceitos - \textit{Fan out}}
+	\begin{block}{}
+		\begin{itemize}
+			\item A mesma saída pode ser usada para excitar diversas funções.
+			\item A entrada de cada função precisa de certa corrente e a saída da função que vai excitar tem uma capacidade limitada de fornecimento de corrente.
+		\end{itemize}
+	\end{block}
+
+	\begin{minipage}{0.45\textwidth}
+		\begin{center}
+			\centerline{\includegraphics[width=1\linewidth]{Figuras/Ch10/fanout1.png}}
+		\end{center}
+	
+		\[ \text{\textit{fan-out} (Baixo)} = \dfrac{I_{OL\ (\text{max})}}{I_{IL\ (\text{max})}} \]
+	\end{minipage}\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{center}
+			\centerline{\includegraphics[width=1\linewidth]{Figuras/Ch10/fanout2.png}}
+		\end{center}
+	
+		\[ \text{\textit{fan-out} (Alto)} = \dfrac{I_{OH\ (\text{max})}}{I_{IH\ (\text{max})}} \]
+	\end{minipage}
+}
+
+\frame{
+	\frametitle{Conceitos - \textit{Fan in}}
+	\begin{block}{}
+		\begin{itemize}
+			\item Definido como o número de entradas de determinada porta lógica
+			\item Quanto maior este número, mais lenta será a porta.
+		\end{itemize}
+	\end{block}
+	\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch10/fanin.PNG}}
+}
+
+\frame{
+	\frametitle{Conceitos - Tempo de atraso de propagação}
+	\begin{block}{}
+		\begin{itemize}
+			\item Tempo que o bloco lógico leva para mudar de estado após uma mudança de nível.
+			\item $t_{PLH}$: \textit{low} to \textit{high} - tempo para mudar de $0$ para $1$.
+			\item $t_{PHL}$: \textit{high} to \textit{low} - tempo para mudar de $1$ para $0$.
+		\end{itemize}
+	\end{block}
+	\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch10/delay.png}}
+}
+
+
+\frame{
+	\frametitle{A família TTL}
+	\begin{block}{Conceitos}
+		\begin{itemize}
+			\item TTL significa Transistor-Transistor-Logic.
+			\item A família TTL foi originalmente desenvolvida pela Texas Instruments.
+			\item Série 74xx - comercial.
+			\item Série 54xx - militar.
+		\end{itemize}
+	\end{block}
+	\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch10/CI5.jpg}}
+}
+
+\frame{
+	\frametitle{A família TTL - Voltagem}
+	\begin{block}{}
+		\begin{itemize}
+			\item Alimentado com uma tensão de \SI{5}{\volt}.
+			\item Nível lógico $0$ é sempre a ausência de tensão ou \SI{0}{\volt}.
+			\item Nível lógico $1$ é sempre uma tensão de \SI{5}{\volt}.
+			\item Os níveis lógicos para serem reconhecidos devem estar dentro de faixas bem definidas. 
+		\end{itemize}
+	\end{block}
+	\centerline{\includegraphics[width=0.6\linewidth]{Figuras/Ch10/ttltensao.png}}
+}
+
+\frame{
+	\frametitle{A família TTL - Corrente}
+	\begin{block}{}
+		\begin{itemize}
+			\item $I_{IL}$: \SI{1.6}{\milli\ampere}.
+			\item $I_{OL}$: \SI{16}{\milli\ampere}.
+			\item $I_{IH}$: \SI{40}{\micro\ampere}.
+			\item $I_{OH}$: \SI{400}{\micro\ampere}.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{A família TTL - Tempo de atraso}
+	\begin{block}{}
+		\begin{itemize}
+			\item Valor médio de aproximadamente \SI{10}{\nano\second}, na versão \textit{standard}.
+		\end{itemize}
+	\end{block}
+}
+
+
+\frame{
+	\frametitle{A família CMOS}
+	\begin{block}{Conceitos}
+		\begin{itemize}
+			\item CMOS significa Complementary MOS.
+			\item Transistores MOSFET.
+			\item Série 4000A - comercial.
+			\item Série 4000B - comercial.
+			\item Série 54/74C - comercial - similar ao TTL.
+			\item Série 74HC/74HCT - comercial - alta velocidade.
+		\end{itemize}
+	\end{block}
+
+%	\vspace{0.3cm}
+	\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch10/CI4.png}}
+}
+
+\frame{
+	\frametitle{A família CMOS - Voltagem}
+	\begin{block}{}
+		\begin{itemize}
+			\item Série 4000/74C - $3$ a $\SI{15}{\volt}$
+			\item Série 74HC - $2$ a $\SI{6}{\volt}$
+			\item Série 74HCT - $\num{4.5}$ a $\SI{5.5}{\volt}$
+		\end{itemize}
+	\end{block}
+
+	\medskip
+	
+	\centerline{\includegraphics[width=0.3\linewidth]{Figuras/Ch10/cmostensao.png}}
+}
+
+\frame{
+	\frametitle{A família CMOS - Corrente}
+	\begin{block}{}
+		\begin{itemize}
+			\item $I_{IL}$: \SI{1}{\micro\ampere}.
+			\item $I_{OL}$: \SI{0.4}{\milli\ampere}.
+			\item $I_{IH}$: \SI{1}{\micro\ampere}.
+			\item $I_{OH}$: \SI{0.4}{\milli\ampere}.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{A família CMOS - Tempo de atraso}
+	\begin{block}{}
+		\begin{itemize}
+			\item Valor médio de aproximadamente \SI{90}{\nano\second}, nas séries mais comuns.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{TTL x CMOS}
+	\begin{block}{Comparação entre as famílias}
+		\begin{itemize}
+			\item A família CMOS possui maior imunidade a ruídos.
+			\item A família CMOS possui um maior número de \textit{fan out}.
+			\item Ao contrário da família TTL, na CMOS não é aconselhável deixar terminais de entradas desconectados. Estes devem ser ligados na tensão positiva ou terra, dependendo do modelo.
+			\item A família CMOS trabalha com uma faixa maior para alimentação.
+			\item A família TTL não possui problemas com o manuseio dos CI - eletricidade estática.
+			\item A família TTL possui um tempo de atraso menor, se comparado com a CMOS.
+		\end{itemize}
+	\end{block}
+}
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+		01. No último slide, têm-se a seguinte afirmação: \textit{``A família CMOS possui um maior número de fan out''.} Através dos conceitos e cálculos estudados, mostre que esta afirmação é verdadeira.
+	\end{block}
+}
+
+
+\section*{Referências}
+
+\frame{
+	\frametitle{Referências e exercícios complementares}
+	\begin{itemize}
+		\item IDOETA, Ivan V. e CAPUANO, Francisco G. Elementos de Eletrônica Digital. São Paulo:
+		      Editora Érica, ed. 40. 2008.
+	\end{itemize}
+
+	\centering{\alert{Página 469 - \textbf{9.8.9 até 9.8.11}}}
+
+}

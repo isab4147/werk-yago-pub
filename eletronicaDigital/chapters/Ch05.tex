@@ -1,0 +1,230 @@
+\section{Simplificação de expressões booleanas por álgebra}
+
+\frame{
+	\frametitle{Por que simplificar?}
+	\begin{block}{Vantagens}
+		\begin{itemize}
+			\item Menor número de portas lógicas.
+			\item Mais simples, menor.
+			\item Mais barato.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Postulados}
+		\begin{block}{}
+			\centering
+%			\renewcommand{\arraystretch}{1.2}
+			\resizebox{\textwidth}{!}{
+				\begin{tabular}{clcc}
+					\toprule
+					P1. & Identidade & \multirow{5}{*}{
+						$ \begin{aligned}
+						A + 0 &= A\\
+						A + 1 &= 1\\
+						A + A &= A\\
+						A + \notted{A} &= 1\\[-0.3em]
+						\notted{\notted{A}} &= A
+						\end{aligned} $} & \multirow{5}{*}{
+						$ \begin{aligned}
+						A\cdot 1 &= A\\
+						A\cdot 0 &= 0\\
+						A\cdot A &= A\\
+						A\cdot \notted{A} &= 0\\[-0.3em]
+						\notted{\notted{A}} &= A
+						\end{aligned} $} \\
+					P2. & Elemento nulo & & \\
+					P3. & Equivalência  & & \\
+					P4. & Complemento   & & \\
+					P5. & Involução     & & \\ \bottomrule
+			\end{tabular}}
+		\end{block}
+}
+
+
+\frame{
+	\frametitle{Propriedades}
+	\begin{block}{}
+		\centering
+%		\renewcommand{\arraystretch}{1.2}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{clc}
+			\toprule
+			PR1. & Cumulativa  & \multirow{3}{*}{$ \begin{aligned}
+				A + B &= B + A\\
+				(A + B) + C &= A + (B + C)\\
+				A + (B\cdot C) &= (A + B)\cdot (A + C)
+				\end{aligned} $} \\
+			PR2. & Associativa & \\
+			PR3. & Distributiva & \\ \bottomrule
+		\end{tabular}}
+	\end{block}
+	
+	\begin{block}{}
+		\centering
+%		\renewcommand{\arraystretch}{1.2}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{clc}
+			\toprule
+			PR1. & Cumulativa  & \multirow{3}{*}{$ \begin{aligned}
+					A\cdot B &= B\cdot A\\
+					(A\cdot B)\cdot C &= A\cdot (B\cdot C)\\
+					A\cdot (B + C) &= (A\cdot B) + (A\cdot C)
+				\end{aligned} $} \\
+			PR2. & Associativa & \\
+			PR3. & Distributiva & \\ \bottomrule
+		\end{tabular}}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Teoremas}
+	\begin{block}{}
+		\centering
+%		\renewcommand{\arraystretch}{1.2}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{clc}
+			\toprule
+			T1. & Absorção 1 & \multirow{3}{*}{$ \begin{aligned}
+				A + (A\cdot B) &= A\\%[-0.3em]
+				A + (\notted{A}\cdot B) &= A + B\\%[-0.3em]
+				\notted{A + B} &= \notted{A}\cdot \notted{B}
+			\end{aligned} $} \\
+			T2. & Absorção 2 & \\
+			T3. & De Morgan  & \\ \bottomrule
+		\end{tabular}}
+	\end{block}
+	
+	\begin{block}{}
+		\centering
+%		\renewcommand{\arraystretch}{1.2}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{clc}
+			\toprule
+			T1. & Absorção 1 & \multirow{3}{*}{$ \begin{aligned}
+				A\cdot (A + B) &= A\\%[-0.3em]
+				A\cdot (\notted{A} + B) &= A\cdot B\\%[-0.3em]
+				\notted{A.B} &= \notted{A} + \notted{B}
+			\end{aligned} $} \\
+			T2. & Absorção 2 & \\
+			T3. & De Morgan  & \\ \bottomrule
+		\end{tabular}}
+	\end{block}
+}
+
+
+\section*{Exemplos}
+
+
+\frame{
+	\frametitle{Exemplo \#01}
+	\begin{block}{Resolução}
+		\begin{align*}
+		S 	&= A\cdot B\cdot C + A\cdot \notted{C} + A\cdot \notted{B}\\
+		& \pushright{\text{\textit{Distributiva}}} \\ 
+		&= A\cdot (B\cdot C + \notted{C} + \notted{B}) \\ 
+		& \pushright{\text{\textit{Comutativa}}} \\ 
+		&= A\cdot (B\cdot C + \notted{B} + \notted{C}) \\
+		& \pushright{\text{\textit{De Morgan}}} \\ 
+		&= A\cdot (B\cdot C + \notted{B\cdot C}) \\
+		&\pushright{\text{\textit{Complemento}}} \\ 
+		&= A\cdot (1) \\
+		& \pushright{\text{\textit{Identidade}}} \\
+		&= A
+		\end{align*}	
+	\end{block}
+}
+
+\frame{
+	\frametitle{Exemplo \#02}
+	\begin{block}{Resolução}
+		\begin{align*}
+			S 	&= \notted{A}\cdot \notted{B}\cdot \notted{C} + \notted{A}\cdot B\cdot \notted{C} + A\cdot \notted{B}\cdot C  \\
+				& \pushright{\text{\textit{Distributiva}}} \\
+				&= \notted{A}\cdot \notted{C}\cdot (\notted{B} + B) + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Complemento}}} \\
+				&= \notted{A}\cdot \notted{C}\cdot (1) + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Identidade}}} \\
+				&= \notted{A}\cdot \notted{C} + A\cdot \notted{B}\cdot C
+		\end{align*}
+	\end{block}
+	
+}
+
+\frame{
+	\frametitle{Exemplo \#03}
+	\begin{block}{Resolução \#01 - Parte 1}
+		\begin{align*}
+			S 	&= A\cdot B + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Identidade}}} \\
+				&= A\cdot B\cdot 1 + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Elemento Nulo}}} \\
+				&= A\cdot B\cdot (1 + C) + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Distributiva}}} \\
+				&= A\cdot B\cdot 1 + A\cdot B\cdot C + A\cdot \notted{B}\cdot C \\
+				& \pushright{\text{\textit{Identidade}}} \\
+				&= A\cdot B + A\cdot B\cdot C + A\cdot \notted{B}\cdot C
+		\end{align*}
+	\end{block}
+}
+
+
+\frame{
+	\frametitle{Exemplo \#03}
+	\begin{block}{Resolução \#01 - Parte 2}
+		\begin{align*}
+		S	&= A\cdot B + A\cdot B\cdot C + A\cdot \notted{B}\cdot C \\
+			& \pushright{\text{\textit{Distributiva}}} \\
+			&= A\cdot B + A\cdot C\cdot (B + \notted{B}) \\
+			& \pushright{\text{\textit{Complemento}}} \\
+			&= A\cdot B + A\cdot C\cdot (1) \\
+			& \pushright{\hfill \text{\textit{Identidade}}} \\
+			&= A\cdot B + A\cdot C
+		\end{align*}
+	\end{block}
+}
+
+
+\frame{
+	\frametitle{Exemplo \#03}
+	\begin{block}{Resolução \#02}
+		\begin{itemize}
+			\item Alternativamente, podemos resolver a mesma questão em menos etapas usando a \textit{absorção}.
+		\end{itemize}
+		\begin{align*}
+		S 	&= A\cdot B + A\cdot \notted{B}\cdot C \\
+			& \pushright{\text{\textit{Distributiva}}} \\
+			&= A\cdot(B+\notted{B}\cdot C) \\
+			& \pushright{\text{\textit{Absorção 1}}} \\
+			&= A\cdot(B+C)
+		\end{align*}
+	\end{block}
+}
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+		01. Simplifique as expressões booleanas a seguir:
+		\begin{itemize}
+			\item $\notted{A + \notted{B}\cdot C}$ \\
+			\item $\notted{(\notted{A} + C)\cdot (B + \notted{D})}$ \\
+			\item $(\notted{A} + B)\cdot (A + B + D)\cdot \notted{D}$ \\
+			\item $A\cdot \notted{B}\cdot C + A\cdot \notted{B}\cdot \notted{C}$ \\
+			\item $(\notted{A} + B)\cdot (A + B)$
+		\end{itemize}
+	\end{block}
+}
+
+\section*{Referências}
+
+\frame{
+	\frametitle{Referências e exercícios complementares}
+	\begin{itemize}
+		\item IDOETA, Ivan V. e CAPUANO, Francisco G. Elementos de Eletrônica Digital. São Paulo: Editora Érica, ed. 40. 2008.
+	\end{itemize}
+	\centering{\alert{Página 148 - \textbf{3.10.1 até 3.10.7}}}
+
+}

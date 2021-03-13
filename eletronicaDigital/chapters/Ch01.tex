@@ -1,0 +1,247 @@
+\section{Conceitos iniciais e sistemas de numeração}
+
+\frame{
+	\frametitle{Analógico x digital}
+	\centering
+	\scalebox{1.3}{
+	\input{Figuras/Ch1/Tikz1.tex}}
+%	\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch1/analogdig.png}}
+}
+
+\frame{
+	\frametitle{Analógico x digital}
+	\centering
+	\scalebox{0.8}{
+		\input{Figuras/Ch1/Tikz2.tex}}
+%	\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch1/rampaescada.png}}
+}
+
+\frame{
+	\frametitle{Analógico x digital}
+	\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch1/multimetro.jpg}}
+}
+
+\frame{
+	\frametitle{Vantagens e desvantagens}
+	\begin{block}{Vantagens}
+		\begin{itemize}
+			\item Sistemas digitais são mais simples de serem projetados. 
+			\item Maior facilidade em manter precisão e exatidão. 
+			\item Operações podem ser programadas. 
+			\item Menos afetados por ruídos.
+			\item CI’s (Circuitos Integrados) podem ser fabricados com mais dispositivos.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Vantagens e desvantagens}
+	\begin{block}{Desvantagens}
+		\begin{itemize}
+			\item O mundo é quase todo analógico. 
+			\item Processar sinais digitais demanda tempo.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{E no mundo real?}
+	\begin{block}{Importante}
+		Como converter?
+	\end{block}
+
+	\vspace{0.5cm}
+	
+	\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch1/mundoreal.png}}
+}
+
+\frame{
+	\frametitle{Sistemas de numeração}
+	\begin{block}{As quatro bases numéricas}
+		\begin{itemize}
+			\item Decimal
+			\item Binário
+			\item Octal
+			\item Hexadecimal
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Sistemas de numeração}
+	\begin{block}{Sistema decimal}
+		\begin{itemize}
+			\item Caracteres 0 a 9.
+			\item Notação posicional -- base 10.
+			\item MSB x LSB.
+			\item Exemplos de representação.
+		\end{itemize}
+	\end{block}
+
+	\vspace{0.3cm}
+	\centerline{\includegraphics[width=0.5\linewidth]{Figuras/Ch1/decimal.jpg}}
+}
+
+\frame{
+	\frametitle{Sistemas de numeração}
+	\begin{block}{Sistema binário}
+		\begin{itemize}
+			\item 2 dígitos.
+			\item Notação posicional -- base 2.
+			\item MSB x LSB.
+			\item Quantidade de dígitos para representar -- como?.
+		\end{itemize}
+	\end{block}
+
+	\vspace{0.3cm}
+	
+	\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch1/binario.jpg}}
+}
+
+\frame{
+	\frametitle{Sistemas de numeração}
+\begin{block}{Tipos de dados binários}
+%	\renewcommand{\arraystretch}{1.2}
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{p{8em}C{8em}}
+			\toprule
+			\thead{\normalsize Tipo de dado} & \text{\thead{\normalsize Tamanho \\ 
+				\normalsize (em bits)}} \\ \midrule
+			bit & 1 \\
+			nibble & 4 \\
+			byte & 8 \\
+			word & 16 \\
+			double word & 32 \\
+			\bottomrule
+		\end{tabular}
+	}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Aritmética binária}
+	\begin{block}{Adição}
+			
+		\begin{equation*}
+		\mathlarger{\mathlarger{\mathlarger{
+			\begin{array}{@{}B1}
+				00\carry 11 \\
+				{} + 0101 \\ \hline
+				0110 \\
+			\end{array}}}}
+		\end{equation*}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Aritmética binária}
+	\begin{block}{Subtração}
+		
+		\begin{equation*}
+		\mathlarger{\mathlarger{\mathlarger{
+					\begin{array}{@{}B2}
+						1\tikzmark{p1} & \carry1\tikzmark{p2}\carry 011 \\
+					{}-	0 	& 1101 \\ \hline
+						0 	& 1110 \\
+					\end{array}}}}
+		\end{equation*}
+		
+		\begin{tikzpicture}[overlay,remember picture]
+			\draw (p1) ++(6,5.1) -- +(0.2,0.5);
+			\draw (p1) ++(6.35,5.1) -- +(0.2,0.5);
+		\end{tikzpicture}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Aritmética binária}
+	\begin{block}{Multiplicação}
+		\centering
+		\binmult{5}{6}
+	\end{block}
+%		\centerline{\includegraphics[width=0.5\linewidth]{Figuras/Ch1/multbin.png}}
+}
+
+
+\section*{Conversão entre bases numéricas}
+
+\frame{
+	\frametitle{Conversão binário-decimal}
+	\begin{block}{Procedimento}
+		\begin{itemize}
+			\item Se dá pela soma das multiplicações de cada termo por sua potência de base 2 equivalente.
+		\end{itemize}
+	
+		\centering
+		\ConvertFromBase{2}{11001}
+	\end{block}
+%	\centerline{\includegraphics[width=0.5\linewidth]{Figuras/Ch1/bindec.png}}
+}
+
+\frame{
+	\frametitle{Conversão decimal-binário}
+	\begin{block}{Procedimento}
+		\begin{itemize}
+			\item Método das divisões sucessivas 
+		\end{itemize}
+	
+		\vspace{0.5cm}
+	
+		\centering
+		\begin{tabular}{c}
+			\basetenconversiontable{12}{2}
+		\end{tabular}
+	\end{block}
+%	\centerline{\includegraphics[width=0.5\linewidth]{Figuras/Ch1/decbin.png}}
+}
+
+\frame{
+	\frametitle{Conversão fração decimal-binário}
+	\begin{block}{Procedimento}
+		\begin{itemize}
+			\item Método das multiplicações sucessivas
+		\end{itemize}
+	
+		\vspace{0.5cm}
+		
+		\ConvertitEnBaseB{3.75}{2}
+	\end{block}
+}
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+
+	\begin{block}{}
+		01. Converter os seguintes números binários para decimais:
+
+		\begin{itemize}
+			\item \num{11111}$ _2 $
+			\item \num{1001100}$ _2 $
+			\item \num{1011,11}$ _2 $
+			\item \num{1100,0011}$ _2 $
+		\end{itemize}
+
+		02. Converter os seguintes números decimais para binários:
+
+		\begin{itemize}
+			\item \num{215}
+			\item \num{102}
+			\item \num{9,92}
+			\item \num{7,47}
+		\end{itemize}
+	\end{block}
+}
+
+\section*{Referências}
+
+\frame{
+	\frametitle{Referências e exercícios complementares}
+	\begin{itemize}
+		\item IDOETA, Ivan V. e CAPUANO, Francisco G. Elementos de Eletrônica Digital. São Paulo: Editora Érica, ed. 40. 2008.
+	\end{itemize}
+
+	\centering{\alert{Página 36 - \textbf{1.6.1 até 1.6.5, 1.6.17 até 1.6.19}}}
+}

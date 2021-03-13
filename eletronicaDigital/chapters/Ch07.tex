@@ -1,0 +1,657 @@
+\section{Circuitos combinacionais}
+
+\frame{
+	\frametitle{Relembrando...}
+	
+	\centering
+	\begin{tikzpicture}[node distance=0.5cm, base/.style={
+		% The shape:
+		rectangle,minimum height=1cm,minimum width=1.5cm,rounded corners=3mm,align=center,
+		% The rest
+		very thick,draw=black!50,
+		fill=black!20}]
+	
+	\node[base] (S) {Situação};
+	\node[base,right=of S,text width=1.5cm] (TV) {Tabela verdade};
+	\node[base, right=of TV, text width=2cm] (ES) {Expressão simplificada};
+	\node[base, right=of ES] (C) {Circuito};
+	
+	\graph {(S) -> (TV) -> (ES) -> (C);};
+	
+	\end{tikzpicture}
+%	\centerline{\includegraphics[width=0.75\linewidth]{Figuras/Ch4/resumo04.png}}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+
+	\centering
+	\input{Figuras/Ch4/Tikz1.tex}
+%	\centerline{\includegraphics[width=0.75\linewidth]{Figuras/Ch4/2var.PNG}}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+	\begin{block}{}
+		Deseja-se instalar, no cruzamento, um sistema automático de semáforos, com as seguintes características:
+		\begin{itemize}
+			\item Quando houver carros transitando somente na rua B, o semáforo 2 deverá permanecer verde para os carros trafegarem livremente.
+			\item Igualmente, quando houver carros transitando somente na rua A, o semáforo 1 deverá permanecer verde.
+			\item Quando houver carros transitando em ambas as ruas, o semáforo da rua A deve ficar verde, pois é a rua preferencial.
+		\end{itemize}
+	\end{block}
+
+}
+
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A & B & G1 & R1 & G2 & R2 \\ \midrule
+			0 & 0 &    &    &    &    \\
+			0 & 1 &    &    &    &    \\
+			1 & 0 &    &    &    &    \\
+			1 & 1 &    &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1 & R1 & G2 & R2 \\ \midrule
+			\textcolor{red}0 & \textcolor{red}0 &    &    &    &    \\
+			0                & 1                &    &    &    &    \\
+			1                & 0                &    &    &    &    \\
+			1                & 1                &    &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1                 & R1                 & G2                 & R2                 \\ \midrule
+			\textcolor{red}0 & \textcolor{red}0 & \textcolor{blue} X & \textcolor{blue} X & \textcolor{blue} X & \textcolor{blue} X \\
+			0                & 1                &                    &                    &                    &                    \\
+			1                & 0                &                    &                    &                    &                    \\
+			1                & 1                &                    &                    &                    &                    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1 & R1 & G2 & R2 \\ \midrule
+			0                & 0                & X  & X  & X  & X  \\ 
+			\textcolor{red}0 & \textcolor{red}1 &    &    &    &    \\ 
+			1                & 0                &    &    &    &    \\ 
+			1                & 1                &    &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1                & R1                & G2                & R2                \\ \midrule
+			0                & 0                & X                 & X                 & X                 & X                 \\ 
+			\textcolor{red}0 & \textcolor{red}1 & \textcolor{blue}0 & \textcolor{blue}1 & \textcolor{blue}1 & \textcolor{blue}0 \\ 
+			1                & 0                &                   &                   &                   &                   \\ 
+			1                & 1                &                   &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1 & R1 & G2 & R2 \\ \midrule
+			0                & 0                & X  & X  & X  & X  \\ 
+			0                & 1                & 0  & 1  & 1  & 0  \\ 
+			\textcolor{red}1 & \textcolor{red}0 &    &    &    &    \\ 
+			1                & 1                &    &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1                & R1                & G2                & R2                \\ \midrule
+			0                & 0                & X                 & X                 & X                 & X                 \\ 
+			0                & 1                & 0                 & 1                 & 1                 & 0                 \\ 
+			\textcolor{red}1 & \textcolor{red}0 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 & \textcolor{blue}1 \\ 
+			1                & 1                &                   &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1 & R1 & G2 & R2 \\ \midrule
+			0                & 0                & X  & X  & X  & X  \\ 
+			0                & 1                & 0  & 1  & 1  & 0  \\ 
+			1                & 0                & 1  & 0  & 0  & 1  \\ 
+			\textcolor{red}1 & \textcolor{red}1 &    &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A                & B                & G1                & R1                & G2                & R2                \\ \midrule
+			0                & 0                & X                 & X                 & X                 & X                 \\ 
+			0                & 1                & 0                 & 1                 & 1                 & 0                 \\ 
+			1                & 0                & 1                 & 0                 & 0                 & 1                 \\ 
+			\textcolor{red}1 & \textcolor{red}1 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 & \textcolor{blue}1 \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+		\centering
+		\begin{tabular}{cc|cccc}
+			\toprule
+			A & B & G1 & R1 & G2 & R2            \\ \midrule
+			0 & 0 & X  & X  & X  & X             \\ 
+			0 & 1 & 0  & 1  & 1  & 0             \\ 
+			1 & 0 & 1  & 0  & 0  & 1             \\ 
+			1 & 1 & 1  & 0  & 0  & 1             \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+
+\begin{center}
+
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\manualterms{X,1,0,1}
+\implicant{1}{3}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ G1 = {\color{red} A} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+
+\begin{center}
+
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\manualterms{X,0,1,0}
+\implicant{0}{2}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ R1 = {\color{red} \notted{A}} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+
+\begin{center}
+
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\manualterms{X,0,1,0}
+\implicant{0}{2}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ G2 = {\color{red} \notted{A}} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 2 variáveis - Exemplo \#01}
+
+\begin{center}
+
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\manualterms{X,1,0,1}
+\implicant{1}{3}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ R2 = {\color{red} A} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+	\centerline{\includegraphics[width=1\linewidth]{Figuras/Ch4/3var.PNG}}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+
+	\begin{block}{}
+		Deseja-se instalar um amplificador para ligar três aparelhos, com as seguintes prioridades: 
+		
+		\begin{itemize}
+			\item Prioridade 1: CD player
+			\item Prioridade 2: Tape playback
+			\item Prioridade 3: Rádio receptor
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A & B & C & SA & SB & SC             \\ \midrule
+			0 & 0 & 0 &    &    &                \\ 
+			0 & 0 & 1 &    &    &                \\ 
+			0 & 1 & 0 &    &    &                \\ 
+			0 & 1 & 1 &    &    &                \\ 
+			1 & 0 & 0 &    &    &                \\ 
+			1 & 0 & 1 &    &    &                \\ 
+			1 & 1 & 0 &    &    &                \\ 
+			1 & 1 & 1 &    &    &                \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B & C & SA & SB & SC \\ \midrule
+			\textcolor{red}0 &
+			\textcolor{red}0 &
+			\textcolor{red}0 &   &   &              \\ 
+			0                & 0 & 1 &    &    &    \\ 
+			0                & 1 & 0 &    &    &    \\ 
+			0                & 1 & 1 &    &    &    \\ 
+			1                & 0 & 0 &    &    &    \\ 
+			1                & 0 & 1 &    &    &    \\ 
+			1                & 1 & 0 &    &    &    \\ 
+			1                & 1 & 1 &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                 & C                 & SA                & SB & SC \\ \midrule
+			\textcolor{red}0 &
+			\textcolor{red}0 &
+			\textcolor{red}0 & \textcolor{blue}X & \textcolor{blue}X & \textcolor{blue}X           \\ 
+			0                & 0                 & 1                 &                   &    &    \\ 
+			0                & 1                 & 0                 &                   &    &    \\ 
+			0                & 1                 & 1                 &                   &    &    \\ 
+			1                & 0                 & 0                 &                   &    &    \\ 
+			1                & 0                 & 1                 &                   &    &    \\ 
+			1                & 1                 & 0                 &                   &    &    \\ 
+			1                & 1                 & 1                 &                   &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			\textcolor{red}0 & \textcolor{red}0 & \textcolor{red}1 &    &    &    \\ 
+			0                & 1                & 0                &    &    &    \\ 
+			0                & 1                & 1                &    &    &    \\ 
+			1                & 0                & 0                &    &    &    \\ 
+			1                & 0                & 1                &    &    &    \\ 
+			1                & 1                & 0                &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			\textcolor{red}0 & \textcolor{red}0 & \textcolor{red}1 & \textcolor{blue}0 & \textcolor{blue}0 & \textcolor{blue}1 \\ 
+			0                & 1                & 0                &                   &                   &                   \\ 
+			0                & 1                & 1                &                   &                   &                   \\ 
+			1                & 0                & 0                &                   &                   &                   \\ 
+			1                & 0                & 1                &                   &                   &                   \\ 
+			1                & 1                & 0                &                   &                   &                   \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			\textcolor{red}0 & \textcolor{red}1 & \textcolor{red}0 &    &    &    \\ 
+			0                & 1                & 1                &    &    &    \\ 
+			1                & 0                & 0                &    &    &    \\ 
+			1                & 0                & 1                &    &    &    \\ 
+			1                & 1                & 0                &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			\textcolor{red}0 & \textcolor{red}1 & \textcolor{red}0 & \textcolor{blue}0 & \textcolor{blue}1 & \textcolor{blue}0 \\ 
+			0                & 1                & 1                &                   &                   &                   \\ 
+			1                & 0                & 0                &                   &                   &                   \\ 
+			1                & 0                & 1                &                   &                   &                   \\ 
+			1                & 1                & 0                &                   &                   &                   \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			0                & 1                & 0                & 0  & 1  & 0  \\ 
+			\textcolor{red}0 & \textcolor{red}1 & \textcolor{red}1 &    &    &    \\ 
+			1                & 0                & 0                &    &    &    \\ 
+			1                & 0                & 1                &    &    &    \\ 
+			1                & 1                & 0                &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			0                & 1                & 0                & 0                 & 1                 & 0                 \\ 
+			\textcolor{red}0 & \textcolor{red}1 & \textcolor{red}1 & \textcolor{blue}0 & \textcolor{blue}1 & \textcolor{blue}0 \\ 
+			1                & 0                & 0                &                   &                   &                   \\ 
+			1                & 0                & 1                &                   &                   &                   \\ 
+			1                & 1                & 0                &                   &                   &                   \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			0                & 1                & 0                & 0  & 1  & 0  \\ 
+			0                & 1                & 1                & 0  & 1  & 0  \\ 
+			\textcolor{red}1 & \textcolor{red}0 & \textcolor{red}0 &    &    &    \\ 
+			1                & 0                & 1                &    &    &    \\ 
+			1                & 1                & 0                &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			0                & 1                & 0                & 0                 & 1                 & 0                 \\ 
+			0                & 1                & 1                & 0                 & 1                 & 0                 \\ 
+			\textcolor{red}1 & \textcolor{red}0 & \textcolor{red}0 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 \\ 
+			1                & 0                & 1                &                   &                   &                   \\ 
+			1                & 1                & 0                &                   &                   &                   \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			0                & 1                & 0                & 0  & 1  & 0  \\ 
+			0                & 1                & 1                & 0  & 1  & 0  \\ 
+			1                & 0                & 0                & 1  & 0  & 0  \\ 
+			\textcolor{red}1 & \textcolor{red}0 & \textcolor{red}1 &    &    &    \\ 
+			1                & 1                & 0                &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			0                & 1                & 0                & 0                 & 1                 & 0                 \\ 
+			0                & 1                & 1                & 0                 & 1                 & 0                 \\ 
+			1                & 0                & 0                & 1                 & 0                 & 0                 \\ 
+			\textcolor{red}1 & \textcolor{red}0 & \textcolor{red}1 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 \\ 
+			1                & 1                & 0                &                   &                   &                   \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			0                & 1                & 0                & 0  & 1  & 0  \\ 
+			0                & 1                & 1                & 0  & 1  & 0  \\ 
+			1                & 0                & 0                & 1  & 0  & 0  \\ 
+			1                & 0                & 1                & 1  & 0  & 0  \\ 
+			\textcolor{red}1 & \textcolor{red}1 & \textcolor{red}0 &    &    &    \\ 
+			1                & 1                & 1                &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			0                & 1                & 0                & 0                 & 1                 & 0                 \\ 
+			0                & 1                & 1                & 0                 & 1                 & 0                 \\ 
+			1                & 0                & 0                & 1                 & 0                 & 0                 \\ 
+			1                & 0                & 1                & 1                 & 0                 & 0                 \\ 
+			\textcolor{red}1 & \textcolor{red}1 & \textcolor{red}0 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 \\ 
+			1                & 1                & 1                &                   &                   &                   \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA & SB & SC \\ \midrule
+			0                & 0                & 0                & X  & X  & X  \\ 
+			0                & 0                & 1                & 0  & 0  & 1  \\ 
+			0                & 1                & 0                & 0  & 1  & 0  \\ 
+			0                & 1                & 1                & 0  & 1  & 0  \\ 
+			1                & 0                & 0                & 1  & 0  & 0  \\ 
+			1                & 0                & 1                & 1  & 0  & 0  \\ 
+			1                & 1                & 0                & 1  & 0  & 0  \\ 
+			\textcolor{red}1 & \textcolor{red}1 & \textcolor{red}1 &    &    &    \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A                & B                & C                & SA                & SB                & SC                \\ \midrule
+			0                & 0                & 0                & X                 & X                 & X                 \\ 
+			0                & 0                & 1                & 0                 & 0                 & 1                 \\ 
+			0                & 1                & 0                & 0                 & 1                 & 0                 \\ 
+			0                & 1                & 1                & 0                 & 1                 & 0                 \\ 
+			1                & 0                & 0                & 1                 & 0                 & 0                 \\ 
+			1                & 0                & 1                & 1                 & 0                 & 0                 \\ 
+			1                & 1                & 0                & 1                 & 0                 & 0                 \\ 
+			\textcolor{red}1 & \textcolor{red}1 & \textcolor{red}1 & \textcolor{blue}1 & \textcolor{blue}0 & \textcolor{blue}0 \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+	\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+		\centering
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			A & B & C & SA & SB & SC             \\ \midrule
+			0 & 0 & 0 & X  & X  & X              \\ 
+			0 & 0 & 1 & 0  & 0  & 1              \\ 
+			0 & 1 & 0 & 0  & 1  & 0              \\ 
+			0 & 1 & 1 & 0  & 1  & 0              \\ 
+			1 & 0 & 0 & 1  & 0  & 0              \\ 
+			1 & 0 & 1 & 1  & 0  & 0              \\ 
+			1 & 1 & 0 & 1  & 0  & 0              \\ 
+			1 & 1 & 1 & 1  & 0  & 0              \\ \bottomrule
+		\end{tabular}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+
+\begin{center}
+
+\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+\manualterms{X,0,1,1,0,0,1,1}
+\implicant{3}{6}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ SA = {\color{red} A} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+
+\begin{center}
+
+\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+\manualterms{X,1,0,0,0,1,0,0}
+\implicant{1}{5}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ SB = {\color{red} \notted{A}\cdot B} \]
+\end{block}
+
+\end{center}
+}
+
+\frame{
+\frametitle{Circuitos combinacionais com 3 variáveis - Exemplo \#02}
+
+\begin{center}
+
+\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+\manualterms{X,0,0,0,1,0,0,0}
+\implicant{0}{4}
+\end{karnaugh-map}
+
+\begin{block}{Expressão simplificada}
+	\[ SC = {\color{red} \notted{A}\cdot \notted{B}} \]
+\end{block}
+
+\end{center}
+}
+
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+		01. Quatro juízes participam de um programa de calouros e cada um tem a sua disposição, uma chave liga/desliga correspondendo ao julgamento do candidato: aprovado ou reprovado. Na saída existem três lâmpadas, correspondentes a três resultados: aprovado (pela maioria), reprovado (pela maioria) ou empate.
+		
+		\bigskip
+		
+		02. Um motor deve funcionar quando uma ou mais das seguintes condições forem satisfeitas: \textbf{(1)} Regime de carga $\geqslant 80\%$ e Temperatura $> \SI{25}{\degreeCelsius}$; \textbf{(2)} Regime de carga $< 80\%$, Umidade relativa $>60\%$ e Temperatura $> \SI{25}{\degreeCelsius}$; \textbf{(3)} Regime de carga $< 80\%$, no período de carga entre as \SI{15}{\hour} e \SI{16}{\hour}; \textbf{(4)} Temperatura $> \SI{25}{\degreeCelsius}$, fora do período de carga entre as \SI{15}{\hour} e \SI{16}{\hour}.
+		
+		\bigskip
+		
+		03. Projete um circuito digital com 4 variáveis de entrada, que indique quando há um número primo	presente na entrada.
+	\end{block}
+}
+
+
+\section*{Referências}
+
+
+\frame{
+	\frametitle{Referências e exercícios complementares}
+	\begin{itemize}
+		\item IDOETA, Ivan V. e CAPUANO, Francisco G. Elementos de Eletrônica Digital. São Paulo:
+		      Editora Érica, ed. 40. 2008.
+	\end{itemize}
+
+	\centering{\alert{Página 174 - \textbf{4.3.1 até 4.3.8}}}
+
+}

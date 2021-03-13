@@ -1,0 +1,421 @@
+\section{Introdução ao controle de processos industriais}
+
+\begin{frame}{Introdução}
+	\begin{block}{O que é a teoria de controle?}
+		\begin{itemize}
+			\item Trata-se do estudo de \textbf{como} levar um processo a um ponto de equilíbrio, ou seja, à \textbf{estabilidade}.
+			\item Seja no piloto automático de um avião, ou na indústria, a \textbf{teoria de controle} é usada.
+		\end{itemize}
+	\end{block}
+
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Figuras/Ch11/fig1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Figuras/Ch11/fig2}
+	\end{minipage}
+\end{frame}
+
+
+\begin{frame}{Estabilidade}
+	\begin{block}{O que é estabilidade?}
+		\begin{itemize}
+			\item A estabilidade é a medida da facilidade que um processo tem de retornar a um ponto de equilíbrio.
+		\end{itemize}
+	\end{block}
+
+	\vspace{0.5cm}
+	
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\scalebox{1}{\input{Figuras/Ch11/tikz1.tex}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\scalebox{1}{\input{Figuras/Ch11/tikz2.tex}}
+	\end{minipage}
+
+	\vspace{0.5cm}
+
+	\centering
+	
+	\Large	
+	Sistema estável
+\end{frame}
+
+
+\begin{frame}{Estabilidade}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\scalebox{1}{\input{Figuras/Ch11/tikz3.tex}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		
+		\vspace{-0.7cm}
+		\scalebox{1}{\input{Figuras/Ch11/tikz4.tex}}
+	\end{minipage}
+
+	\vspace{1cm}
+
+	\centering
+
+	\Large
+	Sistema instável
+\end{frame}
+
+
+\begin{frame}{Estabilidade}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\scalebox{0.8}{\input{Figuras/Ch11/tikz5.tex}}
+		
+		\medskip
+		
+		Sistema estável
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		
+		\vspace{1.6cm}
+		\scalebox{1.2}{\input{Figuras/Ch11/tikz6.tex}}
+		
+		\medskip
+		
+		Sistema instável
+	\end{minipage}
+	
+	\vspace{1cm}
+	
+	\centering
+	
+	\Large
+	
+\end{frame}
+
+
+%\begin{frame}{Estabilidade}
+%	\begin{block}{BIBO estabilidade}
+%		\begin{itemize}
+%			\item Um sistema é BIBO (\textit{Bounded-Input, Bounded-Output}) estável se ele possui uma saída que é limitada tal qual sua entrada.
+%		\end{itemize}
+%	\end{block}
+%
+%	\vspace{0.3cm}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		
+%		\scalebox{0.9}{\input{Figuras/Ch11/tikz7.tex}}
+%	\end{minipage}
+%	\hfill
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		
+%		\scalebox{0.9}{\input{Figuras/Ch11/tikz8.tex}}
+%	\end{minipage}
+%\end{frame}
+
+
+\begin{frame}{Conceitos preliminares}
+	\begin{block}{Processo}
+		\begin{itemize}
+			\item Um \textbf{processo} é qualquer atividade (ou conjunto de atividades) que tem algum \textbf{objetivo}.
+		\end{itemize}
+	\end{block}
+
+	\vspace{0.5cm}
+
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Figuras/Ch11/fig3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Figuras/Ch11/fig4}
+	\end{minipage}
+\end{frame}
+
+
+\begin{frame}{Conceitos preliminares}
+	\begin{block}{Variáveis de processo}
+		\begin{itemize}
+			\item As \textbf{variáveis de processo} são aquelas \textbf{envolvidas no processo}.
+			\item Estas podem ser alteradas durante o processo, e podem ser usadas para \textbf{medir os resultados} e/ou \textbf{controlá-los}.
+		\end{itemize}
+	\end{block}
+	
+%	\vspace{0.5cm}
+	
+	\centering
+	\includegraphics[width=0.8\linewidth]{Figuras/Ch11/fig5}
+\end{frame}
+
+
+\begin{frame}{Conceitos preliminares}
+	\begin{block}{Outras variáveis e \textit{setpoint}}
+		\begin{itemize}
+			\item O \textbf{controle de processos} vai ajustar uma \textbf{variável manipulada} e, assim, estabilizar a \textbf{variável controlada} em seu \textbf{\textit{setpoint}}.
+		\end{itemize}
+	\end{block}
+	
+	%	\vspace{0.5cm}
+	
+	\centering
+	\includegraphics[width=0.8\linewidth]{Figuras/Ch11/fig6}
+\end{frame}
+
+
+\begin{frame}{Malha aberta x malha fechada}
+	\begin{block}{Introdução}
+		\begin{itemize}
+			\item O controle de malha aberta pode ser suficiente em vários sistemas onde as condições de operação são \textbf{constantes}, mas e se não forem?
+		\end{itemize}
+	\end{block}
+	
+	%	\vspace{0.5cm}
+	
+	\centering
+	\includegraphics[height=0.65\textheight]{Figuras/Ch11/fig7}
+\end{frame}
+
+
+\begin{frame}{Malha aberta x malha fechada}
+	\begin{block}{Diagramas de blocos}
+		\begin{itemize}
+			\item Os diagramas de blocos nos ajudam a compreender o funcionamento das malhas, indicando cada componente e sua função na malha.
+		\end{itemize}
+	\end{block}
+	
+	\vspace{1cm}
+	
+	\centering
+	\deftkzbds
+	\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	\node[input] (in) {};
+	\node[block, right=of in] (B) {Bloco};
+	\node[output,right=of B] (out) {}; 
+	
+	\draw[->] (in) -- node[above,midway] {Entrada} (B);
+	\draw[->] (B) -- node[above,midway] {Saída} (out);
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Malha aberta x malha fechada}
+	\begin{block}{Malha aberta}
+		\begin{itemize}
+			\item Uma \textbf{malha aberta} pode ser mostrada por um diagrama de blocos com apenas dois elementos.
+			\item A malha aberta pode lidar com \textbf{quaisquer problemas já conhecidos}, pois já são contados em seu \textbf{funcionamento normal}.
+		\end{itemize}
+	\end{block}
+	
+	\vspace{1cm}
+	
+	\centering
+	\deftkzbds
+	\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	\node[input] (in) {};
+	\node[block, right=of in] (C) {Controlador};
+	\node[block, right=of C] (P) {Processo};
+	\node[output,right=of P] (out) {}; 
+	
+	\draw[->] (in) -- node[above,midway] {Entrada} (C);
+	\draw[->] (C) -- (P);
+	\draw[->] (P) -- (out) node[above,midway] {Saída};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Malha aberta x malha fechada}
+	\begin{block}{Malha fechada}
+		A malha fechada conta com alguns componentes adicionais, entre eles:
+		\begin{itemize}
+			\item \textbf{Comparador}
+			
+			Compara o valor de \textbf{referência} com o \textbf{valor medido} na saída e gera um sinal de \textbf{erro} que indica o quanto o sinal de saída está longe do sinal de entrada.
+			\item \textbf{Atuador}
+			
+			A partir do sinal recebido do controlador, atua sobre a \textbf{variável manipulada} para ajustar e alterar a variável controlada de modo a \textbf{corrigir o erro}.
+			\item \textbf{Sensor}
+			
+			\textbf{Lê a variável controlada} na saída e envia sua condição na forma de sinal para o comparador, fechando o laço.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Malha aberta x malha fechada}
+	\begin{block}{Malha fechada}
+		\begin{itemize}
+			\item Os componentes da malha fechada devem regular sua saída \textbf{independentemente} das condições do processo.
+			\item O sensor deverá \textbf{ler a saída} e \textbf{enviar seu sinal} (através de um transmissor) para o comparador, que deve enviar o \textbf{erro} para o controlador.
+			\item O controlador, então, deve enviar um sinal calculado (ao atuador) para \textbf{corrigir} a saída do processo, que deve tender ao \textbf{valor desejado} (\textit{setpoint}).
+		\end{itemize}
+	\end{block}
+
+%	\vspace{0.5cm}
+	
+	\centering
+	\scalebox{0.7}{
+		\deftkzbds
+		\begin{tikzpicture}[auto, node distance=1cm,>=Latex]
+			\node[input] (in) {};
+			\node[sum,right=1.5cm of in] (sum) {\Large $ + $};
+			\node[block, right=of sum] (C) {Controlador};
+			\node[block,right=of C] (A) {Atuador};
+			\node[block, right=of A] (P) {Processo};
+			\coordinate[right=of P] (mid);
+			\node[output,right=of mid] (out) {};
+			\node[block,below=of A] (S) {Sensor};
+			
+			\draw[->] (in) -- node[above,midway] {Entrada} (sum) node[above=12pt] {Comparador};
+			\draw[->] (sum) -- (C);
+			\draw[->] (C) -- (A);
+			\draw[->] (A) -- (P);
+			\draw[->] (mid) |- (S);
+			\draw[->] (S) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.19, xshift=-4pt] {$+$} (sum);
+			\draw[->] (P) -- (out) node[above,near end] {Saída};
+		\end{tikzpicture}}
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	\begin{block}{Introdução}
+		\begin{itemize}
+			\item Assim que é detectada uma \textbf{anormalidade} na saída, isto é, um \textbf{erro}, em uma malha fechada, o controlador deve responder para corrigí-lo.
+			\item Se o erro for \textbf{muito grande}, a resposta do controlador pode ser \textbf{muito drástica}, causando um erro \textbf{tão grande quanto}, mas \textbf{oposto} ao original.
+		\end{itemize}
+	\end{block}
+
+	\vspace{-1.5cm}
+
+	\centering
+	\scalebox{0.8}{\input{Figuras/Ch11/tikz5.tex}}
+\end{frame}
+
+
+\begin{frame}{Correção da saída - Exemplo \#01}
+	\begin{block}{}
+		\begin{itemize}
+			\item Um trem deve se mover a uma velocidade de \textbf{\SI{150}{\kilo\meter\per\hour}} e, após uma \textbf{subida}, sua velocidade se reduz para \textbf{\SI{100}{\kilo\meter\per\hour}}.
+			\item O controlador manda um sinal \textbf{proporcional} a essa diminuição, incrementando a velocidade para \textbf{\SI{165}{\kilo\meter\per\hour}}.
+			\item Após mais \textbf{uma} pequena correção, o trem se estabiliza em sua subida, com sua velocidade estável em \textbf{\SI{150}{\kilo\meter\per\hour}}.
+		\end{itemize}
+	\end{block}
+
+	\centering
+	\includegraphics[height=0.50\textheight]{Figuras/Ch11/fig8}
+\end{frame}
+
+
+\begin{frame}{Correção da saída - Exemplo \#02}
+	\begin{block}{}
+		\begin{itemize}
+			\item Um avião deve viajar a uma velocidade de \textbf{\SI{1500}{\kilo\meter\per\hour}} para completar seu itinerário a tempo e, após \textbf{turbulências}, sua velocidade se reduz para \textbf{\SI{1000}{\kilo\meter\per\hour}}.
+			\item O controlador manda um sinal \textbf{proporcional} a essa diminuição, incrementando a velocidade para \textbf{\SI{1650}{\kilo\meter\per\hour}}.
+			\item Após outra correção, sua velocidade se aproxima de \textbf{\SI{1400}{\kilo\meter\per\hour}}.
+			\item Ainda longe do \textit{setpoint}, o controlador corrige sua saída \textbf{mais 5 vezes} até chegar em \textbf{\SI{1500}{\kilo\meter\per\hour}}.
+		\end{itemize}
+	\end{block}
+
+	\centering
+	\includegraphics[height=0.4\textheight]{Figuras/Ch11/fig9}
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	\begin{block}{}
+		Os dois exemplos apresentados usam valores múltiplos e, provavelmente, um método de controle similar, mas o segundo precisa realizar \textbf{bem mais} correções para chegar num \textbf{valor razoável}.
+		
+		\medskip
+		
+		Isso se deve à escala do problema, e podemos estudar alguns pontos importantes a partir destes dois casos:
+		\begin{itemize}
+			\item Regime \textbf{transitório} x regime \textbf{permanente}.
+			\item Ações de controle.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	\begin{block}{Regime transitório x regime permanente}
+		\begin{itemize}
+			\item É importante notar que a natureza do processo impacta \textbf{diretamente} sua \textbf{velocidade de resposta} a alterações \textbf{externas}.
+			\item O nível de um reservatório grande (represa), por exemplo, pode levar \textbf{dias} para variar \textbf{significativamente}.
+			\item Visto isso, é importante levar em conta o tempo necessário para a \textbf{variável controlada} se adequar às mudanças proporcionadas pelo controlador, que \textbf{nem sempre pode alterá-la diretamente}.
+			\item Esse tempo de resposta é chamado \textbf{tempo morto}.
+			\item Para corrigir variáveis que necessitam de \textbf{ação imediata} (velocidade de um trem) precisamos de \textbf{medidas drásticas}.
+			\item A essas medidas denominamos \textbf{overshoot}, que seria uma resposta exagerada a fim de mudar o estado da variável \textbf{o mais rápido possível}.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	\begin{block}{Regime transitório x regime permanente}
+		\begin{itemize}
+			\item Quanto \textbf{maior} o tempo morto e o overshoot, \textbf{mais difícil} se torna o controle de uma dada variável, visto que precisaremos de \textbf{mais tempo} para perceber alterações e \textbf{mais correções} no caminho para chegar ao \textit{setpoint}.
+			\item Esse período de adaptações sem estabilidade se chama \textbf{regime transitório}, e é essencial que seja o \textbf{mais curto possível}.
+			\item Quando \textbf{cessa} o regime transitório, começa o \textbf{regime permanente}, que é quando há certa \textbf{estabilidade}.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figuras/Ch11/fig10}
+	
+\end{frame}
+
+
+\begin{frame}{Correção da saída}
+	\begin{block}{Regime transitório x regime permanente}
+		\begin{itemize}
+			\item $ \bm{M_o} $ \textbf{-- Pico da resposta ou overshoot}
+			
+			É o \textbf{quanto} a variável controlada ultrapassa o \textit{setpoint} na primeira oscilação.
+			\item $ \bm{t_e} $ \textbf{-- tempo de estabilização ou acomodação}
+			
+			Tempo que a variável controlada do processo demora para \textbf{alcançar 95\%} de seu valor em regime permanente (\textit{setpoint}).
+			\item $ \bm{t_s} $ \textbf{-- tempo de subida}
+			
+			Tempo decorrido para que a variável controlada vá de \textbf{10\% até 90\% do \textit{setpoint}}.
+			\item $ \bm{L} $ \textbf{-- Atraso ou tempo morto}
+			
+			Tempo que o processo leva para \textbf{começar a responder} a uma variação na variável manipulada.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+		01. Monte o diagrama em blocos para os dois exemplos abordados anteriormente.
+		
+		\vspace{0.5cm}
+		
+		02. Esboce um gráfico de um processo onde $ SP=\SI{200}{\psip}, M_o=25\%,t_e=\SI{10}{\second},L=\SI{2}{\second} $ e $ t_s=\SI{2}{\second} $.
+	\end{block}
+}
+
+
+\section*{Referências}
+\frame{
+	\frametitle{Referências e Exercícios Complementares}
+	\begin{itemize}
+		\item BAYER, Fernando Mariano; ARAÚJO, Olinto César Bassi de. Controle Automático de Processos, 3 ed. UFSM : Colégio Técnico Industrial de Santa Maria, 2011.
+	\end{itemize}
+	%\centering{\alert{Página 546 - \textbf{Capítulo 6}}} \\
+	%\centering{\alert{Lista de exercícios 01}}
+}

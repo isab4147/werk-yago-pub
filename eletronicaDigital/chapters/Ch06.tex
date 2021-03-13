@@ -1,0 +1,503 @@
+\section{Simplificação de expressões booleanas por mapa de Karnaugh}
+
+\frame{
+	\frametitle{Mapa de Karnaugh}
+	\begin{block}{Mapeamento da tabela verdade}
+		\begin{itemize}
+			\item Circuito mínimo.
+			\item Fácil utilização.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{K-map - Duas variáveis}
+	\begin{center}
+	\begin{karnaugh-map}[2][2][1][$A$][$B$]
+	\minterms{}
+	\maxterms{}
+	%\implicant{1}{1}
+	%\implicant{2}{2}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{K-map - Três variáveis}
+	\begin{center}
+	\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+	\minterms{}
+	\maxterms{}
+	\indeterminants{}
+	%\implicant{3}{2}
+	%\implicant{4}{5}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{K-map - Quatro variáveis}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	%\manualterms{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{3}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Mapa de Karnaugh x Tabela verdade}
+	\begin{block}{Atenção à \textbf{ORDEM}}
+		\begin{itemize}
+			\item \textbf{Troca de 10 e 11}.
+			\item Em células adjacentes apenas uma variável pode mudar de valor.
+		\end{itemize}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Como montar?}
+	\begin{block}{Montagem do K-map}
+		Podemos utilizar \alert{mintermos} ou \alert{maxtermos}.
+		
+		\bigskip
+		
+		Passo-a-passo:
+		\begin{enumerate}
+			\item Preencher as células de acordo com a tabela verdade.
+			\item Agrupar os 1's (mintermos) ou 0's (maxtermos):
+			      \begin{enumerate}
+				      \item\normalsize Unir na horizontal ou vertical.
+				      \item\normalsize \textbf{NUNCA} na diagonal.
+				      \item\normalsize \textbf{PODE USAR} os cantos.
+				      \item\normalsize Deve ser múltiplos da \textbf{BASE 2}.
+				      \item\normalsize {\color{red} \textbf{MAIOR AGRUPAMENTO POSSÍVEL}}.
+			      \end{enumerate}
+		\end{enumerate}
+	\end{block}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Adjacências}
+	\begin{center}
+	\begin{karnaugh-map}[2][2][1][$A$][$B$]
+	\minterms{2,3}
+	\maxterms{0,1}
+	%\implicant{1}{1}
+	%\implicant{2}{2}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Adjacências}
+	\begin{center}
+	\begin{karnaugh-map}[2][2][1][$A$][$B$]
+	\minterms{2,3}
+	\maxterms{0,1}
+	\implicant{2}{3}
+	%\implicant{2}{2}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Adjacências}
+	\begin{center}
+	\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+	\minterms{4,5,3,2}
+	\maxterms{0,1,6,7}
+	\indeterminants{}
+	%\implicant{3}{2}
+	%\implicant{4}{5}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Adjacências}
+	\begin{center}
+	\begin{karnaugh-map}[4][2][1][$AB$][$C$]
+	\minterms{4,5,3,2}
+	\maxterms{0,1,6,7}
+	\indeterminants{}
+	\implicant{4}{5}
+	\implicant{3}{2}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Linhas ou colunas}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Linhas ou colunas}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0}
+	\implicant{0}{2}
+	\implicant{0}{8}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Quadra}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar?}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1}
+	\implicant{0}{5}
+	\implicant{15}{10}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Quadra em anel}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Quadra em anel}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0}
+	%\implicant{1}{9}{4}{6}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Quadra em anel}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{0,1,0,1,1,0,1,0,0,1,0,1,1,0,1,0}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Quadra em anel}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{0,1,0,1,1,0,1,0,0,1,0,1,1,0,1,0}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	\implicantedge{1}{3}{9}{11}
+	%\implicantcorner
+	\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Oitava}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Como agrupar? - Oitava}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1}
+	\implicant{4}{14}
+	\implicant{1}{11}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Diagramas com condições irrelevantes}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{X,0,1,X,1,0,1,1,0,1,X,0,0,X,0,X}
+	%\implicant{0}{2}
+	%\implicant{5}{15}
+	%\implicantedge{1}{9}{9}{11}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+	\frametitle{Diagramas com condições irrelevantes}
+	\begin{center}
+	\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+	\manualterms{X,0,1,X,1,0,1,1,0,1,X,0,0,X,0,X}
+	\implicant{13}{9}
+	\implicant{3}{6}
+	\implicantedge{0}{4}{2}{6}
+	%\implicantcorner
+	%\implicantedge{4}{12}{6}{14}
+	\end{karnaugh-map}
+	\end{center}
+}
+
+\frame{
+\frametitle{Obtendo a expressão simplificada - Exemplo \#01}
+
+\begin{block}{}
+	\begin{itemize}
+		\item A variável que \textbf{muda de estado }é \textbf{retirada}.
+	\end{itemize}
+
+	\[ S = A\cdot \notted{B} + A\cdot B + \notted{A}\cdot B \]
+\end{block}
+
+\centering
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\minterms{1,2,3}
+\maxterms{0}
+\implicant{1}{3}
+\implicant{2}{3}
+\end{karnaugh-map}
+
+\vspace{-0.5cm}
+
+\begin{block}{Expressão simplificada}
+	\[ S = {\color{red} A} + {\color{green} B} \]
+\end{block}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#02}
+	
+	\begin{block}{}
+		
+		\[ S = A\cdot B\cdot \notted{C}\cdot  \notted{D} + A\cdot B\cdot \notted{C}\cdot D + A\cdot B\cdot C\cdot D + A\cdot B\cdot C\cdot \notted{D} \]
+	\end{block}
+	
+	\centering
+	\scalebox{0.9}{
+		\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+			
+			\manualterms{0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1}
+			\implicant{12}{14}
+			%\implicant{3}{6}
+			%\implicantedge{0}{4}{2}{6}
+			%\implicantcorner
+			%\implicantedge{4}{12}{6}{14}
+		\end{karnaugh-map}
+	}
+
+	\vspace{-0.8cm}
+	
+	\begin{block}{Expressão simplificada}
+		\[  S = {\color{red} A\cdot B} \]
+	\end{block}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#03}
+	
+	\begin{block}{}
+		
+		\[ S = \notted{A}\cdot \notted{B}\cdot \notted{C}\cdot \notted{D} + \notted{A}\cdot  \notted{B}\cdot C\cdot \notted{D} + A\cdot \notted{B}\cdot \notted{C}\cdot \notted{D} + A\cdot \notted{B}\cdot C\cdot \notted{D} \]
+	\end{block}
+	
+	\centering
+	\scalebox{0.9}{
+		\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+			\manualterms{1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0}
+			%\implicant{12}{15}
+			%\implicant{3}{6}
+			%\implicantedge{0}{2}{8}{10}
+			\implicantcorner
+			%\implicantedge{4}{12}{6}{14}
+		\end{karnaugh-map}
+	}
+
+	\vspace{-0.8cm}
+	
+	\begin{block}{Expressão simplificada}
+		\[ S = {\color{red} \notted{B}\cdot \notted{D}} \]
+	\end{block}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#03}
+	
+	\begin{block}{}
+		
+		\[ S = \notted{A}\cdot \notted{B}\cdot \notted{C}\cdot \notted{D} + \notted{A}\cdot  \notted{B}\cdot C\cdot \notted{D} + A\cdot \notted{B}\cdot \notted{C}\cdot \notted{D} + A\cdot \notted{B}\cdot C\cdot \notted{D} \]
+	\end{block}
+	
+	\centering
+	\scalebox{0.9}{
+		\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+			\manualterms{1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0}
+			%\implicant{12}{15}
+			%\implicant{3}{6}
+			%\implicantedge{0}{2}{8}{10}
+			\implicantcorner
+			%\implicantedge{4}{12}{6}{14}
+		\end{karnaugh-map}
+	}
+
+	\vspace{-0.8cm}
+	
+	\begin{block}{Expressão simplificada}
+		\[ S = {\color{red} \notted{B}\cdot \notted{D}} \]
+	\end{block}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#04}
+		\centering
+		\begin{adjustbox}{totalheight=0.9\textheight-2\baselineskip}
+			\begin{tabular}{cccc|c}
+				\toprule
+				A & B & C & D & S \\ \midrule
+				0 & 0 & 0 & 0 & X \\
+				0 & 0 & 0 & 1 & 0 \\
+				0 & 0 & 1 & 0 & 1 \\
+				0 & 0 & 1 & 1 & X \\
+				0 & 1 & 0 & 0 & 1 \\
+				0 & 1 & 0 & 1 & 0 \\
+				0 & 1 & 1 & 0 & 1 \\
+				0 & 1 & 1 & 1 & 1 \\
+				1 & 0 & 0 & 0 & 0 \\
+				1 & 0 & 0 & 1 & 1 \\
+				1 & 0 & 1 & 0 & X \\
+				1 & 0 & 1 & 1 & 0 \\
+				1 & 1 & 0 & 0 & 0 \\
+				1 & 1 & 0 & 1 & X \\
+				1 & 1 & 1 & 0 & 0 \\
+				1 & 1 & 1 & 1 & X \\ \bottomrule
+			\end{tabular}
+		\end{adjustbox}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#04}
+	
+	\centering
+	\scalebox{0.9}{
+		\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+			\manualterms{X,1,0,0,0,0,1,X,1,1,X,0,X,1,0,X}
+			\implicant{12}{9}
+			\implicant{7}{6}
+			\implicantedge{0}{1}{8}{9}
+			%\implicantcorner
+			%\implicantedge{4}{12}{6}{14}
+		\end{karnaugh-map}
+	}
+	
+	\begin{block}{Expressão simplificada}
+		\[ S = {\color{red} \notted{A}\cdot C} + {\color{green} A\cdot \notted{C}\cdot D} + {\color{YellowOrange} \notted{A}\cdot \notted{D}} \]
+	\end{block}
+}
+
+\frame{
+	\frametitle{Obtendo a expressão simplificada - Exemplo \#05}
+	
+	\centering
+	\scalebox{0.9}{
+		\begin{karnaugh-map}[4][4][1][$AB$][$CD$]
+			\manualterms{0,0,0,1,1,1,1,1,0,0,0,0,1,1,0,0}
+			\implicant{4}{6}
+			\implicant{4}{13}
+			\implicant{3}{7}
+			%\implicantedge{0}{2}{8}{10}
+			%\implicantcorner
+			%\implicantedge{4}{12}{6}{14}
+		\end{karnaugh-map}
+	}
+	
+	\begin{block}{Expressão simplificada}
+		\[ S = {\color{red} \notted{C}\cdot D} + {\color{green} \notted{A}\cdot D} + {\color{YellowOrange} A\cdot B\cdot \notted{C}} \]
+	\end{block}
+}
+
+
+\section*{Exercícios}
+
+\frame{
+	\frametitle{Exercícios}
+	\begin{block}{}
+		01. Simplifique as expressões booleanas a seguir pelo Mapa de Karnaugh:
+		\begin{itemize}
+			\item $S = \notted{C}\cdot(\notted{A}\cdot \notted{B}\cdot \notted{D} + D) + A\cdot \notted{B}\cdot C + \notted{D}$
+			\item $S = \notted{A}\cdot \notted{B}\cdot \notted{C } + \notted{A}\cdot B\cdot \notted{C} + \notted{A}\cdot B\cdot C + A\cdot \notted{B}\cdot \notted{C} + A\cdot B\cdot \notted{C}$
+			\item $S = \notted{A}\cdot \notted{B}\cdot \notted{C} + \notted{A}\cdot B\cdot \notted{C} + \notted{A}\cdot B\cdot C + A\cdot B\cdot C$
+		\end{itemize}
+	\end{block}
+}
+
+
+\section*{Referências}
+
+\frame{
+	\frametitle{Referências e exercícios complementares}
+	\begin{itemize}
+		\item IDOETA, Ivan V. e CAPUANO, Francisco G. Elementos de Eletrônica Digital. São Paulo:
+		      Editora Érica, ed. 40. 2008.
+	\end{itemize}
+	\centering{\alert{Página 149 - \textbf{3.10.9 até 3.10.15}}}
+}
