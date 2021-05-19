@@ -1,0 +1,20 @@
+\deftkzbds
+	
+\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	
+	\node [input, name=input] {};
+	
+	\node [sum, right =of input, xshift=0.5cm] (sum) {$\phantom{\sum}$};
+	\draw [->] (input) -- node {$R(z)$} (sum);
+	
+	\node [block, right=of sum] (G) {$ G(z) $};
+	\draw [->] (sum) -- node {$E(z)$} (G);
+	
+	\node [output, right =of G] (output) {};
+	\draw [->] (G) -- node [name=y] {$Y(z)$}(output);
+	
+	\node [block, below=1cm of G] (H) {$ H(z) $};
+	\draw [->] (y) |- (H);
+	
+	\draw [->] (H) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.25, xshift=-4pt] {$+$} node [near start, yshift=15pt] {$F(z)$} (sum);
+\end{tikzpicture}

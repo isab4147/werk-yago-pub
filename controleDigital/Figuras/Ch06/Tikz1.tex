@@ -1,0 +1,28 @@
+\deftkzbds
+	
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+	
+	\node [input, name=input] {};
+	\node [sum, right =of input, xshift=0.5cm] (sum) {$ \phantom{\sum} $};
+	\draw [draw,->] (input) -- node {$r(kT)$} (sum);
+	
+	\node [block, right =of sum, text width=2cm, align=center] (controller) {Controlador $ G_c(z) $};
+	\draw [->] (sum) -- node {$e(kT)$} (controller);
+	
+	\node [block, right=of controller, xshift=0.5cm] (DA) {D/A};
+	\draw [->] (controller) -- node [xshift=0.25cm] {$u(kT)$} (DA);
+	
+	\node [block, right =of DA, text width=1.8cm, align=center] (process) {Planta \\ $ G(s) $};
+	\draw [->] (DA) -- node {$u(t)$} (process);
+	
+	\node [block, right =of process] (AD) {A/D};
+	\draw [->] (process) -- node[name=ytAr] {$y(t)$} (AD);
+	
+	\node [output, right =of AD] (output) {};
+	\draw [->] (AD) -- node [name=y] {$y(kT)$}(output);
+	
+	\node [coordinate,below=of DA, inner sep=0pt] (midp) {};
+	\draw[->] (y) |- (midp) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.3] {$+$} (sum);
+	
+	\draw[loosely dashed] (controller.north east) +(10pt,5pt) rectangle ($(output.south east)+(5pt,-20pt)$);
+\end{tikzpicture}

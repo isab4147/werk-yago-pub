@@ -1,0 +1,20 @@
+\deftkzbds
+	
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+	
+	\node [input, name=input] {};
+	\node [sum, right =of input, xshift=0.5cm] (sum) {$ \phantom{\sum} $};
+	\draw [draw,->] (input) -- node {$R(z)$} (sum);
+	
+	\node [block, right =of sum, text width=2cm, align=center] (controller) {$ \dfrac{z}{z-1} $};
+	\draw [->] (sum) -- node {$E(z)$} (controller);
+	
+	\node [block, right =of controller, text width=2cm, align=center] (process) {Planta};
+	\draw [->] (controller) -- node {$U(z)$} (process);
+	
+	\node [output, right =of process] (output) {};
+	\draw [->] (process) -- node [name=y] {$Y(z)$}(output);
+	
+	\node [coordinate,below=of process, inner sep=0pt] (midp) {};
+	\draw[->] (y) |- (midp) -| node[pos=0.98] {$-$} node[pos=1.3] {$+$} (sum);
+\end{tikzpicture}

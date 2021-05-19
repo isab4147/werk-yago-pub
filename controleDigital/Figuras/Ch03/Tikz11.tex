@@ -1,0 +1,31 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=1cm,>=Latex]
+	% We start by placing the blocks
+	\node [input] (input) {};
+	\node [right=1cm, name=mid1, node distance=1pt, inner sep=1pt, fill=black, circle, draw] at (input) {};
+	\node [right=1.3cm, name=mid] at (mid1) {};
+	\node [block, above=0.5cm] at (mid) (h1) {$ h_1[n] $};
+	\node [block, below=0.5cm] at (mid) (h2) {$ h_2[n] $};
+	\node [sum, right=1cm, name=sum] at (mid) {$ + $};
+	\node [output, right =of sum] (output) {};
+	\node [above] at (input) {$ z^{n} $};
+	\node [above] at (output) {$ y[n] $};
+	
+	\draw [->] (input) -| (mid1) |- (h1);
+	\draw [->] (mid1) |- (h2);
+	\draw [->] (h1) -| node[midway,right] {$ y_1[n] $} (sum);
+	\draw [->] (h2) -| node[midway,right] {$ y_2[n] $} (sum);
+	\draw [->] (sum) -- (output);
+	
+	\node[right=0.5cm, name=eq] at (output) {\Large $ \equiv $};
+	
+	\node [input, right=0.5cm] at (eq) (in2) {};
+	\node [block, right=of in2] (computer) {$ x[n] $};
+	\node [output, right =of computer] (out2) {};
+	\node [above] at (in2) {$ z^{n} $};
+	\node [above] at (out2) {$ y[n] $};
+	
+	\draw [->] (in2) -- (computer);
+	\draw [->] (computer) -- (out2);
+\end{tikzpicture}

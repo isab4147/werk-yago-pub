@@ -1,0 +1,403 @@
+\section{Os planos \texorpdfstring{$ s $, $ z $ e $ w $}{s, z e w}}
+
+\begin{frame}{Os planos $s$ e $z$}
+\begin{block}{Introdução}
+\begin{itemize}
+    \item Apesar de tanto $z$ como $s$ serem \textbf{variáveis  complexas}, será conveniente representar $s$ em \textit{coordenadas cartesianas} e $z$ em \textit{coordenadas polares}, ou seja, 
+\end{itemize}
+$$s = \sigma + j\omega \quad \text{e} \quad z = r\text{e}^{j\theta}$$
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig1.PNG}}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\centering
+
+\scalebox{0.7}{\input{Figuras/Ch05/tikz1.tex}}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Introdução}
+A relação $ z=\text{e}^{sT} $ é a transformação entre a localização de polos no plano $s $ e a localização no plano $ z $.
+A variável complexa $ s $ pode ser escrita como sendo $ s=\sigma+j\omega $. 
+
+\vspace{0.5cm}
+
+Logo, $ z=\text{e}^{(\sigma+j\omega)T} $, que pode ser escrito como \[ z=\underbrace{\text{e}^{\sigma T}}_{|z|}\underbrace{\text{e}^{j\omega T}}_{\phase{z}} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$ - Exemplo \#01}
+\begin{block}{}
+	\begin{align*}
+		f(t)&=\text{e}^{-at}\, , \, t\geqslant 0& \quad \Rightarrow \quad F(s)&=\dfrac{1}{s+a}\\
+		f(kT)&=\text{e}^{-akT}\, , \, k\geqslant 0& \quad \Rightarrow \quad F(z)&=\sum_{k=0}^{\infty} \text{e}^{-akT}\cdot z^{-k}=\sum_{k=0}^{\infty}\left( \dfrac{\text{e}^{-aT}}{z} \right)^{k}=\\
+		& & &=\dfrac{1}{1-\dfrac{\text{e}^{-aT}}{z}}=\dfrac{z}{z-\text{e}^{-aT}}
+	\end{align*}
+	
+	\begin{itemize}
+		\item $ F(s) $ possui polo em $ s=-a $.
+		\item $ F(z) $ possui polo em $ z=\text{e}^{-aT}=\text{e}^{sT} $, em que $ T\in \mathbb{R}_{>0} $ é o \textbf{período de amostragem.}
+	\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$ - Exemplo \#01}
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.45}{\input{Figuras/Ch05/tikz2.tex}}
+\end{minipage}\tikzmark{p1}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.45}{\input{Figuras/Ch05/tikz3.tex}}
+\end{minipage}
+
+\begin{block}{}
+	\begin{itemize}
+		\item Isso implica que todos os pontos no plano $ s $ tem seu \textbf{ponto correspondente} no plano $ z $.
+	\end{itemize}
+\end{block}
+
+\begin{tikzpicture}[overlay, remember picture, scale=0.5]
+	\draw (p1) ++(-2,0) node[above] {$ f(t) $} -- ++(1.5,0) node[circle, inner sep=1pt, draw, fill=black, name=p2] {} -- node[midway, name=p3] {} +(1.732, 1);
+	\draw (p2) ++(1.732,0) node[circle, inner sep=1pt, fill=black, draw] {} -- +(1.5,0) node[above] {$ f(kT) $};
+	\draw[->] ($ (p3)+(-0.2,0.4) $) node[above=-2pt, xshift=-2pt] {$ T $} to [out=330,in=100] +(0.4,-0.8);
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Observação}
+\begin{itemize}
+		\item A transformada de Laplace de um sinal amostrado pode ser dada por:
+\end{itemize}
+$$F^*(s) = \sum_{k=-\infty}^{\infty} f(kT) \text{e}^{-kTs}$$
+\begin{itemize}
+		\item Considerando um degrau unitário, por exemplo, temos que:
+\end{itemize}
+$$F^*(s) = \sum_{k=0}^{\infty} 1 \text{e}^{-kTs} = 1 + \text{e}^{-Ts} + \text{e}^{-2Ts} + \cdots = 1 + (\text{e}^{-Ts})^1 + (\text{e}^{-Ts})^2 + \cdots$$
+\begin{itemize}
+		\item Da série de potências sabemos que
+\end{itemize}
+$$1 + x + x^2 + \cdots = \dfrac{1}{1-x}, \ \text{se} \ |x| < 1$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Observação}
+\begin{itemize}
+		\item Deste modo,
+\end{itemize}
+$$F^*(s) = \dfrac{1}{1 - \text{e}^{-Ts}}$$
+\begin{itemize}
+		\item O denominador de $F^*(s)$ não é um polinômio em $s$, mas são \textbf{funções transcendentais}. Uma consequência disso é que $F^*(s)$ tem \textbf{infinitos polos}.
+		\item Além disso, $F^*(s)$ é uma \textbf{função periódica} em $s$, com período fundamental $j\omega_s$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Mapeamento}
+\begin{itemize}
+	\item Considere o fato de que a maior frequência que pode ser representada é $\omega_s/2$.
+	\item A \textbf{faixa primária} é dada por:
+\end{itemize}
+$$\Omega_p = \{ s = \sigma + j\omega \in \mathbb{C} \ | -\omega_s/2 \leq \omega \leq \omega_s/2 \} $$
+\end{block}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\centerline{\includegraphics[width=0.75\linewidth]{Figuras/Ch05/fig4.PNG}}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Mapeamento}
+\begin{itemize}
+	\item Mapeamento da reta horizontal $s = \sigma + j\omega_s/2$
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(\sigma + j\omega_s/2)T} = \text{e}^{\sigma T} \text{e}^{(j\omega_s/2) T} = -\text{e}^{\sigma T}$$
+\begin{itemize}
+	\item A reta horizontal $s$ no plano $s$ é mapeada para o eixo real negativo no plano $z$ ($\sigma \to -\infty \implies z \to 0^{-}$ e $\sigma \to \infty \implies z \to -\infty$).
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Mapeamento}
+\begin{itemize}
+	\item Mapeamento da reta horizontal $s = \sigma - j\omega_s/2$
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(\sigma - j\omega_s/2)T} = \text{e}^{\sigma T} \text{e}^{(-j\omega_s/2) T} = -\text{e}^{\sigma T}$$
+\begin{itemize}
+	\item A reta horizontal $s$ no plano $s$ é mapeada para o eixo real negativo no plano $z$ ($\sigma \to -\infty \implies z \to 0^{-}$ e $\sigma \to \infty \implies z \to -\infty$).
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Mapeamento}
+\begin{itemize}
+	\item Mapeamento da reta horizontal $s = \sigma + j\omega_0$
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(\sigma + j\omega_0)T} = \text{e}^{\sigma T} \text{e}^{j\omega_0 T}$$
+\begin{itemize}
+	\item Semi-reta entre a origem do plano $z$ e $\infty$ (semi-plano superior).
+	\item Ângulo $\omega_0 T$ com o eixo semi-real. 
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Mapeamento}
+\begin{itemize}
+	\item Mapeamento da reta horizontal $s = \sigma - j\omega_1$
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(\sigma - j\omega_1)T} = \text{e}^{\sigma T} \text{e}^{-j\omega_1 T}$$
+\begin{itemize}
+	\item Semi-reta entre a origem do plano $z$ e $-\infty$ (semi-plano inferior).
+	\item Ângulo $\omega_1 T$ com o eixo semi-real. 
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto A}
+\begin{itemize}
+	\item O ponto A (origem do plano $s$) é mapeado em:
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{0T} = 1$$
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto A até ponto B}
+\begin{itemize}
+	\item Avançando a partir do ponto A em direção ao ponto B, temos que o mapeamento é:
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(0+\omega)T} = \text{e}^{\omega T}, \quad 0 < \omega < \omega_s/2 \implies 0 < \theta < \pi$$
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto B até ponto C}
+\begin{itemize}
+	\item Avançando a partir do ponto B em direção ao ponto C, temos que o mapeamento é dado no eixo real negativo do plano $z$ (\textit{conforme visto anteriormente}).
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto C até ponto D}
+\begin{itemize}
+	\item Avançando a partir do ponto C em direção ao ponto D, temos que o mapeamento é:
+\end{itemize}
+$$\text{Ponto C:} \ z = \text{e}^{sT} = \text{e}^{(-\infty+\omega_s/2)T} = \text{e}^{-\infty T} \text{e}^{j\pi} = 0\phase{\pi}$$
+$$\text{Ponto D:} \ z = \text{e}^{sT} = \text{e}^{(-\infty-\omega_s/2)T} = \text{e}^{-\infty T} \text{e}^{j-\pi} = 0\phase{-\pi}$$
+\vspace{-0.3cm}
+\begin{itemize}
+    \item A mudança de fase indica uma mudança de direção.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto D até ponto E}
+\begin{itemize}
+	\item Avançando a partir do ponto D em direção ao ponto E, temos que o mapeamento é dado no eixo real negativo do plano $z$ (\textit{conforme visto anteriormente}).
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Ponto E até ponto A}
+\begin{itemize}
+	\item Avançando a partir do ponto E em direção ao ponto A, temos que o mapeamento é:
+\end{itemize}
+$$z = \text{e}^{sT} = \text{e}^{(0+\omega)T} = \text{e}^{-\omega T}, \quad -\omega_s/2 < \omega < 0 \implies -\pi < \theta < 0$$
+\end{block}
+\centerline{\includegraphics[width=0.9\linewidth]{Figuras/Ch05/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{block}{Em resumo...}
+\begin{itemize}
+	\item O \textbf{eixo imaginário} do plano $ s $ é $ s=j\omega $, $ \sigma=0 $, e o lugar geométrico correspondente no plano $ z $ é:
+	\[ \left. z=\text{e}^{\sigma T}\text{e}^{j\omega T} \quad \rightarrow \quad |z|=1 \text{ e }0<\phase{z} < \SI{360}{\degree}\right\rbrace \text{\textbf{círculo unitário.}}\]
+	\item O \textbf{semiplano esquerdo} do plano $ s $ é dado por $ s=-\sigma+j\omega $, $ \sigma >0 $, e o lugar geométrico correspondente no plano $ z $ é:
+	\[ \left. z=\text{e}^{\sigma T}\text{e}^{j\omega T} \quad \rightarrow \quad |z|=\text{e}^{-\sigma T}<1 \text{ e }\phase{z}= \omega T \right\rbrace \text{\textbf{dentro do círculo.}}  \]
+	\item O \textbf{semiplano direito} do plano $ s $ é dado por $ s=\sigma+j\omega $, $ \sigma>0 $, e o lugar geométrico correspondente no plano $ z $ é:
+	\[ \left. z=\text{e}^{\sigma T}\text{e}^{j\omega T} \quad \rightarrow \quad |z|=\text{e}^{\sigma T}>1 \text{ e }\phase{z}= \omega T \right\rbrace \text{\textbf{fora do círculo.}} \]
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Região de estabilidade no plano $z$}
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch05/tikz4.tex}}
+\end{minipage}\tikzmark{p12}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch05/tikz5.tex}}
+\end{minipage}
+
+\begin{block}{Conclusão}
+	\textbf{Um sistema causal será estável se todos os polos em malha fechada da função de transferência em $ \bm{z} $ estiverem dentro do círculo unitário do plano $ \bm{z} $.}
+\end{block}
+
+\begin{tikzpicture}[overlay, remember picture, scale=0.5]
+\draw[->] ($ (p12)+(0,0) $) node[above=5pt, xshift=15pt] {$ z=\text{e}^{sT} $} to [out=45,in=135] +(2,0);
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Importante}
+Importante observar que o mapeamento exponencial, na prática, é pouco realizado, por limitação das técnicas digitais e que por causa disso é realizado por meio de \textbf{aproximações}, como veremos nas próximas aulas.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Observação}
+\begin{itemize}
+	\item Valores constantes de $ \sigma $ são mapeados em um círculo dentro do círculo unitário no plano $ z $.
+	\item Grandes valores de $ \sigma $ representam pequenos valores de constante de tempo, logo um decaimento ou crescimento mais veloz.
+\end{itemize}
+\end{block}
+
+%\vspace{0.5cm}
+
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.9}{\input{Figuras/Ch05/tikz6.tex}}
+\end{minipage}\tikzmark{p13}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.65}{\input{Figuras/Ch05/tikz7.tex}}
+\end{minipage}
+
+\begin{tikzpicture}[overlay, remember picture, scale=0.5]
+\draw[-Implies, double distance=2pt] ($ (p13)+(0.5,1) $) -- +(1,0);
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Relação entre os planos $s$ e $z$}
+\begin{block}{Observação}
+\begin{itemize}
+	\item Valores constantes de $\omega$ são mapeados de forma radial no plano $ z $.
+\end{itemize}
+\end{block}
+
+\vspace{0.5cm}
+
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{1}{\input{Figuras/Ch05/tikz8.tex}}
+\end{minipage}\tikzmark{p14}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch05/tikz9.tex}}
+\end{minipage}
+
+\begin{tikzpicture}[overlay, remember picture, scale=0.5]
+\draw[-Implies, double distance=2pt] ($ (p14)+(0.5,1) $) node[name=p24] {} -- +(1,0);
+\node[below=1cm of p24, align=center] {
+	$ \begin{aligned}
+	z=\text{e}^{sT}&=\text{e}^{\sigma T}\text{e}^{j\omega T}\\
+				   &=r\phase{\theta}
+	\end{aligned} $
+};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{O plano $w$}
+\begin{block}{Introdução}
+\begin{itemize}
+    \item Conforme vimos anteriormente, a transformada de Laplace de um sinal amostrado introduz um número infinito de polos (já que temos a presença do termo $\text{e}^{sT}$).
+    \item Ao mapearmos para o plano $z$ (onde $z = \text{e}^{sT}$) este problema é contornado.
+    \item Além disso, o \textbf{limite de estabilidade} deixa de ser o eixo imaginário (plano $s$) e passa a ser a circunferência de raio unitário (plano $z$). 
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{O plano $w$}
+\begin{block}{Contextualização}
+\begin{itemize}
+    \item Em algumas aplicações (como, por exemplo, analisar a estabilidade de sistemas usando o critério de estabilidade de Routh-Hurwitz -- \textit{veja o capítulo 7}) pode ser interessante voltar a mapear o limite de estabilidade para o \textbf{eixo imaginário}, porém \textbf{sem recorrer ao uso de funções transcendentais}, para não incorrer  no problema de ter infinitos polos.
+    \item Deste modo, se
+\end{itemize}
+$$z = \text{e}^{sT} \implies s = \dfrac{1}{T} \text{ln} \, z$$
+\begin{itemize}
+   \item[] está descartado o seu uso, por se tratar de uma função transcendental.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $z$ e $w$}
+\begin{block}{Definição}
+\begin{itemize}
+    \item A expansão em séries de potências nos diz que:
+\end{itemize}
+$$\text{ln} \, z = 2 \sum_{k=0}^{\infty} \dfrac{1}{2k+1} \left(\dfrac{z-1}{z+1}\right)^{2k+1}$$
+\begin{itemize}
+    \item Truncando depois do primeiro termo, temos que:
+\end{itemize}
+$$\text{ln} \, z \approx 2 \left(\dfrac{z-1}{z+1}\right)$$
+\begin{itemize}
+    \item Deste modo, como $s = \dfrac{1}{T} \text{ln} \, z$, temos que:
+\end{itemize}
+$$\boxed{w = \dfrac{2}{T} \left(\dfrac{z-1}{z+1}\right)}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Relação entre os planos $z$ e $w$}
+\begin{block}{Definição}
+\begin{itemize}
+    \item O inverso também é válido. Logo:
+\end{itemize}
+$$\boxed{z = \dfrac{1+(T/2)w}{1-(T/2)w}}$$
+\end{block}
+\end{frame}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+01. Mostre que o eixo real do plano $s$, ou seja, $s = \sigma$, $\forall \sigma$ é mapeado por $z = \text{e}^{sT}$ para o semi-eixo real positivo no plano $z$. 
+\end{block}
+}
+
+\frame{
+\frametitle{Referências e exercícios complementares}
+\begin{itemize}
+\item AGUIRRE, Luis A. Controle de Sistemas Amostrados, 1 ed. [s.n.], 2019.
+\end{itemize}
+\centering{\alert{Página 96 - \textbf{Capítulo 3}}} \\
+}
+
+

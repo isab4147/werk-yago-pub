@@ -1,0 +1,616 @@
+\section{Aproximações de tempo discreto}
+
+\begin{frame}{Aproximações de tempo discreto}
+\begin{block}{}
+	O projeto de controladores de tempo discreto pode ser realizado de duas formas:
+	
+	\tikzmark{A}
+	
+	\vspace{-0.4cm}
+	
+	\begin{enumerate}
+		\item Através de \textbf{aproximações discretas} do projeto realizado no domínio contínuo.
+		\item \textbf{Diretamente} no domínio discreto por meio da transformada $ \mathcal{Z} $.
+	\end{enumerate}
+	
+	\begin{tikzpicture}[overlay, remember picture]
+	\draw[->] ($ (A) +(0.2,0) $) to [out=240,in=135] +(0.1,-1.6cm) node[name=EmB] {} node[right, name=Em] 
+	{\textbf{Emulação:} dado $ H(s) $ deve-se obter $ H(z) $ por \textbf{aproximações}:};
+	
+	\draw ($ (EmB)+(0.2,-0.2) $) -- ++(0,-0.5) node[right=10pt] 
+	{Integração numérica}
+	-- ++(0,-1) node[right=10pt] {Mapeamento polo-zero};
+	
+	\draw[->] ($ (EmB)+(0.2,-0.7) $) -- +(8pt,0);
+	\draw[->] ($ (EmB)+(0.2,-1.7) $) -- +(8pt,0);
+	\end{tikzpicture}
+	
+	\vspace{2.2cm}
+\end{block}
+\end{frame}
+
+\begin{frame}{Emulação}
+\begin{block}{Introdução}
+\begin{itemize}
+    \item Trata-se de um método \textbf{indireto} para projetar um controlador discreto.
+\end{itemize}
+\textbf{Passos:}
+\begin{enumerate}
+    \item Planta contínua;
+    \item Projeto de controlador contínuo;
+    \item \textbf{Obtenção do controlador discreto que se aproxima do controlador contínuo (por meio de uma aproximação)};
+    \item Análise de desempenho;
+    \item Se necessário retornar ao segundo ou terceiro passo.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Integração numérica}
+\begin{block}{Ideia}
+\begin{itemize}
+    \item A ideia da aproximação por integração numérica é representar uma função de transferência por uma equação diferencial. Após isto, derivar uma equação de diferenças aproximando a equação diferencial.
+    \item Serão vistas \textbf{quatro aproximações para a integração numérica}:
+    \begin{enumerate}
+        \item Retangular para frente (Euler 1);
+        \item Retangular para trás (Euler 2);
+        \item Trapezoidal ou bilinear (Tustin);
+        \item Bilinear com \textit{prewarping}.
+    \end{enumerate}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Integração numérica}
+\begin{block}{Formulação matemática}
+Considere a função de transferência de um \textbf{integrador}. O objetivo é obter um sistema discreto que represente aproximadamente essa função.
+\[ G(s)=\dfrac{Y(s)}{U(s)}=\dfrac{1}{s}\Rightarrow \dot{y}(t)=u(t) \]
+Integrando ambos os lados em um tempo de amostragem $ T $:
+\[ \int_{(k-1)T}^{kT}\dot{y}(t)\dif t=\int_{(k-1)T}^{kT}u(t)\dif t\Rightarrow y(kT)-y[(k-1)T]=\int_{(k-1)T}^{kT}u(t)\dif t \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Retangular para frente (Euler 1)}
+\centering
+
+\vspace{-2.5cm}
+
+\noindent
+\scalebox{1}{\input{Figuras/Ch08/Tikz06.tex}}
+\end{frame}
+
+
+\begin{frame}{Retangular para frente (Euler 1)}
+\begin{block}{Formulação matemática}
+	\[ y(kT)-y[(k-1)T]=T u[(k-1)T] \]
+	Aplicando a transformada $ \mathcal{Z} $ na equação acima, temos:
+	\[ Y(z) - z^{-1}Y(z)=Tz^{-1}U(z) \]
+	Portanto,
+	\[ \dfrac{Y(z)}{U(z)}=\dfrac{Tz^{-1}}{1-z^{-1}}=\dfrac{T}{z-1} \]
+	Lembre-se que $ \dfrac{Y(s)}{U(s)}=\dfrac{1}{s} $, logo
+	\begin{gather*}
+	\dfrac{1}{s}\approx\dfrac{T}{z-1}\Rightarrow\\
+	\boxed{s=\dfrac{z-1}{T}} \text{ ou } \boxed{z=Ts+1}
+	\end{gather*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Retangular para frente (Euler 1)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+\item Para analisar o limite de estabilidade, sabemos que $ s=j\omega $ mapeia-se em:
+\end{itemize}
+$$ z=Tj\omega+1 $$
+\begin{itemize}
+\item Para analisar a região de estabilidade, considere:
+\end{itemize}
+$$\Re(s) < 0 \implies \Re \left(\dfrac{z-1}{T}\right) < 0$$
+\begin{itemize}
+\vspace{-0.3cm}
+\item[] Como $T > 0$, temos que:
+\end{itemize}
+$$\Re(z-1) < 0 \implies \Re(z) < 1$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Retangular para frente (Euler 1)}
+\begin{block}{Estabilidade}
+\begin{itemize}	
+\item Portanto, sistemas estáveis no plano $ s $ podem se tornar \textbf{instáveis} quando mapeados para $ z $ (\textit{veja o exemplo a seguir -- pense em um valor de T que torne o equivalente discreto instável}).
+\end{itemize}
+\end{block}
+\centering
+\vspace{0.2cm}
+\scalebox{0.9}{\input{Figuras/Ch08/Tikz07.tex}}
+\end{frame}
+
+\begin{frame}{Retangular para frente (Euler 1) - Exemplo \#01}
+\begin{block}{Problema}
+Discretize a função de transferência do controlador abaixo utilizando o método Euler 1, e considerando $T= \num{1}$ s.
+	\[ C(s)=\dfrac{2}{s+2} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Retangular para frente (Euler 1) - Exemplo \#01}
+\begin{block}{Resolução}
+	\[ C(z)=\dfrac{2}{\dfrac{z-1}{T}+2}=\dfrac{2T}{z-1+2T} \]
+	\[ \dfrac{U(z)}{E(z)}=\dfrac{\num{2}}{z+\num{1}}\Rightarrow u[k+1]+u[k]=\num{2}e[k] \]
+	Aplicando um atraso, temos:
+	\[ u[k]=-u[k-1]+\num{2}e[k-1] \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Retangular para trás (Euler 2)}
+\centering
+
+\vspace{-2.5cm}
+
+\scalebox{1}{\input{Figuras/Ch08/Tikz08.tex}}
+\end{frame}
+
+
+\begin{frame}{Retangular para trás (Euler 2)}
+\begin{block}{Formulação matemática}
+	\[ y(kT)-y[(k-1)T]=Tu(kT) \]
+	Aplicando a transformada $ \mathcal{Z} $ na equação acima, temos:
+	\[ Y(z)-z^{-1}Y(z)=TU(z) \]
+	Portanto,
+	\[ \dfrac{Y(z)}{U(z)}=\dfrac{T}{1-z^{-1}}=\dfrac{Tz}{z-1} \]
+	Lembre-se que $ \dfrac{Y(s)}{U(s)}=\dfrac{1}{s} $, logo: \useshortskip
+	\begin{gather*}
+	\dfrac{1}{s}\approx\dfrac{Tz}{z-1}\Rightarrow\\
+	\boxed{s=\dfrac{z-1}{Tz}}\text{ ou }\boxed{z=\dfrac{1}{1-Ts}}
+	\end{gather*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Retangular para trás (Euler 2)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+\item Para analisar o limite de estabilidade, sabemos que $ s=j\omega $ mapeia-se em:
+\end{itemize}
+ \[ z=\dfrac{1}{1-Ts}+\dfrac{1}{2}-\dfrac{1}{2}=\dfrac{1}{2}+\dfrac{1}{2}\underbrace{\dfrac{Ts+1}{1-Ts}}_{\text{módulo}=1 \text{ p/ }s=j\omega} \implies |z-1/2|=1/2  \]
+\begin{itemize}
+\item Para analisar a região de estabilidade, considere:
+\end{itemize}
+$$\Re(s) < 0 \implies \Re \left(\dfrac{z-1}{Tz}\right) < 0$$
+\begin{itemize}
+\vspace{-0.3cm}
+\item[] Como $T > 0$, temos que:
+\end{itemize}
+$$\Re \left(\dfrac{z-1}{z}\right) < 0 \implies \Re \left(\dfrac{a+jb-1}{a+jb}\right) < 0$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Retangular para trás (Euler 2)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+\item[] Multiplicando pelo conjugado, para separar a parte real da parte imaginária, temos:
+\end{itemize}
+$$\Re \left(\dfrac{(a-1)+jb}{a+jb} \cdot \dfrac{a-jb}{a-jb}\right) < 0 \implies \Re \left(\dfrac{a^2-a+bj+b^2}{a^2+b^2}\right) < 0$$
+\begin{itemize}
+\item[] Como o denominador é sempre maior que zero, temos que:
+\end{itemize}
+$$\Re (a^2-a+bj+b^2) < 0 \implies a^2-a+b^2 < 0$$
+\begin{itemize}
+\item[] Completando quadrados, podemos escrever:
+\end{itemize}
+$$(a-\num{0,5})^2+b^2 < \num{0,5}^2$$
+\begin{itemize}
+\vspace{-0.3cm}
+\item[] o que representa uma circunferência de raio $\num{0,5}$ com centro deslocado em $\num{0,5}$ em $a$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Retangular para trás (Euler 2)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+	    \item Esta transformação mapeia sistemas estáveis em $ s $ em sistemas estáveis em $ z $. No entanto, \textbf{nem toda a região de estabilidade no plano $\bm{z}$ é usada}, restringindo o espaço do projeto (\textit{veja o exemplo a seguir -- existe algum valor de T que torne o equivalente discreto instável?})
+\end{itemize}
+\end{block}
+\centering
+\vspace{0.2cm}
+\scalebox{0.8}{\input{Figuras/Ch08/Tikz09.tex}}
+\end{frame}
+
+
+\begin{frame}{Retangular para trás (Euler 2) - Exemplo \#01}
+\begin{block}{Problema}
+Discretize a função de transferência do controlador abaixo utilizando o método Euler 2, e considerando $T= \num{1}$ s.
+	\[ C(s)=\dfrac{2}{s+2} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Retangular para trás (Euler 2) - Exemplo \#01}
+\begin{block}{Resolução}
+	\[ C(z)=\dfrac{2}{\dfrac{z-1}{Tz}+2}=\dfrac{2Tz}{z(1+2T)-1} \]
+	\[ \dfrac{U(z)}{E(z)}=\dfrac{\num{2}z}{\num{3}z-1}\Rightarrow \num{3}u[k+1]-u[k]=\num{2}e[k+1] \]
+	Aplicando um atraso, e dividindo por $\num{3}$, temos:
+	\[ u[k]=\dfrac{1}{3}u[k-1]+\dfrac{2}{3}e[k] \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin)}
+\centering
+
+\vspace{-2.5cm}
+
+\scalebox{1}{\input{Figuras/Ch08/Tikz10.tex}}
+\end{frame}
+
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin)}
+\begin{block}{Formulação matemática}
+	\[ y(kT)-y[(k-1)T]=\dfrac{T}{2}\left( u(kT)+u[(k-1)T] \right) \]
+	Aplicando a transformada $ \mathcal{Z} $ na equação acima, temos: \useshortskip
+	\[ Y(z)-z^{-1}Y(Z)=\dfrac{T}{2}\left( U(z)+z^{-1}U(z) \right) \]
+	Portanto, \useshortskip
+	\[ \dfrac{Y(z)}{U(z)}=\dfrac{T}{2}\dfrac{(1+z^{-1})}{(1-z^{-1})}=\dfrac{T}{2}\dfrac{(z+1)}{(z-1)} \]
+	Lembre-se que $ \dfrac{Y(s)}{U(s)}=\dfrac{1}{s} $, logo: \useshortskip
+	\begin{gather*}
+	\dfrac{1}{s}\approx\dfrac{T}{2}\dfrac{(z+1)}{(z-1)}\Rightarrow\\
+	\boxed{s=\dfrac{2}{T}\dfrac{(z-1)}{(z+1)}}\text{ ou }\boxed{z=\dfrac{1+Ts/2}{1-Ts/2}}
+	\end{gather*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+\item Para analisar o limite de estabilidade, sabemos que $ s=j\omega $ mapeia-se em:
+\end{itemize}
+	\[ z=\underbrace{\dfrac{1+\dfrac{Ts}{2}}{1-\dfrac{Ts}{2}}}_{\text{módulo}=1 \text{ p/ }s=j\omega} \]
+\begin{itemize}
+\item Para analisar a região de estabilidade, considere:
+\end{itemize}
+$$\Re(s) < 0 \implies \Re \left(\dfrac{2}{T}\dfrac{(z-1)}{(z+1)}\right) < 0$$
+\begin{itemize}
+\vspace{-0.3cm}
+\item[] Como $2/T > 0$, temos que:
+\end{itemize}
+$$\Re \left(\dfrac{z-1}{z+1}\right) < 0 \implies \Re \left(\dfrac{a+jb-1}{a+jb+1}\right) < 0$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+\item[] Multiplicando pelo conjugado, para separar a parte real da parte imaginária, temos:
+\end{itemize}
+$$\Re \left(\dfrac{(a-1)+jb}{(a+1)+jb} \cdot \dfrac{a+1 -jb}{a+1 -jb}\right) < 0 \implies \Re \left(\dfrac{a^2-1+2bj+b^2}{(a+1)^2+b^2}\right) < 0$$
+\begin{itemize}
+\item[] Como o denominador é sempre maior que zero, temos que:
+\end{itemize}
+$$\Re (a^2-1+2bj+b^2) < 0 \implies a^2-1+b^2 < 0$$
+\begin{itemize}
+\item[] Com isso,
+\end{itemize}
+$$a^2+b^2 < 1^2$$
+\begin{itemize}
+\vspace{-0.3cm}
+\item[] o que representa uma circunferência de raio unitário centrada na origem.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin)}
+\begin{block}{Estabilidade}
+\begin{itemize}
+    \item Há o mapeamento de \textbf{todo semiplano esquerdo de $ \bm{s} $ no interior do círculo unitário de $ \bm{z} $} (\textit{veja o exemplo a seguir -- existe algum valor de T que torne o equivalente discreto instável?})
+\end{itemize}
+\end{block}
+
+\centering
+
+\scalebox{0.9}{\input{Figuras/Ch08/Tikz11.tex}}
+\end{frame}
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin) - Exemplo \#01}
+\begin{block}{Problema}
+Discretize a função de transferência do controlador abaixo utilizando o método de Tustin, e considerando $T= \num{1}$ s.
+	\[ C(s)=\dfrac{2}{s+2} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Trapezoidal ou bilinear (Tustin) - Exemplo \#01}
+\begin{block}{Resolução}
+	\[ C(z)=\dfrac{2}{\dfrac{2}{T}\dfrac{(z-1)}{(z+1)}+2}=\dfrac{2T(z+1)}{2(z-1)+2T(z+1)} \]
+	\[ \dfrac{U(z)}{E(z)}=\dfrac{\num{0,5}z+\num{0,5}}{z}\Rightarrow u[k+1]=\num{0,5}e[k+1]+\num{0,5}e[k] \]
+	Aplicando um atraso, temos:
+	\[ u[k]=\num{0,5}e[k]+\num{0,5}e[k-1] \]
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>c2d(sys,T,'tustin') 
+\end{verbatim}
+converte um sistema dinâmico de tempo contínuo \textbf{sys} em tempo discreto com um tempo de amostragem $\bm{T}$ utilizando o método \textbf{tustin}. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: discretização do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch08/fig1.PNG}}
+}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Origem do \textit{warping}}
+\begin{itemize}
+    \item O \textit{warping} é uma distorção não linear na frequência quando há a transição entre o plano $s$ e o plano $z$, dependendo da frequência utilizada.
+    \item No caso de sistemas como \textbf{filtros} (onde a preservação do comportamento da frequência é extremamente importante) esta transformação torna-se ineficaz.
+    \item As características da resposta em frequência do filtro analógico aparecem no filtro digital. No entanto, a escala de frequência com que a resposta ocorre sofrerá uma \textbf{compressão de um intervalo infinito para um intervalo finito}.
+    \item Todo o eixo $j\omega$ é \textbf{comprimido} no círculo unitário de comprimento $2\pi$, causando uma \textbf{distorção de frequência}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Formulação matemática}
+Considere que um ponto no plano $s$ é dado por $\sigma + j\omega_a$. Como a parte real não é afetada pela frequência, podemos escrever:
+$$s = j\omega_a$$
+De semelhante modo, um ponto no plano $z$ (também desconsiderando a parte que não é afetada pela frequência) é dado por:
+$$z = \text{e}^{j\omega_dT}$$
+Por Tustin sabemos que:
+$$s=\dfrac{2}{T}\dfrac{(z-1)}{(z+1)} \implies
+j\omega_a = \dfrac{2}{T}\dfrac{(\text{e}^{j\omega_dT}-1)}{(\text{e}^{j\omega_dT}+1)}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Formulação matemática}
+\begin{align*}
+    j\omega_a &= \dfrac{2}{T}\dfrac{(\text{e}^{j\omega_dT}-1)}{(\text{e}^{j\omega_dT}+1)} \\ \\
+    j\omega_a &= \dfrac{2}{T}\dfrac{\text{e}^{j\omega_dT/2}(\text{e}^{j\omega_dT/2}-\text{e}^{-j\omega_dT/2})}{\text{e}^{j\omega_dT/2}(\text{e}^{j\omega_dT/2}+\text{e}^{-j\omega_dT/2})} \\ \\
+    j\omega_a &= j\dfrac{2}{T}\dfrac{\dfrac{\text{e}^{j\omega_dT/2}-\text{e}^{-j\omega_dT/2}}{2j}}{\dfrac{\text{e}^{j\omega_dT/2}+\text{e}^{-j\omega_dT/2}}{2}} = j\dfrac{2}{T}\dfrac{\text{sen}(\omega_dT/2)}{\text{cos}(\omega_dT/2)} \implies
+\end{align*}
+$$\boxed{\omega_a = \dfrac{2}{T}\text{tan}(\omega_dT/2)} \text{ ou } \boxed{\omega_d = \dfrac{2}{T}\text{tan}^{-1}(\omega_aT/2)}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{\textit{Prewarping}}
+\begin{itemize}
+    \item A correção \textit{prewarping} tem por objetivo antecipar a distorção da frequência no plano $s$, para amenizar a distorção quando a transformação for realizada. 
+    \item A correção da distorção não é feita para todos os polos, amenizando apenas a distorção no \textbf{polo desejado}. Assim, a distorção ainda existe quando comparado com outro polo.
+    \item Para aplicar a correção de \textit{prewarping}, é necessário utilizar a equação abaixo para calcular novos polos e zeros a partir dos originais. Feito isto, a transformação bilinear só será realizada após obter a nova função de transferência com polos e zeros corrigidos.
+\end{itemize}
+$$\boxed{\Bar{a} = \dfrac{2}{T} \text{tan} \left(\dfrac{aT}{2}\right)}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Antes do \textit{prewarping}}
+\begin{itemize}
+    \item É possível observar que a distorção ocorre, porém mais amenizada em frequências menores.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.65\linewidth]{Figuras/Ch08/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Depois do \textit{prewarping}}
+\begin{itemize}
+    \item Após a correção de \textit{prewarping}, pode ser observado que os polos de maior frequência no plano $z$ estão sem distorção. Entretanto, os polos de menor frequência sofreram certa distorção. 
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.65\linewidth]{Figuras/Ch08/fig3.PNG}}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping} - Exemplo \#01}
+\begin{block}{Problema}
+Discretize a função de transferência do controlador abaixo utilizando o método bilinear com \textit{prewarping} na frequência de corte do filtro, e considerando $T= \num{1}$ s.
+	\[ C(s)=\dfrac{2}{s+2} \]
+\end{block}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping} - Exemplo \#01}
+\begin{block}{Resolução}
+    \[ C(s)=\dfrac{\dfrac{2}{T} \text{tan} \left(\dfrac{aT}{2}\right)}{s+\dfrac{2}{T} \text{tan} \left(\dfrac{aT}{2}\right)} = \dfrac{2 \ \text{tan}(1)}{s+2 \ \text{tan}(1)} \]
+	\[ C(z)=\dfrac{2 \ \text{tan}(1)}{\dfrac{2}{T}\dfrac{(z-1)}{(z+1)}+2 \ \text{tan}(1)}=\dfrac{2T(z+1) \ \text{tan}(1)}{2(z-1)+2T(z+1) \ \text{tan}(1)} \]
+	\[ \dfrac{U(z)}{E(z)}=\dfrac{\num{0,609}z+\num{0,609}}{z + \num{0,218}}\Rightarrow u[k+1] + \num{0,218} u[k] =\num{0,609}e[k+1]+\num{0,609}e[k] \]
+	Aplicando um atraso, temos:
+	\[ u[k]=-\num{0,218}u[k-1]+\num{0,609}e[k]+\num{0,609}e[k-1] \]
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>c2d(sys,T,c2dOptions('Method','tustin','PrewarpFrequency',2))
+\end{verbatim}
+converte um sistema dinâmico de tempo contínuo \textbf{sys} em tempo discreto com um tempo de amostragem $\bm{T}$ utilizando o método \textbf{tustin} com \textbf{\textit{prewaping}} na frequência $\bm{w}$. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: discretização do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.6\linewidth]{Figuras/Ch08/fig4.PNG}}
+}
+
+\begin{frame}{\MATLAB}
+\begin{block}{Antes do \textit{prewarping}}
+\begin{itemize}
+    \item Frequência de corte $\omega = 2$ rad/s.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch08/fig5.png}}
+\end{frame}
+
+\begin{frame}{\MATLAB}
+\begin{block}{Antes do \textit{prewarping}}
+\begin{itemize}
+    \item Frequência de corte $\omega = 2$ rad/s.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch08/fig6.png}}
+\end{frame}
+
+\begin{frame}{\MATLAB}
+\begin{block}{Depois do \textit{prewarping}}
+\begin{itemize}
+    \item Frequência de corte $\omega = 2$ rad/s.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch08/fig7.png}}
+\end{frame}
+
+\begin{frame}{\MATLAB}
+\begin{block}{Depois do \textit{prewarping}}
+\begin{itemize}
+    \item Frequência de corte $\omega = 2$ rad/s.
+\end{itemize}
+\end{block}
+\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch08/fig8.png}}
+\end{frame}
+
+\begin{frame}{Bilinear com \textit{prewarping}}
+\begin{block}{Observação}
+\begin{itemize}
+    \item E se a função de transferência contínua possuir mais de um polo?
+\end{itemize}
+$$G(z)=G(s)\Big|_{s=\dfrac{a(z-1)}{\left[\text{tan}\left(\dfrac{aT}{2}\right)\right](z+1)}}$$
+\begin{itemize}
+    \item[] onde $a$ é a frequência onde deseja-se que os ganhos dos sistemas contínuos e discretos sejam iguais.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Mapeamento polo-zero}
+\begin{block}{Ideia}
+Obtém-se o equivalente discreto através da relação $ \bm{z=\text{\textbf{e}}^{sT}} $.
+\begin{itemize}
+    \item Se tomarmos a transformada $\mathcal{Z}$ de amostras de um sinal contínuo $e(t)$, então os \textbf{polos} da função de transferência discreta $E(z)$ estão relacionados aos polos de $E(s)$ de acordo com $z=\text{\textbf{e}}^{sT}$. No entanto, precisaríamos passar pelo mesmo processo de transformada $\mathcal{Z}$ para localizar os zeros de $E(z)$.
+    \item A ideia da técnica do mapeamento polo-zero é que a relação $z=\text{\textbf{e}}^{sT}$ também pode ser razoavelmente aplicada para os \textbf{zeros} da função de transferência discreta.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Mapeamento polo-zero}
+	\begin{block}{Passos}
+		\begin{enumerate}
+			\item Inicialmente deve-se \textbf{fatorar} $ H(s) $ na forma de seus polos e zeros:\[ H(s)=K\cdot\dfrac{(s-z_1)(s-z_2)\cdots(s-z_m)}{(s-p_1)(s-p_2)\cdots(s-p_n)} \]
+			
+			\item Se $ H(s) $ possui um polo em $ s=-a $, $ H(z) $ possui um polo em $ z=\text{e}^{-aT} $.
+			
+			\item Se $ H(s) $ possui um polo em $ s=-a+jb $, $ H(z) $ possui um polo em $ z=r\text{e}^{j\theta} $, onde $ r=\text{e}^{-aT} $  e $ \theta=bT $.
+			
+			\item Todos os zeros finitos são mapeados do mesmo jeito que os polos (passos 2 e 3).
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Mapeamento polo-zero}
+	\begin{block}{Passos}
+		\begin{enumerate}
+			\setcounter{enumi}{4}
+			\item Os zeros de $ H(s) $ em $ s\to\infty\,(m<n) $ são mapeados em $ \bm{z=-1} $. Acrescenta-se $\bm{n-m-1}$ fatores de $(z+1)$ ao numerador de $H(z)$. 
+			\begin{itemize}
+			    \item Esta regra permite que o computador tenha tempo para calcular a saída discreta (\textit{delay} de um tempo de amostragem).
+			    \item O ponto $z = -1$ representa, de maneira real, a maior frequência possível na função de transferência discreta; portanto, é apropriado que se $H(s)$ for zero na maior frequência contínua, $|H(z)|$ deve ser zero em $z=-1$, a frequência mais alta que pode ser processada pelo filtro digital.
+			\end{itemize}
+			
+			
+			\item Ajusta-se o ganho de $ G(z) $, isto é, o \textbf{ganho} deve ser ajustado para que em baixa frequência essas funções possuam módulos iguais.
+			
+			\[ G(s)\Big|_{s=0}=G(z)\Big|_{z=1} \]
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Mapeamento polo-zero - Exemplo \#01}
+\begin{block}{Problema}
+Discretize a função de transferência do controlador abaixo utilizando o mapeamento polo-zero, e considerando $T= \num{1}$ s.
+	\[ C(s)=\dfrac{2}{s+2} \]
+\end{block}
+\end{frame}
+
+\begin{frame}{Mapeamento polo-zero - Exemplo \#01}
+\begin{block}{Resolução}
+	\begin{enumerate}
+		\item N/A.
+		
+		\item $ C(s) $ possui polo em $ s=-2 $, logo $ C(z) $ possui polo em $ z=\text{e}^{-2T}=\num{0,1353} $.
+		
+		\item N/A.
+		
+		\item N/A.
+		
+		\item N/A.
+		
+		\[ C(z)=\dfrac{K}{z-\num{0,1353}} \]
+		
+		\item
+		\[
+		C(s)\Big|_{s=0}=C(z)\Big|_{z=1}\Rightarrow 1=\dfrac{K}{\num{0,8647}}\Rightarrow K=\num{0,8647} \]
+	\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Mapeamento polo-zero - Exemplo \#01}
+\begin{block}{Resolução}
+    \[ \dfrac{U(z)}{E(z)}=\dfrac{\num{0,8647}}{z-\num{0,1353}}\Rightarrow u[k+1] - \num{0,1353} u[k]=\num{0,8647}e[k] \]
+	Aplicando um atraso, temos:
+	\[ u[k]=\num{0,1353}u[k-1]+\num{0,8647}e[k-1] \]
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>c2d(sys,T,'matched') 
+\end{verbatim}
+converte um sistema dinâmico de tempo contínuo \textbf{sys} em tempo discreto com um tempo de amostragem $\bm{T}$ utilizando o método \textbf{matched} (\textit{mapeamento polo-zero}). \\
+\vspace{0.2cm}
+\textbf{Exemplo}: discretização do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.35\linewidth]{Figuras/Ch08/fig9.PNG}}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+01. Mostre a equivalência dos métodos de discretização quando $T \to 0$.
+
+\vspace{1cm}
+
+02. A função de transferência abaixo é um compensador de avanço de fase projetado para adicionar aproximadamente \SI{60}{\degree} em $\omega_1 = 3$ rad:
+$$H(s) = \dfrac{s+1}{0,1s+1}$$
+Para cada um dos métodos de aproximação, calcule e desenhe no plano $\mathcal{Z}$ a localização dos polos e zeros da função de transferência discreta. Utilize $T = 0,25$ s.
+\end{block}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+03. Encontre o equivalente discreto da função de transferência abaixo utilizando o método de Tustin. Faça também uma compensação de distorção em frequência para $a = 2$ rad/s e $T = 1$ s. Confira a sua resposta no \MATLAB por meio do diagrama de Bode.
+$$G(s) = \dfrac{5}{s^2+3s+2}$$
+
+\vspace{1cm}
+
+04. Considerando a função de transferência genérica de primeira ordem
+$$G(s) = \dfrac{a}{s+a}$$
+Mostre que na frequência de canto, $|G(s)| = |G(z)| = \dfrac{1}{\sqrt{2}} = -\num{3,01}$ dB. 
+\end{block}
+}
+
+\frame{
+\frametitle{Referências e exercícios complementares}
+\begin{itemize}
+\item AGUIRRE, Luis A. Controle de Sistemas Amostrados, 1 ed. [s.n.], 2019.
+\end{itemize}
+\centering{\alert{Página 125 - \textbf{Capítulo 4}}} \\
+\vspace{0.4cm}
+\begin{itemize}
+\item FRANKLIN, Gene F.; POWELL, J. David; WOLKMAN, Michael L. Digital Control of Dynamic Systems, 3 ed. Addison-Wesley, 1998.
+\end{itemize}
+\centering{\alert{Página 209 - \textbf{Capítulo 6}}} \\
+}

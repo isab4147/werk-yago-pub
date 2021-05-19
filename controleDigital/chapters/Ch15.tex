@@ -1,0 +1,868 @@
+\section{Controle por realimentação de estados}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Definição}
+O par $(A,B)$, $A \in \mathbb{R}^{n \times n}$, $B \in \mathbb{R}^{n \times r}$ é \textbf{controlável} se para todo $\bm{x}_0$ e $\bm{x}_1$ existe a sequência de sinais de controle $\bm{u}(0)$, $\bm{u}(1)$, $\cdots$, $\bm{u}(N)$, $\bm{u}(k) \in \mathbb{R}^{r}$ para $N \in \mathbb{Z}$ finito tal que se o estado do sistema for $\bm{x}_0$ em $k = 0$, o mesmo será forçado pelo sinal de controle para $\bm{x}_1$ em $k \leq N$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Definição}
+\begin{itemize}
+    \item Em outras palavras, o sistema é dito \textbf{controlável} se for possível \textbf{transferir o sistema de qualquer estado inicial arbitrário a qualquer estado desejado} (também um estado arbitrário) em um período de tempo finito; ou seja, se cada variável de estado puder ser controlada em um período de tempo finito por algum sinal de controle não sobrecarregado.
+    \item Se qualquer \textbf{variável de estado é independente do sinal de controle}, então é impossível controlar esta variável de estado e, portanto, o sistema é \textbf{incontrolável}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Solução da equação dinâmica}
+\begin{itemize}
+    \item A partir de 
+\end{itemize}
+$$\bm{x}(k+1) = A\bm{x}(k) + B\bm{u}(k)$$
+\begin{align*}
+    \bm{x}(1) &= A\bm{x}(0) + B\bm{u}(0) \\
+    \bm{x}(2) &= A\bm{x}(1) + B\bm{u}(1) = A[A\bm{x}(0) + B\bm{u}(0)] + B\bm{u}(1) \\
+    &= A^2\bm{x}(0) + AB\bm{u}(0) + B\bm{u}(1) \\
+    \bm{x}(3) &= A\bm{x}(2) + B\bm{u}(2) = A[A^2\bm{x}(0) + AB\bm{u}(0) + B\bm{u}(1)] + B\bm{u}(2) \\
+    &= A^3\bm{x}(0) + A^2B\bm{u}(0) + AB\bm{u}(1) + B\bm{u}(2) \\
+    \vdots  \\
+    \bm{x}(k) &= A^k\bm{x}(0) + \sum_{n=0}^{k-1} A^n B\bm{u}(k-1-n) = A^k\bm{x}(0) + \sum_{n=0}^{k-1} A^{k-1-n} B\bm{u}(n)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Solução da equação dinâmica}
+\begin{itemize}
+    \item Portanto, podemos escrever:
+\end{itemize}
+\begin{align*}
+    \bm{x}(N) &= A^N\bm{x}(0) + \sum_{n=0}^{N-1} A^{N-1-n} B\bm{u}(n) \\
+    &= A^N\bm{x}(0) + \begin{bmatrix} B & AB & A^2B & \cdots & A^{N-1}B \end{bmatrix}
+    \begin{bmatrix} \bm{u}(N-1) \\ \vdots \\ \bm{u}(0) \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Como o estado no instante $N$ deve ser $\bm{x}_1$ e  chamando a condição inicial de $\bm{x}_0$, temos o  sistema de $n$ equações que deve ter solução para que o sistema seja controlável:
+\end{itemize}
+\vspace{-0.4cm}
+\begin{align*}
+    \bm{x}_1 - A^N\bm{x}_0 = \begin{bmatrix} B & AB & A^2B & \cdots & A^{N-1}B \end{bmatrix}
+    \begin{bmatrix} \bm{u}(N-1) \\ \vdots \\ \bm{u}(0) \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Teorema da controlabilidade}
+\begin{itemize}
+    \item A equação anterior é um sistema de equações lineares da forma $\beta = \mathcal{C} \alpha$, onde $\beta$ e $\mathcal{C}$ são conhecidos.
+    \item Se o sistema for controlável, então existe  uma sequência finita de controle $\bm{u}(k), \ k =  0, 1, \cdots, N-1$ que leva o estado de $\bm{x}_0$ a $\bm{x}_1$. Em outras palavras, \textbf{o sistema de equações deve ter solução}.
+    \item Para que o sistema de equações tenha solução é necessário e suficiente que a  matriz $\mathcal{C}$ (\textit{matriz de controlabilidade}) tenha \textbf{posto} $\bm{n}$ (\textit{seja não singular}), isto é, ela deve ter $\bm{n}$ \textbf{linhas ou colunas linearmente independentes}.
+\end{itemize}
+$$\boxed{\rho[\mathcal{C}] = n}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Teorema da controlabilidade}
+\begin{itemize}
+    \item Uma forma usual e prática de verificar a controlabilidade (\textit{principalmente para sistemas de ordem elevada}) é garantir que \textbf{o determinante da matriz de controlabilidade seja diferente de zero} (\textit{se você não sabe álgebra linear terá de aceitar essa afirmação na base da fé}).
+    \item Deve ser notado que a controlabilidade de estado \textbf{independe da saída}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade}
+\begin{block}{Exemplo físico}
+	Devido à simetria do circuito, não é possível, manipulando a fonte de tensão  $u$, alterar a tensão sobre capacitor, que é a  variável de estado do circuito. 
+\end{block}
+\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch15/fig0.PNG}}
+\end{frame}
+
+\begin{frame}{Controlabilidade - Exemplo \#01}
+\begin{block}{Problema}
+Verificar se o sistema abaixo é completamente controlável.
+\begin{align*}
+    \begin{bmatrix} x_1(k+1) \\ x_2(k+1) \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    0 & 1 \\ -2 & 3
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1(k) \\ x_2(k)
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    0 \\ 1
+    \end{bmatrix}
+    u(k)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item A matriz de controlabilidade é dada por:
+\end{itemize}
+\begin{align*}
+    \mathcal{C} &= \begin{bmatrix} B & AB \end{bmatrix} \\
+    &= \begin{bmatrix} 0 & 1 \\ 1 & 3 \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Calculando o determinante da matriz de controlabilidade, temos:
+\end{itemize}
+$$\text{det}[\mathcal{C}] = -1 \neq 0 $$
+Desta forma, o sistema é completamente controlável e $\rho = n = 2$.
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>ctrb(A,B) 
+\end{verbatim}
+computa a matriz de controlabilidade representada pelo par $\bm{(A,B)}$. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: cálculo do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.3\linewidth]{Figuras/Ch15/fig1.PNG}}
+}
+
+\begin{frame}{Controlabilidade - Exemplo \#02}
+\begin{block}{Problema}
+Verificar se o sistema descrito pelo diagrama de fluxo de sinal mostrado abaixo é completamente controlável.
+\end{block}
+\centerline{\includegraphics[width=0.85\linewidth]{Figuras/Ch15/fig2.PNG}}
+\end{frame}
+
+\begin{frame}{Controlabilidade - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item A equação dinâmica, de acordo com o diagrama de fluxo de sinal, pode ser escrita como:
+\end{itemize}
+\begin{align*}
+    \begin{bmatrix} x_1(k+1) \\ x_2(k+1) \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    a_2 & 1 \\ 0 & a_1
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1(k) \\ x_2(k)
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    1 \\ 0
+    \end{bmatrix}
+    u(k)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlabilidade - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item A matriz de controlabilidade é dada por:
+\end{itemize}
+\begin{align*}
+    \mathcal{C} &= \begin{bmatrix} B & AB \end{bmatrix} \\
+    &= \begin{bmatrix} 1 & a_2 \\ 0 & 0 \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Calculando o determinante da matriz de controlabilidade, temos:
+\end{itemize}
+$$\text{det}[\mathcal{C}] = 0 $$
+Desta forma, o sistema não é completamente controlável pois $\rho = 1 \neq n = 2$ (\textit{presença de uma linha linearmente dependente}).
+\begin{itemize}
+    \item Esse resultado era esperado, uma vez que pelo diagrama de fluxo de sinal pode ser visto que a entrada $u(k)$ não afeta o  estado $x_2(k)$. Geometricamente isso significa que há regiões no espaço de estado (\textit{o subespaço não controlável}) para onde não é possível levar o sistema (o estado $\bm{x}$) em tempo finito por meio da ação de controle $u(k)$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Definição}
+O par $(A,C)$, $A \in \mathbb{R}^{n \times n}$, $C \in \mathbb{R}^{p \times n}$ é \textbf{observável} se para qualquer $\bm{x}_0$, essa condição inicial pode ser determinada a partir da sequência finita de valores $\bm{y}(0)$, $\bm{y}(1)$, $\cdots$, $\bm{y}(N-1)$, $\bm{y}(k) \in \mathbb{R}^{p}$, e de entradas $\bm{u}(0)$, $\bm{u}(1)$, $\cdots$, $\bm{u}(N-1)$, $\bm{u}(k) \in \mathbb{R}^{r}$, para $N \in \mathbb{Z}$ finito.
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Definição}
+\begin{itemize}
+    \item No caso de observabilidade, diz-se que o estado de uma planta é \textbf{observável} se qualquer que seja seu valor inicial $\bm{x}_0$, o mesmo  pode ser determinado a partir de medidas do sinal de saída $\bm{y}$ e de entrada (se houver) $\bm{u}$ tomadas durante um intervalo finito de tempo.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Solução da equação de saída}
+\begin{itemize}
+    \item A partir de 
+\end{itemize}
+$$\bm{y}(k) = C\bm{x}(k) + D\bm{u}(k)$$
+\begin{align*}
+    \bm{y}(0) &= C\bm{x}(0) + D\bm{u}(0) \\
+    \bm{y}(1) &= C\bm{x}(1) + D\bm{u}(1) = C[A\bm{x}(0) + B\bm{u}(0)] + D\bm{u}(1) \\
+    &= CA\bm{x}(0) + CB\bm{u}(0) + D\bm{u}(1) \\
+    \bm{y}(2) &= C\bm{x}(2) + D\bm{u}(2) = C[A^2\bm{x}(0) + AB\bm{u}(0) + B\bm{u}(1)] + D\bm{u}(2) \\
+    &= CA^2\bm{x}(0) + CAB\bm{u}(0) + CB\bm{u}(1) + D\bm{u}(2) \\
+    \vdots  \\
+    \bm{y}(N-1) &= CA^{N-1}\bm{x}(0) + \sum_{n=0}^{N-2} CA^{N-2-n} B\bm{u}(n) + D\bm{u}(N-1)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Solução da equação de saída}
+\begin{itemize}
+    \item Na forma matricial, temos:
+\end{itemize}
+\begin{align*}
+\begin{bmatrix}
+    \bm{y}(0) - D\bm{u}(0) \\
+    \bm{y}(1) - CB\bm{u}(0) - D\bm{u}(1) \\
+    \vdots  \\
+    \bm{y}(N-1) - \sum_{n=0}^{N-2} CA^{N-2-n} B\bm{u}(n) - D\bm{u}(N-1)
+\end{bmatrix}
+=
+\begin{bmatrix}
+C \\
+CA \\
+\vdots \\
+CA^{N-1}
+\end{bmatrix}
+\bm{x}(0)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Teorema da observabilidade}
+\begin{itemize}
+    \item A equação anterior é um sistema de equações lineares da forma $\beta = \mathcal{O} \alpha$, onde $\beta$ e $\mathcal{O}$ são conhecidos.
+    \item A mesma análise realizada para o problema de controlabilidade pode ser realizada aqui. Assim, é possível determinar $\bm{x}(0)$ unicamente se houver $\bm{n}$ \textbf{equações linearmente independentes}.
+    \item Para que o sistema de equações tenha solução é necessário e suficiente que a  matriz $\mathcal{O}$ (\textit{matriz de observabilidade}) tenha \textbf{posto} $\bm{n}$ (\textit{seja não singular}), isto é, ela deve ter $\bm{n}$ \textbf{linhas ou colunas linearmente independentes}.
+\end{itemize}
+$$\boxed{\rho[\mathcal{O}] = n}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade}
+\begin{block}{Teorema da observabilidade}
+\begin{itemize}
+    \item Uma forma usual e prática de verificar a observabilidade (\textit{principalmente para sistemas de ordem elevada}) é garantir que \textbf{o determinante da matriz de observabilidade seja diferente de zero} (\textit{se você não sabe álgebra linear terá de aceitar essa afirmação na base da fé}).
+    \item Quando o estado não é mensurável, é impossível a implementação deste tipo de controle. Porém, é possível obter uma estimativa do vetor $\bm{x}$, usando apenas os sinais de entrada, $\bm{u}$, e de saída, $\bm{y}$, que são sempre mensuráveis. \textbf{O esquema que estima o estado a partir da entrada e da saída é denominado de observador de estado}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade - Exemplo \#01}
+\begin{block}{Problema}
+Verificar se o sistema representado pelo diagrama de simulação abaixo é completamente observável.
+\end{block}
+\vspace{0,4 cm}
+\centering
+\scalebox{.65}{\input{Figuras/Ch15/Tikz0.tex}}
+\end{frame}
+
+\begin{frame}{Observabilidade - Exemplo \#01}
+\begin{block}{Resolução}
+O modelo em espaço de estados é:
+\begin{align*}
+    \begin{bmatrix} x_1(k+1) \\ x_2(k+1) \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    -\num{0,2} & 0 \\ -1 & \num{0,8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1(k) \\ x_2(k)
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    1 \\ 1
+    \end{bmatrix}
+    u(k) \\
+    y(k)
+    &=
+    \begin{bmatrix}
+    -1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1(k) \\ x_2(k)
+    \end{bmatrix}
+    + u(k)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Observabilidade - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item A matriz de observabilidade é dada por:
+\end{itemize}
+\begin{align*}
+    \mathcal{O} &= \begin{bmatrix} C \\ CA \end{bmatrix} \\
+    &= \begin{bmatrix} -1 & 1 \\ -\num{0,8} & \num{0,8} \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Calculando o determinante da matriz de observabilidade, temos:
+\end{itemize}
+$$\text{det}[\mathcal{O}] = 0 $$
+Desta forma, o sistema não é completamente observável pois $\rho = 1 \neq n = 2$ (\textit{presença de uma coluna linearmente dependente}).
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>obsv(A,C) 
+\end{verbatim}
+computa a matriz de observabilidade representada pelo par $\bm{(A,C)}$. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: cálculo do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.32\linewidth]{Figuras/Ch15/fig3.PNG}}
+}
+
+\begin{frame}{Dualidade}
+\begin{block}{Formulação matemática}
+\begin{itemize}
+    \item Seja o sistema
+\end{itemize}
+\begin{align*}
+    \bm{x}(k+1) &= A\bm{x}(k) + B\bm{u}(k)  \\
+    \bm{y}(k) &= C\bm{x}(k) + D\bm{u}(k)
+\end{align*}
+\vspace{-0.4cm}
+	\begin{itemize}
+		\item[] onde $\bm{x} \in \mathbb{R}^n$, $\bm{u} \in \mathbb{R}^r$ e $\bm{y} \in \mathbb{R}^p$. Além disso, $A \in \mathbb{R}^{n \times n}$, $B \in \mathbb{R}^{n \times r}$, $C \in \mathbb{R}^{p \times n}$ e $D \in \mathbb{R}^{p \times r}$.
+		\item Transpondo-se as matrizes,  invertendo a posição de $B$ e $C$, e trocando  entre si as dimensões dos vetores de entrada e saída, obtém-se o sistema \textbf{dual}:
+	\end{itemize}
+\begin{align*}
+    \bm{\widetilde{x}}(k+1) &= A^\text{T}\bm{\widetilde{x}}(k) + C^\text{T}\bm{\widetilde{u}}(k)  \\
+    \bm{\widetilde{y}}(k) &= B^\text{T}\bm{\widetilde{x}}(k) + D^\text{T}\bm{\widetilde{u}}(k)
+\end{align*}
+\vspace{-0.4cm}
+	\begin{itemize}
+		\item[] onde $\bm{\widetilde{x}} \in \mathbb{R}^n$, $\bm{\widetilde{u}} \in \mathbb{R}^p$ e $\bm{\widetilde{y}} \in \mathbb{R}^r$. Além disso, $A^\text{T} \in \mathbb{R}^{n \times n}$, $C^\text{T} \in \mathbb{R}^{n \times p}$, $B^\text{T} \in \mathbb{R}^{r \times n}$ e $D^\text{T} \in \mathbb{R}^{r \times p}$.
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Dualidade}
+\begin{block}{Teorema I}
+\begin{itemize}
+    \item A matriz de controlabilidade do sistema ``original" é
+\end{itemize}
+\begin{align*}
+    \mathcal{C} = \begin{bmatrix} B & AB & \cdots & A^{N-1}B \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item A matriz de observabilidade do sistema dual é
+\end{itemize}
+\begin{align*}
+    \mathcal{O}_d = \begin{bmatrix} B^\text{T} \\ B^\text{T}A^\text{T} \\ \vdots \\ B^\text{T}(A^{N-1})^\text{T} \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Dualidade}
+\begin{block}{Teorema I}
+\begin{itemize}
+    \item Como $\rho[\mathcal{O}_d] = \rho[\mathcal{O}_d^\text{T}]$, transpondo $\mathcal{O}_d$ temos:
+\end{itemize}
+\begin{align*}
+    \mathcal{O}_d^\text{T} &= \begin{bmatrix} (B^\text{T})^\text{T} & (B^\text{T}A^\text{T})^\text{T} & \cdots & (B^\text{T}(A^{N-1})^\text{T})^\text{T} \end{bmatrix} \\
+    &= \begin{bmatrix} B & AB & \cdots & A^{N-1}B \end{bmatrix} \\
+    &= \mathcal{C}
+\end{align*}
+\vspace{0.2cm}
+\textbf{Teorema: O par} $\bm{(A,B)}$ \textbf{é controlável se e somente se o par }$\bm{(A^\text{T}, B^\text{T})}$ \textbf{for observável.}
+\end{block}
+\end{frame}
+
+\begin{frame}{Dualidade}
+\begin{block}{Teorema II}
+\begin{itemize}
+    \item A matriz de observabilidade do sistema ``original" é
+\end{itemize}
+\begin{align*}
+    \mathcal{O} = \begin{bmatrix} C \\ CA \\ \vdots \\ CA^{N-1} \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item A matriz de controlabilidade do sistema dual é
+\end{itemize}
+\begin{align*}
+    \mathcal{C}_d = \begin{bmatrix} C^\text{T} & A^\text{T}C^\text{T} & \cdots & (A^{N-1})^\text{T}C^\text{T} \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Dualidade}
+\begin{block}{Teorema II}
+\begin{itemize}
+    \item Como $\rho[\mathcal{C}_d] = \rho[\mathcal{C}_d^\text{T}]$, transpondo $\mathcal{C}_d$ temos:
+\end{itemize}
+\begin{align*}
+    \mathcal{C}_d^\text{T} &= \begin{bmatrix} (C^\text{T})^\text{T} \\ (A^\text{T}C^\text{T})^\text{T} \\ \cdots \\ ((A^{N-1})^\text{T}C^\text{T})^\text{T} \end{bmatrix} \\
+    &= \begin{bmatrix} C \\ CA \\ \vdots \\ CA^{N-1} \end{bmatrix} \\
+    &= \mathcal{O}
+\end{align*}
+\vspace{0.2cm}
+\textbf{Teorema: O par} $\bm{(A,C)}$ \textbf{é observável se e somente se o par }$\bm{(A^\text{T}, C^\text{T})}$ \textbf{for controlável.}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+\begin{itemize}
+    \item Se o sistema não for controlável ou observável (\textit{temos cancelamentos de polos na função de transferência}), nem todos os autovalores de $A$ são polos do sistema. 
+    \item Consideraremos aqui que os $n$ \textbf{autovalores} de $A$ \textbf{são os polos do sistema}, ou seja, \textbf{o sistema é controlável e observável}. Outra forma de dizer isso é que a realização em espaço de estados deve ser mínima, ou  ainda, que os polinômios do numerador e denominador da função de transferência não devem ter termos em comum (\textit{devem ser coprimos}).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+	Qual o efeito que a realimentação de estados tem sobre os polos de malha fechada e em que condições esses polos podem ser alocados?
+\end{block}
+\vspace{0,1 cm}
+\centering
+\scalebox{.8}{\input{Figuras/Ch15/Tikz1.tex}}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+	Realimentando o sistema a partir da saída temos:
+\end{block}
+\vspace{0,1 cm}
+\centering
+\scalebox{.8}{\input{Figuras/Ch15/Tikz2.tex}}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+	\begin{itemize} 
+	\item Considerando\\
+	$$ G(z) = \dfrac{z}{(z-1)(z-0,9)}$$
+	\item A equação característica é:\\
+	$$ z^2 + (K_0 - 1,9)z + 0,9 = 0 $$
+	\item Alterando o parâmetro $ K_0 $, não é possível definir de forma arbitrária a \textbf{equação característica}, pois só existe uma variável livre $ K_0 $, para dois coeficientes da equação característica.
+	$$ \bm{u} = r - K_0\bm{y} $$
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+	"O princípio de que as entradas devem ser computadas utilizando o \textbf{estado} foi anunciado e enfatizado por Richard Ballman em meados da década de 1950. \textbf{Essa é a ideia fundamental do controle realimentado}."
+	\begin{flushright}
+		(Kalman, 1960)
+	\end{flushright}
+	\begin{itemize}
+		\item Partindo desse conceito, Kalman iniciou sua análise considerando uma lei de controle no seguinte formato
+		$$ \bm{u}(kT) = \mathcal{X}\left ( \bm{x}(kT), kT\right ) $$
+		\item Simplificando posteriormente
+		\begin{align*}
+		\bm{u}(kT) = -K\bm{x}(kT), \quad  & \bm{x} \in \mathbb{R}^n \\ 
+		& K \in \mathbb{R}^{1 \times n}
+		\end{align*}
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\vspace{0,1 cm}
+\begin{center}
+	Sistema com realimentação de estados\\
+	\scalebox{.8}{\input{Figuras/Ch15/Tikz3.tex}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Introdução}
+\begin{itemize}
+    \item Visto que os polos determinam a \textbf{dinâmica} de um sistema, um sistema realimentado tem a capacidade de \textbf{alterar a localização dos polos} do sistema controlado e, portanto, tem o potencial de mudar  a dinâmica original.
+    \item Esta capacidade de alocação de polos está intrinsecamente ligada ao número de parâmetros livres que o controlador possui.
+    \item A \textbf{alocação de polos} permite o controle de sistemas de múltiplas entradas e múltiplas saídas. A ideia principal é \textbf{realimentar todas as variáveis de estado}, por meio do vetor $\bm{x}$, em vez de fazer a realimentação com o vetor de saída $\bm{y}$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Formulação matemática}
+\begin{itemize}
+    \item Considere a lei de controle
+\end{itemize}
+\begin{align*}
+    \bm{u}(k) &= r(k) - k_1x_1(k) - k_2x_2(k) - ... - k_nx_n(k) \\
+    &= r(k) - K\bm{x}(k)
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item[] em que $K = \begin{bmatrix}
+    k_1 & k_2 & \cdots & k_n
+    \end{bmatrix}$
+    \item Neste esquema, cada variável de estado é realimentada por meio de um ganho, representado pelo vetor de realimentação $K$. Esta técnica permite a \textbf{alocação dos polos nas posições desejadas}, desde que o sistema seja controlável.
+\end{itemize}
+\begin{align*}
+    \bm{x}(k+1) &= A\bm{x}(k) + B\bm{u}(k) \\
+    &= A\bm{x}(k) + B[r(k) - K\bm{x}(k)] \\
+    &= (A - BK)\bm{x}(k) + Br(k)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Equação característica do sistema realimentado}
+\begin{itemize}
+    \item A equação característica do sistema realimentado é dada por
+\end{itemize}
+$$\boxed{|\lambda I - (A-BK)| =  0}$$
+\begin{itemize}
+    \item Escrevendo o sistema na forma canônica controlável:
+\end{itemize}
+\begin{align*}
+    BK = \begin{bmatrix}
+    0 \\ 0 \\ \vdots \\ 0 \\ 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    k_1 & k_2 & \cdots & k_n
+    \end{bmatrix} = \begin{bmatrix}
+    0 & 0 & 0 & \cdots & 0 \\
+    0 & 0 & 0 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 0 \\
+    k_1 & k_2 & k_3 & \cdots & k_n
+    \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Equação característica do sistema realimentado}
+\vspace{0.3cm}
+\begin{align*}
+    A - BK &= \begin{bmatrix}
+    0 & 1 & 0 & \cdots & 0 \\
+    0 & 0 & 1 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 1 \\
+    -a_0 & -a_1 & -a_2 & \cdots & -a_{n-1}
+    \end{bmatrix} - \begin{bmatrix}
+    0 & 0 & 0 & \cdots & 0 \\
+    0 & 0 & 0 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 0 \\
+    k_1 & k_2 & k_3 & \cdots & k_n
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    0 & 1 & 0 & \cdots & 0 \\
+    0 & 0 & 1 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 1 \\
+    -(a_0+k_1) & -(a_1+k_2) & -(a_2+k_3) & \cdots & -(a_{n-1}+k_n)
+    \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{Comparação entre os polinômios}
+\begin{itemize}
+    \item O polinômio característico do sistema é, portanto,
+\end{itemize}
+$$\Delta(\lambda) = \lambda^n + (a_{n-1}+k_n)\lambda^{n-1} + ... + (a_1+k_2)\lambda + (a_0+k_1)$$
+\vspace{-0.3cm}
+\begin{itemize}
+    \item O polinômio característico desejado para o sistema em malha fechada é:
+\end{itemize}
+$$\Delta_d(\lambda) = \lambda^n + \alpha_{n-1}\lambda^{n-1} + ... + \alpha_1\lambda + \alpha_0$$
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Deste modo,
+\end{itemize}
+$$k_{i+1} = \alpha_i - a_i, \ i=0,1,...,n-1$$
+\begin{itemize}
+    \item Se o par $(A,B)$ for completamente controlável existe um vetor $K$ tal que os autovalores de $(A-BK)$ podem ser arbitrariamente \textbf{escolhidos}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#01}
+\begin{block}{Problema}
+	Encontrar um vetor de ganhos $K$ (\textit{caso haja}) tal que o sistema em malha fechada abaixo possua autovalores em $\lambda_1 = \num{0,8}$ e $\lambda_2 = \num{0,9}$.
+	\begin{align*}
+	\begin{bmatrix} x_1(k+1) \\ x_2(k+1) \end{bmatrix}
+	&=
+	\begin{bmatrix}
+	0 & 1 \\ -\num{0,96} & -2
+	\end{bmatrix}
+	\begin{bmatrix}
+	x_1(k) \\ x_2(k)
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+	0 \\ 1
+	\end{bmatrix}
+	u(k)
+	\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#01}
+\begin{block}{Resolução}
+	\begin{itemize}
+		\item O polinômio característico desejado para a malha fechada é:
+	\end{itemize}
+	$$\Delta_d(\lambda) = (\lambda-\num{0,8})(\lambda-\num{0,9}) = \lambda^2 - \num{1,7}\lambda + \num{0,72}$$
+	\vspace{-0.3cm}
+		\begin{itemize}
+		\item A nova matriz dinâmica do sistema é dada por
+	\end{itemize}
+	$$ \tilde{A} = A - BK = \begin{bmatrix}
+		0 & 1\\ 
+		-\num{0,96} & -2
+	\end{bmatrix} -
+	\begin{bmatrix}
+		0 & 0 \\ 
+		K_1 & K_2 
+	\end{bmatrix} =
+	\begin{bmatrix}
+		0 & 1\\ 
+		-\num{0,96} - K_1 & -2 - K_2
+	\end{bmatrix} $$
+	\vspace{-0.2cm}
+	\begin{itemize}
+		\item A nova equação característica se torna:
+	\end{itemize}
+	$$ \Delta_{\tilde{A}} = \lambda^2 + (2 + K_2)\lambda + (\num{0,96} + K_1)$$
+	\vspace{-0,3 cm}
+	\begin{itemize}
+		\item Por comparação de coeficientes podemos determinar os ganhos
+	\end{itemize}
+	$$ \num{0,96}+K_1 = \num{0,72} \therefore K_1 = -\num{0,24} $$
+	$$ 2+K_2 = -\num{1,7} \therefore K_2 = -\num{3,7} $$
+	$$K = \begin{bmatrix}
+		-\num{0,24} & -\num{3,7}
+	\end{bmatrix}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado}
+\begin{block}{A fórmula de Ackermann}
+\begin{itemize}
+    \item É possível determinar $K$ sem supor que $(A,B)$ esteja na forma canônica controlável, utilizando a \textbf{fórmula de Ackermann} (\textit{mesmo assim a condição é que o sistema seja totalmente  controlável, ou seja, $\rho[\mathcal{C}] = n$}).
+\end{itemize}
+$$\boxed{K = \begin{bmatrix}
+    0 & 0 & \cdots & 0 & 1
+    \end{bmatrix} \mathcal{C}^{-1}\Delta_d(A)}$$
+\vspace{-0.3cm}
+\begin{itemize}
+    \item[] onde $\Delta_d(A)$ é o polinômio característico desejado para a malha fechada avaliado em $A \in \mathbb{R}^{n \times n}$, isto é,
+\end{itemize}
+\vspace{0.2cm}
+$$\Delta_d(A) = A^n + \alpha_{n-1}A^{n-1} + ... + \alpha_1A + \alpha_0I$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#02}
+\begin{block}{Problema}
+Encontrar um vetor de ganhos $K$ (\textit{caso haja}) tal que o sistema em malha fechada abaixo possua autovalores em $\lambda_1 = \num{0,9}$ e $\lambda_2 = \num{0,8}$.
+\begin{align*}
+    \begin{bmatrix} x_1(k+1) \\ x_2(k+1) \end{bmatrix}
+    &=
+    \begin{bmatrix}
+    -\num{1,2} & 1 \\ 0 & -\num{0,8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1(k) \\ x_2(k)
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    \num{0,5} \\ 1
+    \end{bmatrix}
+    u(k)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item O primeiro passo consiste em verificar a controlabilidade do sistema:
+\end{itemize}
+\begin{align*}
+    \mathcal{C} &= \begin{bmatrix} B & AB \end{bmatrix} \\
+    &= \begin{bmatrix} \num{0,5} & \num{0,4} \\ 1 & -\num{0,8} \end{bmatrix}
+\end{align*}
+\vspace{-0.3cm}
+\begin{itemize}
+    \item Calculando o determinante da matriz de controlabilidade, temos:
+\end{itemize}
+$$\text{det}[\mathcal{C}] = -\num{0,8} \neq 0 $$
+Desta forma, o sistema é completamente controlável e $\rho = n = 2$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item O polinômio característico desejado para a malha fechada é:
+\end{itemize}
+$$\Delta_d(\lambda) = (\lambda-\num{0,9})(\lambda-\num{0,8}) = \lambda^2 - \num{1,7}\lambda + \num{0,72}$$
+\vspace{-0.3cm}
+\begin{itemize}
+    \item O polinômio característico desejado para a malha fechada avaliado em $A \in \mathbb{R}^{n \times n}$ é:
+\end{itemize}
+\begin{align*}
+    \lambda_d(A) &= \left(\begin{bmatrix}
+    -\num{1,2} & 1 \\ 0 & -\num{0,8}
+    \end{bmatrix}\right)^2 - \num{1,7} \begin{bmatrix}
+    -\num{1,2} & 1 \\ 0 & -\num{0,8}
+    \end{bmatrix} + \num{0,72}\begin{bmatrix}
+    1 & 0 \\ 0 & 1
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    \num{4,2} & -\num{3,7} \\ 0 & \num{2,72}
+    \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Realimentação de variáveis de estado - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{itemize}
+    \item Com isso, o vetor de ganhos $K$ é dado por
+\end{itemize}
+\begin{align*}
+    K &= \begin{bmatrix}
+    0 & 1
+    \end{bmatrix} \mathcal{C}^{-1}\Delta_d(A) \\
+    &= \begin{bmatrix}
+    0 & 1
+    \end{bmatrix} \begin{bmatrix} \num{0,5} & \num{0,4} \\ 1 & -\num{0,8} \end{bmatrix}^{-1} \begin{bmatrix}
+    \num{4,2} & -\num{3,7} \\ 0 & \num{2,72}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    0 & 1
+    \end{bmatrix} \begin{bmatrix} 1 & \num{0,5} \\ \num{1,25} & -\num{0,625} \end{bmatrix} \begin{bmatrix}
+    \num{4,2} & -\num{3,7} \\ 0 & \num{2,72}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    \num{1,25} & -\num{0,625}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \num{4,2} & -\num{3,7} \\ 0 & \num{2,72}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    \num{5,25} & -\num{6,325}
+    \end{bmatrix}
+\end{align*}
+\end{block}
+\end{frame}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>acker(A,B,roots(p)) 
+\end{verbatim}
+determina o vetor de ganhos $K$ utilizando a fórmula de Ackermann utilizando o par $\bm{(A,B)}$ e as raízes do polinômio característico desejado $\bm{p}$. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: cálculo do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.45\linewidth]{Figuras/Ch15/fig4.PNG}}
+}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{verbatim}
+>>place(A,B,roots(p)) 
+\end{verbatim}
+determina o vetor de ganhos $K$ utilizando a realimentação de estados por meio do par $\bm{(A,B)}$ e as raízes do polinômio característico desejado $\bm{p}$. \\
+\vspace{0.2cm}
+\textbf{Exemplo}: cálculo do exemplo \#01
+\end{block}
+\centerline{\includegraphics[width=0.4\linewidth]{Figuras/Ch15/fig5.PNG}}
+}
+
+\cprotect\frame{
+\frametitle{\MATLAB}
+\begin{block}{}
+\begin{itemize}
+    \item \texttt{acker} só se aplica  ao caso monovariável, mas aceita polos com  multiplicidade maior que um. 
+    \item \texttt{place} tem  propriedades numéricas melhores, pode ser usada no caso multivariável, mas não aceita  polos com multiplicidade maior que o número  de entradas.
+\end{itemize}
+\end{block}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+01. Verifique que $(A-BK)$ (\textit{do exemplo \#01 da realimentação de variáveis de estado}) de fato possui os autovalores desejados, ao ser utilizado o vetor de ganhos $K$.
+
+\vspace{1cm}
+
+02. Considere um sistema discreto representado pelo seguinte espaço de estados:
+\begin{align*}
+    \bm{x}(k+1) &= \begin{bmatrix}
+    0 & 1 \\
+    -2 & 3 \\
+    \end{bmatrix}\bm{x}(k) +  \begin{bmatrix}
+    0 \\
+    1 \\  
+    \end{bmatrix}\bm{u}(k) \\
+    \bm{y}(k) &= \begin{bmatrix}
+    0 & 1
+    \end{bmatrix}\bm{x}(k) 
+\end{align*}
+    
+\begin{enumerate}
+    \item[(a)] Este sistema é controlável?
+    \item[(b)] Este sistema é observável?
+    \item[(c)] Compare os resultados pelo \MATLAB.
+\end{enumerate}
+\end{block}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+03. Um sistema em tempo discreto possui as seguintes matrizes na representação em espaço de estados:
+\begin{align*}
+    A= \begin{bmatrix}
+    0 & 1 \\
+    -1 & -2 \\
+    \end{bmatrix} \qquad \qquad  B=\begin{bmatrix}
+    1 & 0 \\
+    0 & 1 \\  
+    \end{bmatrix}
+\end{align*}
+    
+Verifique se esse sistema é controlável e, em caso positivo, forneça $K$ tal que o sistema com a lei de controle $\bm{u} = -K\bm{x}$ tenha  autovalores em $\lambda_1 = \num{0,1}$ e $\lambda_2 = \num{0,2}$. Compare os resultados pelo \MATLAB.
+\end{block}
+}
+
+\frame{
+\frametitle{Referências e exercícios complementares}
+\begin{itemize}
+\item AGUIRRE, Luis A. Controle de Sistemas Amostrados, 1 ed. [s.n.], 2019.
+\end{itemize}
+\centering{\alert{Página 355 - \textbf{Capítulo 8}}} \\
+\vspace{0.4cm}
+\begin{itemize}
+\item FRANKLIN, Gene F.; POWELL, J. David; WOLKMAN, Michael L. Digital Control of Dynamic Systems, 3 ed. Addison-Wesley, 1998.
+\end{itemize}
+\centering{\alert{Página 352 - \textbf{Capítulo 8}}} \\
+}

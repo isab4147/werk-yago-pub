@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+\draw[->] (0,-0.5) -- (0,4.5) node[above=2pt] {$ j\omega $};
+\draw[->] (-5,0) -- (1,0) node[right=2pt] {$ \sigma $};
+
+\draw[dashed] (-4,0) node[below=3pt] {$ \num{-0,33} $} -- (-4,4);
+
+\filldraw[fill=mWhite] (-2,0) circle (2pt) node[below,yshift=-3pt] {$ \num{-0,05} $};
+
+%\draw (-2,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt) node[below, xshift=-2pt] {$ \num{-0,05} $};
+
+\draw (-2,0) -- (-4,4);
+
+\draw (-2.3,0) arc (180:118:0.3) node[midway,above left=-3pt,yshift=-2pt] {$ \theta $};
+
+\draw (-4,4) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt);
+
+\draw (-1,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt) node[below, xshift=4pt] {$ \num{-0,005} $};
+
+\draw (-1,0) -- (-4,4);
+
+\draw (-1.3,0) arc (180:125:0.3) node[midway,above left=-3pt,yshift=-2pt] {$ \gamma $};
+
+\draw[dashed] (-4,4) -- (0,4) node[right] {$ \num{0.5864} $};
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+\deftkzbds
+	
+	% The block diagram code is probably more verbose than necessary
+	\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	% We start by placing the blocks
+	\node [input] (input) {};
+	\node [sum, right=of input] (sum) {$\sum$};
+	\node [block, right=of sum] (controller) {Controlador};
+	\node [block, right=of controller, pin={[pinstyle]above:$w(t)$},
+	node distance=3cm] (system) {Planta};
+	% We draw an edge between the controller and system block to 
+	% calculate the coordinate u. We need it to place the measurement block. 
+	\draw [->] (controller) -- node[name=u] {$u(t)$} (system);
+	\node [output, right =of system] (output) {};
+	\node [block, below =of u, pin={[pinstyle]below:$v(t)$}] (measurements) {Sensor};
+	
+	% Once the nodes are placed, connecting them is easy. 
+	\draw [draw,->] (input) -- node {$r(t)$} (sum);
+	\draw [->] (sum) -- node {$e(t)$} (controller);
+	\draw [->] (system) -- node [name=y] {$y(t)$}(output);
+	\draw [->] (y) |- (measurements);
+	\draw [->] (measurements) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.21, xshift=-4pt] {$+$} 
+	node [very near start, yshift=15pt] {$b(t)$} (sum);
+	\end{tikzpicture}

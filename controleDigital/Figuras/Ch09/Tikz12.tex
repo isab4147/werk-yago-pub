@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+\draw[->] (0,-1) -- (0,4.5) node[above=2pt] {$ j\omega $};
+\draw[->] (-6,0) -- (1.5,0) node[right=2pt] {$ \sigma $};
+
+\coordinate (A) at (-2,3.46);
+
+\draw (0,0) -- (-5,0);
+\draw (-5.46,0) -- (A);
+\draw (-4,0) -- (A);
+\draw (-2.93,0) -- (A);
+\draw[dashed] (-2,0) node[below] {$ -4 $} -- (A) (0,0) -- (A);
+
+\draw[violet] (-0.5,0) arc (180:120:0.5) node[midway, above left=-3pt, yshift=-3pt] {$ \theta $};
+\draw[dashed] (-5,3.46) -- (0,3.46) node[right] {$ 4 $};
+
+\fill (A) circle (1.5pt);
+
+\filldraw[draw=black,fill=mWhite] (-2.93,0) circle (1.5pt) node[below] {$ -\dfrac{1}{T} $};
+
+\draw (-5.46,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt) node[below] {$ -\dfrac{1}{\alpha T} $};
+
+\draw[violet] (-1.5,3.46) arc (360:300:0.5) node[midway, below right=-3pt, yshift=3pt] {$ \theta $};
+
+\draw[cyan] (-4.25,3.46) arc (180:240:2.25) node[near start, left=-2pt, yshift=-18pt, xshift=0pt] {$ \dfrac{\ang{180}-\theta}{2} $};
+
+\draw[cyan] (-1.25,2.16) arc (300:240:1.5) node[near start, below, fill=mWhite, inner sep=1pt, yshift=-5pt] {$ \dfrac{\ang{180}-\theta}{2} $};
+
+\draw[purple] (-3,3.46) arc (180:300:1) node[very near start, left=-3pt, yshift=-10pt] {$ \ang{180}-\theta $};
+
+\draw[orange] (-3.77,1.7) arc (225:240:2.5) node[midway, below left, yshift=5pt] {$ \dfrac{\phi}{2} $};
+
+\draw[orange] (-3.375,1.08) arc (240:255:2.75) node[midway, below, xshift=-5pt, yshift=2pt] {$ \dfrac{\phi}{2} $};
+\end{tikzpicture}

@@ -1,0 +1,27 @@
+\deftkzbds
+	
+\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	
+	\node [input, name=input] {};
+	
+	\node [coordinate, right=of input] (junction) {};
+	\draw (input) -- node[near start] {$E(z)$} (junction);
+	
+	\node [block, right=of junction] (ei) {$ C_i(z) $};
+	\node [block, above=of ei] (kp) {$ C_p(z) $};
+	\node [block, below=of ei] (cd) {$ C_d(z) $};
+	
+	\draw [->] (junction) -- (ei);
+	\draw [->] (junction) |- (kp);
+	\draw [->] (junction) |- (cd);
+	
+	\node [sum, right=2cm of ei] (sum) {$ \phantom{\sum} $};
+	\draw (sum) ++(-8pt,-8pt) -- ++(16pt,16pt) ++(-16pt,0pt) -- +(16pt,-16pt);
+	
+	\draw [<-] (sum) -- node[very near start, above] {$ + $} (ei);
+	\draw [<-] (sum) |- node[very near start, right] {$ + $} (kp);
+	\draw [<-] (sum) |- node[very near start, left] {$ + $} (cd);
+	
+	\node [output, right=of sum] (output) {};
+	\draw [->] (sum) -- node[near end] {$ U(z) $} (output);
+\end{tikzpicture}

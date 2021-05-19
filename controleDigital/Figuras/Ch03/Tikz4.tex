@@ -1,0 +1,13 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+	% We start by placing the blocks
+	\node [input] (input) {};
+	\node [block, right=of input, xshift=0cm, align=center, text width=2cm] (computer) {$ h[n] $};
+	\node [output, right =of computer] (output) {};
+	\node [above, xshift=0.8cm] at (input) {$ z^{n} $};
+	\node [above, xshift=-0.8cm] at (output) {$ y[n] $};
+	
+	\draw [->] (input) -- (computer);
+	\draw [->] (computer) -- (output);
+\end{tikzpicture}

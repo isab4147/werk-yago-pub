@@ -1,0 +1,18 @@
+\begin{tikzpicture}[scale=1.5]
+	\draw[-latex] (-1.5,0) -- (2,0) node[right] {$ \Re(z) $};
+	\draw[-latex] (0,-1.5) -- (0,1.5) node[above] {$ \Im(z) $};
+	
+	\draw[dashed] (0,0) circle (1);
+	
+	\node [above right,rotate=45] at ($ (0.3,0)+(1.8pt,-1.5pt) $) {\footnotesize $ \theta=\omega_1T $};
+	
+	\draw[->] (0,0) -- (150:1) node[left] {$ r=1 $};
+	
+	\draw[-latex] (0,0) -- (45:1cm);
+	\draw[-latex] (0,0) -- (45:1.5cm);
+	\draw (0,0) -- (45:1.7cm);
+	
+	\draw[-stealth] (0.3,0) arc (0:45:0.3);
+	
+	\draw (0,0) node[below left] {$ 0 $};
+\end{tikzpicture}

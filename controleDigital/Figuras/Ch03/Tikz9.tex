@@ -1,0 +1,14 @@
+\begin{tikzpicture}[scale=1.5,>=latex]
+
+	\draw[pattern=south east lines] (0cm,0cm) circle(1cm);
+
+	% draw the unit circle
+	\draw[dashed] (0cm,0cm) circle(1cm);
+	
+    % draw the coordinates
+    \draw[->, fill=white] (-1.5cm,0cm) -- (1.5cm,0cm) node[right,fill=white] {$\Re(z)$};
+    \draw[->, fill=white] (0cm,-1.5cm) -- (0cm,1.5cm) node[above,fill=white] {$\Im(z)$};
+    
+    \draw[->,line width=1.5pt,white] (0,0) -- (45:1);
+    \draw[->,thick] (0,0) -- (45:1) node[right] {$ r=1/2 $};
+\end{tikzpicture}

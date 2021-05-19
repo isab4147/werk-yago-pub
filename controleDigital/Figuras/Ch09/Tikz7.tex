@@ -1,0 +1,29 @@
+\begin{tikzpicture}[y=0.75cm]
+\draw[->] (-3,0) -- (1.5,0) node[right=2pt] {$ \sigma $};
+\draw[->] (0,-4.5) -- (0,4.5) node[above=2pt] {$ j \omega $};
+
+\draw[-{Latex[width=2pt, length=5pt]}] (-2,0) -- (-2,3.46);
+
+\draw[dashed] (0,3.46) -- (-2,3.46);
+\draw (-0.2,3.46) -- (0.2,3.46) node[right] {$ \num{3,46} $};
+
+\draw[-{Latex[width=2pt, length=5pt]}] (0,0) -- (-2,3.46);
+\draw (0,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt);
+
+\draw (-0.2,-3.46) -- (0.2, -3.46) node[right] {$ \num{-3,46} $};
+
+\draw[dashed] (-2,0) |- (0,-3.46);
+
+\fill (-2,3.46) circle (1.2pt);
+
+\node[below=2pt, fill=mWhite, inner sep=1pt] at (-2,0) {$ -2 $};
+
+\draw[->] (0.5,0) arc (0:120:0.5cm) node[midway, above right=-3pt] {$ \gamma $};
+
+\draw[->] (-1.7,0) arc (0:90:0.3cm) node[midway, above right=-3pt] {$ \alpha $};
+
+\draw (-0.5,0) arc(180:120:0.5cm) node[left,midway] {$ \theta $};
+
+\draw (-2,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- +(4pt,-4pt);
+
+\end{tikzpicture}

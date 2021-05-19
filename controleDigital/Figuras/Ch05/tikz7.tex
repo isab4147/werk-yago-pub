@@ -1,0 +1,21 @@
+\begin{tikzpicture}[scale=1.5]
+	\draw[->] (-2.5,0) -- (2.5,0) node[right] {$ \Re(z) $};
+	\draw[->] (0,-2) -- (0,2) node[above] {$ \Im(z) $};
+	
+	\draw (0,0) circle (1.5);
+	\draw[dashed] (0,0) circle (1);
+	\draw (0,0) circle (0.5);
+	
+%	\node [below left] at (-1,0) {$ -1 $};
+%	\node [below right] at (0,-1) {$ -1 $};
+%	\node [above right] at (0,1) {$ 1 $};
+%	\node [below right] at (1,0) {$ 1 $};
+
+	\draw (0,0) node[below left] {$ 0 $};
+	
+	\draw [->] (0.2, 0.6) node[right] {$ \text{e}^{\sigma_1T} $} parabola (0.05,0.5);
+	
+	\draw [->] (1.2, 1.4) node[right] {$ \text{e}^{-\sigma_2T} $} parabola (1.05,1.1);
+	
+	\draw[->] (0,0) -- (30:1) node[right=0pt] {\footnotesize $ r=1 $};
+\end{tikzpicture}

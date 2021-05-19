@@ -1,0 +1,15 @@
+\begin{tikzpicture}[scale=1.5,>=latex]
+	
+	\draw[pattern=south east lines,draw=white] (-1.5cm,-1.5cm) rectangle (1.5cm,1.5cm);
+
+	% draw the unit circle
+	\draw[dashed, fill=white] (0cm,0cm) circle(1cm);
+	
+    % draw the coordinates
+    \draw[->, fill=white] (-1.5cm,0cm) -- (1.5cm,0cm) node[right,fill=white] {$\Re(z)$};
+    \draw[->, fill=white] (0cm,-1.5cm) -- (0cm,1.5cm) node[above,fill=white] {$\Im(z)$};
+    
+    \draw[->] (0,0) -- (45:1) node[midway, xshift=2pt,below=0pt,rotate=45,inner sep=0.5pt] {\small $ r=1/2 $};
+    
+    
+\end{tikzpicture}

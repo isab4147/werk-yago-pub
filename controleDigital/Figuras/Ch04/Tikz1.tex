@@ -1,0 +1,20 @@
+\begin{tikzpicture}[scale=1,>=latex, every node/.style={inner sep =2pt}]
+	
+	\draw[pattern=south east lines, draw=mWhite] (0cm,0cm) circle(2cm);
+	
+	\draw[dashed] (0cm,0cm) circle(2cm);
+
+	\draw[dashed, fill=mWhite] (0cm,0cm) circle(1cm);
+	
+    % draw the coordinates
+    \draw[->, fill=mWhite] (-2.5cm,0cm) -- (2.5cm,0cm) node[right=2pt,fill=mWhite] {$\Re(z)$};
+    \draw[->, fill=mWhite] (0cm,-2.5cm) -- (0cm,2.5cm) node[above=2pt,fill=mWhite] {$\Im(z)$};
+    
+    \draw[fill=black] (0.5,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- ++(4pt,-4pt) +(-2pt,2pt) node[below=2pt] {$ \dfrac{1}{2} $};
+    
+	\draw[fill=black] (1,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- ++(4pt,-4pt) +(-2pt,2pt) node[below left=2pt] {$ 1 $};
+	
+	\draw[fill=black] (2,0) ++(-2pt,-2pt) -- ++(4pt,4pt) ++(-4pt,0pt) -- ++(4pt,-4pt) +(-2pt,2pt) node[below right=2pt] {$ 2 $};
+	
+	\draw[->] (0,0) -- (45:1) node[midway,rotate=45,above,xshift=1pt] {\footnotesize$ r=1 $};
+\end{tikzpicture}

@@ -1,0 +1,18 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+
+\node [input, name=input] {};
+\node [sum, right =of input, xshift=0.5cm] (pm) {$ \sum $};
+\draw [draw,->] (input) -- node {$R(s)$} (pm);
+
+\node [block, right =of pm, text width=2cm, align=center] (Gc) {$ \dfrac{1}{(s+1)(s+2)} $};
+\draw [->] (pm) -- (Gc);
+
+\node [output, right =of Gc] (output) {};
+\draw [->] (Gc) -- node [name=outAr] {$C(s)$}(output);
+
+\node [coordinate,below=1.5cm] at (Gc) (Hs) {};
+\draw[->] (outAr) |- (Hs) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.4, xshift=-4pt] {$+$} (pm);
+
+\end{tikzpicture}

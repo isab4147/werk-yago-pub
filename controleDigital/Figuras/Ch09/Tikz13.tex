@@ -1,0 +1,15 @@
+\begin{tikzpicture}[scale=2]
+\draw (0,0) -- (99.2:2) node[name=A,coordinate] {};
+
+\draw (0,0) -- node[midway, below] {$ \dfrac{1}{T} $} (1.65,0);
+
+\draw (1.65,0) -- node[midway,right=2pt] {$ \omega_n $} (A);
+
+\draw (0.3,0) arc (0:99.2:0.3) node[midway, right,yshift=0pt, xshift=2pt] {$\ang{99.2} $};
+
+\draw (1.35,0) arc (180:135:0.3) node[midway,left,yshift=2pt] {$ \ang{45} $};
+
+\draw ($ (A)!0.3cm!(0,0) $) arc (279.2:315:0.3) node[midway, name=C, coordinate] {};
+
+\draw[->] (C) +(0,0.05) parabola bend (0,2.1) (0.2,2.2) node[above] {$ \dfrac{\ang{180}-\theta}{2}-\dfrac{\phi}{2}=\ang{35,8} $};
+\end{tikzpicture}

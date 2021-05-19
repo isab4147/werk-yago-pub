@@ -1,0 +1,161 @@
+\mode<presentation>
+{
+ \usetheme{JuanLesPins}
+ \usefonttheme{serif}
+ \usecolortheme{beaver}
+ \setbeamercovered{invisible} \setbeamertemplate{blocks}[rounded][shadow=true] 
+ \setbeamertemplate{navigation symbols}{} 
+ \setbeamertemplate{footline}[frame number]
+ \usecolortheme[RGB={122,4,24}]{structure}
+}
+%\usepackage[portuguese]{babel}
+\usepackage[english,brazilian]{babel}
+\selectlanguage{brazilian}
+
+\usepackage[utf8]{inputenc}
+\usepackage{steinmetz}
+\usepackage{lmodern}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{color}
+\usepackage{courier}
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{calligra}
+\usepackage{srcltx}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{refcount}
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[thinc]{esdiff}
+\usepackage[useregional]{datetime2}
+\usepackage{mathrsfs}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{empheq}
+\usepackage{commath}
+%\usepackage{tdclock}
+
+% MATLAB
+\usepackage{xspace}
+\newcommand{\MATLAB}{\textsc{Matlab}\xspace}
+
+\setcounter{tocdepth}{1} 
+\newcommand{\degree}{\ensuremath{^\circ}}
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{tikz}
+\usepackage{karnaugh-map}
+\usepackage[american, siunitx]{circuitikz}
+
+\usetikzlibrary{positioning, calc}
+
+\usepackage{booktabs, xfrac, longtable}
+
+\usepackage{cprotect}
+\usepackage{verbatim}
+\usepackage{siunitx}
+\usepackage{bm}
+\usepackage{esvect}
+\usepackage{steinmetz}
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
+\newcounter{saveenumi}
+\newcommand{\saveenumerate}{%
+  \stepcounter{saveenumi}%
+  \label{saveenumi-\thesaveenumi}}
+\newcommand{\restoreenumerate}{%
+  \setcounterref{enumi}{saveenumi-\thesaveenumi}}
+\sisetup{output-decimal-marker = {,}}
+
+% \itemequation[label]{text before}{equation}
+\makeatletter
+\newcommand*{\itemequation}[3][]{%
+  \item
+  \begingroup
+    \refstepcounter{equation}%
+    \ifx\\#1\\%
+    \else
+      \label{#1}%
+    \fi
+    \sbox0{#2}%
+    \sbox2{$\displaystyle#3\m@th$}%
+    \sbox4{ \@eqnnum}%
+    \dimen@=.5\dimexpr\linewidth-\wd2\relax
+    % Warning for overlapping
+    \let\CenterInSpace=N%
+    \ifcase
+    \ifdim\wd0>\dimen@
+          \z@
+        \else
+          \ifdim\wd4>\dimen@
+            \z@
+          \else
+            \@ne
+          \fi
+        \fi
+      \let\CenterInSpace=Y%
+    \fi
+    \ifdim\dimexpr\wd0+\wd2+\wd4\relax>\linewidth
+      \@latex@warning{Equation is too large}%
+    \fi
+    \noindent
+    \rlap{\copy0}%
+    \ifx\CenterInSpace Y%
+      \rlap{\hbox to \linewidth{\kern\wd0\hss\copy2\hss\kern\wd4}}%
+    \else
+      \rlap{\hbox to \linewidth{\hfill\copy2\hfill}}%
+    \fi
+    \hbox to \linewidth{\hfill\copy4}%
+    \hspace{0pt}% allow linebreak
+  \endgroup
+  \ignorespaces
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% RODAPÉ %%%%%%%%%%%%%%%%%
+
+\setbeamercolor{footline}{fg=white}
+\setbeamertemplate{footline}
+{\begin{tikzpicture}
+    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=1cm]{Figuras/Capa/macaefooter.png}};
+    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / \inserttotalframenumber};
+\end{tikzpicture}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% INFORMAÇÕES DO CURSO %%%%%%%%%%
+
+\title[Modelagem de Sistemas Dinâmicos] {Modelagem de Sistemas Dinâmicos}
+
+\subtitle {Notas de aula}
+
+\author{Prof. Yago Pessanha Corrêa}
+
+\institute[MSP/IFF] 
+{
+Grupo de Pesquisa e Desenvolvimento em Laboratórios de Automação e Controle \\
+Instituto Federal de Educação, Ciência e Tecnologia Fluminense (IFFluminense) \\
+Bacharelado em Engenharia de Controle e Automação \\
+\vspace*{.1cm} {\tt \textbf{yago.correa@iff.edu.br}}\\
+}
+
+%\tddate
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% SUMÁRIO %%%%%%%%%%%%%%%%%
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Sumário}
+    \tableofcontents[currentsection]
+  \end{frame}
+}

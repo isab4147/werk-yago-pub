@@ -1,0 +1,19 @@
+\begin{tikzpicture}[scale=1.5,>=latex,every node/.style={inner sep=2pt}]
+
+	\draw[pattern=south east lines, draw=white, thin] (0.5cm,0) circle (0.5cm);
+	
+	\draw[dashed] (0.5,0) circle (0.5);
+	
+	% draw the unit circle
+%	\draw[line width=3pt, draw=white] (0cm,0cm) circle(1cm);
+	\draw (0cm,0cm) circle(1cm);
+	
+    % draw the coordinates
+    \draw[->, fill=white] (-1.5cm,0cm) -- (1.5cm,0cm) node[right=2pt,fill=white] {$\Re(z)$};
+    \draw[->, fill=white] (0cm,-1.5cm) -- (0cm,1.5cm) node[above=2pt,fill=white] {$\Im(z)$};
+    
+    \draw (-1,0) node[below,xshift=-7pt] {$ -1 $};
+    \draw (1,0) node[below,xshift=5pt] {$ 1 $};
+    \draw (0,1) node[right=2pt,yshift=5pt] {$ 1 $};
+    \draw (0,-1) node[right=2pt,yshift=-5pt] {$ -1 $};
+\end{tikzpicture}

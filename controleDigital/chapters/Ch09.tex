@@ -1,0 +1,629 @@
+\section{Revisão de controladores no \texorpdfstring{plano $ s $}{plano-s} pelo LGR}
+
+\begin{frame}{Introdução}
+\begin{block}{Especificações no domínio do tempo}
+\begin{itemize}
+    \item O desempenho de um sistema de controle pode ser especificado utilizando certas métricas de desempenho.
+    \item Geralmente, tais métricas são traduzidas em termos de \textbf{localização de  polos dominantes do sistema em malha fechada}. 
+    \item Saber determinar regiões viáveis para tais polos a fim de garantir o desempenho esperado é fundamental em técnicas de projeto.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Introdução}
+\begin{block}{Projeto de sistemas de controle}
+\begin{itemize}
+    \item Na construção de um sistema de controle, uma modificação adequada na dinâmica da \textbf{planta} pode ser uma maneira simples de atender às especificações de desempenho. Isso, no entanto, pode \textbf{não ser possível} em muitas situações práticas porque a planta pode ser fixa e não ser passível de modificações.
+    \item Nesses casos, devemos ajustar \textbf{outros parâmetros} que não aqueles da planta fixa.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Introdução}
+\begin{block}{Abordagem do LGR no projeto de sistemas de controle}
+\begin{itemize}
+    \item Na prática, o gráfico do \textbf{Lugar Geométrico das Raízes (LGR)} de um sistema pode indicar que o desempenho desejado não pode ser atingido simplesmente com o ajuste de ganho. Torna-se então necessário remodelar os lugares das raízes para atender às especificações de desempenho.
+    \item Os problemas de projeto, portanto, tornam-se aqueles de melhorar o desempenho do sistema por meio da inclusão de um \textbf{compensador} (\textit{controlador}). A compensação de um sistema de controle fica reduzida ao projeto de um filtro cujas características tendem a compensar as características indesejáveis e inalteráveis da planta.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Introdução}
+\centering
+
+\scalebox{0.8}{\input{Figuras/Ch09/Tikz1.tex}}
+
+\vspace{1cm}
+
+\begin{block}{Forma padrão}
+	\[ \dfrac{C(s)}{R(s)}=G(s)=\dfrac{\omega_n^{2}}{s^{2}+2\zeta\omega_n s+\omega_n^{2}} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Introdução}
+\begin{minipage}[c]{0.45\linewidth}
+	\centering
+	
+	\vspace{-1.6cm}
+	\scalebox{0.8}{\input{Figuras/Ch09/Tikz2.tex}}
+	
+	Subamortecido
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.45\linewidth}
+	\centering
+	
+	\scalebox{0.8}{\input{Figuras/Ch09/Tikz3.tex}}
+	
+	Criticamente amortecido
+\end{minipage}
+
+\end{frame}
+
+
+\begin{frame}{Introdução}
+\begin{block}{Definições}
+	À medida que aumenta $ \zeta $ a resposta será muito \textbf{lenta}, mas tem erro \textbf{menor}.
+	
+	\vspace{1cm}
+	
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		
+		\scalebox{0.7}{\input{Figuras/Ch09/Tikz4.tex}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\linewidth}
+		\begin{align*}
+		T_p&=\dfrac{\pi}{\omega_d}\\
+		T_r&=\dfrac{\pi-\theta}{\omega_d}\, , \, \theta=\tg^{-1}\dfrac{\omega_d}{\zeta\omega_n}\\
+		M_p&=\text{e}^{-\pi}\left( \dfrac{\zeta}{\sqrt{1-\zeta^{2}}} \right)\\
+		T_s&=\dfrac{4}{\zeta\omega_n}(2\%) 
+		\end{align*}
+	\end{minipage}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase}
+\begin{block}{Características}
+\begin{itemize}
+	\item Melhora a resposta \textbf{transitória}.
+	\item Torna o sistema \textbf{estável}.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{minipage}{0.45\linewidth}
+\centering
+
+\scalebox{1}{\input{Figuras/Ch09/Tikz5.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+\[ G_c(s)=K_c\cdot\dfrac{s+\dfrac{1}{T}}{s+\dfrac{1}{\alpha T}} \]
+$$0 < \alpha < 1$$
+\end{minipage}
+\vspace{0.5cm}
+\begin{itemize}
+	\item Considere que $\delta_1$ é o ângulo do zero com um ponto de teste no eixo $j\omega$, e que $\delta_2$ é o ângulo do polo com um ponto de teste no eixo $j\omega$.
+	\item Como $\delta_1 > \delta_2$, temos que $\delta_1 - \delta_2 > 0$; daí o nome \textbf{avanço de fase}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase}
+\begin{block}{Passos}
+\begin{enumerate}
+\item A partir das especificações de desempenho, determine os \textbf{polos desejados dominantes} em malha fechada.
+\item Encontre o ângulo de \textbf{avanço} $ \phi $ para que os polos pertençam ao LGR.
+\item Determine $ \alpha $ e $ T $, isto é, a \textbf{posição do polo e zero} com base na deficiência angular (de modo que o compensador complete o ângulo $ \phi $ necessário).
+\item Encontre $ K_c $ usando \textbf{condição de módulo}.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Problema}
+Deseja-se $ \omega_n=\SI{4}{\radian\per\second} $ e $ \zeta $ igual do sistema em malha fechada sem compensação.
+\end{block}
+
+\vspace{1cm}
+
+\centering
+
+\scalebox{0.9}{\input{Figuras/Ch09/Tikz6.tex}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+	\begin{block}{Resolução}
+		\begin{enumerate}
+			\item 
+			\[ G(s)=\dfrac{4}{s^{2}+2s+4}=\dfrac{\omega_n^{2}}{s^{2}+2\zeta\omega_n s+\omega_n^{2}}\rightarrow \, \begin{aligned}
+			\omega_n&=\SI{2}{\radian\per\second}\\
+			\zeta&=0.5
+			\end{aligned} \]
+			\begin{align*}
+			\text{Polos desejados em }s&=-\zeta\omega_n\pm j\omega_n\sqrt{1-\zeta^{2}}\\
+			s&=-2\pm j3,46
+			\end{align*}
+			%	\setcounter{enumi}{4}
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig1.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig2.png}}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item 
+\end{enumerate}
+\begin{minipage}{0.35\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch09/Tikz7.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.6\linewidth}
+	\begin{align*}
+	\gamma&=\ang{180}-\tg^{-1}\left( \dfrac{\num{3,46}}{2}\right)=\ang{120}\\
+	\alpha&=\ang{90}\\
+	\sum \text{Ângulos}&=\ang{0}-\left( \ang{120}+\ang{90}\right) =\ang{-210}
+	\end{align*}
+\end{minipage}
+
+Pela condição de ângulo ($ \pm180(2k+1) $), \textbf{$ \bm{\phi=}\ang{30} $}, ângulo de avanço.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item 
+\end{enumerate}
+
+\centering
+
+\scalebox{0.8}{\input{Figuras/Ch09/Tikz8.tex}}
+
+\vspace{-0.5cm}
+
+\[ \theta=\tg^{-1}\left( \dfrac{\num{3,46}}{2}\right) =\ang{60} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item 
+\end{enumerate}
+\begin{minipage}{0.5\linewidth}
+	\centering
+	
+	\scalebox{0.8}{\input{Figuras/Ch09/Tikz8.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+	\centering
+	
+	\scalebox{0.8}{\input{Figuras/Ch09/Tikz9.tex}}
+	
+	\vspace{-0.5cm}
+	\begin{align*}
+	\dfrac{\omega_n}{\sen\ang{75}}&=\dfrac{1/T}{\sen\ang{45}}\\
+	\dfrac{1}{T}&=\num{2,93}
+	\end{align*}
+\end{minipage}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Resolução}
+	\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item 
+\end{enumerate}
+\begin{minipage}{0.5\linewidth}
+	\centering
+	
+	\scalebox{0.8}{\input{Figuras/Ch09/Tikz8.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch09/Tikz10.tex}}
+	
+	\vspace{-0.5cm}
+	\begin{align*}
+	\dfrac{\omega_n}{\sen45^{\circ}}&=\dfrac{1/\alpha T}{\sen75^{\circ}}\\
+	\dfrac{1}{\alpha T}&=\num{5,46}
+	\end{align*}
+\end{minipage}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item \begin{align*}
+		G_c(s)G(s)&=\eval{\left| K_c\cdot\dfrac{s+\num{2,93}}{s+\num{5,46}}\cdot\dfrac{4}{s(s+2)}\right|}_{s=-2+j\num{3,46}}=1\Rightarrow\\
+		\left| 4K_c\cdot\dfrac{\num{3,57}}{\num{4,85}\cdot4\cdot\num{3,46}} \right|&=1\Rightarrow K_c=\num{4,7}\\
+		\Aboxed{G_c(s)&=\num{4,7}\cdot\dfrac{s+\num{2,93}}{s+\num{5,46}}}
+	\end{align*}
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig3.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig4.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig5.png}}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\begin{block}{Problema}
+Deseja-se $T_s=\SI{1}{\second} $ e $ M_p = 5 \%$.
+\end{block}
+
+\vspace{1cm}
+
+\centering
+
+\scalebox{0.9}{\input{Figuras/Ch09/Tikz17.tex}}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{enumerate}
+%	\setcounter{enumi}{3}
+	\item \begin{align*}
+	M_p&=5\%\Rightarrow \zeta\approx \num{0,7}\\
+	T_s&=\dfrac{4}{\zeta \omega_n}\Rightarrow\omega_n\approx\SI{5,71}{\radian\per\second}
+	\end{align*}
+	\begin{align*}
+			\text{Polos desejados em }s&=-\zeta\omega_n\pm j\omega_n\sqrt{1-\zeta^{2}}\\
+			s&=-4\pm j4
+	\end{align*}
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig6.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig7.png}}
+\end{frame}
+            
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\begin{block}{Resolução}
+	\begin{enumerate}
+		\setcounter{enumi}{1}
+		\item 
+	\end{enumerate}
+	\begin{minipage}{0.4\linewidth}
+		\centering
+		
+		\scalebox{0.8}{\input{Figuras/Ch09/Tikz11.tex}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.55\linewidth}
+		\begin{align*}
+		&\alpha=\ang{180}-\tg^{-1}\left( \dfrac{4}{2}\right)=\ang{116,56}\\
+		&\gamma=\ang{180}-\tg^{-1}\left( \dfrac{4}{3}\right)=\ang{126,86}\\
+		\begin{split}
+		&\sum \text{Ângulos}=\ang{0}-\\&\left(\ang{116,56}+\ang{126,86}\right)=\ang{-243,4}
+		\end{split}
+		\end{align*}
+	\end{minipage}
+	
+	\medskip
+	
+	Pela condição de ângulo ($ \pm180(2k+1) $), \textbf{$ \bm{\phi=}\ang{63,4} $}, ângulo de avanço.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+	\begin{block}{Resolução}
+		\begin{enumerate}
+			\setcounter{enumi}{2}
+			\item 
+		\end{enumerate}
+		
+		\centering
+		
+		\scalebox{0.7}{\input{Figuras/Ch09/Tikz12.tex}}
+		
+		\vspace{-0.5cm}
+		
+		\[ \theta=\tg^{-1}\left( \dfrac{4}{4}\right) =\ang{45} \]
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+	\begin{block}{Resolução}
+		\begin{enumerate}
+			\setcounter{enumi}{2}
+			\item 
+		\end{enumerate}
+		\begin{minipage}{0.5\linewidth}
+			\centering
+			
+			\scalebox{0.8}{\input{Figuras/Ch09/Tikz12.tex}}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.4\linewidth}
+			\centering
+			
+			\scalebox{0.7}{\input{Figuras/Ch09/Tikz13.tex}}
+			
+			\vspace{-0.7cm}
+			\begin{align*}
+			\dfrac{\omega_n}{\sen\ang{99,2}}&=\dfrac{1/T}{\sen\ang{35,8}} \Rightarrow\\
+			\dfrac{1}{T}&=\num{3,38}
+			\end{align*}
+		\end{minipage}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+	\begin{block}{Resolução}
+		\begin{enumerate}
+			\setcounter{enumi}{2}
+			\item 
+		\end{enumerate}
+		\begin{minipage}{0.5\linewidth}
+			\centering
+			
+			\scalebox{0.8}{\input{Figuras/Ch09/Tikz12.tex}}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.4\linewidth}
+			\centering
+			
+			\scalebox{0.8}{\input{Figuras/Ch09/Tikz14.tex}}
+			
+			\vspace{-0.5cm}
+			\begin{align*}
+			\dfrac{\omega_n}{\sen\ang{35,8}}&=\dfrac{1/\alpha T}{\sen\ang{99,2}}\Rightarrow\\
+			\dfrac{1}{\alpha T}&=\num{9,63}
+			\end{align*}
+		\end{minipage}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item \begin{align*}
+	G_c(s)G(s)=\eval{\left| K_c\cdot\dfrac{s+\num{3,38}}{s+\num{9,63}}\cdot\dfrac{1}{(s+1)(s+2)}\right|}_{s=-4+4j}&=1\Rightarrow\\
+	\left| K_c\cdot\dfrac{(-\num{0,62}+4j)}{\num{5,63}+4j}\cdot\dfrac{1}{(-3+4j)(-2+4j)} \right|&=1\Rightarrow\\
+	K_c\cdot\dfrac{\num{4,04}}{\num{6,90}\cdot5\cdot\num{4,47}}&=1\Rightarrow K_c=\num{38,17}
+	\end{align*}
+	\[ \boxed{G_c(s)=\num{38,17}\cdot\dfrac{s+\num{3,38}}{s+\num{9,63}}} \]
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig8.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig9.png}}
+\end{frame}
+
+\begin{frame}{Controlador avanço de fase - Exemplo \#02}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig10.png}}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase}
+\begin{block}{Características}
+\begin{itemize}
+	\item Melhora a resposta do \textbf{regime permanentemente}.
+	\item Não altera o LGR pois $\zeta$ e $\omega_n$ são satifatórios.
+\end{itemize}
+
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	\scalebox{1}{\input{Figuras/Ch09/Tikz15.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\linewidth}
+\[ G_c(s)=\hat{K}_c\cdot\dfrac{s+\dfrac{1}{T}}{s+\dfrac{1}{\beta T}} \]
+$$\beta > 1$$
+\end{minipage}
+\vspace{0.1cm}
+\begin{itemize}
+	\item Considere que $\delta_1$ é o ângulo do zero com um ponto de teste no eixo $j\omega$, e que $\delta_2$ é o ângulo do polo com um ponto de teste no eixo $j\omega$.
+	\item Como $\delta_1 < \delta_2$, temos que $\delta_1 - \delta_2 < 0$; daí o nome \textbf{atraso de fase}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase}
+	\begin{block}{Passos}
+		\begin{enumerate}
+			\item Localize os \textbf{polos dominantes de malha fechada} sobre o lugar das raízes.
+			\item Calcule a constante de erro estático e determinar o \textbf{acréscimo} na constante de erro estático necessário para satisfazer às especificações.
+			\item Determine os \textbf{polos e zeros} e verifique se a contribuição está \textbf{entre $ \ang{-5} $ e $ \ang{0} $}.
+			\item Ajuste o ganho $\hat{K}_c$ do compensador a partir da condição de módulo, de modo que os polos dominantes de malha fechada se situem na posição desejada ($\hat{K}_c$ será aproximadamente 1).
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\begin{block}{Problema}
+Deseja-se $K_v=\SI{5}{\second^{-1}} $.
+\end{block}
+
+\vspace{1cm}
+
+\centering
+
+\scalebox{0.9}{\input{Figuras/Ch09/Tikz18.tex}}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\item \[ \dfrac{C(s)}{R(s)}=\dfrac{\num{1,06}}{s(s+1)(s+2)+\num{1,06}} \]
+	
+	\begin{align*}
+		s&=\num{-2,3386}\\
+		\text{polos dominantes em: }s&=\num{-0,3307}\pm j\num{0,5864}
+	\end{align*}
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig11.png}}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig12.png}}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item \[ K_v=\lim\limits_{s\to0}sG(s)=\lim\limits_{s\to0}s\cdot\dfrac{\num{1,06}}{(s+1)(s+2)}=\dfrac{\num{1,06}}{2}=\SI[per-mode=reciprocal]{0,53}{\per\second}\therefore\beta\approx10 \]
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item
+\end{enumerate}
+\begin{minipage}{0.35\linewidth}
+	\centering
+	
+	\scalebox{0.7}{\input{Figuras/Ch09/Tikz16.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.6\linewidth}
+	\begin{align*}
+		G_c(s)&=\hat{K}_c\dfrac{s+\num{0,05}}{s+\num{0,005}}\\
+		\theta&=\ang{180}-\tg^{-1}\left( \dfrac{\num{0,5864}}{\num{0,28}} \right) =\ang{115,52}\\
+		\gamma&=\ang{180}-\tg^{-1}\left( \dfrac{\num{0,5864}}{\num{0,325}} \right) =\ang{118,99}
+	\end{align*}
+\end{minipage}
+\[ \sum \text{Ângulos}=\ang{115,52}-\ang{118,99}=\ang{-3,47}\quad\text{\cmark} \]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\begin{block}{Resolução}
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item
+\end{enumerate}
+
+\begin{align*}
+	G_c(s)G(s)&=\hat{K}_c\dfrac{s+\num{0,05}}{s+\num{0,005}}\cdot\dfrac{\num{1,06}}{s(s+1)(s+2)}\\
+			  &=\dfrac{K(s+\num{0,05})}{s(s+\num{0,005})(s+1)(s+2)}\Rightarrow \hat{K}_c=\num{0,9433}K
+\end{align*}
+
+Deslocamento dos polos dominantes $ s=-\num{0,3307}\pm j\num{0,5864} $ para $ s=-\num{0,31}\pm j\num{0,55} $
+
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+	\begin{block}{Resolução}
+		\begin{enumerate}
+			\setcounter{enumi}{3}
+			\item
+		\end{enumerate}
+		
+		\[ \eval{\left| \dfrac{K(s+\num{0,05})}{(s+\num{0,005})s(s+1)(s+2)} \right|}_{s=-\num{0,31}+j\num{0,55}}=1\Rightarrow K=\num{1,0235}\therefore \hat{K}_c=\num{0,9656} \]
+		
+		\[ \boxed{G_c(s)=\num{0,9656}\dfrac{s+\num{0,05}}{s+\num{0,005}}} \]
+	\end{block}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig13.png}}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig14.png}}
+\end{frame}
+
+\begin{frame}{Controlador atraso de fase - Exemplo \#01}
+\centerline{\includegraphics[width=0.8\linewidth]{Figuras/Ch09/fig15.png}}
+\end{frame}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+01. Considere a função de transferência de um sistema como sendo
+$$G(s) = \dfrac{10}{s(s+1)}$$
+Projete um controlador avanço de fase de forma que os polos de malha fechada dominantes tenham um coeficiente de amortecimento de $\num{0,5}$ e uma frequência natural não amortecida de 3 rad/s.
+\end{block}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+02. Considere o modelo de um sistema de controle de um veículo espacial mostrado na figura abaixo. Projete um compensador de avanço de fase $G_c(s)$ tal que o coeficiente de amortecimento $\zeta$ e a frequência natural não amortecida $\omega_n$ dos polos dominantes de malha fechada sejam 0,5 e 2 rad/s, respectivamente.
+\end{block}
+\vspace{0.3cm}
+\centerline{\includegraphics[width=0.7\linewidth]{Figuras/Ch09/fig16.PNG}}
+}
+
+\frame{
+\frametitle{Referências e exercícios complementares}
+\begin{itemize}
+\item OGATA, Katsuhiko. Engenharia de Controle Moderno, 5 ed. Pearson, 2010.
+\end{itemize}
+\centering{\alert{Página 358 - \textbf{Capítulo 6}}} \\
+}

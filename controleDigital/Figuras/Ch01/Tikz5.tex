@@ -1,0 +1,34 @@
+\deftkzbds
+	
+\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+	
+	\node [input, name=input] {};
+	\node [sum, right =of input, xshift=0.5cm] (sum) {$\sum$};
+	\node [block, right =of sum, text width=2cm, align=center] (computer) {Computador digital};
+	
+	\node [block, right=of computer] (DA) {D/A};
+	\draw [->] (computer) -- node[name=uk] {$u(kT)$} (DA);
+	\node [block, right =of DA, pin={[pinstyle]above:$w(t)$},
+	node distance=3cm] (process) {Planta};
+	\node[below=20pt, circle, draw] at (process) {\Large 1};
+	\draw [->] (DA) -- node[name=u] {$u(t)$} (process);
+	% We draw an edge between the computer and process block to 
+	% calculate the coordinate u. We need it to place the measurement block. 
+	\node [output, right =of process] (output) {};
+	
+	\node [block, below=of computer, yshift=2cm, xshift=1.4em, minimum width=4em] (clock) {Clock};
+	
+	\node [block, below =of DA, pin={[pinstyle]below:$v(t)$}, yshift=-0.5cm] (sensor) {Sensor};
+	\node [block, left=4cm] at (sensor) (AD) {A/D};
+	\node[below=20pt, circle, draw] at (AD) {\Large 2};
+	
+	\draw [->] (clock) -| (DA);
+	\draw [->] (clock) -| (AD);
+	
+	\draw [draw,->] (input) -- node {$r(kT)$} (sum);
+	\draw [->] (sum) -- node {$\hat{e}(kT)$} (computer);
+	\draw [->] (process) -- node [name=y] {$y(t)$}(output);
+	\draw [->] (y) |- (sensor);
+	\draw [->] (sensor) -- node[yshift=15pt] {$\hat{y}(t)$} (AD);
+	\draw [->] (AD) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.15, xshift=-4pt] {$+$} node [near start, yshift=15pt] {$\hat{y}(kT)$} (sum);
+\end{tikzpicture}

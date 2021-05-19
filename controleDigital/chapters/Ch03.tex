@@ -1,0 +1,799 @@
+\section{Transformada \texorpdfstring{$ \mathcal{Z}$}{Z}}
+	
+\begin{frame}{Introdução}
+\begin{block}{Relembre a malha de controle digital...}
+	Como são tratados os dados no controlador digital?
+	\begin{itemize}
+	    \item \textbf{De maneira recursiva}.
+	\end{itemize}
+\end{block}
+
+\vspace{1cm}
+
+\centering
+
+\scalebox{1}{\input{Figuras/Ch03/Tikz1.tex}}
+
+\end{frame}
+
+\begin{frame}{Introdução}
+\begin{block}{Derivada}
+	\begin{itemize}
+		\item A \textbf{derivada} de uma função $ f(t) $: as equações diferenciais utilizam as derivadas para descrever fenômenos físicos que variam com o tempo, onde o tempo varia \textbf{continuamente}.
+	\end{itemize}
+
+	\[ \od{f}{t}=\dot{f}=f^{\prime}=\lim\limits_{t\to t_0}\dfrac{f(t)-f(t_0)}{t-t_0} \]
+	
+\end{block}
+\end{frame}
+
+\begin{frame}{Introdução}
+\begin{block}{Equação de diferenças}
+	\begin{itemize}
+		\item A \textbf{equação de diferenças} é qualquer problema onde deve-se determinar uma função desconhecida a partir de uma relação de recorrência envolvendo o operador diferença.
+	\end{itemize}
+	
+	\[ \dfrac{\Delta f(t)}{\Delta t}=\dfrac{f(t)-f(t_0)}{t-t_0}\quad, \quad\forall (t-t_0) \in \set{\pm1, \pm2, \pm3, \ldots, \pm n} \subseteq \mathbb{Z}^{\times} \]
+	
+\end{block}
+\end{frame}
+	
+\begin{frame}{Introdução}
+\begin{block}{Equação de diferenças}
+\begin{itemize}
+	\item Os sinais de \textbf{entrada} passados após a $ k $-ésima amostra:  $ e_0$, $e_1$, $\ldots $, $ e_{k} $.
+	\item Os sinais de \textbf{saída} anteriores a amostra $ k $: $ u_0$, $u_1$, $\ldots $, $ u_{k-1} $.
+	\item Definimos a equação de recorrência $ u_k =f\left(e_0\ldots e_k, u_0\ldots u_{k-1} \right) $.
+	\item De maneira geral: $$ \boxed{u(kT)=f\left[u(kT-T)\text{, }\ldots\text{, } u(kT-mT)\text{, }e(kT)\text{, }\ldots\text{, }e(kT-nT) \right]} $$
+\end{itemize}
+
+\textbf{Obs.:} É preciso de C.I.
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Sequência de Fibonacci}
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\[ u_k=u_{k-1}\mathord{+}\;u_{k-2}, \quad \text{onde }k\in \intco{2,\infty}\;\cap\;\mathbb{Z} \]
+		
+		\[ \begin{cases}
+		u_0=1\\
+		u_1=1
+		\end{cases} \]
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\begin{longtable}{CC}
+			\toprule
+			k & u_k\\\midrule
+			0 & 1\\
+			1 & 1\\
+			2 & 2\\
+			3 & 3\\
+			4 & 5\\
+			5 & 8\\
+			6 & 15\\
+			7 & 21\\
+			\multicolumn{2}{C}{\vdots} \\
+			\bottomrule
+		\end{longtable}
+	\end{minipage}
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Problema: determine $u_{50}$}
+\begin{itemize}
+    \item Preciso saber quem é $u_{49}$ e $u_{48}$.
+    \item A \textbf{solução} consiste em encontrar uma forma de determinar $u(k)$ \textbf{independente} das amostras anteriores.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Solução}
+No caso de Equações de Diferenças de Coeficientes Constantes (CCDE), a solução é no formato $z^k$, sendo $z$ a variável e $k$ a variável independente discreta.
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Solução}
+$$\boxed{u_k = Az^k}$$
+A sequência de Fibonacci é dada por:
+$$u_k = u_{k-1} + u_{k-2}$$
+Com isso,
+$$Az^k = Az^{k-1} + Az^{k-2}$$
+$$Az^k = Az^k \cdot z^{-1} + Az^k \cdot z^{-2}$$
+$$1 = z^{-1} + z^{-2}$$
+Equação característica: $z^2 - z - 1 = 0 \implies z_{1,2} = \dfrac{1}{2} \pm \dfrac{\sqrt{5}}{2}$
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Solução}
+Considerando duas raízes reais, a solução geral é dada por:
+$$u_k = A_1z_1^{k} + A_2z_2^{k}$$
+Aplicando as condições iniciais, temos:
+\begin{itemize}
+    \item $u_0 = 1 \implies 1 = A_1z_1^{0} + A_2z_2^{0} \implies 1 = A_1 + A_2$
+    \item $u_1 = 1 \implies 1 = A_1z_1^{1} + A_2z_2^{1} \implies 1 = A_1\left(\dfrac{1 + \sqrt{5}}{2}\right) + A_2\left(\dfrac{1 - \sqrt{5}}{2}\right)$
+\end{itemize}
+Multiplicando a primeira equação por $\left(\dfrac{1 + \sqrt{5}}{2}\right)$ e subtraindo da segunda, nos leva a:
+$$A_2 = \dfrac{\sqrt{5} - 1}{2\sqrt{5}} \implies A_1 = \dfrac{\sqrt{5} + 1}{2\sqrt{5}}$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Exemplo \#01}
+\begin{block}{Solução}
+Com isso,
+$$\boxed{u(k) = \dfrac{\sqrt{5} + 1}{2\sqrt{5}}\left(\dfrac{1 + \sqrt{5}}{2}\right)^k + \dfrac{\sqrt{5} - 1}{2\sqrt{5}}\left(\dfrac{1 - \sqrt{5}}{2}\right)^k}$$
+\begin{itemize}
+    \item \textbf{Independe} das amostras anteriores.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Transformada $ \mathcal{Z} $}
+\begin{block}{Definição}
+	
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	ED $ \rightarrow $ FT
+	\[ \mathcal{L}\left\lbrace f(t) \right\rbrace=F(s) \]
+	\[ s=\sigma+j\omega \]
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	
+	ER $ \rightarrow $ FTD
+	\[ \mathcal{Z}\left\lbrace f(kT) \right\rbrace=F(z) \]
+	\[ z=\text{e}^{sT} \]
+\end{minipage}
+
+\vspace{0.5cm}
+
+\textbf{Motivação}: estudo de filtros digitais, como implementar em um FPGA, por exemplo.
+
+\end{block}
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#01}
+	\begin{center}
+		\scalebox{1}{\input{Figuras/Ch03/Tikz2.tex}}
+	\end{center}
+	
+	\begin{block}{Problema}
+		Dados: $ h[n]=\left( \dfrac{1}{2}\right)^{n}u[n]\, ,\quad \text{onde } u[n]=\begin{cases}
+		1\, ,\, n\geqslant0.\\
+		0\, ,\, n<0.
+		\end{cases}  $
+		
+		\vspace{0.2cm}
+		
+		\textbf{Qual a resposta a $ \bm{x[n]=1} $?}
+		
+		\vspace{0.5cm}
+		
+		\textit{Dicas:}
+		\begin{itemize}
+			\item $ y[n]=x[n] * h[n]=\displaystyle\sum_{k=-\infty}^{\infty}h[k]x[n-k] $
+			\item $ \displaystyle\sum_{k=0}^{\infty}r^{k}=\dfrac{1}{1-r}\, ,\, \text{se }|r|<1 $ (PG)
+		\end{itemize}
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#01}
+\begin{block}{Resolução}
+	\[ y[n]=\sum_{k=-\infty}^{0}\cancelto{0}{\left( \dfrac{1}{2}\right)^{k}u[k]\cdot1}+\sum_{k=0}^{\infty}\left( \dfrac{1}{2}\right) ^{k}\cdot 1=\dfrac{1}{1-1/2}=\boxed{2} \]
+\end{block}
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#02}
+\begin{center}
+	\scalebox{1}{\input{Figuras/Ch03/Tikz2.tex}}
+\end{center}
+
+\begin{block}{Problema}
+	Dados: $ h[n]=\left( \dfrac{1}{2}\right)^{n}u[n]\, ,\quad \text{onde } u[n]=\begin{cases}
+	1\, ,\, n\geqslant0\\
+	0\, ,\, n<0
+	\end{cases}  $
+	
+	\vspace{0.2cm}
+	
+	\textbf{E se $ \bm{x[n]=2^{n}} $?}
+\end{block}
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#02}
+\begin{block}{Resolução}
+	\begin{align*}
+	y[n]&=\sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot2^{n-k}= \sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot2^{n}\cdot2^{-k}=\\
+	&=2^{n}\sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot2^{-k}=2^{n}\sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot\left( \dfrac{1}{2}\right) ^{k}=\\
+	&=2^{n}\sum_{k=0}^{\infty}\left(\dfrac{1}{4} \right)^{k}=2^{n}\cdot\dfrac{1}{1-1/4}=\boxed{\dfrac{4}{3}\cdot2^{n}}
+	\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#03}
+\begin{center}
+	\scalebox{1}{\input{Figuras/Ch03/Tikz2.tex}}
+\end{center}
+
+\begin{block}{Problema}
+	Dados: $ h[n]=\left( \dfrac{1}{2}\right)^{n}u[n]\, ,\quad \text{onde } u[n]=\begin{cases}
+	1\, ,\, n\geqslant0\\
+	0\, ,\, n<0
+	\end{cases}  $
+	
+	\vspace{0.2cm}
+	
+	\textbf{De maneira geral: $ \bm{x[n]=z^{n}\, , \quad z} $ dado.}
+\end{block}
+\end{frame}
+
+\begin{frame}{Abordagem intuitiva (autofunções) - Exemplo \#03}
+\begin{block}{Resolução}
+	\begin{align*}
+	y[n]&=\sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot z^{n-k}=z^{n}\sum_{k=0}^{\infty}\left(\dfrac{1}{2} \right)^{k}\cdot z^{-k}\\
+	&=z^{n}\sum_{k=0}^{\infty}\left(\dfrac{1}{2z} \right)^{k}=
+	\left\{
+	\begin{aligned}
+	&\dfrac{1}{1-1/2z}\cdot z^{n}\tikzmark{af} &, \quad &\left| \dfrac{1}{2z} \right|<1\\
+	&\infty &, \quad &\text{C.C.}
+	\end{aligned}\right.
+	\end{align*}
+	
+	\begin{tikzpicture}[overlay, remember picture]
+	\draw[<-] (af) ++(0.2,0.5) -- +(1,0.5) node[above right=-6pt,yshift=-0.35cm,align=center, text width=2cm] {\textbf{autofunção} (analogia com autovetor)};
+	\end{tikzpicture}
+\end{block}
+\end{frame}
+
+\begin{frame}{Caso Geral}
+\centering
+
+\scalebox{1}{\input{Figuras/Ch03/Tikz3.tex}}
+\end{frame}
+
+\begin{frame}{Caso Geral}
+\begin{block}{Prova}
+	\begin{align*}
+	x[n]&=z^{n} \, , \quad z \text{ dado}\\
+	y[n]&=x[n]*h[n]=\sum_{k=-\infty}^{\infty}h[k]x[n-k]=\sum_{k=-\infty}^{\infty}h[k]z^{n-k}=\\
+	&=z^{n}\underbrace{\sum_{k=-\infty}^{\infty}h[k]z^{-k}}_{\substack{H(z) \\ \text{Transformada }\mathcal{Z}}}=H(z)z^{n}
+	\end{align*}
+	
+	\QEDB
+	
+	\textbf{Obs.:} Note que o somatório \textbf{pode não convergir.}
+\end{block}
+	
+\end{frame}
+
+
+\begin{frame}{Região de convergência (ROC) - Exemplo \#01}
+\begin{center}
+	\scalebox{1}{\input{Figuras/Ch03/Tikz4.tex}}
+\end{center}
+
+\begin{block}{Problema}
+	$$ h[n]=\left( \dfrac{1}{2} \right)^{n}u[n] $$
+	
+	\textbf{Determine $ \bm{H(z)} $ e a sua ROC.}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Região de convergência (ROC) - Exemplo \#01}
+\begin{center}
+	\scalebox{1}{\input{Figuras/Ch03/Tikz4.tex}}
+\end{center}
+
+\begin{block}{Resolução}
+	$$ h[n]=\left( \dfrac{1}{2} \right)^{n}u[n] $$
+	
+	\[ H(z)=\sum_{n=-\infty}^{\infty}h[n]z^{-n}=\sum_{n=0}^{\infty}\left( \dfrac{1}{2} \right)^{n}z^{-n}=\dfrac{1}{1-1/2z}\, , \, \left| \dfrac{1}{2z} \right|<1  \]
+	
+	\vspace{0.5cm}
+	
+	Logo, ROC: $ \set{z\in\mathbb{C}:|z|>1/2} $
+	
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Região de convergência (ROC) - Exemplo \#02}
+\begin{center}
+	\scalebox{1}{\input{Figuras/Ch03/Tikz4.tex}}
+\end{center}
+
+\begin{block}{Problema}
+	$$ h[n]=-\left( \dfrac{1}{2}\right)^{n}u[-n-1] $$
+	
+	\textbf{Determine $ \bm{H(z)} $ e a sua ROC.}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Região de convergência (ROC) - Exemplo \#02}
+\begin{block}{Resolução}
+	\[ u[-n-1]=0 \Rightarrow -n-1<0 \Rightarrow n>-1 \]
+	\begin{align*}
+	H(z)&=\sum_{n=-\infty}^{-1}-\left( \dfrac{1}{2}\right)^{n}z^{-n} \,\overset{k=-n}{\Longleftrightarrow}\, -\sum_{k=1}^{\infty}\left( \dfrac{1}{2}\right)^{-k}z^{k}=-\sum_{k=1}^{\infty}(2z)^{k}=
+	\end{align*}
+	\[ \boxed{\sum_{k=m}^{\infty}\dfrac{r^{m}}{1-r}} \]
+	
+	\[ =-2z\cdot\dfrac{1}{1-2z}\, , \, \left| 2z \right| < 1  \]
+	
+	\vspace{0.5cm}
+	
+	ROC: $ \set{z\in\mathbb{C} : |z| < 1/2} $
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Região de convergência (ROC)}
+\begin{block}{Conclusão}
+	
+\begin{itemize}
+	\item \textbf{Não dá para saber qual o sinal possui uma dada $ \bm{H(z)} $ sem saber a ROC.}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{minipage}{0.4\linewidth}
+	\begin{center}
+		\scalebox{1}{\input{Figuras/Ch03/Tikz5.tex}}
+	\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\linewidth}
+	$$ \left\lbrace \begin{aligned}
+	&z^{n}\sum_{n=-\infty}^{\infty}h[n]z^{-n} &, &\quad z\in \text{ROC}\\
+	&\infty &, &\quad \text{C.C.}
+	\end{aligned} \right.  $$
+\end{minipage}
+	
+\end{block}
+\end{frame}
+
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{}
+	ROC: $ \set{z\in\mathbb{C} \text{ tal que } \displaystyle\sum_{n=-\infty}^{\infty}|h[n]z^{-n}|<\infty} $ \textbf{absolutamente somável}
+	
+	\begin{enumerate}
+		\item Se $ z\in \text{ROC} \Rightarrow |H(z)|<\infty $
+		\item Seja $ z $ na forma polar, $ z=r\text{e}^{j\omega} $, com $ r=|z| $, $ \omega=\phase{z} $
+		\[ \Rightarrow \left| h[n]z^{-n} \right|=\left|h[n] \right|\cdot \left|z^{-n} \right|=|h[n]|\cdot r^{-n} \]
+		$ \Rightarrow $ fato de $ z $ pertencer à ROC só depende de $ |z| $
+	\end{enumerate}
+
+\end{block}
+\end{frame}
+
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	Para o sistema ser BIBO estável basta que a resposta ao impulso seja absolutamente somável.
+	
+	\[ |x[n]|\leqslant B\Rightarrow|y[n]|\leqslant C \]
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	Prova:
+	\begin{align*}
+	y[n]&=\sum_{k=-\infty}^{\infty}h[k]x[n-k]\Rightarrow\\
+	|y[n]|&=\left| \sum_{k=-\infty}^{\infty}h[k]x[n-k] \right| \quad \text{desigualdade de triângulos}\\
+	|y[n]|&\leqslant \sum_{k=-\infty}^{\infty}\left|h[k]x[n-k] \right|
+	\end{align*}
+	
+	
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	\begin{align*}
+	|y[n]|&\leqslant \sum_{k=-\infty}^{\infty}\left|h[k]\right| \cdot \left| x[n-k] \right|\\
+	|y[n]|&\leqslant B \sum_{k=-\infty}^{\infty}\left|h[k]\right| \quad , \text{então}\\
+	|y[n]|&\leqslant C
+	\end{align*}
+	\QEDB
+	
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	
+	Portanto, o sistema é estável se $ \displaystyle\sum_{k=-\infty}^{\infty}|h[k]|<\infty $
+
+\begin{itemize}
+    \item \textbf{Exemplo:} a função degrau unitário é BIBO estável?
+\end{itemize}
+
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	Lembre-se que a condição de ROC é \[ \set{z\in\mathbb{C} \text{ tal que } \displaystyle\sum_{k=-\infty}^{\infty}|h[k]|\cdot r^{-k}<\infty}  \]
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e estabilidade}
+\begin{block}{Condição de estabilidade}
+	Logo, o sistema é estável se e somente se $ r=1\in $ ROC.
+\end{block}
+
+\centering
+
+\scalebox{1.5}{\input{Figuras/Ch03/Tikz6.tex}}
+
+\end{frame}
+
+
+\begin{frame}{ROC e causalidade}
+\begin{block}{Sistemas causais}
+	A saída \textbf{só depende da entrada no presente e no passado.} A saída não é antecipada antes da aplicação da entrada ($ h[n]=0\, , \, n<0 $).
+	
+	$$ y[n]=\sum_{k=0}^{\infty}h[k]x[n-k] \rightarrow y[n] \text{ só depende de } \left\lbrace \begin{aligned}&x[n] \quad &k=0\\
+	&x[n-1] &k=1\\
+	&x[n-2] &k=2\\
+	& &\vdots\phantom{k=n}
+	\end{aligned}\right.  $$
+\end{block}
+\end{frame}
+
+\begin{frame}{ROC e causalidade}
+\begin{block}{}
+\begin{itemize}
+	\item Para sistemas causais: $ h[n]=0 \, , \, n<0 $
+\end{itemize}
+\end{block}
+
+\begin{minipage}{0.45\linewidth}
+	\centering
+	\scalebox{1}{\input{Figuras/Ch03/Tikz7.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	\[ h[n]=\left( \dfrac{1}{2} \right)^{n}u[n]  \]
+	\[ \text{ROC: } |z|>1/2\]
+	\scalebox{1}{\input{Figuras/Ch03/Tikz8.tex}}
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}{ROC e causalidade}
+\begin{block}{}
+	\begin{itemize}
+		\item Para sistemas anticausais: $ h[n]=0 \, , \, n\geqslant0 $
+	\end{itemize}
+\end{block}
+\begin{minipage}{0.45\linewidth}
+	\centering
+	\scalebox{1}{\input{Figuras/Ch03/Tikz9.tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+	\centering
+	\[ g[n]=-\left( \dfrac{1}{2} \right)^{n}u[-n-1]  \]
+	\[ \text{ROC: } |z|<1/2\]
+	\scalebox{1}{\input{Figuras/Ch03/Tikz10.tex}}
+\end{minipage}
+
+\end{frame}
+
+
+\begin{frame}{ROC e polos}
+\begin{block}{Contradição}
+	\[ H(z)=\dfrac{N(z)}{D(z)} \]
+	
+	\[ \left. \begin{aligned}
+	\text{Se } z \in \text{ ROC}&\Rightarrow |H(z)|<\infty\\
+	\text{Se } z \text{ é polo} &\Rightarrow |H(z)|=\infty
+	\end{aligned}\right\rbrace\, \bot  \]
+	
+	Logo, \textbf{polo $ \bm{\notin} $ ROC.}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{ROC e polos - Exemplo \#01}
+	\begin{block}{Problema}
+		\[ x[n]=\underbrace{\left( \dfrac{1}{2}\right)^{n}u[n]}_{h_1[n]}\underbrace{-2^{n}u[-n-1]\vphantom{\left(\dfrac{1}{2}\right)}}_{h_2[n]} \]
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{ROC e polos - Exemplo \#01}
+\begin{block}{Resolução}
+	\begin{align*}
+		H_1(z)&=\dfrac{1}{1-1/2z}\, , \, |z|>\dfrac{1}{2}\\
+		H_2(z)&=\dfrac{1}{1-2/z} \quad , \, |z|<2
+	\end{align*}
+\end{block}
+
+\vspace{0.5cm}
+
+\centering
+\scalebox{0.8}{\input{Figuras/Ch03/Tikz11.tex}}
+
+\end{frame}
+
+
+\begin{frame}{ROC e polos - Exemplo \#01}
+\begin{block}{Resolução}
+	\centering
+	\begin{align*}
+	y_1[n]&=\left\lbrace \begin{aligned}
+	&H_1(z)z^{n}& \, &, \, |z|>1/2\\
+	&\infty& \, &, \, \text{C.C.}
+	\end{aligned} \right.\\
+	y_2[n]&=\left\lbrace \begin{aligned}
+	&H_2(z)z^{n}& \, &, \, |z|<2\\
+	&\infty& \, &, \, \text{C.C.}
+	\end{aligned} \right.\\
+	\Rightarrow y[n]& =\left\lbrace \begin{aligned}
+	&z^{n}\left(H_1(z)+H_2(z) \right)& \, &, \, 1/2<|z|<2\\
+	&\infty& \, &, \, \text{C.C.}
+	\end{aligned} \right.
+	\end{align*}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{ROC e polos - Exemplo \#01}
+\begin{block}{Resolução}
+	\[ X(z)=\dfrac{1}{1-1/2z}+\dfrac{1}{1-2/z}=\dfrac{2-\dfrac{5}{2}z^{-1}}{\left(1-\dfrac{1}{2}z^{-1} \right)\left(1-2z^{-1} \right)  } \]
+	
+	\begin{itemize}
+		\item \textbf{Polos:} $ z=1/2 $ e $ z=2 $, ROC nunca atravessa o polo e é conexa.
+		\item Sistema é \textbf{estável} ($ z=1 \in $ ROC).
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da ROC}
+\begin{block}{Sinais de duração finita}
+	A ROC de um sinal de duração finita inclui todo plano $z$, com possíveis exceções de $ z = 0 $ e $ |z| = \infty $.\\
+	\begin{center}
+		$ x[n] \neq 0 $, para $n_1 \leqslant n \leqslant n_2 $\\
+		$$ X(z) = \sum_{n = n_1}^{n_2}x[n]z^{-n} $$
+	\end{center}
+	\begin{itemize}
+		\item Se $ n_2 > 0 $: $ X(z) $ tem um termo $ z^{-1} $, logo a ROC não pode incluir $ z = 0 $.
+		\item Se $ n_1 < 0 $: $ X(z) $ tem um termo $ z^{1} $, logo a ROC não pode incluir $ |z| = \infty $.
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da ROC}
+\begin{block}{Sinais de duração finita - Exemplos}
+	\begin{itemize}
+		\item [1.] $ x[n] = \delta[n] $\\
+		\vspace{0,1 cm}
+		$ X(z) = \sum_{n=-\infty}^{\infty} \delta[n]z^{-n} = 1 $, \textbf{a ROC inclui todo plano $\bm{z}$!}\\
+		\vspace{0,2 cm}
+		\item [2.] $ x[n] = \delta[n - 1] $\\
+		\vspace{0,1 cm}
+		$ X(z) = \sum_{n=-\infty}^{\infty} \delta[n - 1]z^{-n} = z^{-1} = \dfrac{1}{z} $, a ROC não inclui $z=0$\\
+		\vspace{0,2 cm}
+		\item [3.] $ x[n] = \delta[n + 1] $\\
+		\vspace{0,1 cm}
+		$ X(z) = \sum_{n=-\infty}^{\infty} \delta[n + 1]z^{-n} = z $, a ROC não inclui $z = \infty$
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da ROC}
+\begin{block}{Sinais de duração infinita - Resumo}
+	A condição de convergência é $ |X(z)| < \infty $.
+	\begin{itemize}
+		\item A ROC de um sinal aberto à direita tem a forma $ |z| > r_{+} $.
+		\item A ROC de um sinal aberto à esquerda tem a forma $ |z| <  r_{-} $.
+		\item A ROC de um sinal bilateral tem a forma $ r_{+} < |z| < r_{-} $.
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Transformada de Fourier para sinais discretos - \textit{DTFT}}
+$$H(\text{e}^{j\omega}) = \sum_{n=-\infty}^{\infty}h[n]\text{e}^{-j\omega n}$$
+\begin{itemize}
+    \item $h[n]$ deve ser \textbf{absolutamente somável} para que o somatório convirja e, consequentemente, para que exista transformada de Fourier.
+    \item Queremos ser capazes de representar com a transformada $\mathcal{Z}$ um sinal que \textbf{diverge}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Se $h[n]$ divergir...}
+\begin{itemize}
+    \item Podemos reescrever o sinal como:
+\end{itemize}
+$$\dfrac{h[n]}{r^n}$$
+\begin{itemize}
+    \item Para $|r| > 1$, $r^n$ também diverge.
+    \item No entanto, se $r^n$ divergir \textbf{mais rapidamente} que $h[n]$, temos que o sinal, como um todo, \textbf{converge}. Desta forma, basta escolher um $r$ grande. 
+\end{itemize}
+\end{block}
+\vspace{0.2cm}
+\centering
+\scalebox{0.8}{\input{Figuras/Ch03/Tikz10.tex}}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Transformada $\mathcal{Z}$}
+$$H(r,\text{e}^{j\omega}) = \sum_{n=-\infty}^{\infty}h[n]r^{-n} \text{e}^{-j\omega n}$$
+$$H(r,\text{e}^{j\omega}) = \sum_{n=-\infty}^{\infty}h[n](r\text{e}^{j\omega})^{-n}$$
+$$\boxed{H(z) = \sum_{n=-\infty}^{\infty}h[n]z^{-n}}$$
+\begin{itemize}
+    \item \textbf{Se \bm{$r = 1$}, a transformada \bm{$\mathcal{Z}$} coincide com a transformada de Fourier}.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Exemplo \#01}
+$$h[n] = \alpha^n u[n] \implies H(z) = \dfrac{1}{1 - \alpha z^{-1}}$$
+$$\text{ROC: } |z|>|\alpha|$$
+\begin{itemize}
+    \item Se $|\alpha| > 1$ temos que $h[n]$ \textbf{diverge}.
+    \begin{itemize}
+        \item Se desenharmos a ROC, percebemos que não inclui a circunferência de raio unitário. Deste modo, este sinal \textbf{não tem} transformada de Fourier.
+    \end{itemize}
+    \item Se $|\alpha| < 1$ temos que $h[n]$ \textbf{converge}.
+    \begin{itemize}
+        \item Se desenharmos a ROC, percebemos que inclui a circunferência de raio unitário. Deste modo, este sinal \textbf{tem} transformada de Fourier.
+    \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Exemplo \#02}
+$$h[n] = -\alpha^n u[-n-1] \implies H(z) = \dfrac{1}{1 - \alpha z^{-1}}$$
+$$\text{ROC: } |z|<|\alpha|$$
+\begin{itemize}
+    \item Se $|\alpha| > 1$ temos que $h[n]$ \textbf{converge}.
+    \begin{itemize}
+        \item Se desenharmos a ROC, percebemos que inclui a circunferência de raio unitário. Deste modo, este sinal \textbf{tem} transformada de Fourier.
+    \end{itemize}
+    \item Se $|\alpha| < 1$ temos que $h[n]$ \textbf{diverge}.
+    \begin{itemize}
+        \item Se desenharmos a ROC, percebemos que não inclui a circunferência de raio unitário. Deste modo, este sinal \textbf{não tem} transformada de Fourier.
+    \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{A relação entre a transformada $\mathcal{Z}$ e a transformada de Fourier}
+\begin{block}{Problema}
+	Determine a transformada $\mathcal{Z}$ do sinal\\
+	$$ x[n] = \left\{\begin{matrix}
+	1, & n = -1\\ 
+	2, & n = 0\\ 
+	-1, & n = 1\\ 
+	1, & n = 2\\ 
+	0, & \text{C.C.}
+	\end{matrix}\right. $$\\
+	Utilize a transformada $\mathcal{Z}$ para determinar a \textit{DTFT} de $x[n]$, caso exista.
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ bilateral}
+\begin{block}{Propriedades}
+	\begin{itemize}
+		\item Reversão temporal
+		$$ x[-n] \longleftrightarrow X\left( \dfrac{1}{z} \right), \quad \text{ ROC: } \dfrac{1}{R_x}$$
+		\item Convolução
+		$$ x[n]\ast y[n]  \longleftrightarrow X(z)Y(z), \quad \text{ ROC: } R_x \cap R_y $$
+		\item Diferenciação no domínio z
+		$$ nx[n] \longleftrightarrow -z\frac{\mathrm{d} }{\mathrm{d} x} X(z), \quad \text{ ROC: } R_x $$
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ bilateral - Exemplo \#01}
+\begin{block}{Problema}
+		Encontre a transformada $\mathcal{Z}$ e a ROC do sinal\\
+		$$ x[n] = \left ( n\left ( \dfrac{-1}{2} \right )^n u[n]\right )\ast\left ( \dfrac{1}{4} \right )^{-n}u[-n] $$
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ bilateral - Exemplo \#01}
+\begin{block}{Resolução}
+	$$ x[n] = \underset{x_1[n]}{\underbrace{\left ( n\left ( \dfrac{-1}{2} \right )^n u[n]\right )}}\ast \underset{x_2[n]}{\underbrace{\left ( \dfrac{1}{4} \right )^{-n}u[-n]}} $$
+	\begin{itemize}
+	    \item Aplicando as propriedades, temos:
+	\end{itemize}
+	$$ X_1(z) = \dfrac{-\frac{1}{2}z}{\left ( z + \frac{1}{2} \right )^2}, \quad \text{ ROC: } \left | z \right |  > \frac{1}{2} $$
+	$$ X_2(z) = \dfrac{-4}{z - 4}, \quad \text{ ROC: } \left | z \right |  < 4 $$
+	\vspace{-0.2cm}
+	\begin{itemize}
+	    \item Deste modo,
+	\end{itemize}
+	$$ X(z) = \dfrac{2z}{\left ( z + \frac{1}{2} \right )^2 (z - 4)}, \quad \text{ ROC: } \frac{1}{2}< \left | z \right |  < 4 $$
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ unilateral}
+\begin{block}{Linearidade}
+A transformada $\mathcal{Z}$ é uma transformada \textbf{linear}. Considere um sinal $x[n]$ cuja transformada $\mathcal{Z}$ é $X(z)$, e considere ainda um sinal $y[n]$ cuja transformada $\mathcal{Z}$ é $Y(z)$. Deste modo:
+
+$$\mathcal{Z}\{\alpha x[n] + \beta y[n]\} = \alpha X(z) + \beta Y(z)$$ \\
+\vspace{0.2cm}
+\textbf{Demonstração}: 
+$$\mathcal{Z}\{\alpha x[n] + \beta y[n]\} = \sum_{n=0}^{\infty} \left[\alpha x[n] + \beta y[n]\right] z^{-n}$$
+$$= \alpha \sum_{n=0}^{\infty} x[n] z^{-n} + \beta \sum_{n=0}^{\infty} y[n] z^{-n} = \alpha X(z) + \beta Y(z)$$ \qed
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ unilateral}
+\begin{block}{Deslocamento no tempo (atraso)}
+Se $\mathcal{Z}\{x[n]\} = X(z)$ então $\mathcal{Z}\{x[n-n_0]\} = z^{-n_0} \left(X(z) + \sum_{\gamma=1}^{n_0} x[-\gamma] z^{\gamma}  \right)$ \\
+\vspace{0.2cm}
+\textbf{Demonstração}: Seja $n - n_0 = \gamma$, então:
+$$\mathcal{Z}\{x[n-n_0]\} = \sum_{n=0}^{\infty} x[n-n_0] z^{-n} = \sum_{\gamma=-n_0}^{\infty} x[\gamma] z^{-(\gamma + n_0)} = z^{-n_0} \sum_{\gamma=-n_0}^{\infty} x[\gamma] z^{-\gamma}$$
+$$= z^{-n_0} \sum_{\gamma=-n_0}^{\infty} x[\gamma] z^{-\gamma} - z^{-n_0} \sum_{\gamma=-n_0}^{-1} x[\gamma] z^{-\gamma} + z^{-n_0} \sum_{\gamma=-n_0}^{-1} x[\gamma] z^{-\gamma}$$
+$$= z^{-n_0} \sum_{\gamma=0}^{\infty} x[\gamma] z^{-\gamma} + z^{-n_0} \sum_{\gamma=-n_0}^{-1} x[\gamma] z^{-\gamma} = z^{-n_0} \left(X(z) + \sum_{\gamma=1}^{n_0} x[-\gamma] z^{\gamma}\right)$$\qed
+\end{block}
+\end{frame}
+
+\begin{frame}{Propriedades da transformada $\mathcal{Z}$ unilateral}
+\begin{block}{Deslocamento no tempo (avanço)}
+Se $\mathcal{Z}\{x[n]\} = X(z)$ então $\mathcal{Z}\{x[n+n_0]\} = z^{n_0} \left(X(z) - \sum_{\gamma=0}^{n_0-1} x[\gamma] z^{-\gamma}  \right)$ \\
+\vspace{0.2cm}
+\textbf{Demonstração}: Seja $n + n_0 = \gamma$, então:
+$$\mathcal{Z}\{x[n+n_0]\} = \sum_{n=0}^{\infty} x[n+n_0] z^{-n} = \sum_{\gamma=n_0}^{\infty} x[\gamma] z^{-(\gamma - n_0)} = z^{n_0} \sum_{\gamma=n_0}^{\infty} x[\gamma] z^{-\gamma}$$
+$$= z^{n_0} \sum_{\gamma=n_0}^{\infty} x[\gamma] z^{-\gamma} + z^{n_0} \sum_{\gamma=0}^{n_0-1} x[\gamma] z^{-\gamma} - z^{n_0} \sum_{\gamma=0}^{n_0-1} x[\gamma] z^{-\gamma}$$
+$$= z^{n_0} \sum_{\gamma=0}^{\infty} x[\gamma] z^{-\gamma} - z^{n_0} \sum_{\gamma=0}^{n_0-1} x[\gamma] z^{-\gamma} = z^{n_0} \left(X(z) - \sum_{\gamma=0}^{n_0-1} x[\gamma] z^{-\gamma}\right)$$\qed
+\end{block}
+\end{frame}
+
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+01. Demonstre a propriedade do deslocamento no tempo (atraso) para a transformada $\mathcal{Z}$ bilateral. Qual a diferença quando comparada com a transformada $\mathcal{Z}$ unilateral?
+
+\vspace{1cm}
+
+02. Demonstre a propriedade do deslocamento no tempo (avanço) para a transformada $\mathcal{Z}$ bilateral. Qual a diferença quando comparada com a transformada $\mathcal{Z}$ unilateral?
+\end{block}
+}
+
+\frame{
+\frametitle{Exercícios}
+\begin{block}{}
+03. A acumulação no domínio do tempo discreto é análoga à integração no domínio do tempo contínuo. Considere a acumulação
+$$y[n] = \sum_{k=-\infty}^{n} x[n]$$
+Mostre que a transformada $\mathcal{Z}$ (independente se bilateral ou unilateral) é dada por
+$$\dfrac{Y(z)}{X(z)} = \dfrac{z}{z-1}$$
+\end{block}
+}
+
+\frame{
+\frametitle{Referências e exercícios complementares}
+\begin{itemize}
+\item AGUIRRE, Luis A. Controle de Sistemas Amostrados, 1 ed. [s.n.], 2019.
+\end{itemize}
+\centering{\alert{Página 96 - \textbf{Capítulo 3}}} \\
+\vspace{0.4cm}
+\begin{itemize}
+\item FRANKLIN, Gene F.; POWELL, J. David; WOLKMAN, Michael L. Digital Control of Dynamic Systems, 3 ed. Addison-Wesley, 1998.
+\end{itemize}
+\centering{\alert{Página 149 - \textbf{Capítulo 4}}} \\
+}

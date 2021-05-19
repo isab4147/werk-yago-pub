@@ -1,0 +1,21 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+
+\node [input, name=input] {};
+\node [sum, right =of input, xshift=0.5cm] (pm) {$ \sum $};
+\draw [draw,->] (input) -- node {$R(s)$} (pm);
+
+\node [block, right =of pm, text width=2cm, align=center] (Gc) {$ G_c(s) $};
+\draw [->] (pm) -- node {Erro} (Gc);
+
+\node [block, right =of Gc, text width=2cm, align=center] (Gp) {$ G_p(s) $};
+\draw [->] (Gc) -- node[name=midAr] {} (Gp);
+
+\node [output, right =of Gp] (output) {};
+\draw [->] (Gp) -- node [name=outAr] {$C(s)$}(output);
+
+\node [block,below=of midAr] (Hs) {$ H(s) $};
+\draw[->] (outAr) |- (Hs) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.28, xshift=-4pt] {$+$} (pm);
+
+\end{tikzpicture}

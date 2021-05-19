@@ -1,0 +1,33 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+
+\node [input, name=input] {};
+
+\node [sum, right =of input, xshift=0.5cm] (sum) {$\phantom{\sum}$};
+\draw [draw,->] (input) -- node {$r(kT)$} (sum);
+
+\node [block, right =of sum, text width=2cm, align=center] (computer) {Controlador discreto};
+\draw [->] (sum) -- node {$e(kT)$} (computer);
+
+\node [block, right=of computer] (DA) {D/A};
+\draw [->] (computer) -- (DA);
+
+\node [block, right =of DA, node distance=3cm] (process) {$\dfrac{1}{s(s+1)}$};
+\draw [->] (DA) -- (process);
+ 
+\node [output, right =of process] (output) {};
+\draw [->] (process) -- node [name=y] {$Y(s)$}(output);
+
+\node [block, below=of computer, yshift=2cm, xshift=1.4em, minimum width=4em] (clock) {Clock};
+
+\node [block, below =of DA, coordinate, yshift=-0.5cm] (sensor) {};
+\node [block, left=4cm] at (sensor) (AD) {A/D};
+
+\draw [->] (clock) -| (DA);
+\draw [->] (clock) -| (AD);
+
+\draw[->] (y) |- (AD);
+
+\draw [->] (AD) -| node[pos=0.98, xshift=15pt] {$-$} node[pos=1.15, xshift=-4pt] {$+$} (sum);
+\end{tikzpicture}

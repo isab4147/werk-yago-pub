@@ -1,0 +1,39 @@
+\begin{tikzpicture}[scale=0.5]
+			\draw (-4,-3) rectangle (4,3); %CLP
+		\draw (-4,0) -- (-2.5,0); %Div in out
+		\draw (-2.5,-3) -- (-2.5,3); %Div cartoes
+		\draw (-1.5,-2.5) rectangle (0,2.5); %Mem dados
+		\draw (0.5,-2.5) rectangle (3.5,-1); %Mem prog
+		\draw (1,0) rectangle (3,2); %CPU
+		\draw (-4,-5) rectangle (4,-3); %Alimentacao
+		\draw (-2.5,4) rectangle (4,6); %Term de prog
+		
+		\draw (1,2.6) node {CLP};
+		
+		\draw (-3.25,1.5) node[text width=1.5cm,align=center,rotate=90] {\small Cartões de input};
+		
+		\draw (-3.25,-1.5) node[text width=1.5cm,align=center,rotate=90] {\small Cartões de output};
+		
+		\node at (2,1) {\small CPU};
+		
+		\node[rotate=90,text width=1.5cm,align=center] at (-0.75,0) {\small Memória de dados};
+		
+		\node[text width=2cm,align=center] at (2,-1.75) {\footnotesize Memória de programa};
+		
+		\node at (-6,0) {Campo};
+		
+		\node at (0,-4) {Alimentação};
+		
+		\node[text width=3cm,align=center] at (0.75,5) {Terminal de programação};
+		
+		\draw[-Latex] (-8,1.5) -- node[above] {Entradas} +(4,0);
+		\draw[Latex-] (-8,-1.5) -- node[below] {Saídas} +(4,0);
+		\draw[-Latex] (-2.5,1.5) -- +(1,0);
+		\draw[Latex-] (-2.5,-1.5) -- +(1,0);
+		\draw[-Latex] (0,1.5) -- +(1,0);
+		\draw[Latex-] (0,0.5) -- +(1,0);
+		\draw[Latex-] (2,0) -- +(0,-1);
+		
+		\draw[-Latex] (-1.5,4) -- +(0,-1);
+		\draw[Latex-] (3,4) -- +(0,-1);
+	\end{tikzpicture}

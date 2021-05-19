@@ -1,0 +1,32 @@
+\deftkzbds
+	
+	\begin{tikzpicture}[auto, node distance=2cm,>=Latex]
+		% We start by placing the blocks
+		\node [input] (input) {};
+		\node [block, right=of input, xshift=0cm] (SH) {S/H};
+		\node [block, right=of SH] (quantizer) {quantizador};
+		\node [output, right =of quantizer, xshift=0cm] (output) {};
+		\node [input, below= of SH, xshift=2cm] (clock) {};
+		\node [above=1cm, name=midp, node distance=1pt, inner sep=1pt, fill=black, circle, draw] at (clock) {};
+		
+		\node [above] at (input) {entrada};
+		\node [above] at (output) {saída};
+		
+		\draw [->] (input) -- (SH);
+		\draw [->] (quantizer) -- (output);
+		\draw [->] (SH) -- (quantizer);
+		\draw [] (quantizer) |- (midp);
+		\draw [->] (midp) -| (SH);
+		\draw (midp) -- (clock) node[below=0pt] {clock};
+		
+		\draw [<-] (SH) -- +(0,1.5) node[above, name=alias] {\textit{aliasing}};
+		\node [above=5pt] at (alias) {$ \omega_s>2\omega_c $};
+		
+		\draw [loosely dashed] ($(input)+(1,1)$) rectangle ($(output)+(-1,-2)$) node[yshift=7pt, xshift=-13pt] {A/D};
+		
+		\draw [<-, dashed] (quantizer.north) -- +(3,1) node[right, text width=4cm, align=center, name=txt1] {efeito de quantização (limitação ou recurso finito)};
+		
+		\draw [->] (txt1) -- +(0,-1) node[align=center, below, name=txt2] {truncamento $\left[q\right]$};
+		
+		\draw [->] (txt2) -- +(0,-1) node[align=center, below] {\textbf{erro}};
+		\end{tikzpicture}

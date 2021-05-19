@@ -1,0 +1,12 @@
+\deftkzbds
+
+\begin{tikzpicture}[auto, node distance=1.5cm,>=Latex]
+\node [input] (input2) {};
+\node [block, right=of input] (computer) {$ G(z) $};
+\node [output, right =of computer] (output2) {};
+\node [above] at (input2) {$ U(z) $};
+\node [above] at (output2) {$ Y(z) $};
+
+\draw [->] (input2) -- (computer);
+\draw [->] (computer) -- (output2);
+\end{tikzpicture}
