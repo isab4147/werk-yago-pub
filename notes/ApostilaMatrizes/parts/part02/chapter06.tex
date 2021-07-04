@@ -1,0 +1,227 @@
+\chapter{Casos interessantes}
+
+\section{Matriz transposta}
+O determinante de uma matriz quadrada qualquer $A_n$ será \textbf{igual} ao determinante de sua \textbf{transposta}.
+$$
+\det A_n = \det A_n^t
+$$
+
+\section{Fila nula}
+Caso haja qualquer \textbf{linha} ou \textbf{coluna nula} em uma matriz seu determinante será \textbf{zero}.
+$$
+\text{Dada a matriz }A_n=\begin{bmatrix}
+    a_{11} & a_{12} & 0 & \cdots & a_{1n} \\
+    a_{21} & a_{22} & 0 & \cdots & a_{2n} \\
+    \vdots  & \vdots & \vdots & \ddots & \vdots  \\
+    a_{m1} & a_{m2} & 0 & \cdots & a_{mn}
+\end{bmatrix} \text{, } \det A_n=0 \text{ pois sua 3\textsuperscript{a} coluna é nula.}
+$$
+
+\section{Multiplicação de uma fila por uma constante}
+Se toda uma \textbf{linha} ou \textbf{coluna} de uma matriz quadrada qualquer $A_n$ for \textbf{multiplicada} por um valor, podemos \textbf{reescrever} o determinante como sendo multiplicado por aquele valor (e retirá-lo da matriz).
+
+\Example
+$$
+\text{Dado o }\det A_n= 
+\begin{vmatrix}
+    a_{11} & a_{12} & k\cdot a_{13} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & k\cdot a_{23} & \cdots & a_{2n} \\
+    \vdots  & \vdots & \vdots &  \ddots & \vdots  \\
+    a_{n1} & a_{n2} & k\cdot a_{n3} & \cdots & a_{nn}
+\end{vmatrix}
+$$
+podemos reescrever esse determinante como
+$$
+k \cdot \det A_n = k \cdot 
+\begin{vmatrix}
+    a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+    \vdots  & \vdots & \vdots & \ddots & \vdots  \\
+    a_{n1} & a_{n2} & a_{n3} & \cdots & a_{nn}
+\end{vmatrix}
+$$
+
+\Example
+
+\begin{gather*}
+    \text{Dada a matriz }A=\begin{bmatrix*}[r]
+        1 & 3 & 8\\
+        7 & -9 & 1\\
+        -2 & 4 & -6
+    \end{bmatrix*} \text{, que pode ser reescrita como:}\\
+    A=\begin{bmatrix*}[r]
+        1 & 3 & 8\\
+        7 & -9 & 1\\
+        -1\cdot2 & 2\cdot2 & -3\cdot2
+    \end{bmatrix*} 
+    \text{ temos que }\det A= 2\cdot 
+    \begin{vmatrix*}[r]
+        1 & 3 & 8\\
+        7 & -9 & 1\\
+        -1 & 2 & -3
+    \end{vmatrix*}
+\end{gather*}
+
+\section{Multiplicação da matriz inteira por uma constante}
+Se uma matriz quadrada $A_n$ \textbf{inteira} for \textbf{multiplicada} por uma constante $k$ podemos \textbf{retirá-la} da matriz e seu determinante será \textbf{igual} a constante \textbf{elevada} a ordem da matriz ($k^n$) \textbf{multiplicado} pelo determinante da matriz \textbf{sem a constante}.
+
+\begin{gather*}
+    \text{Se } k\cdot A_n=\begin{bmatrix*}[c]
+        k\cdot a_{11} & k\cdot a_{12} & \cdots & k\cdot a_{1n} \\
+        k\cdot a_{21} & k\cdot a_{22} & \cdots & k\cdot a_{2n} \\
+        \vdots  & \vdots & \ddots & \vdots  \\
+        k\cdot a_{m1} & k\cdot a_{m2} & \cdots & k\cdot a_{mn}
+    \end{bmatrix*} 
+    \text{, então, segue que} \\[0.5em]
+    \det (k \cdot A_n) = k^n \cdot \det A_n
+\end{gather*}
+
+\Example
+
+\begin{gather*}
+    \text{Dada a matriz }A=
+    \begin{bmatrix*}[r]
+        3 & -6 & -3\\
+        12 & 15 & 0\\
+        9 & -9 & 2
+    \end{bmatrix*} 
+    \text{, que pode ser reescrita como:}\\
+    A=\begin{bmatrix*}[r]
+        1\cdot3 & -2\cdot3 & -1\cdot3\\
+        4\cdot3 & 5\cdot3 & 0\cdot3\\
+        3\cdot3 & -3\cdot3 & \sfrac{2}{3}\cdot3
+    \end{bmatrix*}
+    =3\cdot \begin{bmatrix*}[r]
+    1 & -2 & -1\\
+    4 & 5 & 0\\
+    3 & -3 & \sfrac{2}{3}
+    \end{bmatrix*} 
+    \text{ temos que } 
+    \det A= 3^3 \cdot \begin{vmatrix*}[r]
+    1 & -2 & -1\\
+    4 & 5 & 0\\
+    3 & -3 & \sfrac{2}{3}
+    \end{vmatrix*}
+\end{gather*}
+
+\section{Troca de filas paralelas}
+Caso \textbf{troquemos} duas \textbf{linhas} ou duas \textbf{colunas distintas} de uma matriz quadrada $A_n$, criamos uma nova matriz $B_n$ tal que: $$\det B_n=-\det A_n$$
+\Example
+
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+    a & b \\
+    c & d
+\end{bmatrix*}
+$$
+trocando a 1\textsuperscript{a} coluna pela 2\textsuperscript{a} coluna temos uma nova matriz $B$ tal que:
+$$
+B=\begin{bmatrix*}[r]
+    b & a\\
+    d & c
+\end{bmatrix*} \text{ onde }\det B =-\det A
+$$
+
+\section{Filas paralelas iguais ou proporcionais}
+Caso duas \textbf{linhas} ou \textbf{colunas distintas} sejam \textbf{múltiplas} uma da outra em uma matriz quadrada $A_n$ seu determinante será igual a $0$.
+
+\Example
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+1 & -4 & 1\\
+2 & 5 & 2\\
+3 & 12 & 3
+\end{bmatrix*}
+$$
+
+Como a primeira coluna é múltipla da terceira (multiplicada por $1$):
+
+$$
+\det A=0
+$$
+
+\Example
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+2 & 1 & -5\\
+7 & 0 & 0\\
+0 & -3 & 15
+\end{bmatrix*}
+$$
+
+Como a segunda coluna é múltipla da terceira (multiplicada por $-5$):
+
+$$
+\det A=0
+$$
+
+\section{Matriz inversa}
+Dada uma matriz quadrada $A_n$, o determinante de sua \textbf{inversa} obedece à relação:
+
+$$
+\det A_n^{-1}=\frac{1}{\det A_n}
+$$
+
+\section{Matriz triangular}
+
+O determinante de uma matriz triangular $A_n$ onde $n$ é a ordem dessa matriz será o produto dos elementos de sua diagonal principal. Isso é válido para todo $n$.
+
+\Example
+
+$$
+\det A=\begin{vmatrix}
+a_{11} & 0 & 0\\
+a_{21} & a_{22} & 0\\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix}= a_{11} \cdot a_{22} \cdot a_{33}
+$$
+
+\section{Matriz identidade}
+
+O determinante de uma matriz identidade $I_n$ onde $n$ é a ordem dessa matriz será igual a $1$ para qualquer valor possível de $n$.
+
+$$
+\det I_n=1
+$$
+
+\paragraph{Nota:}
+Repare que a matriz identidade é meramente um caso específico de uma matriz triangular, e, portanto, como o determinante de uma matriz triangular qualquer será o produto de sua diagonal principal, segue que $\det I_n=1\cdot 1\cdot1\dots1=1$ sempre.
+
+\section{Multiplicação de matrizes}
+
+O determinante de uma matriz $C=A\cdot B$ vai ser igual ao produto dos determinantes das matrizes $A$ e $B$.
+
+$$
+\det C=\det (A\cdot B) = \det A \cdot \det B
+$$
+
+\section{Matriz de Vandermonde}
+
+O determinante de uma matriz de \textit{Vandermonde} quadrada $V_n$ de ordem $n$ será dado pelo produto de todas as diferenças possíveis entre os elementos da linha/coluna onde estão as bases das PG's da matriz. As diferenças devem ser de um elemento qualquer (que não será o primeiro da linha/coluna) subtraído de algum que vem antes dele (e que não será o último da linha/coluna).
+
+\Example
+
+
+$$
+\text{Dada a matriz de \textit{Vandermonde} }V=\begin{bmatrix*}[r]
+1 & 4 & 16\\
+1 & 9 & 81\\
+1 & 5 & 25
+\end{bmatrix*}
+$$
+vamos, primeiro, isolar a coluna dessa matriz onde estão as bases das PG's:
+$$
+\begin{bmatrix*}[r]
+4\\9\\5
+\end{bmatrix*}
+$$
+as diferenças possíveis entre dois elementos dessa coluna que respeitam a condição de o \textit{minuendo} (termo que vem primeiro, da qual se subtrai) estar em uma posição posterior ao \textit{subtraendo} (termo que vem depois, que é subtraído) são:
+\begin{gather*}
+    9-4\\
+    5-4\\
+    5-9
+\end{gather*}
+podemos calcular o determinante de $V$ fazendo:
+$$
+\det V=(5-9)\cdot(9-4)\cdot(5-4)=(-4)\cdot5\cdot1=-20
+$$

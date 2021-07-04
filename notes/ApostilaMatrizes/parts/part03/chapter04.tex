@@ -1,0 +1,108 @@
+\chapter{Teorema de Cramer}
+\label{chap:cram}
+
+\section{O que é?}
+
+Esse teorema nos diz que, dado um sistema linear $S$ que tenha o \textbf{mesmo número} de incógnitas e expressões, se o colocarmos na forma matricial poderemos tomar seu determinante $D$, e, caso esse seja diferente de $0$, poderemos \textbf{determinar} os valores da \textbf{única solução possível} desse sistema.
+
+\section{Passo a passo}
+
+$$
+\text{Dado o sistema }S_1\begin{cases}
+2x-3y=0\\
+x+2y=2
+\end{cases}
+$$
+
+\begin{enumerate}
+    \item Primeiro devemos checar se o número de \textbf{incógnitas} é \textbf{igual} ao número de \textbf{expressões}.
+    
+    No sistema acima isso é verdadeiro, pois temos $x$ e $y$ (duas incógnitas) e temos duas expressões (duas linhas). \checkmark
+    
+    \paragraph{Nota:}
+    Caso o sistema tenha mais expressões do que incógnitas podemos ignorar algumas das expressões a fim de realizar os cálculos necessários com esse sistema.
+    
+    \item Agora podemos escrever o sistema em \textit{forma matricial}, para a realização desse teorema basta escrever a \textbf{primeira parte}, formada pelos \textbf{coeficientes}. Chamaremos essa matriz de $A$.
+    $$
+    A=\begin{bmatrix*}[r]
+    2 & -3\\
+    1 & 2
+    \end{bmatrix*}
+    $$
+
+    \item Devemos, então, tomar o \textbf{determinante} desse sistema. 
+    
+    Chamaremos esse determinante de $D$.
+    
+    $$
+    D=\det A=2\cdot 2-(-3)\cdot 1\Rightarrow D=4+3=7
+    $$
+    
+    \item Se o determinante $D$ for \textbf{diferente} de zero, podemos prosseguir com o teorema.
+    
+    No sistema que estamos utilizando isso se verifica. \checkmark
+\end{enumerate}
+
+\section{Encontrando a única solução possível}
+
+\begin{enumerate}
+    \item Para encontrar o \textbf{valor} de uma incógnita $i$ qualquer (valor esse que \textbf{resolverá} o sistema) devemos \textbf{repetir} a matriz dos coeficientes ($A$) e trocar a coluna representada por essa incógnita de escolha por uma coluna feita \textbf{a partir} dos termos independentes. O determinante da nova matriz será chamado $D_i$.
+    
+    Continuando com o mesmo exemplo, vamos resolver para $x$:
+    
+    $$
+    D_x=\begin{vmatrix*}[r]
+    \color{green}0 & -3\\ \color{green}2 & 2
+    \end{vmatrix*} \Rightarrow \\
+    D_x=0 \cdot 2 -(-3)\cdot 2 = 6
+    $$
+    
+    Repare que substituímos os termos da coluna que representa os coeficientes de $x$ por uma coluna formada pelos termos independentes (em \textcolor{green}{verde}), que devem estar na \textbf{mesma ordem} do sistema.
+    
+    \item O valor solução $\alpha_i$ da incógnita escolhida ($i$) será encontrado pela equação:
+    
+    $$
+    \alpha_i=\frac{D_i}{D}
+    $$
+    
+    Seguindo com o exemplo, fazemos:
+    
+    $$
+    \text{Substituíndo } \alpha_x = \frac{D_x}{D} \text{ pelos valores que possuímos, encontramos } \alpha_x=\frac{6}{7}
+    $$
+    
+    \item Agora devemos repetir o processo para as outras incógnitas.
+    
+    Fazendo para $y$ temos:
+    
+    \begin{gather*}
+        D_y=\begin{vmatrix}
+        2 & 0\\ 1 & 2
+        \end{vmatrix} \Rightarrow D_y= 2\cdot 2-0\cdot 2=4\\
+        \alpha_y=\frac{D_y}{D}\Rightarrow\alpha_y=\frac{4}{7}
+    \end{gather*}
+    
+    \item Por fim, escrevemos a solução encontrada em forma de ênupla.
+    
+    $$
+    \left(\sfrac{6}{7},~\sfrac{4}{7}\right)
+    $$
+    
+    \item \textbf{(Extra)} Caso ache necessário, basta substituir os valores da ênupla nas expressões do sistema para \textbf{testar} a solução.
+    
+    $$
+    S_1\begin{cases}
+    2\cdot \dfrac{6}{7}-3\cdot\dfrac{4}{7}=0 \\[1em]
+    \dfrac{6}{7}+2\cdot\dfrac{4}{7}=2
+    \end{cases}\Rightarrow 
+    S_1\begin{cases}
+    \dfrac{12-12}{7}=0\\[1em]
+    \dfrac{6+8}{7}=2
+    \end{cases}\Rightarrow 
+    S_1\begin{cases}
+    \dfrac{0}{7}=0\\[1em]
+    \dfrac{14}{7}=2
+    \end{cases}
+    $$
+
+\end{enumerate}

@@ -1,0 +1,138 @@
+\chapter{Escalonamento}
+\label{chap:esc}
+
+\section{Introdução}
+Para resolver e diferenciar os sistemas lineares dispomos da técnica chamada \mbox{\textit{escalonamento}}. Essa técnica consiste em um \textbf{algoritmo} (outra palavra para \textit{receita}) onde vamos, através de soma e multiplicação, \textbf{zerar} coeficientes das expressões de um sistema linear, um por um.
+
+\section{Algoritmo (ou receita)}
+\begin{enumerate}
+    \item Devemos escolher alguma das expressões de um sistema para usar como \textbf{referência}. É boa prática escolher uma expressão onde os coeficientes são \textbf{menores}.
+    \Example
+    $$
+    S_1\begin{cases}
+    \color{red}x+y-z=2\\
+    3x-4y+2z=1\\
+    5x+2y-z=7
+    \end{cases}
+    $$
+    
+    Vamos usar a primeira expressão (em \textcolor{red}{vermelho}). Vamos chamá-la de \ref{eq:a}.
+    
+    \item Agora vamos \textbf{escolher} alguma incógnita com o objetivo de \textbf{zerar} seu \textbf{coeficiente}. Nessa etapa podemos organizar as expressões colocando a escolhida \textbf{em cima} das outras.
+    
+    \paragraph{Continuação:}
+    
+    \begin{empheq}[left=S_1\empheqlbrace]{align*}
+    &x+y-z=2 \label{eq:a}\tag{$S_a$}\\
+    &3x-4y+2z=1 \label{eq:b}\tag{$S_b$}\\
+    &5x+2y-z=7 \label{eq:c}\tag{$S_c$}
+    \end{empheq}
+    
+    A expressão referência se encontra \textbf{acima} das que pretendemos mexer (\ref{eq:a} acima de \ref{eq:b} e \ref{eq:c}).
+    
+    \item Através de equação podemos encontrar valores que, \textbf{multiplicados} à primeira equação, vão \textbf{zerar} o \textbf{coeficiente} da incógnita de escolha nas outras.
+    
+    A expressão \ref{eq:a} multiplicada por uma constante $k_1$ e somada à expressão \ref{eq:b} deverá zerar o coeficiente que multiplica $x$:
+    $$
+    S_a\times k_1 + S_b=0
+    $$
+    
+    Porém, como é \textbf{absurdo} fazer contas para $n$ valores ao mesmo tempo, vamos focar no que nos interessa, o valor de $x$ nas expressões \ref{eq:a} e \ref{eq:b}. Para isso basta \textbf{substituir as expressões} \ref{eq:a} e \ref{eq:b} por seus \textbf{respectivos coeficientes} de $x$:
+    $$
+    1\cdot k_1 + 3=0
+    $$
+    Resolvendo, temos:
+    $$
+    1\cdot k_1 + 3=0 \Rightarrow k=-3
+    $$
+    
+    Fazendo o mesmo para \ref{eq:a} e \ref{eq:c}, temos:
+    $$
+    S_a\times k_2+S_c \Rightarrow 1\cdot k_2+5=0 \Rightarrow k=-5
+    $$
+    
+    \paragraph{Nota:}
+    O valor $k_1$ (que zera o coeficiente de $x$ em \ref{eq:b}) \textbf{não necessariamente} é o mesmo que $k_2$ (que zera o coeficiente de $x$ em \ref{eq:c}).
+    
+    \item Agora basta \textbf{multiplicar} a expressão de \textbf{referência} pelo valor encontrado e \textbf{somar} às outras expressões. 
+    
+    Como os valores que zeram cada uma são \textbf{diferentes}, executamos esse passo \textbf{independentemente}.
+    
+    Sabemos que $k_1=-3$ zera a expressão \ref{eq:b}, então faremos:
+    \begin{gather*}
+        (x+y-z=2)\times (-3) +S_b\Rightarrow\\
+        (-3x-3y+3z=-6) + S_b\Rightarrow\\
+        \begin{aligned}
+        -3x-3y+3z&=-6\\
+        \mathbf{+}~~3x-4y+2z&=2\\\midrule
+         0x-7y+5z&=-4
+        \end{aligned}
+    \end{gather*}
+    
+    Colocando a nova expressão no lugar de \ref{eq:b}, ficamos com:
+    $$
+    S_1\begin{cases}
+    x+y-z=2\\
+    0x-7y+5z=-4\\
+    5x+2y-z=7
+    \end{cases}
+    $$
+    
+    \paragraph{Nota:} 
+    a expressão de referência (\ref{eq:a}) \textbf{não se altera}, e nem a expressão \ref{eq:c}. No escalonamento só alteramos \textbf{uma expressão de cada vez}.
+    
+    Vamos fazer a mesma coisa para \ref{eq:a} e \ref{eq:c}. Sabemos que $k=-5$ zera a expressão \ref{eq:c}, então fazemos:
+    \begin{gather*}
+        (x+y-z=2) \times (-5) + S_c\Rightarrow\\
+        (-5x-5y+5z=-10) + S_c\Rightarrow\\
+        \begin{aligned}
+        -5x-5y+5z&=-10\\
+        \mathbf{+}~~5x+2y-z&=7\\\midrule
+        0x-3y+4z&=-3
+        \end{aligned}
+    \end{gather*}
+    
+    Colocando a nova expressão no lugar de \ref{eq:c}, temos:
+    $$
+    S_1\begin{cases}
+    x+y-z=2\\
+    0x-7y+5z=-4\\
+    0x-3y+4z=-3
+    \end{cases}
+    $$
+    
+    \item Por fim, devemos repetir os passos $1$ a $4$ escolhendo \textbf{outra incógnita} para "zerar" e outra expressão como referência, \textbf{sem mexer} na referência anterior.
+    
+    Usando \ref{eq:b} como referência para zerar o coeficiente $y$ em \ref{eq:c} temos:
+    $$
+    S_b\times k_3 +S_c=0\Rightarrow -7\cdot k + (-3) =0\Rightarrow k_3= \sfrac{3}{7}
+    $$
+    
+    Como não devemos alterar as referências anteriores (expressão \ref{eq:a}), basta encontrar o valor $k_3$ para zerar o coeficiente $y$ em \ref{eq:c}.
+    
+    Fazendo a conta ficamos com:
+    \begin{gather*}
+        (-7+5z=-4) \times \left(\sfrac{-3}{7}\right)+S_c\Rightarrow\\
+        \left(3y-\frac{15}{7}=-\frac{12}{7}\right) + S_c\Rightarrow\\
+        \begin{aligned}
+        3y-\frac{15}{7}&=-\frac{12}{7}\\
+        \mathbf{+}~~-3y+4z&=-3\\\midrule
+        0y+\frac{13}{7}z&=-\frac{33}{7}
+        \end{aligned}
+    \end{gather*}
+
+    Colocando a nova expressão no lugar de \ref{eq:c} temos:
+    $$
+    S_1\begin{cases}
+    x+y-z=2\\
+    0x-7y+5z=-4\\
+    0x+0y+\dfrac{13}{7}=-\dfrac{33}{7}
+    \end{cases}
+    $$
+    
+    Podemos ver que a cada vez que \textbf{repetimos} o algoritmo zeramos os coeficientes de \textbf{outra incógnita}.
+    
+    Agora que não há mais expressões para mexer, pois devemos ter pelo menos uma nova referência e uma outra expressão para mexer (e no momento só teríamos uma referência e mais nada), podemos, então, interromper o algoritmo.
+
+
+\end{enumerate}

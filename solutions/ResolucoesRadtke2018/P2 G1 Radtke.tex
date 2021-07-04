@@ -1,0 +1,218 @@
+% !TeX program = xelatex
+\documentclass{ipaexam}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[useregional]{datetime2}
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+
+\usepackage{graphicx,float}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{multicol}
+\usepackage{enumitem, ipactikz}
+\usepackage{textcomp}
+
+\setmyunit{2cm}
+\usetikzlibrary{positioning, calc}
+
+%\title{Resolução da P2 de Eletrônica Analógica (G1)}
+\givecredits
+\author{Isabella B.}
+\date{}
+\lecture{Eletrônica Analógica} % disciplina
+\hwtype{Resolução} % o que é
+\examname{P2 - G1} % prova
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\question
+Determine se o transistor está em região ativa ou saturação:
+
+\medskip
+
+\begin{ctikz}
+    \node(tr)[npn] at (0,0) {};
+    \node[right] at (tr) {$\beta:100$};
+    
+    \draw (tr.base) to[R, a=100<\kilo\ohm>, l=$\R_b$, -o] ++(-1,0) node[left] {\SI{5}{\volt}};
+    
+    \draw (tr.collector) to[R, a=2<\kilo\ohm>, l=$\R_c$, -o] ++(0,1) node[above] {\SI{10}{\volt}};
+    
+    \draw (tr.emitter) to[short] ++(0,-0.2) node[ground] {};
+\end{ctikz}
+
+\begin{solution}
+	O transistor estará em saturação quando a resistência $\Rce$ for nula, isto é, quando $\I_c > \I_{c~max}$.
+	
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{align*}
+			\I_c &= \I_b \cdot \beta\\
+			&= \dfrac{\Ut_b-\Ut_{be}}{\R_b} \cdot \beta\\[1ex]
+			&= \dfrac{5-07}{100\cdot10^3} \cdot 100\\[1ex]
+			&= \SI{4.3}{\milli\ampere}
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{align*}
+		\I_{c~max} &= \dfrac{\Ut_c}{\R_c}\\[1ex]
+		&= \dfrac{10}{2\cdot10^3}\\[1ex]
+		&= \SI{5}{\milli\ampere}
+		\end{align*}
+	\end{minipage}
+	
+	\medskip
+	
+	Como $\I_c < \I_{c~max}$, o transistor está na região \textbf{ATIVA}.
+\end{solution}
+
+\clearpage
+
+\question
+Seja o circuito a seguir:
+
+\medskip
+
+\begin{ctikz}
+    \node(oa)[op amp, yscale=-1] at(0,0) {};
+    
+    \draw (oa.down) to[short, -o] ++(0,0.2) node[above] {\SI[retain-explicit-plus]{+5}{\volt}};
+    
+    \draw (oa.up) to[short, -o] ++(0,-0.2) node[below] {\SI{-5}{\volt}};
+    
+    \draw (oa.+) to[short, -*] ++(-0.6,0) to[R, a^=1<\kilo\ohm>, l_=$\R_4$] ++(0,-1) node[ground] {};
+    
+    \coordinate(a) at ($(oa.+) +(-1.2,0)$);
+    
+    \draw (oa.-) to[short] ++(0,-1) to[short] ++(-1.2,0) to[short] (a) to[short, -*] ++(-0.6,0) to[R,a^=3<\kilo\ohm>, l_=$\R_2$] ++(0,-1) node[ground] {};
+    
+    \draw (oa.+) ++(-0.6,0) to[R, a=1<\kilo\ohm>, l=$\R_3$, -*] ++(0,1);
+    
+    \draw (oa.out) ++(1,0) node(tr) [npn] {};
+    \draw (oa.out) to[R, l=$\R_5$] (tr.base);
+    \node[ground] at (tr.emitter) {};
+    
+    \coordinate(o) at ($(oa.+)+(-0.6,1)$);
+    
+    \draw (oa.+) ++(-1.2,0) ++(-0.6,0) to[R, a=1<\kilo\ohm>, l=$\R_1$] ++(0,1) to[short, -*] ++(0.6,0) to[short, -o] ++(0,0.2) node[above] {\SI{10}{\volt}} ++(0,-0.2) to[short] (o) to[R,l=$\R_6$] (o-|tr.collector) to[leD, a=2.2<\volt>] (tr.collector);
+    
+\end{ctikz}
+
+\begin{parts}
+	\part
+	Qual é o valor da tensão na saída do amp op? Explique.
+	
+	\begin{solution}
+		Sendo a tensão da entrada não-inversora ($\V_A$) igual à queda de tensão em $\R_4$ e a tensão na entrada inversora ($\V_B$) igual à queda de tensão em $\R_2$, temos:
+		
+		\begin{minipage}[c]{0.5\linewidth}
+			\begin{align*}
+				\Ut_{R2} &= \R_2\cdot\dfrac{\Ut}{\R_1+\R_2}\\
+				&= 3\cdot10^3\cdot\dfrac{10}{1\cdot10^3+3\cdot10^3}\\
+				&= 10\cdot\dfrac{3\cdot\cancel{10^3}}{4\cdot\cancel{10^3}}=10\cdot\dfrac{3}{4}=\SI{7.5}{\volt}
+			\end{align*}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\linewidth}
+			\begin{align*}
+				\Ut_{R4} &= \R_4\cdot\dfrac{\Ut}{\R_3+\R_4}\\
+				&= 1\cdot10^3\cdot\dfrac{10}{1\cdot10^3+1\cdot10^3}\\
+				&= 10\cdot\dfrac{1\cdot\cancel{10^3}}{2\cdot\cancel{10^3}}=10\cdot\dfrac{1}{2}=\SI{5}{\volt}
+			\end{align*}
+		\end{minipage}
+		
+		\medskip
+		
+		Podemos ver que $\Ut_{R2}>\Ut_{R4}$, e, portanto, a tensão na saída do amp op será $\boxed{\SI{-5}{\volt}}$
+	\end{solution}
+
+	\part
+	Qual deve ser o valor de $\R_6$ para que a corrente no LED seja de \SI{20}{\milli\ampere}?
+	
+	\begin{solution}
+		\item[\textbf{Forma 1:}] Utilizando o resultado da letra (a) podemos ver que o transistor tem sua junção pn base-emissor inversamente polarizada, portanto \textbf{o LED não possuíra corrente alguma}. Sendo assim, o cálculo é supérfluo.
+		
+		\textbf{Forma 2:} Assumindo o caso em que o transistor esteja em saturação (pois caso contrário seria impossível determinar $\Rce$) podemos determinar o valor de $\R_6$ utilizando \textit{Kirchhoff}:$$\R_6=\dfrac{10-2.2}{20\cdot10^{-3}}=\boxed{\SI{0.39}{\kilo\ohm}}$$
+	\end{solution}
+\end{parts}
+
+\clearpage
+
+\question
+Seja o circuito do controlador on/off com intervalo diferencial, implementado em aula:
+
+\medskip
+
+\begin{ctikz}[x=1.5cm, y=1.5cm]
+    \draw (0,0) node(oa1)[op amp, yscale=-1] {}
+        (oa1.+) to[short, -o] ++(-0.2,0) node[left] {\SI{4.5}{\volt}} (oa1.-) to[short, -*] ++(0,-1) to[short, -o] ++(-0.2,0) node[left] {Nível: \SIrange[range-phrase = {$\sim~$}]{1}{5}{\volt}} (oa1.up) to[short] ++(0,-0.2) node[ground] {};
+        
+    \draw (0,-2.5) node(oa2)[op amp, yscale=-1] {} (oa2.+) 
+        to[short] ++(0,1) (oa2.-) to[short, -o] ++(-0.2,0) node[left] {\SI{1.5}{\volt}} (oa2.down) to[short, -o] ++(0,0.2) node[above] {\SI{10}{\volt}};
+        
+    \draw (oa2.out) ++(2,0) node(tr1)[npn] {};
+    \node[right] at (tr1) {$\Q_1$};
+    \draw (oa2.out) to[R, l=$\R_2$] (tr1.base);
+        
+    \coordinate(o1) at ($(oa1.down)+(0,0.2)$);
+    \coordinate(a) at (o1-|tr1.collector);
+        
+    \draw (oa1.down) to[short] ++(0,0.2) to[short, -*] (a) to[short, -o] ++(0,0.2) node[above] {\SI{10}{\volt}};
+    
+    \coordinate(b) at (tr1.base|-oa1.out);
+    
+    \draw (oa1.out) to[R, l=$\R_1$] (b);
+    
+    \draw (tr1) ++(2,0) node(tr2)[npn] {};
+    \node[right] at (tr2) {$\Q_2$};
+    
+    \coordinate(g) at (a-|tr2.collector);
+    
+    \draw (a) to[short] (g) to[short, -*] ++(0,-0.5) to[short, -o] ++(0.5,0) node[right] {A} ++(-0.5,0) to[R,l=$\R_4$, -*] ++(0,-1) to[short, -o] ++(0.5,0) node[right] {B} ++(-0.5,0) to[triac, n=tri, mirror] (tr2.collector);
+    
+    \coordinate(o2) at ($(oa2.up)+(0,-0.2)$);
+    \coordinate(e) at (o2-|tr1.emitter);
+    
+    \draw (e) to[short] (tr2.emitter|-e) to[short] (tr2.emitter);
+    
+    \coordinate(o4) at ($(b)+(1,0)$);
+    \coordinate(h) at ($(o4)!.5!(tr2.base|-o4)$);
+    \coordinate(i) at (h|-tr2.base);
+    
+    \coordinate(f) at (tri.G-|tr1.collector);
+    
+    \draw (f) to[short] (tri.G);
+    \draw (h) to[kinky cross=(f)--(tri.G), kinky crosses=right] (i) to[short] (tr2.base);
+    
+    \coordinate(d) at ($(f)+(0,1.5)$);
+    
+    \draw (b) to[short] (h);
+    \draw (tr1.collector) to[short, -*] (f) to[R, l_=$\R_3$] (d) to[kinky cross=(b)--(h), kinky crosses=left] (a);
+    
+    \draw (tr1.emitter) to[short] (e);
+    \draw (oa2.up) to[short] ++(0,-0.2) to[short, -*] (e) to[short] ++(0,-0.2) node[ground] {};
+    
+\end{ctikz}
+
+\begin{parts}
+	\part
+	O transistor $\Q_1$ deve estar em corte ou em saturação para que o triac conduza corrente entre seus terminais principais (MT1 e MT2)? Explique.
+	
+	\begin{solution}
+		O triac conduzirá quando houver um valor de tensão (superior à um valor tabelado, mas que aqui assumiremos ser $0$ pois não foi informado) em seu \textit{Gate}. Analisando o comportamento do transistor $\Q_1$ podemos notar que está realizando a função de \textit{pull-down} (ou seja, age como uma chave NF), portanto, o transistor deve estar em \textbf{CORTE} para que o triac comece a conduzir, porém, uma vez conduzindo ele independe do estado de $ \Q_1 $.
+	\end{solution}
+
+	\part
+	Qual será o estado do triac (corte ou saturação) quando a tensão referente à medição de nível for de \SI{2}{\volt}?
+	
+	\begin{solution}
+		Para o valor de \SI{2}{\volt} na medição de nível teremos entrado no \textit{range} do controlador, sendo assim, na saída amp op de cima temos \SI{10}{\volt} e no de baixo também. Como há tensão na base do transistor $\Q_1$ (por conta dos dados do problema) sabemos que ele estará em saturação, o que (pelo resultado da letra (a)) faz com que o triac mantenha-se no último estado em que estava.
+	\end{solution}
+\end{parts}
+
+\end{questions}
+\end{document}

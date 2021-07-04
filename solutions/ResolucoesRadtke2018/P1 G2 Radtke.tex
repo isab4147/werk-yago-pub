@@ -1,0 +1,357 @@
+% !TeX program = xelatex
+\documentclass{ipaexam}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[useregional]{datetime2}
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+
+\usepackage{graphicx,float}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{multicol, enumitem, ipactikz}
+
+\setmyunit{2cm}
+\sisetup{detect-weight=true, detect-family=true}
+\usetikzlibrary{positioning, calc}
+
+%\title{Resolução da P1 de Eletrônica Analógica (G2)}
+\givecredits
+\author{Isabella B.}
+\date{}
+\lecture{Eletrônica Analógica} % disciplina
+\hwtype{Resolução} % o que é
+\examname{P1 - G2} % prova
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\question
+O amperímetro é um equipamento que mede a corrente elétrica em um circuito elétrico. Sobre o amperímetro assinale a resposta correta:
+
+\begin{choices}
+	\CorrectChoice O equipamento de medição tem resistência próxima a zero, sendo que sua medição em paralelo pode danificar internamente o equipamento.
+	\choice	...
+	\choice	...
+	\choice	...
+	\choice	...
+\end{choices}
+
+\medskip
+
+\begin{solution}
+	A afirmação faz sentido, pois, sendo o amperímetro um aparelho que deve medir corrente, faz sentido que deva ser ligado em série (pois, como sabemos, em série a corrente é igual em todos os pontos e componentes, já que não pode desaparecer do nada -- análoga à vazão em um sistema hidráulico). A resistência desse equipamento deve ser próxima de zero para que não altere a tensão de algum outro componente pois, idealmente, aparelhos de medição devem causar distúrbios mínimos ao sistema em que estão inseridos.
+\end{solution}
+
+\clearpage
+
+\question
+Determine a resistência equivalente entre os terminais A e B:
+
+\medskip
+
+\begin{ctikz}
+    \draw (0,1) node[above] {A} to[short, o-*] ++(0.5,0) to[R=5<\ohm>, -*] ++(1,0) -- ++(1,0) to[R=30<\ohm>] ++(0,-1) -- ++(-1,0) to[R=4<\ohm>, *-] ++(-1,0) to[short, *-o] node[above] {B} +(-0.5,0);
+    \draw (0.5,1) to[R=70<\ohm>] ++(0,-1);
+    \draw (1.5,1) to[R=70<\ohm>] ++(0,-1);
+\end{ctikz}
+
+\begin{solution}
+	Basicamente, devemos determinar a $\Req$ do circuito.
+
+	Vamos começar pela parte mais distante dos terminais da fonte, no caso, as resistências de \SI{30}{\ohm} e \SI{70}{\ohm} que se encontram em paralelo.
+	
+	Para calcular a $\Req$ desses dois elementos em paralelo, vamos utilizar a fórmula simplificada do produto pela soma:$$\Req=\dfrac{30\cdot70}{30+70}=\dfrac{2100}{100}=\SI{21}{\ohm}$$
+	
+	Re-escrevendo o circuito ficamos com:
+	
+	\begin{ctikz}
+	    \draw (0,1) node[above] {A} to[short, o-*] ++(0.5,0) to[R=5<\ohm>] ++(1,0) to[R, l=$\Req{=}\SI{21}{\ohm}$] ++(0,-1) to[R=4<\ohm>] ++(-1,0) to[short, *-o] node[above] {B} +(-0.5,0);
+	    \draw (0.5,1) to[R=70<\ohm>] ++(0,-1);
+	\end{ctikz}
+	
+	Agora, na parte mais "externa"~do circuito (isso é, a parte mais distante dos terminais da fonte), nós temos $3$ resistências em série, uma de \SI{5}{\ohm}, outra de \SI{4}{\ohm}, e a $\Req$ calculada anteriormente.
+	
+	Para achar $\Req$ dessas resistências em série basta somarmos seus valores:$$\Req'=5+4+21=\SI{30}{\ohm}$$
+
+	Re-escrevendo o circuito novamente, ficamos com:
+	
+	\begin{ctikz}
+	    \draw (0,1) node[above] {A} to[short, o-*] ++(0.5,0) -- ++(1,0) to[R, l=$R'_{eq}:\SI{30}{\ohm}$] ++(0,-1) -- ++(-1,0) to[short, *-o] node[above] {B} +(-0.5,0);
+	    \draw (0.5,1) to[R=70<\ohm>] ++(0,-1);
+	    
+	\end{ctikz}
+
+	Por fim, temos duas resistências em paralelo, o que nos dá uma $\Req$ total de:$$\boxed{\Req=\dfrac{30\cdot70}{30+70}=\dfrac{2100}{100}=\SI{21}{\ohm}}$$
+\end{solution}
+
+\clearpage
+
+\question
+Com as pontas de prova de um voltímetro posicionadas entre os pontos A e B do circuito mostrado a seguir, foi efetuada uma medida de tensão de \SI{5}{\volt}. Determine o valor (em \si{\volt}) da tensão $\V_f$ da fonte.
+
+\medskip
+
+\begin{ctikz}
+    \draw (0,1) to[battery1=$\V_f$]
+    (0,0) to[short]
+    (1,0) node[below] {B} to[short, *-]
+    ++(1,0) to[R=5<\ohm>]
+    ++(0,1) to[R=10<\ohm>, -*] node[above] {A}
+    ++(-1,0) to[R=12<\ohm>]
+    ++(-1,0);
+    \draw (1,1) to[R=20<\ohm>] (1,0);
+\end{ctikz}
+
+\begin{solution}
+	Podemos notar que a tensão entre os pontos A e B equivale a tensão presente no resistor de \SI{20}{\ohm}, podemos usar a lei de \textit{Kirchhoff}, então, para descobrir a corrente que passa através desse resistor:$$\I_1=\dfrac{5}{20}=\SI{0.25}{\ampere}$$
+
+	Como o resistor de \SI{20}{\ohm} está em paralelo com os resistores de \SI{10}{\ohm} e \SI{5}{\ohm}, sabemos que possuem a mesma queda de tensão, portanto, podemos calcular a corrente que passa por eles também:$$\I_2=\dfrac{5}{15}\approx\SI{0.333}{\ampere}$$
+	
+	Pela lei dos nós, sabemos que a corrente chegando ao ponto A deve ser a mesma saindo do mesmo ponto A (que nós acabamos de calcular).
+	
+	\begin{ctikz}
+	    \draw (0,1) to[battery1=$\V_f$, i<=$\I_t$]
+	    (0,0) to[short]
+	    (1,0) node[below] {B} to[short, *-]
+	    ++(1,0) to[R=5<\ohm>]
+	    ++(0,1) to[R=10<\ohm>, -*, i<=$\I_2$] node[above] {A}
+	    ++(-1,0) to[R=12<\ohm>, i<=$\I_3$]
+	    ++(-1,0);
+	    \draw (1,1) to[R=20<\ohm>, i=$\I_1$] (1,0);
+	\end{ctikz}
+	
+	Pela ilustração acima podemos ver que:$$\I_3=\I_1+\I_2\Rightarrow\I_3=\num{0.25}+\num{0.333}\approx\SI{0.583}{\ampere}$$
+	
+	Também podemos perceber, pela ilustração, que $\I_3=\I_t$, e, usando a corrente total, podemos determinar a tensão da fonte, porém, para isso, devemos encontrar a $\Req$ do circuito:$$\Req=12+20\parallelsum(10+5)=12+20\parallelsum15=12+\dfrac{20\cdot15}{20+15}=12+\dfrac{300}{35}=12+\num{8.571}\approx\SI{20.571}{\ohm}$$
+	Agora podemos calcular a tensão da fonte $\V_f$, utilizando a lei de \textit{Kirchhoff}:$$\boxed{\Ut=\num{20.571}\cdot\num{0.583}=\SI{12}{\volt}}$$
+\end{solution}
+
+\textbf{Nota:} Repare que só podemos dizer que o resultado é IGUAL à \SI{12}{\volt} pois quando colocamos os valores na calculadora, ou fazendo o calculo sem arredondamentos - à mão - chegamos ao valor de $12$, exatamente. Caso contrário, ou se houver dúvida, é mais seguro colocar $\approx$.
+
+\clearpage
+
+\question
+No circuito a seguir, qual é a corrente que percorre o diodo zener (cuja tensão nominal é de \SI{16}{\volt})?
+
+\medskip
+
+\begin{ctikz}
+    \draw (0,1) to[battery1=25<\volt>]
+    (0,0) to[short, -*]
+    (1,0) to[short]
+    ++(0.5,0) to[R, a=80<\kilo\ohm>]
+    ++(0,1) to[short, -*]
+    ++(-0.5,0) to[R=18<\kilo\ohm>]
+    ++(-1,0);
+    \draw (1,0) to[zzD] (1,1);
+\end{ctikz}
+
+\begin{solution}
+	Primeiramente, podemos notar que, como o zener está inversamente polarizado, temos que utilizar sua tensão nominal para nossos cálculos. Repare que o resistor de \SI{80}{\kilo\ohm} possui a mesma tensão que o zener (pois estão em paralelo), portanto:$$\I_1=\dfrac{16}{80\cdot10^3}=\SI{0.2}{\milli\ampere}$$
+
+	Como o zener está consumindo \SI{16}{\volt}, teremos o resto sendo consumido pelo resistor de \SI{18}{\kilo\ohm}, que obrigatoriamente deverá consumir o resto da tensão. Sendo assim, como $25-16=\SI{9}{\volt}$, teremos: $$\I_2=\dfrac{9}{18\cdot10^3}=\SI{0.5}{\milli\ampere}$$
+	
+	Como $\I_2=\I_t$, levando em conta a lei dos nós, temos que $\I_{zener}=\I_t-\I_1$, portanto: $$\boxed{\I_{zener}=0.5-0.2=\SI{0.3}{\milli\ampere}}$$
+\end{solution}
+
+\clearpage
+
+\question
+Ao medir um sinal puramente senoidal num osciloscópio, foi verificado que a tensão pico a pico medida era de \SI{40}{\volt}. Qual é o valor $rms$ eficaz aproximado desse sinal?
+
+\medskip
+
+\begin{solution}
+	Sabemos que $\V_{rms}=\dfrac{A}{\sqrt{2}}$, como a tensão pico a pico é o \textbf{dobro} da amplitude do sinal ($A$), temos que: $$\boxed{\V_{rms}=\dfrac{\sfrac{40}{2}}{\sqrt{2}}=\dfrac{20}{\sqrt{2}}\approx\SI{14.142}{\volt}_{rms}}$$
+
+\end{solution}
+
+\question
+Qual é a relação aproximada de espiras do transformador T$_1$ no circuito abaixo?
+
+\medskip
+
+\begin{ctikz}
+    \node(T1)[transformer] at (1,1){};
+    \draw (T1.A1) to[short]
+    ++(-0.3,0) ++(-0.7,0) node[](top){} to[push button=Ch$_1$] 
+    ++(0.7,0);
+    \draw (T1.A2) to[short]
+    ++(-0.3,0) to[generic=F$_1$] 
+    ++(-0.7,0) node[](bot) {};
+    
+    \draw (bot) to[sV, ly^=\SI{220}{\volt} and \SI{60}{\hertz}] (top);
+    
+    \node[above=-8pt] at (T1) {T$_1$};
+    \node[] at ($(T1) +(28pt, -28pt)$) {\SI{12}{\volt}};
+    
+\end{ctikz}
+
+\begin{solution}
+	Como podemos ver, a tensão da fonte é de \SI{220}{\volt}, que é a mesma tensão na espira esquerda do transformador T$_1$, e temos \SI{12}{\volt} do lado direito do transformador.
+	
+	Como a relação das espiras de um transformador é dada por $\dfrac{n_1}{n_2}=\dfrac{\V_1}{\V_2}$, temos que:$$\boxed{\dfrac{n_1}{n_2}=\dfrac{220}{12}\approx\num{18.33}}$$
+
+\end{solution}
+\clearpage
+
+\question
+O circuito retificador abaixo é composto por quatro diodos, uma fonte de corrente alternada e um resistor de carga:
+
+\medskip
+
+\begin{ctikz}
+    \draw (0,2) to[sV, v_=V$_{in}$]
+    (0,0) to[short]
+    ++(2,0) to[D, l=d$_3$, *-*]
+    ++(-1,1) to[short] 
+    ++(0.5,0) to[R, v^=$\V_r$] 
+    ++(1,0) to[short]
+    ++(0.5,0) to[D, l=d$_4$, *-]
+    ++(-1,-1) (3,1) to[D, l_=d$_2$, -*]
+    ++(-1,1) to[D, l_=d$_1$]
+    ++(-1,-1) (0,2) to[short]
+    ++(2,0);
+\end{ctikz}
+
+Considere os diodos ideais e a fonte CA puramente senoidal. Nesse contexto, analise as afirmativas abaixo:
+
+\begin{enumerate}[label=\roman*-, align=right]
+    \item A configuração do circuito é denominada "retificador de meia onda".
+    \item No semiciclo positivo da fonte CA (polaridades mostradas no circuito) os diodos d$_1$ e d$_4$ estarão conduzindo.
+    \item O valor de pico da tensão retificada $\V_r$ é o dobro do valor de pico da tensão da fonte CA.
+\end{enumerate}
+
+Está correto apenas o que se afirma em:
+
+\begin{choices}
+	\choice ...
+	\CorrectChoice ii
+	\choice ...
+	\choice ...
+	\choice ...
+\end{choices}
+
+\begin{solution}
+	Podemos ver que somente a afirmativa ii está correta eliminando as demais:
+	
+	\begin{enumerate}[label=\roman*-, align=right]
+		\item Sabemos que um retificador de \textbf{meia} onda só nos daria tensão em \textbf{metade} do período da fonte, consistindo em apenas um diodo. Essa afirmativa é, portanto, \textbf{FALSA}.
+		\item Podemos ver que, de acordo com as polaridades mostradas no circuito (na fonte), os diodos d$_1$ e d$_4$ realmente estarão conduzindo. \checkmark
+		\item Sabemos que a tensão retificada (que, por mais que apresente picos, são mínimos, pois essa é a função do retificador - nos fornecer um sinal constante) terá valor igual à $\sfrac{\V}{\sqrt{2}}$, portanto, essa afirmativa é \textbf{FALSA} também.
+	\end{enumerate}
+\end{solution}
+
+\clearpage
+
+\question
+Considere o circuito a seguir, formado por diodos ideais ligados a tensões constantes:
+
+\bigskip
+
+\begin{ctikz}
+    \draw 
+    node[left]{\SI[retain-explicit-plus]{+5}{\volt}} (0,0) to[D, o-]
+    ++(0.5,0) to[short] ++(1,0) (0,-0.5)
+    node[left]{\SI[retain-explicit-plus]{+4}{\volt}} to[D, o-]
+    ++(0.5,0) to[short, -*] ++(1,0) (0,-1)
+    node[left]{\SI[retain-explicit-plus]{+3}{\volt}} to[D, o-]
+    ++(0.5,0) to[short, -*] ++(1,0) (0,-1.5)
+    node[left]{\SI[retain-explicit-plus]{+2}{\volt}} to[D, o-]
+    ++(0.5,0) to[short, -*] ++(1,0) (0,-2)
+    node[left]{\SI[retain-explicit-plus]{+1}{\volt}} to[D, o-]
+    ++(0.5,0) to[short, -*] ++(1,0)
+    (1.5,0) to[short] ++(0,-2) to[short, -o] ++(0.3,0) node[right] {$\V_0$} ++(-0.3,0) to[R, a^=10<\kilo\ohm>, l_=$\R_1$,i=$\I_{r1}$] ++(0,-1) node[ground] {};
+\end{ctikz}
+
+O valor da tensão $\V_0$ e da corrente $\I_{r1}$ sobre o resistor $\R_1$ são, respectivamente:
+
+\begin{choices}
+	\CorrectChoice \SI{5}{\volt} e \SI{0.5}{\milli\ampere}
+	\choice ...
+	\choice ...
+	\choice ...
+	\choice ...
+\end{choices}
+
+\begin{solution}
+	Sabemos que para que um diodo conduza corrente a tensão aplicada à ele tem que ter a polaridade correta (anodo positivo e catodo negativo), o que ocorre em todos os resistores, isso é, quando eles são analisados \textit{separadamente}. O que ocorre no circuito, porém, é que uma vez que o primeiro diodo (de cima pra baixo) esteja conduzindo, teremos \SI{5}{\volt} no catodo do segundo, o que \textbf{inverte} sua polaridade, e, portanto, o faz não conduzir. A mesma coisa ocorre com todos os outros diodos. E, no final, teremos \SI{5}{\volt} passando pelo resistor $\R_1$, o que nos dá $\I_{r1}=\sfrac{5}{10\cdot10^3}=\SI{0.5}{\milli\ampere}$ percorrendo esse resistor.
+\end{solution}
+
+\clearpage
+
+\question
+Um técnico de eletricidade encontrou uma bateria de corrente contínua, mas não conhece o seu valor de tensão nominal nem o valor de sua resistência interna. Dispondo apensar de um amperímetro para identificar esses dois parâmetros, implementou o seguinte experimento: colocou nos terminais dessa bateria uma carga resistiva de \SI{10}{\ohm} e obteve uma medida de corrente elétrica igual a \SI{15/26}{\ampere}. Em seguida, colocou outra carga resistiva de \SI{50}{\ohm} e obeteve a corrente de \SI{5/42}{\ampere}.
+
+Quais são os valores de tensão (em \si{\volt})~e de resistência interna (em \si{\ohm})~da bateria?
+
+\begin{solution}
+	Os circuitos montados pelo técnico podem ser vistos da seguinte forma:
+
+	\bigskip
+	
+	\begin{minipage}[c]{0.5\linewidth}
+		\textbf{Situação 1 -}
+		
+		\begin{ctikz}
+			\draw (0,0) to[R, l_=$\R_{in}$]
+			++(0,-1) to[battery1, l_=$\V$]
+			++(0,-0.5) to[short]
+			++(1,0) to[R=10<\ohm>]
+			++(0,1.5) to[short]
+			++(-1,0);
+		\end{ctikz}
+		
+		\begin{equation}
+		I_1=\dfrac{\V}{\R_{in}+\R_1}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\linewidth}
+		\textbf{Situação 2 -}
+		
+		\begin{ctikz}
+			\draw (0,0) to[R, l_=$\R_{in}$]
+			++(0,-1) to[battery1, l_=$\V$]
+			++(0,-0.5) to[short]
+			++(1,0) to[R=50<\ohm>]
+			++(0,1.5) to[short]
+			++(-1,0);
+		\end{ctikz}
+		
+		\begin{equation}
+			\I_2=\dfrac{\V}{\R_{in}+\R_1}
+		\end{equation}
+	\end{minipage}
+
+	\bigskip
+	
+	Podemos notar que usamos $\V$ e $\R_{in}$ em ambas as equações, tendo, portanto, um sistema de equações. Agora basta resolvê-lo:
+	
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{gather*}
+			\I_1=\dfrac{15}{26}=\dfrac{\V}{\R_{in}{}+10}\\[2ex]
+			\I_2=\dfrac{5}{42}=\dfrac{\V}{\R_{in}{}+50}\\[2ex]
+			\V=\V\\
+			\dfrac{15}{26}\cdot\left(\R_{in}{}+10\right)=\dfrac{5}{42}\cdot\left(\R_{in}{}+50\right)\\
+			21\cdot3\cdot\left(\R_{in}{}+10\right)=13\cdot\left(\R_{in}{}+50\right)\\[2ex]
+			63\R_{in}{}+63\cdot10=13\R_{in}{}+13\cdot50\\
+			50\R_{in}=20\\
+			\boxed{\R_{in}=\SI{0.4}{\ohm}}
+		\end{gather*}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{gather*}
+			\dfrac{15}{26}=\dfrac{\V}{\R_{in}{}+10}\\[2ex]
+			\dfrac{15}{26}\cdot\left(0.4+10\right)=\V\\[2ex]
+			\boxed{\V=\SI{6}{\volt}}
+		\end{gather*}
+	\end{minipage}
+\end{solution}
+
+\end{questions}
+\end{document}

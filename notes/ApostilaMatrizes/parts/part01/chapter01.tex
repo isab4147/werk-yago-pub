@@ -1,0 +1,79 @@
+\chapter{Introdução}
+
+\section{Um pouco de contexto}
+
+Historicamente, as matrizes foram utilizadas para a resolução de sistemas lineares (a \autoref{p:3} é inteiramente dedicada a este tópico) que são, basicamente, conjuntos de equações com uma ou mais incógnitas.
+
+Eram conhecidas como \textit{tabelas} (do francês \textit{tableau}), nome (aparentemente) dado por \textit{Cauchy}, em 1826. O nome \textit{matriz} (derivado do latim \textit{mater} - \textit{mãe}, que também tem a conotação de \textit{útero}) surgiu depois, em 1850, quando o matemático inglês \textit{James Joseph Sylvester} veio a nomeá-las com a ideia de que matrizes seriam \textit{úteros} de determinantes (ele estava se referindo aos \textit{cofatores}, que serão discutidos no \autoref{chap:cof} da \autoref{p:2}), pois "dariam luz"~à vários desses.
+
+Quem primeiro deu vida às matrizes como entidades matemáticas independentes foi \textit{Arthur Cayley}, que definiu operações básicas com matrizes (que serão discutidas nos Capítulos \ref{chap:opermat} e \ref{chap:multmat}). Antes de \textit{Cayley} as matrizes eram meros ingredientes dos determinantes (que serão discutidos na \autoref{p:2}), que eram o tópico de estudo até então.
+
+No início do século passado, as matrizes se estabeleceram como ferramentas fundamentais para o estudo da álgebra linear (que é um ramo da matemática que estuda os sistemas de equações lineares).
+
+\section{Definição}
+
+Uma \textit{matriz} consiste em uma estrutura organizada em \textbf{linhas} e \textbf{colunas}, composta de elementos que podem ser \textbf{números}, \textbf{símbolos} ou \textbf{expressões}. Representamos o \textbf{tamanho} da matriz por $m \times n$, onde $m$ se refere ao número de \textbf{linhas} e $n$ ao número de \textbf{colunas}.
+
+\begin{multicols}{2}
+    \noindent Podemos ver na matriz ao lado o uso de \textbf{índices} para indicar a \textit{posição} de seus elementos. 
+    
+    \noindent O índice $mn$ de um elemento $a$ da matriz $A$ indica que o elemento $a$ se encontra na linha $m$ e na coluna $n$. Esse índice abstrato pode ser dado por quaisquer letras de escolha, um caso comum é usarmos as letras $i$ e $j$ para indicar linha e coluna respectivamente.
+    
+    \columnbreak
+        
+    \null
+    
+	\begin{tikzmatrix}[]
+		
+		\matrix(M)[matstyle]{
+			a_{11} \& a_{12} \\
+			a_{21} \& a_{22} \\
+		};
+		
+		\node [left=of M] {$A_{2 \times 2} =$};
+		
+		\draw[thick, draw=greenAr!80, <-] (M-1-1.north) ++(0, 5pt) -- node[right] {\textit{1\textsuperscript{a} coluna}} +(0, 20pt);
+		
+		\draw[thick, draw=redAr!80, <-] (M-1-2.east) ++(5pt, 0) -- node[below, near end] {\textit{1\textsuperscript{a} linha}} +(20pt, 0);
+		
+	\end{tikzmatrix}
+    \centerline{\footnotesize{representação de uma matriz $2 \times 2$}}
+    
+    \vskip1em\null
+
+\end{multicols}
+
+\paragraph{Nota:} Geralmente usamos alguma \textbf{letra maiúscula} do nosso alfabeto para representar uma matriz $\left( A,B,C,\dots Z \right)$.
+
+\subsection{Representação}
+Uma matriz qualquer pode ser representada por:
+
+$$
+A_{m \times n} =
+\begin{bmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}
+$$
+
+Repare que para a indicação de matriz podemos usar tanto:
+$$
+\text{(I) parênteses: } A_{m \times n}=
+\begin{pmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots & \ddots & \vdots \\
+    a_{n1} & \cdots & a_{mn}
+\end{pmatrix}
+$$
+
+quanto:
+
+$$
+\text{(II) colchetes: }A_{m \times n}= \begin{bmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots & \ddots & \vdots \\
+    a_{n1} & \cdots & a_{mn}
+\end{bmatrix}
+$$

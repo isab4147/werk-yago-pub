@@ -1,0 +1,212 @@
+\chapter{Multiplicação de matrizes}
+\label{chap:multmat}
+
+\section{Definição:}
+Dadas duas matrizes $A_{(m \times n)}$  e $B_{(n \times j)}$, a \textit{multiplicação} de $A$ por $B$, escrita como $A\cdot B$ vai se dar em algumas etapas:
+
+\subsection{Condição de existência}
+A \textit{multiplicação de matrizes} só vai ser possível se o \textbf{número de colunas} da primeira for \textbf{igual} ao \textbf{número de linhas} da segunda ($A_{(m \times n)}$  e $B_{(n \times j)}$).
+
+\subsection{Formato}
+Após checada a condição de existência podemos prosseguir para o cálculo da multiplicação. O resultado dessa multiplicação terá dimensões $m \times j$, ou seja, terá \textbf{tantas linhas} quanto a matriz $A$ e \textbf{tantas colunas} quanto a matriz $B$.
+
+\subsection{Cálculo}
+A matriz $C=A\cdot B$ terá seus elementos $c_{ik}$ obtidos tomando-se a \textbf{linha} $i$ da matriz $A$ e a \textbf{coluna} $k$ da matriz $B$ \textbf{multiplicando-se} seus elementos \textbf{respectivos} (1\textsuperscript{o} com 1\textsuperscript{o}, 2\textsuperscript{o} com 2\textsuperscript{o}, em diante...) e \textbf{somando os produtos}.
+
+\paragraph{Nota:}
+A matriz $A\cdot B$ será \textbf{diferente} da matriz $B\cdot A$, não só por conta da \textbf{condição de existência} e do \textbf{formato}, mas também porque o cálculo de $A\cdot B$ tomará as \textbf{linhas} de $A$ e as \textbf{colunas} de $B$, e o cálculo de $B\cdot A$ tomará as \textbf{linhas} de $B$ e as \textbf{colunas} de $A$, o que é um processo \textbf{completamente} diferente.
+
+\Example
+
+\begin{gather*}
+    \text{Dados }A=\begin{bmatrix*}[r]
+    a_{11} & a_{12} \\ a_{21} & a_{22} 
+    \end{bmatrix*} \text{ e }B=\begin{bmatrix*}[r]
+    b_{11} & b_{12} \\ b_{21} & b_{22}
+    \end{bmatrix*} \text{, seja } C=A \cdot B
+\end{gather*}
+Calculamos $C$ fazendo:
+\begin{gather*}
+    C=\begin{bmatrix*}[r]
+    c_{11} & c_{12} \\ c_{21} & c_{22}
+    \end{bmatrix*}\text{, onde }\\
+    \begin{aligned}
+        c_{11}=a_{11} \cdot b_{11} + a_{12} \cdot b_{21} \\
+        c_{12}=a_{11} \cdot b_{12} + a_{12} \cdot b_{22} \\
+        c_{21}=a_{21} \cdot b_{11} + a_{22} \cdot b_{21} \\
+        c_{22}=a_{21} \cdot b_{12} + a_{22} \cdot b_{22} \\
+    \end{aligned} \\
+    \text{resultando em }C=\begin{bmatrix*}[r]
+    a_{11} \cdot b_{11} + a_{12} \cdot b_{21} &
+    a_{11} \cdot b_{12} + a_{12} \cdot b_{22} \\
+    a_{21} \cdot b_{11} + a_{22} \cdot b_{21} &
+    a_{21} \cdot b_{12} + a_{22} \cdot b_{22}
+    \end{bmatrix*}
+\end{gather*}
+
+\subsection{Ilustrado}
+
+\input{parts/part01/multinpractice/tikzmultex.tex}
+
+\section{Na prática}
+
+\begin{gather*}
+    \text{Dadas as matrizes }A=\begin{bmatrix*}[r]
+    1 & -5 & 7 \\ 12 & 3 & -9
+    \end{bmatrix*} \text{ e }B=\begin{bmatrix*}[r]
+    4 & -2 \\ -3 & 1 \\ 2 & 7
+    \end{bmatrix*} \\ \text{calculamos }C=A \cdot B \text{ pelos seguinte passos:}
+\end{gather*}
+
+\begin{enumerate}
+    \item Primeiro devemos checar a condição de existência do produto: 
+    
+    Podemos ver que $A_{2\times3}\cdot B_{3\times 2}$ obedece à condição de existência. \checkmark
+    
+    \item Agora vamos determinar as dimensões do produto $A\cdot B$: 
+    
+    Tomando a quantidade de linhas de $A$ (2) e a quantidade de colunas de $B$ (2) temos $C_{2\times2}$.
+    
+    \item Agora preencheremos a matriz resultante:
+
+\end{enumerate}
+
+\subsection{Usando a definição}
+
+\begin{gather*}
+    A=\begin{bmatrix*}[r]
+    1 & -5 & 7 \\ 12 & 3 & -9
+    \end{bmatrix*} \text{ e }B=\begin{bmatrix*}[r]
+    4 & -2 \\ -3 & 1 \\ 2 & 7
+    \end{bmatrix*} \text{, logo }C=\begin{bmatrix*}[r]
+    c_{11} & c_{12} \\ c_{21} & c_{22}
+    \end{bmatrix*}\text{, onde} \\
+    c_{11} = 1 \cdot 4 + (-5) \cdot (-3) + 7 \cdot 2 \\
+    c_{12} = 1 \cdot (-2) + (-5) \cdot 1 + 7 \cdot 7 \\
+    c_{21} = 12 \cdot 4 + 3 \cdot (-3) + (-9) \cdot 2 \\
+    c_{22} = 12 \cdot (-2) + 3 \cdot 1 + (-9) \cdot 7 \\
+    \text{resultando em }C=\begin{bmatrix*}[r]
+    4 + 15 + 14 &
+    (-2) + (-5) + 49 \\
+    48 + (-9) + (-18) &
+    (-24) + 3 + (-63)
+    \end{bmatrix*}=\begin{bmatrix*}[r]
+    34 & 42 \\
+    21 & -80
+    \end{bmatrix*}
+\end{gather*}
+
+\subsection{Uma visão alternativa}
+
+Vamos preencher a matriz $C$ num ziguezague, conforme a figura abaixo.
+
+\begin{center}
+    \begin{tikzpicture}[node distance = 8pt,every left delimiter/.style={xshift=.75em},
+        every right delimiter/.style={xshift=-.75em}, ampersand replacement=\&]
+        
+        \matrix(M)[matstyle]{
+            c_{11} \& c_{12} \\
+            c_{21} \& c_{22} \\
+        };
+        \node [left=of M] {$C=$};
+        \begin{scope}[on background layer, every node/.style={circle,fill=white, above=-5pt,inner sep=1pt}]
+            \draw[->, color=redAr!50] (M-1-1.north) to node[] {\small1} (M-1-2.north);
+            \draw[->, color=redAr!50] (M-1-2.center) to node[] {\small2} (M-2-1.center);
+            \draw[->, color=redAr!50] (M-2-1.south) to node[] {\small3} (M-2-2.south);
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+Começamos, então, pelo elemento $c_{\textcolor{red}{1}\textcolor{teal}{1}}$. O digito \textcolor{red}{vermelho} se refere ao número da \textbf{linha} da primeira matriz e o digito \textcolor{teal}{azul} ao número da \textbf{coluna} da segunda matriz.
+
+Nesse caso pegaremos a primeira \textbf{linha} da matriz $B$ e a primeira \textbf{coluna} da matriz $A$ e vamos multiplicá-las.
+
+$$
+c_{11}=\begin{bmatrix*}[r]
+1 & -5 & 7
+\end{bmatrix*}\cdot\begin{bmatrix*}[r]
+4 \\ -3 \\ 2
+\end{bmatrix*}
+$$
+
+Agora podemos ter uma visão mais clara do processo. Se fizermos a \textit{transposta} da linha de $B$ ficamos com:
+
+$$
+c_{11}=\begin{bmatrix*}[r]
+1 \\ -5 \\ 7
+\end{bmatrix*}\cdot\begin{bmatrix*}[r]
+4 \\ -3 \\ 2
+\end{bmatrix*}
+$$
+
+A operação pode, então, ser feita facilmente agora. Vamos multiplicar os elementos correspondentes e somar todos no final, conforme é mostrado abaixo:
+
+\begin{multicols}{3}
+    $$
+    \begin{array}{l c r}
+        c_{11}= & ~ & 1\cdot4 \\
+        ~ & \multicolumn{2}{l}{(-5)\cdot(-3)}\\
+        ~ & + & 7\cdot2\\
+        \cline{2-3} ~ & ~ & 33
+    \end{array}
+    $$
+    \columnbreak
+    \centering
+    
+    \null
+    \noindent OU
+    \vskip2em\null
+    
+    \columnbreak
+    \null
+    
+    \begin{align*}
+        c_{11}&=\tikzmark{a1}1\cdot\tikzmark{b1}4 + (-\tikzmark{a2}5)\cdot(-\tikzmark{b2}3) + \tikzmark{a3}7\cdot\tikzmark{b3}2 \\
+              &=4 + 15 + 14 = 33
+    \end{align*}
+    
+    \vskip1em\null
+\end{multicols}
+\begin{tikzoverlay}[node distance=2em]
+    \foreach \num in {1, 3} {
+        \node (aa\num) [above = of a\num, xshift=2pt] {\footnotesize $a_{1\num}$};
+        \node (ba\num) [above = of b\num, xshift= 6pt] {\footnotesize $b_{1\num}$};
+    }
+    \node (aa2) [above = of a2] {\footnotesize $a_{12}$};
+    \node (ba2) [above = of b2] {\footnotesize $b_{12}$};
+    
+    \foreach \num in {1, 3}{
+        \draw[->] (aa\num) -- +(0,-1.8em);
+        \draw[->] (ba\num) -- +(-3pt, -1.9em);
+    }
+    
+    \draw[->] (aa2) -- +(0, -1.8em);
+    \draw[->] (ba2) -- +(0, -1.8em);
+
+\end{tikzoverlay}
+\begin{minipage}{\textwidth}
+    \begin{multicols}{2}
+        \noindent Essa operação seria o equivalente a preencher o primeiro elemento do diagrama:
+        \smallskip
+    
+        \input{parts/part01/multinpractice/mult1.tex}
+        
+        \columnbreak
+        
+        \noindent Podemos fazer o mesmo com os outros elementos da matriz $C$:
+        \begin{align*}
+            c_{12}&=1\cdot(-2) + (-5) \cdot 1 + 7 \cdot 7=42\\
+            c_{21}&= 12\cdot4 +3\cdot(-3)+ (-9)\cdot2=21\\
+            c_{22}&= 12\cdot(-2)+3 \cdot1 +(-9)\cdot7=-84
+        \end{align*}
+        
+        \noindent Preenchendo a matriz $C$, temos:
+        $$
+        C=
+        \begin{bmatrix*}[r]
+            33 & 42 \\21 & -84
+        \end{bmatrix*}
+        $$
+        \null
+    \end{multicols}
+\end{minipage}

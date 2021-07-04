@@ -1,0 +1,181 @@
+\chapter{Classificação dos sistemas lineares}
+
+\section{Introdução}
+
+A partir do teorema de \textit{Cramer} e da técnica do \textit{escalonamento} podemos \textbf{classificar} os sistemas lineares em \textbf{três} tipos:
+
+\begin{enumerate}[label=(\Roman*), align=Center]
+    \item S.P.D. $\Rightarrow$ Sistema Possível Determinado
+    \item S.P.I. $\Rightarrow$ Sistema Possível Indeterminado
+    \item S.I. $\Rightarrow$ Sistema Impossível
+
+\end{enumerate}
+
+O primeiro já foi abordado anteriormente (veja o \autoref{chap:cram}). Todo sistema onde o determinante dos coeficientes (chamado $D$) for diferente de $0$ será S.P.D.
+
+O segundo e terceiro tipos ocorrerão quando $D=0$. No segundo teremos \textbf{infinitas soluções possíveis} e no terceiro, \textbf{nenhuma} (daí o nome \textit{impossível}).
+
+\section{Classificação}
+No exemplo do \autoref{chap:esc} usamos um sistema onde $D\neq 0$ e, então, caímos no caso S.P.D., porém se fosse o caso $D=0$ a classificação em S.P.I. ou S.I. se faria necessária.
+
+\begin{enumerate}[label=(\Roman*), align=Center]
+    \item O caso \textbf{S.P.I.} ocorre quando:
+    \begin{enumerate}
+        \item após o escalonamento, ocorrer uma expressão do tipo:
+        $$
+        0a+0b+0c+\dots+0z=0 \text{ onde ($a$, $b$, $c$, $\dots$, $z$) representam incógnitas.}
+        $$
+        
+        Repare que nesse caso temos \textbf{incógnitas} do sistema com coeficiente \textbf{igual à $\mathbf{0}$ igualadas à $\mathbf{0}$}.
+        
+        \item os determinantes $D_i$ para as incógnitas do sistema forem iguais à zero.
+    \end{enumerate}
+    
+    \item O caso \textbf{S.I.} ocorre quando:
+    \begin{enumerate}
+        \item após o escalonamento ocorrer uma expressão do tipo:
+        $$
+        0a+0b+0c+\dots+0z \neq 0 \text{ onde ($a$, $b$, $c$, $\dots$, $z$) representam incógnitas.}
+        $$
+        
+        Repare que nesse caso temos incógnitas do sistema com coeficientes \textbf{iguais à $\mathbf{0}$}, porém igualadas à um valor \textbf{diferente de $\mathbf{0}$}, o que é \textbf{impossível}, afinal $\mathbf{0x=0}$ para \textbf{qualquer valor de $\mathbf{x}$}, e o \textbf{contrário} disso é \textbf{absurdo!}
+        
+        \item os determinantes $D_i$ para as incógnitas do sistema forem diferentes de zero.
+        
+    \end{enumerate}
+    
+    \paragraph{Nota:}
+        Os dois casos para S.I. e S.P.I. são equivalentes, portanto podemos testá-los tanto por determinantes quanto por escalonamento.
+\end{enumerate}
+
+\section{Resolvendo sistemas S.P.I. e S.I. com variáveis \texorpdfstring{$a$}{a} e \texorpdfstring{$b$}{b}}
+
+Podemos nos deparar com sistemas lineares onde algum ou alguns de seus coeficientes são representados por uma variável $a$, e talvez algum de seus termos independentes seja representado por outra variável, $b$.
+
+\paragraph{Nota:}
+as variáveis não necessariamente tem que ser representadas por $a$ e $b$, podendo ser quaisquer letras de escolha (frequentemente são $m$ e $k$).
+
+\medskip
+
+Para resolver esse tipo de sistema devemos dividi-lo em \textbf{casos}. O enunciado geralmente pede para que \textit{discutamos} o sistema.
+$$\text{Seja o sistema }S_1\begin{cases}
+2x+y=1\\
+2x-ay=-3
+\end{cases}$$
+
+Podemos começar resolvendo-o pelo teorema de \textit{Cramer}:
+$$
+D=\begin{vmatrix}
+2 & 1\\
+2 & -a
+\end{vmatrix}\Rightarrow D=2\cdot (-a) -1\cdot 2\Rightarrow D=-2\cdot a-2
+$$
+
+Para que o sistema seja S.P.D. devemos ter $D\neq 0$, então, para que \textbf{não} seja S.P.D. devemos ter $D=0$, ou, substituindo:
+$$
+-2\cdot a-2=0\Rightarrow a=-1
+$$
+
+Agora que achamos o valor de $a$ para que o sistema não seja S.P.D., basta descobrirmos se ele será S.P.I. ou S.I.
+
+Vamos substituir $a$ por $-1$ no sistema.
+$$
+S_1\begin{cases}
+2x+y=1\\
+2x-(-1)y=-3
+\end{cases}\Rightarrow\begin{cases}
+2x+y=1\\
+2x+y=-3
+\end{cases}
+$$
+
+Usando a primeira expressão como referência, por escalonamento temos:
+$$S_a\times k+S_b=0$$
+
+Para zerar o coeficiente de $x$ na segunda expressão temos:
+$$2\cdot k+2=0\Rightarrow k=-1$$
+
+Multiplicando a primeira expressão por $-1$ e somando à segunda, temos:
+\begin{gather*}
+    (2x+y=1) \times (-1)+S_b \Rightarrow\\ -2x-y=-1 + S_b\Rightarrow\\
+    \begin{aligned}
+    -2x-y&=-1\\
+    \mathbf{+}~~2x+y&=-3\\\midrule
+    0x+0y&=-4
+    \end{aligned}
+\end{gather*}
+
+Claramente, para $D=0$ o sistema é \textbf{impossível}.
+
+\medskip
+
+A discussão desse sistema, então, será:
+
+\begin{enumerate}[label={Caso (\Roman*)}, align=Center]
+    \item quando $a\neq-1$ teremos $D\neq0$ e o sistema será S.P.D.
+    \item quando $a=-1$ o sistema será S.I.
+\end{enumerate}
+
+Outra possibilidade de sistema é:
+$$
+S_2\begin{cases}
+x-y=2\\
+2x+ay=b
+\end{cases}
+$$
+
+Onde temos as variáveis $a$ e $b$.
+
+Novamente, dividiremos em casos, começando pela aplicação do teorema de \textit{Cramer}.
+$$
+D=\begin{vmatrix}
+1 & -1\\
+2 & a
+\end{vmatrix}\Rightarrow D=1\cdot a-(-1)\cdot 2\Rightarrow D=a+2
+$$
+
+Para que o sistema seja S.P.D. segue que $D\neq 0$, substituindo, temos:
+$$
+a+2\neq 0\Rightarrow a\neq -2
+$$
+
+Para que o sistema não seja S.P.D. temos que $D=0$, ou, substituindo, $a=-2$.
+Substituindo $a$ no sistema ficamos com
+$$
+S_2 \begin{cases}
+x-y=2\\
+2x+(-2)y=b
+\end{cases} \Rightarrow S_2 \begin{cases}
+x-y=2\\
+2x-2y=b
+\end{cases}
+$$
+
+Usando a primeira expressão como referência, por escalonamento, temos:
+$$
+S_a \times k + S_b=0
+$$
+
+Para zerar o coeficiente de $x$ na segunda expressão temos
+$$1\cdot k + 2= 0\Rightarrow k=-2$$
+
+Multiplicando a primeira expressão por $-2$ e somando à segunda, temos
+\begin{gather*}
+    (x-y=2) \times (-2) + S_b \Rightarrow\\
+    -2x+2y=-4 + S_b\Rightarrow\\
+    \begin{aligned}
+    -2x+2y&=-4\\
+    \mathbf{+}~~2x-2y&=b\\\midrule
+    0x+0y&=b-4
+    \end{aligned}
+\end{gather*}
+
+Agora temos dois casos, um onde o termo independente é igual a zero e, portanto, o sistema será S.P.I. e outro onde o termo independente é diferente de zero e o sistema será S.I.
+
+Basta, por fim, discuti-los junto ao caso $D\neq0$.
+
+\begin{enumerate}[label={Caso (\Roman*)}, align=Center]
+    \item quando $a\neq -2$ teremos $D\neq0$ e o sistema será S.P.D.
+    \item quando $a=-2$ e $b-4=0$ (portanto, $b=4$) segue que o sistema será S.P.I
+    \item quando $a=-2$ e $b-4\neq 0$ (logo $b\neq4$) segue que o sistema será S.I
+\end{enumerate}

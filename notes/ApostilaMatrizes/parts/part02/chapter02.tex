@@ -1,0 +1,43 @@
+\chapter{Cofator}
+\label{chap:cof}
+
+\section{Definição}
+Dada uma matriz quadrada $A$, o cofator de $A_{ij}$ é definido como o determinante (com sinal característico) da matriz $A$ obtido \textbf{suprimindo-se} a linha $i$ e a coluna $j$ da matriz original $A$.
+
+Basicamente, um cofator é definido como o \textbf{determinante} de um \textit{recorte} da matriz original, com um sinal específico.
+
+\section{Na prática}
+Esse recorte se dá da seguinte forma:
+
+$$
+\text{Se }A=\begin{bmatrix*}[r]
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{bmatrix*} \text{, fazendo o recorte do cofator $A_{11}$ ficamos com}
+$$
+\vspace{-10pt}
+\begin{tikzmatrix}
+    \tikzset{faded/.style={color=red!50}}
+    
+    \matrix(M)[matstyle]{
+        |[faded]|a_{11} \& |[faded]|a_{12} \& |[faded]|a_{13} \\
+        |[faded]|a_{21} \& a_{22} \& a_{23} \\
+        |[faded]|a_{31} \& a_{32} \& a_{33} \\
+    };
+    \node[left=of M] {$A_{11}=\det$};
+    \node[right=of M] {$
+\Rightarrow A_{11}=\begin{vmatrix*}[r]
+a_{22} & a_{23} \\
+a_{32} & a_{33}
+\end{vmatrix*}
+$};
+    
+    \draw[thick] (M-1-1.west) -- (M-1-3.east)
+    (M-1-1.north) -- (M-3-1.south);
+        
+\end{tikzmatrix}
+
+Agora que o recorte está feito, basta tirar o determinante da matriz que sobrou e colocar um sinal nele para conseguir o cofator.
+
+O sinal será explicado em detalhe no próximo capítulo, mas consiste em multiplicar o determinante por $(-1)^{i+j}$ onde $i$ e $j$ são o número da linha e da coluna que suprimimos.

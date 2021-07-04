@@ -1,0 +1,22 @@
+\begin{tikzscale}[0.8]
+	\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+	\tkzDrawTriangle[pythagore](A,B)
+
+	\tkzLabelSegment[below=2pt, xshift=3pt](A,B){$b$}
+	\tkzLabelSegment[right=2pt, yshift=-2pt](B,C){$a$}
+	\tkzLabelSegment[above left](A,C){$c$}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+	\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+	%\tkzLabelPoint[xshift=-0.5cm, yshift=16pt](B){$\theta$}
+
+	\tkzMarkAngle[size=1](B,A,C)
+	\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\alpha$}
+
+	\tkzLabelPoint[xshift=-12pt](A){$A$}
+	\tkzLabelPoint[xshift=-2pt](B){$C$}
+	\tkzLabelPoint[yshift=12pt, xshift=-2pt](C){$B$}
+
+	\tkzMarkAngle[size=0.8](A,C,B)
+	\tkzLabelPoint[xshift=-18pt, yshift=-15pt](C){$\beta$}
+\end{tikzscale}

@@ -1,0 +1,116 @@
+\chapter{Teorema de Jacobi}
+
+\section{Introdução}
+O teorema diz que, se tomarmos uma matriz quadrada qualquer $A$ podemos \textbf{somar} uma coluna $c$ dessa matriz à uma outra coluna $c'$ qualquer (também da matriz) multiplicada por uma \textbf{constante} $k$ de escolha, e esse processo \textbf{não altera} o valor do determinante dessa matriz.
+
+\Example
+
+\begin{gather*}
+    \text{Dada a matriz }A=\begin{bmatrix*}[r]
+        a_{11} & a_{12} \\
+        a_{21} & a_{22}
+    \end{bmatrix*} \text{, podemos fazer} \\
+    \begin{bmatrix*}[r]
+        a_{11} & a_{12} + k \cdot a_{11} \\
+        a_{21} & a_{22} + k \cdot a_{22}
+    \end{bmatrix*} \text{, onde } \det B = \det A
+\end{gather*}
+
+\section{Aplicação}
+A utilidade desse teorema não é clara à primeira vista, mas vamos discorrer uma técnica que esclarece seu uso:
+
+\begin{enumerate}
+    \item Primeiro devemos tomar uma \textbf{coluna de referência}, vamos usar a primeira coluna (em \textcolor{red}{vermelho}).
+    $$
+    A=\begin{bmatrix*}[r]
+    \color{red}4 & -2 & 8 \\
+    \color{red}3 & 7 & -2 \\
+    \color{red}5 & 1 & -1
+    \end{bmatrix*}
+    $$
+    \item Agora temos que escolher uma linha. Para o exemplo vamos usar a primeira (em \textcolor{green}{verde}).
+    $$
+    \begin{bmatrix*}[r]
+    \color{green}-2 & \color{green}8 \\
+    7 & -2 \\
+    1 & -1
+    \end{bmatrix*}
+    $$
+    \item Vamos aplicar o teorema de \textit{Jacobi} de modo a \textbf{zerar} essa linha. Para facilitar podemos usar uma equação. Para zerar o $-2$ podemos fazer:
+    $$
+    -2 + 4 \cdot k_1 = 0 \Rightarrow k_1 = \sfrac{1}{2}
+    $$
+    \item Repare o que ocorre:
+    \begin{enumerate}
+        \item Pegamos a coluna de referência e vamos usá-la com \textit{Jacobi} nas duas outras.
+        \item Escolhemos alguma linha e vamos usar o teorema com o objetivo de zerá-la.
+    \end{enumerate}
+    \item Continuando. Para zerar o $8$ segue:
+    $$
+    8+4 \cdot k_2 = 0 \Rightarrow k_2 = -2
+    $$
+\end{enumerate}
+
+\paragraph{Nota:}
+Repare que para cada coluna podemos usar uma constante \textbf{diferente} ($k_1$ e $k_2$ nesse caso).
+
+\smallskip
+
+Aplicando o teorema na segunda coluna (em \textcolor{teal}{azul}) ficamos com:
+
+\vskip2.5em
+
+\begin{minipage}{\textwidth}
+$$
+A=\begin{bmatrix*}[r]
+\tikzmark{m1c1}4 & \textcolor{teal}{-2}+\sfrac{1}{2}\cdot\tikzmark{m1c2}4 & 8 \\
+3 & \textcolor{teal}{7}+\sfrac{1}{2}\cdot3 & -2 \\
+5 & \textcolor{teal}{1}+\sfrac{1}{2}\cdot5 & -1
+\end{bmatrix*}
+$$
+
+\begin{tikzoverlay}
+    \curvedarrow[redAr!80, thick] (m1c1:0.5 m1c2:0.5);
+\end{tikzoverlay}
+\end{minipage}
+    
+A coluna de referência é \textbf{multiplicada} pela \textbf{constante} e \textbf{somada} à segunda coluna, realizando a operação ficamos com:
+
+$$
+A=\begin{bmatrix*}[r]
+4 & -2+2 & 8 \\
+3 & 7+\sfrac{3}{2} & -2\\
+5 & 1+\sfrac{5}{2} & -1
+\end{bmatrix*} \Rightarrow A=\begin{bmatrix*}[r]
+4 & 0 & 8\\
+3 & \sfrac{17}{2} & -2\\
+5 & \sfrac{7}{2} & -1
+\end{bmatrix*}
+$$
+
+Agora vamos aplicar o teorema à terceira coluna usando a outra constante ($-2$):
+
+\vskip2.5em
+
+\begin{gather*}
+    A=\begin{bmatrix*}[r]
+    \tikzmark{m2c1}4 & 0 & 8+(-\tikzmark{m2c3}2) \cdot 4\\
+    3 & \sfrac{17}{2} & -2+(-2)\cdot3\\
+    5 & \sfrac{7}{2} & -1+(-2)\cdot5
+    \end{bmatrix*}\Rightarrow\\
+    A=\begin{bmatrix*}[r]
+    4 & 0 & 8-8\\
+    3 & \sfrac{17}{2} & -2-6\\
+    5 & \sfrac{7}{2} & -1-10
+    \end{bmatrix*}\Rightarrow A=\begin{bmatrix*}[r]
+    4 & 0 & 0\\
+    3 & \sfrac{17}{2} & -8\\
+    5 & \sfrac{7}{2} & -11
+    \end{bmatrix*}
+\end{gather*}
+
+\begin{tikzoverlay}
+    \curvedarrow[redAr!80,thick] (m2c1:0.5 m2c3:0.5);
+\end{tikzoverlay}
+
+Agora podemos ver como esse teorema pode ser útil, se quisermos usar o \textit{teorema de Laplace} para encontrar o determinante da matriz $A$ faremos pouquíssimas operações pois temos uma fileira quase toda zerada.

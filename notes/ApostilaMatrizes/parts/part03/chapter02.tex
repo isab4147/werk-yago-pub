@@ -1,0 +1,103 @@
+\chapter{Forma matricial}
+
+Todo sistema linear pode ser escrito na \textit{forma matricial}, realizando alguns passos...
+
+\section{Passo a passo}
+
+\begin{enumerate}
+    \item É necessário avaliar se nosso sistema é ou não linear.
+    
+    \item É necessário organizar o sistema de forma adequada.
+    
+    \Example
+    
+    \begin{gather*}
+        \text{Dado o sistema }S_1\begin{cases}
+        \textcolor{red}{2x}+\textcolor{green}{3y}-4=0\\
+        \textcolor{green}{-~y}+\textcolor{red}{x}=2
+        \end{cases} \text{, podemos reescrevê-lo como:}\\
+        S_1\begin{cases}
+        \textcolor{red}{2x}+\textcolor{green}{3y}=4\\
+        \textcolor{red}{x}+(\textcolor{green}{-~y})=2
+        \end{cases}
+    \end{gather*}
+    
+    \paragraph{Note que:}
+    
+    \begin{enumerate}
+        \item \textbf{Separamos} as incógnitas (junto com seus coeficientes) do \textbf{termo independente}.
+        \item Colocamos incógnitas \textbf{correspondentes} na mesma \textbf{coluna} (\textcolor{green}{verde} em baixo de \textcolor{green}{verde} e \textcolor{red}{vermelho} em baixo de \textcolor{red}{vermelho}).
+    \end{enumerate}
+    
+    \item Vamos \textbf{identificar} os coeficientes e escrevê-los:
+    
+    \Example
+    
+    \begin{gather*}
+        \text{Dado o sistema }S_2\begin{cases}
+        x-3y+2z=2\\
+        2y-z=1
+        \end{cases} \text{, podemos reescrevê-lo como:}\\
+        S_2\begin{cases}
+        1x-3y+2z=2\\
+        0x+2y-z=1
+        \end{cases}
+    \end{gather*}
+    
+    O passo a passo pode ser descrito como:
+    
+    \begin{enumerate}
+        \item \textbf{Identificamos} quais são as incógnitas (no caso, $x$, $y$ e $z$).
+        
+        \item \textbf{Reescrevemos a equação} (similar ao passo anterior), mas agora colocando os coeficientes \textbf{explicitamente} (sem omitir $0$’s ou $1$’s).
+        
+    \end{enumerate}
+    
+    \item Vamos escrever os \textbf{coeficientes} em \textbf{colunas} de uma matriz (cada sistema será \textbf{uma linha}).
+    
+    \Example
+    
+    \begin{gather*}
+        S_3\begin{cases}
+        2x-1y+1z=0\\
+        0x+1y-1z=3\\
+        5x+2y-3z=-2
+        \end{cases}\\
+        \begin{bmatrix*}[r]
+        2 & -1 & 1\\
+        0 & 1 & -1\\
+        5 & 2 & -3
+        \end{bmatrix*}
+    \end{gather*}
+    
+    \item Vamos reescrever a matriz do passo anterior sendo \textbf{multiplicada} por uma matriz com as incógnitas.
+    
+    A partir do último exemplo:
+    
+    $$
+    \begin{bmatrix*}[r]
+        2 & -1 & 1\\
+        0 & 1 & -1\\
+        5 & 2 & -3
+    \end{bmatrix*} \cdot \begin{bmatrix*}[r] x\\y\\z \end{bmatrix*}
+    $$
+    
+    Repare que elas estão escritas na \textbf{mesma ordem}, porém de cima pra baixo.
+    
+    \item Por fim, basta \textbf{igualar} esse produto aos termos independentes, também em forma de matriz.
+    
+    Continuando o exemplo dos passos anteriores:
+    
+    $$
+    \begin{bmatrix*}[r]
+        2 & -1 & 1\\
+        0 & 1 & -1\\
+        5 & 2 & -3
+    \end{bmatrix*} \cdot \begin{bmatrix*}[r] 
+    x\\y\\z 
+    \end{bmatrix*}=\begin{bmatrix*}[r]
+    0 & 3 & -2
+    \end{bmatrix*}
+    $$
+    
+\end{enumerate}

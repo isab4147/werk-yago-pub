@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tabularx,float,array,longtable,booktabs,multirow,makecell,siunitx}
+
+\sisetup{per-mode=symbol,output-decimal-marker={,}}
+\DeclareSIUnit{\ppm}{ppm}
+
+
+\begin{document}
+\begin{longtable}{cp{8.5cm}c}
+	\toprule
+	\thead{\normalsize\bfseries Nível de CO$_2$}                           & \thead{\normalsize\bfseries Efeitos na saúde}                     & \thead{\normalsize\bfseries Exposição} \\ \midrule
+	\SI{280}{\ppm}
+	$\sim$
+	\SI{300}{\ppm}                                                         & {Níveis pré-industriais - sem efeitos}                            & Toda a vida                            \\ \midrule
+	\SI{400}{\ppm}                                                         & {Níveis médios atuais - sem efeitos conhecidos}                   & Toda a vida                            \\ \midrule
+	\SI{800}{\ppm}                                                         & {Níveis associados à síndrome do edifício doente
+	(Dor de cabeça, tontura, fadiga...)}                                   & Curto prazo                                                                                                \\ \midrule
+	\SI{950}{\ppm}
+	$\sim$
+	\SI{1000}{\ppm}                                                        & {Prejuízo moderado das funções cognitivas}                        & \SI{2.5}{\hour}$\sim$\SI{8}{\hour}     \\ \midrule
+	\SI{950}{\ppm}
+	$\sim$
+	\SI{1400}{\ppm}                                                        & {Sintomas físicos (respiratórios, na pele, nos olhos,
+	dores de cabeça, tontura, aumento na frequência cardíaca)}             & \SI{30}{\minute}                                                                                           \\ \midrule
+	\SI{1000}{\ppm}                                                        & {Níveis associados a doenças respiratórias, dores de cabeça,
+	dificuldade de concentração nas salas de aula}                         & Curto prazo                                                                                                \\ \midrule
+	\SI{1000}{\ppm}                                                        & {Estresse oxidativo e dano ao DNA de bactérias
+	(implicações de câncer em humanos)}                                    & \SI{3}{\hour}                                                                                              \\ \midrule
+	\SI{1000}{\ppm}                                                        & {Mudanças danosas na respiração, circulação e córtex cerebral}    & Pouco tempo                            \\ \midrule
+	\SI{1400}{\ppm}
+	$\sim$
+	\SI{3000}{\ppm}                                                        & {Prejuízo significativo das funções cognitivas, incluindo fadiga} & \SI{2.5}{\hour}$\sim$\SI{8}{\hour}     \\ \midrule
+	\SI{2000}{\ppm}                                                        & {Efeitos em rins animais (calcificação, provavelmente)}           & Estudos crônicos                       \\ \midrule
+	\SI{2000}{\ppm}
+	$\sim$
+	\SI{3000}{\ppm}                                                        & {Comportamento restritivo no sangue e níveis elevados de CO$_2$}  & \SI{3}{\hour}                          \\ \midrule
+	\SI{2000}{\ppm}
+	$\sim$
+	\SI{4000}{\ppm}                                                        & {Níveis insalubres de CO$_2$ no sangue -- 15\% acima do normal
+	inclui sonolência, dores de cabeça e variações na frequência cardíaca} & \SI{4}{\hour}                                                                                              \\ \midrule
+	\SI{2700}{\ppm}                                                        & {Aumento na frequência cardíaca}                                  & \SI{10}{\minute}                       \\ \midrule
+	\SI{2700}{\ppm}                                                        & {Sonolência mensurável em EEG}                                    & \SI{10}{\minute}                       \\ \midrule
+	\SI{5000}{\ppm}                                                        & {Limite de exposição máxima em um dia de trabalho}                & \SI{8}{\hour}                          \\ \midrule
+	\SI{5000}{\ppm}                                                        & {Níveis atuais de exposição máxima em submarinos e aeronaves}     & Durante operação                       \\ \midrule
+	\SI{5000}{\ppm}                                                        & {Calcificação dos rins e degradação dos ossos em porcos da índia} & 8 semanas                              \\ \midrule
+	\SI{5000}{\ppm}
+	$\sim$
+	\SI{6600}{\ppm}                                                        & {Dores de cabeça, letargia, mau humor, lentidão mental,
+	irritação emocional e interrupção do sono}                             & Curto prazo                                                                                                \\ \midrule
+	\SI{7000}{\ppm}                                                        & {Aumento de 35\% no fluxo sanguíneo cerebral
+	(implicações para efeitos cognitivos vistos em outros estudos)}        & 23 dias                                                                                                    \\ \midrule
+	\SI{8500}{\ppm}                                                        & {Aumento no espaço morto nos pulmões}                             & 20 dias                                \\ \midrule
+	\SI{10000}{\ppm}                                                       & {Calcificação dos rins, diminuição na formação de ossos e
+	reabsorção aumentada destes em porcos da índia}                        & 6 semanas                                                                                                  \\ \bottomrule
+\end{longtable}
+\end{document}

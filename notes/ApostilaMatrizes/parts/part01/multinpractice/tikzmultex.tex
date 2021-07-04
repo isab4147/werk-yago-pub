@@ -1,0 +1,54 @@
+\begin{center}
+    \begin{tikzpicture}[>=latex, ampersand replacement=\&]
+
+\matrix (A) [matstyle, nodes = {node style ge}] at (0,0)
+{
+  a_{11} \& a_{12} \& \ldots \& a_{1n}\\
+  |[node style sp]| a_{21} \& |[node style sp]| a_{22} \& \ldots \& |[node style sp]| a_{2n} \\
+  \vdots \& \vdots \& \ddots \& \vdots  \\
+  a_{m1} \& a_{m2} \& \ldots \& a_{mn}  \\
+};
+
+\node [draw,below=10pt] at (A.south) {$A$ : \textcolor{red}{$m$ linhas} $n$ colunas};
+
+\matrix (B) [matstyle, nodes = {node style ge}] at (6*\myunit,6*\myunit)
+{
+  b_{11} \& |[node style sp]| b_{12} \& \ldots \& b_{1j}  \\
+  b_{21} \& |[node style sp]| b_{22} \& \ldots \& b_{2j}  \\
+  \vdots \& \vdots \& \ddots \& \vdots  \\
+  b_{i1} \& |[node style sp]| b_{i2} \& \ldots \& b_{ij}  \\
+};
+
+\node [draw,above=10pt] at (B.north) { $B$ : $i$ linhas \textcolor{red}{$j$ colunas}};
+
+\matrix (C) [matstyle, nodes = {node style ge}] at (6*\myunit,0)
+{ 
+c_{11} \& c_{12} \& \ldots \& c_{1j} \\
+  c_{21} \& |[node style sp,red]| c_{22} \& \ldots \& c_{2j} \\
+  \vdots \& \vdots \& \ddots \& \vdots \\
+  c_{m1} \& c_{m2} \& \ldots \& c_{mj} \\
+};
+
+\draw[blue] (A-2-1.north) -- (C-2-2.north)
+            (A-2-1.south) -- (C-2-2.south)
+            (B-1-2.west)  -- (C-2-2.west)
+            (B-1-2.east)  -- (C-2-2.east);
+            
+\draw[<->,red](A-2-1) to[in=180,out=90]	node[arrow style mul] (x) {$a_{21}\times b_{12}$} (B-1-2);
+
+\draw[<->,red] (A-2-2) to[in=180,out=90]
+	node[arrow style mul] (y) {$a_{22}\times b_{22}$} (B-2-2);
+	
+\draw[<->,red](A-2-4) to[in=180,out=90]
+	node[arrow style mul] (z) {$a_{2n}\times b_{i2}$} (B-4-2);
+	
+\draw[red,->] (x) to node[arrow style plus] {$+$} (y)%
+                  to node[arrow style plus] {$+\raisebox{.5ex}{\ldots}+$} (z)%
+                  to (C-2-2.north west);
+
+
+\node [draw,below=10pt] at (C.south) 
+    {$ C=A\times B$ : \textcolor{red}{$m$ linhas}  \textcolor{red}{$j$ colunas}};
+
+\end{tikzpicture}
+\end{center}

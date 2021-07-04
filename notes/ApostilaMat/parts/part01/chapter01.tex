@@ -1,0 +1,226 @@
+\chapter{Operações matemáticas}
+
+\section{Introdução}
+
+Nosso estudo se inicia com as operações elementares da matemática, nomeadamente:
+
+\begin{RomanList}
+	\item Soma;
+	\item Subtração;
+	\item Multiplicação, e;
+	\item Divisão.
+\end{RomanList}
+
+Veremos, também, que as operações de subtração e divisão são simplesmente soma e subtração repetidas vezes.
+
+\section{Contagem}
+
+A contagem é, de certa forma, a operação mais essencial de todas, consiste em contar coisas e agrupá-las.
+
+\subsection{Contando elementos}
+
+Elementos são coisas, em geral, e serão o objeto de análise da contagem. Contamos usando os números naturais, isto é, $ 1,2,3,4,\ldots $. A contagem deve ser realizada na mesma ordem dos números naturais e é consistente, ou seja, toda vez que contarmos $ 5 $ de alguma coisa, se a quantidade dessa coisa não mudar, contaremos $ 5 $ se contarmos novamente. A contagem tampouco muda dependendo da ordem, por exemplo: se arrumarmos cartas de um baralho em um montinho podemos contar da cima, de baixo, ou de qualquer outra forma, contanto que contemos todas as cartas do montinho uma vez e uma vez somente, a contagem nos dará o mesmo resultado.
+
+\Example
+Podemos contar da esquerda pra direita...
+\begin{xkcdenv}[1]
+	
+	\draw[thick, -{Latex[length=8pt]}] (0.5,0.5) -- (3.5,0.5);
+	
+	\foreach \x/\y/\w in {0/0/below,1/1/above,2/0/below,3/1/above,4/0/below}{
+		\path (\x, \y) node[circle, xkcd, inner sep=0.3cm, draw] {} node[\w=15pt] {\pgfmathparse{int(\x + 1)}\pgfmathresult};
+	}
+	
+\end{xkcdenv}
+ou da direita pra esquerda...
+\begin{xkcdenv}[1, xscale=-1]
+	
+	\draw[thick, -{Latex[length=8pt]}] (0.5,0.5) -- (3.5,0.5);
+	
+	\foreach \x/\y/\w in {0/0/below,1/1/above,2/0/below,3/1/above,4/0/below}{
+		\path (\x, \y) node[circle, xkcd, inner sep=0.3cm, draw] {} node[\w=15pt] {\pgfmathparse{int(\x + 1)}\pgfmathresult};
+	}
+	
+\end{xkcdenv}
+o resultado será o mesmo, independentemente.
+
+\subsection{Agrupando elementos}
+
+O agrupamento de elementos é essencial para que entendamos o nosso sistema de representação de números, tópico que será abordado no final desse material, e consiste em formar grupos (daí o nome \textit{agrupamento} $=$ \textit{a} $+$ \textit{grupo} $+$ \textit{mento}) de elementos.
+
+Um grupo de elementos pode ser formado juntando-os em quantidades regulares, por exemplo:
+
+\Example
+Se juntarmos $ 10 $ elementos em grupos de $ 5 $, teremos $ 2 $ grupos.
+\begin{xkcdenv}[0.5]
+	
+	\draw (-1,-2) rectangle node[above=1.4cm] {grupo 1} (5, 3);
+	\draw (6,-2) rectangle node[above=1.4cm] {grupo 2} (12, 3);
+	
+	\foreach \x/\y/\w in {0/0/below,1/1/above,2/0/below,3/1/above,4/0/below}{
+		\path (\x, \y) node[circle, xkcd, inner sep=0.2cm, draw] {} node[\w=10pt] {\pgfmathparse{int(\x + 1)}\pgfmathresult};
+	}
+
+	\foreach \x/\y/\w in {7/0/below,8/1/above,9/0/below,10/1/above,11/0/below}{
+		\path (\x, \y) node[circle, xkcd, inner sep=0.2cm, draw] {} node[\w=10pt] {\pgfmathparse{int(\x - 6)}\pgfmathresult};
+	}
+
+\end{xkcdenv}
+
+\subsection{Zero}
+O zero (representado por $ 0 $) é um conceito importante na contagem, mais recente na história devido a sua complexidade, ele representa a ausência de elementos. Quando não há alguma coisa, podemos dizer que "há zero" de algo. Quando iniciamos a contagem de algo, podemos não nos dar conta mas, na realidade, começamos a contar do zero, dessa forma, se nós contamos $ 10 $ cartas vermelhas e agora queremos contar somente cartas pretas, antes de começar a contar as pretas voltamos ao zero para começar novamente.
+
+\Example
+
+\begin{xkcdenv}[1]
+	
+	\draw[thick, -{Latex[length=8pt]}] (-0.5,-0.35) -- (9.4,-0.35);
+	
+	\path (-0.5, 0.9) node[above=1] {0};
+	\path (-0.5, -1.6) node[below=1] {0};
+	
+	\foreach \x in {0,1,...,9}{
+		\draw (\x,0) rectangle node[above=1] {\pgfmathparse{int(\x +1)}\pgfmathresult} +(0.9, 1.8);
+		\draw[fill=black] (\x,0) ++(0.2,0.2) rectangle +(0.5, 1.4);
+		
+		\draw (\x,-2.5) rectangle node[below=1] {\pgfmathparse{int(\x +1)}\pgfmathresult} +(0.9, 1.8);
+		\draw[fill=red] (\x,-2.5) ++(0.2,0.2) rectangle +(0.5, 1.4);
+	}
+
+\end{xkcdenv}
+
+\subsection{Exercícios}
+
+\Question Existem quantas cartas abaixo?
+
+\begin{xkcdenv}[1]
+	
+	\foreach \x in {0,1,...,11}{
+		\draw (\x,0) rectangle +(0.9, 1.8);
+		\draw[fill=black] (\x,0) ++(0.2,0.2) rectangle +(0.5, 1.4);
+		
+		\draw (\x,-2) rectangle +(0.9, 1.8);
+		\draw[fill=black] (\x,-2) ++(0.2,0.2) rectangle +(0.5, 1.4);
+	}
+	
+\end{xkcdenv}
+
+\section{Soma}
+
+A soma é a operação aritmética mais essencial de todas, e consiste, de certa forma, em contar dois ou mais grupos de coisas sem voltar ao zero. O símbolo da soma é o $ + $. Também podemos chamá-la de \textit{adição}.
+
+Como exemplo, vamos somar um grupo de $ 2 $ com um grupo de $ 7 $:
+
+\Example
+Usando objetos, podemos fazer da seguinte forma:
+\begin{xkcdenv}[0.5]
+	
+	\draw (-1,-2) rectangle node[above=1.2cm] {2 objetos} (2.5, 2.8);
+	\draw (5.5,-2) rectangle node[above=1.2cm] {7 objetos} (14.6, 2.8);
+	
+	\foreach \x/\y/\w/\z in {0/0/below/1,1.5/0.6/above/2}{
+		\path (\x, \y) node[circle, xkcd, inner sep=0.2cm, draw] {} node[\w=10pt] {\z};
+	}
+
+	\path (4,0.5) node {\LARGE +};
+	
+	\foreach \x/\y/\w/\z in {4.5/0.5/below/1,6/0.2/above/2,7.1/0.3/below/3,8.2/0.8/above/4,9.3/0/below/5,10.5/0.3/above/6,11.6/0.5/below/7}{
+		\path ($(\x, \y) +(2,0)$) node[circle, xkcd, inner sep=0.2cm, draw] {} node[\w=10pt] {\z};
+	}
+
+	\path (16.1,0.5) node {\LARGE =};
+	
+	\draw (1.6,-8.8) rectangle node[above=1.2cm] {9 objetos} (13.2, -4);
+	
+	\foreach \x/\y/\w/\z in {2.2/0/below/1,3.3/0.6/above/2,4.5/0.5/below/3,6/0.2/above/4,7.1/0.3/below/5,8.2/0.8/above/6,9.3/0/below/7,10.5/0.3/above/8,11.6/0.5/below/9}{
+		\path ($(\x, \y) +(0.6,-6.8)$) node[circle, xkcd, inner sep=0.2cm, draw] {} node[\w=10pt] {\z};
+	}
+	
+\end{xkcdenv}
+Aqui nós juntamos os dois grupos em um só e contamos "tudo junto".
+
+Uma ferramenta muito útil pra compreender a soma é a reta numérica. Um exemplo de reta numérica que usamos diariamente é a régua:
+
+\Example
+
+\begin{xkcdenv}[1, xscale=0.5]
+	
+	\draw (0,0) rectangle (20, 1);
+	
+	\foreach \x in {1,2,...,19}{
+		\draw (\x,0) node[above=0.15] {\footnotesize\x} -- +(0,0.2);
+	}
+	\foreach \x in {0.25,0.75,...,19.75}{
+		\draw (\x,0) -- +(0,0.1);
+	}
+	
+	\foreach \x in {0.5,1.5,...,19.5}{
+		\draw (\x,0) -- +(0,0.14);
+	}
+\end{xkcdenv}
+
+Podemos somar distâncias usando a régua:
+
+\Example
+\begin{xkcdenv}[1]
+	
+	\draw[dashed] (0,1.7) -- (0,1) (2,1.7) -- (2,0.6) (9,1.7) -- (9,0.6);
+	\draw[decorate,decoration={brace,amplitude=10pt}] (0,1.8) -- node[midway, above=0.5] {2 cm} +(2,0);
+	
+	\path (3.25,2.55) node {\LARGE +};
+	
+	\draw[decorate,decoration={brace,amplitude=10pt}] (2,1.8) -- node[midway, above=0.5] {5 cm} +(7,0);
+	
+	\path (9.5,2.55) node {\LARGE =};
+	
+	\draw (0,0) rectangle (10, 1);
+	
+	\foreach \x in {1,2,...,9}{
+		\draw (\x,0) node[above=0.15] {\footnotesize\x} -- +(0,0.2);
+	}
+	\foreach \x in {0.25,0.75,...,9.75}{
+		\draw (\x,0) -- +(0,0.1);
+	}
+	
+	\foreach \x in {0.5,1.5,...,9.5}{
+		\draw (\x,0) -- +(0,0.14);
+	}
+	
+	\draw (0,-0.1) -- +(0,-0.2) (2,-0.1) -- +(0,-0.2) (9,-0.1) -- +(0,-0.2);
+	
+	\draw[decorate,decoration={brace,amplitude=10pt}] (9,-0.4) -- node[midway, below=0.5] {9 cm} (0,-0.4);
+
+\end{xkcdenv}
+
+Repare que nos dois exemplos de soma nós simplesmente contamos $ 1, 2 $ e, depois, sem voltar do zero, continuamos com $ 3, 4, 5, 6, 7, 8 $ e $ 9 $. Dessa maneira realizamos a operação $ 2+7=9 $. Na régua, basta colocarmos as duas distâncias lado a lado e medirmos o comprimento das duas juntas.
+
+\paragraph{Nota:} As "retas numéricas" abordadas nesse capítulo não são de fato retas numéricas! Entenderemos isso mais à frente no material, mas, por praticidade, usarei o termo por enquanto. 
+
+\subsection{Exercícios}
+
+\Question
+Realize a soma de:
+\begin{Subquest}
+
+	\item $ 2+5 $
+	\item $ 3+2 $
+	\item $ 2+3 $
+	\item $ 22+17 $
+
+\end{Subquest}
+
+\Question
+Há pouco vimos um exemplo de reta numérica, imagine uma escada gigante (ela pode ter quantos degraus você desejar!) e responda:
+\begin{Subquest}
+	
+	\item Como poderíamos usar a escada para contar até $ 4 $?
+	\item Como poderíamos usar a mesma escada para somar $ 4+3 $?
+	\item Essa escada é uma reta numérica? Explique.
+	
+\end{Subquest}
+
+
+
+
+
+

@@ -1,0 +1,211 @@
+% !TeX program = xelatex
+\documentclass{ipaexam}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[useregional]{datetime2}
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+
+\usepackage{graphicx,float}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{multicol, enumitem, textcomp, ipactikz}
+
+\setmyunit{2cm}
+
+\usetikzlibrary{positioning, calc}
+
+%\title{Resolução da P2 de Eletrônica Analógica (G2)}
+\givecredits
+\author{Isabella B.}
+\date{}
+\lecture{Eletrônica Analógica} % disciplina
+\hwtype{Resolução} % o que é
+\examname{P2 - G2} % prova
+
+\begin{document}
+
+\maketitle
+
+
+Seja o circuito a seguir:
+
+\begin{ctikz}[x=1cm, y=1cm]
+	\node(tr)[npn] at (0,0) {};
+	\draw (tr.collector) to[R, l=$\R_c$] ++(0,1) ++(0,1) node[above] {\SI[retain-explicit-plus]{+5}{\volt}} to[leD, l_=d$_1$, o-] ++(0,-1) (tr.emitter) node[ground] {} (tr.base) to[R, a^=86<\kilo\ohm>, l_=$\R_b$] ++(-1,0)
+	to[short, -o] ++(-0.5,0) node(lab)[left] {};
+	\node[right] at (tr) {$\Q_1$};
+	\node[above left] at (lab) {$\V_{ctrl}$};
+	\node[below left] at (lab) {\SI[retain-explicit-plus]{+5}{\volt}};
+\end{ctikz}
+
+O objetivo do circuito abaixo é acender o LED d$_1$ a partir da entrada de controle digital $\V_{ctrl}$. De acordo com as especificações do projeto, quando $\V_{ctrl}=\SI{5}{\volt}$, o transistor $\Q_1$ deve entrar no modo de saturação e o LED d$_1$ deve conduzir uma corrente de \SI{10}{\milli\ampere}. Sob essa condição de operação, o transistor apresentará $\V_{be}=\SI{0.7}{\volt}$ e $\V_{ce}=\SI{0.2}{\volt}$, enquanto o LED apresentará uma queda de tensão $\V_d=\SI{1.2}{\volt}$. Com base nesses dados, responda:
+
+\begin{questions}
+\question
+Qual deve ser o valor da resistência $\R_c$?
+
+\begin{solution}
+
+Sabemos que $\I_c=\dfrac{5-\V_d-\V_{ce}}{\R_c+\R_{ce}}$. Como $ \Q_1 $ deve entrar em saturação: $ \R_{ce}=0 $ e, portanto, $$\I_c=\dfrac{5-1.2-0.2}{\R_c{}+0}=10\cdot10^{-3}\Rightarrow\R_c=\dfrac{3.6}{10\cdot10^{-3}}=\boxed{\SI{360}{\ohm}} $$
+
+\end{solution}
+\medskip
+
+\question
+Qual deve ser o ganho $\beta$ do transistor?
+
+\medskip
+	
+\begin{solution}
+
+Sabemos que $\I_c=\I_b \cdot \beta \Rightarrow \beta=\dfrac{\I_c}{\I_b}$, e como $ \I_b=\dfrac{5-\V_{be}}{\R_b}=\dfrac{5-0.7}{86\cdot10^3}=\SI{50}{\micro\ampere} $, temos:
+$$\beta=\dfrac{10\cdot10^{-3}}{50\cdot10^{-6}}=\boxed{200}$$
+
+\end{solution}
+
+\clearpage
+	
+\question
+Seja o circuito a seguir:
+
+\medskip
+
+\begin{ctikz}[x=1.5cm, y=1.5cm]
+	\draw (0,3) to[short, -*] (0,2.5) to[short] (0,2) to[battery1=12<\volt>] (0,1) to[short] (0,0) to[short] ++(1,0) to[pushed button, n=pbut] ++(1,0) to[short] ++(1,0) to[short] ++(0,1) to[lamp, a=2<\kilo\ohm>, l=L$_1$] ++(0,1) to[short] ++(0,1) (0,3) to[short] ++(2,0) to[Ty, n=ty, mirror] ++(1,0) (0,2.5) to[short] ++(0.5,0) to[R, a_=250<\ohm>] ++(1,0) to[push button, l_=CH1] (0,2.5 -| ty.G) to[short] (ty.G);
+	\node[below=5pt] at (pbut) {CH2};
+\end{ctikz}
+
+Quais são as chaves (CH1/CH2) responsáveis, respectivamente, pelo acionamento e desacionamento da lâmpada L$_1$? Explique.
+	
+\begin{solution}
+	
+A chave CH1 acionará a lâmpada, pois ela será responsável por liberar a passagem de corrente até o \textit{Gate} do SCR, o que o acionará, fazendo com que conduza a corrente que acionará a lâmpada. O acionamento da chave CH2 desacionará a lâmpada, pois cortará o fluxo de corrente dela, e também do SCR, e, portanto, o SCR entrará em corte (a chave CH1 não tem essa capacidade e, portanto, não pode ser usada para o desacionamento da lâmpada).
+
+\end{solution}
+
+\textbf{Nota:} Vale notar que a chave CH2 é mais "poderosa"~ do que a CH1, pois independentemente do estado da chave CH1 (acionada ou desacionada), a chave CH2, quando acionada, desliga a lâmpada e faz o SCR entrar em corte.
+	
+\clearpage
+
+\question
+Determine o estado do transistor (corte, região ativa ou saturação).
+
+\medskip
+
+\begin{ctikz}
+	\draw (0,0) node(tr)[pnp] {} (tr.emitter) to[short] ++(0,0.5) to[short] ++(1,0) to[short] ++(0,-0.5) to[battery1=6<\volt>] ++(0,-1) to[short] ++(0,-1) to[short, -*] ++(-1,0) node(p)[]{} to[R, a=150<\ohm>, l=$\R_c$] (tr.collector) (tr.base) to[short] ++(-1,0) node(n)[]{} to[R, a^=4.7<\kilo\ohm>, l_=$\R_b$] (p -| n) to[short] (p);
+	\node[right] at (tr) {$\beta:90$};
+\end{ctikz}
+
+\begin{solution}
+	
+Sabemos que um transistor está em saturação se a resistência $ \R_{ce}=0 $ e, portanto, $\I_c\geqslant\sfrac{\V}{\R_c}=\I_{c~max}$.
+	
+Calculando, temos:
+
+\begin{gather*}
+	\I_c=\I_b\cdot\beta=\dfrac{6-0.7}{4.7\cdot10^3}\cdot90=\SI{101.489}{\milli\ampere}\\
+	\I_{c~max}=\dfrac{\V}{\R_c}=\dfrac{6}{150}=\SI{40}{\milli\ampere}
+\end{gather*}
+
+Temos, então, que $ \I_c>\I_{c~max} $, logo, o transistor está em \textbf{SATURAÇÃO}.
+
+\end{solution}
+	
+\clearpage
+
+\question
+Seja o circuito a seguir:
+
+\begin{ctikz}
+	\node(oa)[op amp, yscale=-1] at(0,0) {};
+	
+	\draw (oa.down) to[short, -o] ++(0,0.2) node[above] {$\V_{cc}^+=\SI[retain-explicit-plus]{+12}{\volt}$};
+	
+	\draw (oa.up) to[short, -o] ++(0,-0.2) node[below] {$\V_{cc}^-=\SI{-12}{\volt}$};
+		
+	\draw (oa.+) to[short, -*] ++(-0.6,0) to[R, a^=1<\kilo\ohm>, l_=$\R_4$] ++(0,-1) node[ground] {};
+	
+	\coordinate(a) at ($(oa.+) +(-1.2,0)$);
+	
+	\draw (oa.-) to[short] ++(0,-1) to[short] ++(-1.2,0) to[short] (a) to[short, -*] ++(-0.6,0) to[R,a^=1<\kilo\ohm>, l_=$\R_2$] ++(0,-1) node[ground] {};
+	
+	\draw (oa.+) ++(-0.6,0) to[R, a=1<\kilo\ohm>, l=$\R_3$, -*] ++(0,1);
+	
+	\draw (oa.out) ++(1,0) node(tr) [npn] {};
+	\draw (oa.out) to[R, l=$\R_5$] (tr.base);
+	\node[ground] at (tr.emitter) {};
+	
+	\coordinate(o) at ($(oa.+)+(-0.6,1)$);
+	
+	\draw (oa.+) ++(-1.2,0) ++(-0.6,0) to[R, a=3<\kilo\ohm>, l=$\R_1$] ++(0,1) to[short, -*] ++(0.6,0) to[short, -o] ++(0,0.2) node[above] {\SI{10}{\volt}} ++(0,-0.2) to[short] (o) to[R,l=$\R_6$] (o-|tr.collector) to[leD, a=2.2<\volt>] (tr.collector);
+		
+\end{ctikz}
+
+\begin{parts}
+	\part Calcule as tensões nas entradas do amp op.
+	\begin{solution}
+		Sabemos que o amp op mede a queda de tensão do ponto de amostragem em relação ao gnd e, sendo assim, mede as quedas nos resistores $ \R_2 $ e $ \R_4 $ em suas entradas não-inversora e inversora, respectivamente.
+		
+		\begin{ctikz}[european voltages]
+			\clip (-3,-1.3) rectangle (0.6,1);
+			\node(oa)[op amp, yscale=-1] at(0,0) {};
+			
+			\draw (oa.down) to[short, -o] ++(0,0.2) node[above] {$\V_{cc}^+=\SI[retain-explicit-plus]{+12}{\volt}$};
+			
+			\draw (oa.up) to[short, -o] ++(0,-0.2) node[below] {$\V_{cc}^-=\SI{-12}{\volt}$};
+			
+			\draw (oa.+) to[short, -*] ++(-0.6,0) to[R, l_=$\R_4$, v^=$\V_{R4}$] ++(0,-1) node[ground] {};
+			
+			\coordinate(a) at ($(oa.+) +(-1.2,0)$);
+			
+			\draw (oa.-) to[short] ++(0,-1) to[short] ++(-1.2,0) to[short] (a) to[short, -*] ++(-0.6,0) to[R, l_=$\R_2$, v^=$\V_{R2}$] ++(0,-1) node[ground] {};
+			
+			\draw (oa.+) ++(-0.6,0) to[R, a=1<\kilo\ohm>, l=$\R_3$, -*] ++(0,1);
+			
+			\draw (oa.out) ++(1,0) node(tr) [npn] {};
+			\draw (oa.out) to[R, l=$\R_5$] (tr.base);
+			\node[ground] at (tr.emitter) {};
+			
+			\coordinate(o) at ($(oa.+)+(-0.6,1)$);
+			
+			\draw (oa.+) ++(-1.2,0) ++(-0.6,0) to[R, a=3<\kilo\ohm>, l=$\R_1$] ++(0,1) to[short, -*] ++(0.6,0) to[short, -o] ++(0,0.2) node[above] {\SI{10}{\volt}} ++(0,-0.2) to[short] (o) to[R,l=$\R_6$] (o-|tr.collector) to[leD, a=2.2<\volt>] (tr.collector);
+			
+		\end{ctikz}
+		
+		Calculando, temos:
+		
+		\medskip
+		
+		\begin{minipage}[c]{0.5\linewidth}
+			Entrada não-inversora:
+			\begin{align*}
+			\V_{R4} &=\R_4\cdot\I\\
+			&=\R_4\cdot\dfrac{\Ut}{\R_3+\R_4}\\
+			&=1\cdot10^3\cdot\dfrac{10}{1\cdot10^3+1\cdot10^3}\\
+			&=10\cdot\dfrac{1\cdot\cancel{10^3}}{2\cdot\cancel{10^3}}=10\cdot\dfrac{1}{2}=\SI{5}{\volt}
+			\end{align*}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\linewidth}
+			Entrada inversora:
+			\begin{align*}
+			\V_{R2} &=\R_2\cdot\I\\
+			&=\R_2\cdot\dfrac{\Ut}{\R_1+\R_2}\\
+			&=1\cdot10^3\cdot\dfrac{10}{3\cdot10^3+1\cdot10^3}\\
+			&=10\cdot\dfrac{1\cdot\cancel{10^3}}{4\cdot\cancel{10^3}}=10\cdot\dfrac{1}{4}=\SI{2.5}{\volt}
+			\end{align*}
+		\end{minipage}
+	\end{solution}
+
+	\part
+	Qual é o valor da tensão na saída do amp op? Explique.
+	\begin{solution}
+		Pela letra (a) sabemos que $ \V_{R4}>\V_{R2} $ e, portanto, a tensão presente na saída do amp op será a positiva (do mesmo lado da entrada não-inversora), de $\boxed{\V_{cc}^+=\SI[retain-explicit-plus]{+12}{\volt}}$.
+	\end{solution}
+
+\end{parts}
+
+\end{questions}
+\end{document}

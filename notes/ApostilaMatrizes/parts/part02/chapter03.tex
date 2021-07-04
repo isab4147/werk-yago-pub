@@ -1,0 +1,67 @@
+\chapter{Teorema de Laplace}
+
+\section{Introdução}
+
+Podemos encontrar o determinante de uma matriz quadrada de \textbf{qualquer} grau através desse teorema. Primeiro vamos escolher uma \textbf{coluna} ou \textbf{fileira} dessa matriz, uma boa prática é escolher baseando-se na que possuir \textbf{mais zeros} (veremos a razão para isso mais a frente).
+
+\Example
+
+$$
+\text{Dada a matriz }
+A=\begin{bmatrix*}[c]
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix*} \\
+$$
+seu determinante pode ser obtido pela fórmula:
+$$\det A=a_{k1}\cdot A_{k1}+a_{k2}\cdot A_{k2}+\dots +a_{kn}\cdot A_{kn}$$
+
+\centerline{OU}
+
+$$\det A=a_{1k}\cdot A_{1k}+a_{2k}\cdot A_{2k}+\dots +a_{nk}\cdot A_{nk}$$
+
+onde $k$ é uma linha ou coluna qualquer da matriz $A$.
+
+\section{Passo a passo}
+
+\begin{enumerate}
+    \item Usando a coluna/fileira escolhida como referência (no exemplo vamos usar a 1\textsuperscript{a} coluna), multiplicar os elementos dessa fileira/coluna pelos cofatores da sua posição.
+    \item Em seguida devemos somá-los ou subtraí-los dependendo da soma $i+j$ , caso seja par, somamos, caso seja ímpar devemos subtrair. (Isso vem da definição do cofator).
+\end{enumerate}
+
+\Example
+
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+    4 & 3 & -5 & 4\\ 2 & 1 & 7 & 14 \\ 1 & -9 & 6 & 9 \\ 7 & 2 & -12 & -1
+\end{bmatrix*} \text{ tomamos sua 1\textsuperscript{a} coluna: }\begin{bmatrix*}[r]
+    4 \\ 2 \\ 1 \\ 7
+\end{bmatrix*}
+$$
+
+Pegamos elemento a elemento e \textbf{multiplicamos} pelo \textit{cofator} de sua posição.
+
+O primeiro elemento da coluna é o $4$, sua posição é $11$, então fazemos:
+$$4\cdot A_{11}$$
+
+Repetimos isso para todos os elementos dessa fileira:
+\vspace{-2em}
+\begin{multicols}{3}
+    $$2\cdot A_{11}$$ \\ $$1\cdot A_{31}$$ \\ $$7 \cdot A_{41}$$
+\end{multicols}
+
+Agora devemos determinar o \textbf{sinal} de cada um desses produtos. A regra diz, se a soma dos dígitos da posição for \textbf{par}, o sinal vai ser \textbf{positivo} e se for \textbf{ímpar} o sinal deverá ser \textbf{negativo}.
+
+Para o elemento $a_{11}$ ($4$) ficamos com $+~4\cdot A_{11}$, pois $1+1=2$ que é \textbf{par}.
+
+Somando todos os elementos conseguimos o determinante:
+
+$$
+\det A= +"4\cdot A_{11} - 2\cdot A_{11} + 1\cdot A_{31} - 7 \cdot A_{41}
+$$
+
+Para encontrar os cofatores podemos aplicar o método \textbf{novamente} (isso se chama \textbf{recursão}).
+
+Como cada cofator é multiplicado por um elemento da matriz, no caso de algum desses elementos ser $0$ não precisaremos calcular esse cofator. Por isso é boa prática selecionar a coluna/fileira com a \textbf{maior quantidade de zeros}.

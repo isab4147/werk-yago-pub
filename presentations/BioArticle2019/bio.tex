@@ -1,0 +1,286 @@
+\documentclass[article,11pt,oneside,a4paper,
+	english,	% idioma adicional para hifenização
+	brazil,		% o último idioma é o principal do documento
+	sumario=tradicional]{abntex2}
+
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+\usepackage{graphicx}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\DeclareSIUnit\ppm{ppm}
+
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+
+\definecolor{blue}{RGB}{41,5,195} % alterando o aspecto da cor azul
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Modelo de artigo científico com abnTeX2},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{atigo científico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+% Altera as margens padrão
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{1in}{*}
+\checkandfixthelayout
+
+\setlength{\parindent}{1.3cm} % tamanho do parágrafo
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+\SingleSpacing
+
+\titulo{Efeitos do \texorpdfstring{\ce{CO2}}{CO2} na atmosfera e na saúde}
+\tituloestrangeiro{} % titulo em outro idioma (opcional)
+
+\autor{Isabella Basso \and
+	João Pedro Lacerda \and
+	Juliana Oliveira \and
+	Maria Cecília Nascimento \and
+	Maria Eduarda Santos
+}
+
+\local{Campos dos Goytacazes, Brasil}
+\data{23 de junho de 2019}
+
+\makeindex
+
+\begin{document}
+
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+\frenchspacing
+
+% página de titulo principal (obrigatório)
+\maketitle
+
+% resumo em português
+\begin{resumoumacoluna}
+	Há mais de um século o homem vem alterando a composição da atmosfera de forma destrutiva, tanto para si quanto para as outras espécies que habitam o planeta Terra. Nesse artigo explorar-se-ão -- através de uma apresentação concisa, pensada para um público relativamente leigo -- os efeitos do gás carbônico (\ce{CO2}) na saúde e no meio ambiente com o uso de maquetes e cartazes explicativos.
+
+	\vspace{\onelineskip}
+
+	\noindent
+	\textbf{Palavras-chave}: Efeitos do dióxido de carbono. Projeto escolar. Saúde. Meio ambiente. Aquecimento global.
+\end{resumoumacoluna}
+
+
+\begin{center}\smaller
+	% elemento obrigatório. Indicar dia, mês e ano
+	\textbf{Data de submissão e aprovação}:
+
+	% elemento opcional. Pode ser indicado o endereço eletrônico, DOI, suportes e outras informações relativas ao acesso.
+	%\textbf{Identificação e disponibilidade}: 
+\end{center}
+
+\textual
+
+% Fundamentação teórica + justificativa
+\section{Introdução}
+
+Na Primeira Revolução Industrial, ocorrida no séc. XVIII, o homem começou a queimar combustíveis fosseis em quantidades significativas que, dentro de dois séculos -- tempo irrelevante na perspectiva geológica --, já tiveram seus efeitos notados \cite{NASAevi,Hansen2010}. O efeito mais imediato da queima de combustíveis fosseis na atmosfera é o chamado \textit{Efeito Estufa}, o qual recebe seu nome devido à ligação imediata que possui com a temperatura em um dado espaço.
+
+
+\subsection{Efeito Estufa}
+
+O efeito estufa é, por definição, o processo pelo qual a superfície de um planeta se aquece na presença de uma atmosfera que recebeu radiação, sendo esse aquecimento superior àquele pelo qual a superfície passaria na ausência de uma atmosfera.
+
+Na Terra, nossa atmosfera absorve e re-emite cerca de $ 70\% $ da energia solar que a atinge \cite{NASA2009}, a porcentagem que incide sobre a superfície é, majoritariamente, luz visível e que, então, é absorvida e re-emitida como calor. Esse calor fica preso na atmosfera pelos gases do efeito estufa, que o emitirão para fora da atmosfera eventualmente.
+
+\subsection{Ação Humana}
+
+Devido à supracitada queima de combustíveis fosseis promovida pelo homem, a quantidade de \ce{CO2} aumentou em $ 40\% $ desde a Revolução Industrial \cite{WMO2014,Stuiver1984}, o que levou a um aumento na temperatura do globo em cerca de \SI{1}{\degreeCelsius} desde, aproximadamente, 1900 \cite{NASAevi,Hansen2010}.
+
+
+\subsection{Efeitos no homem}
+
+Graças ao aumento significativo do uso dos aparelhos ares condicionados (e também a previsão de maior demanda futura) \cite{Agency2018}, segue que haverá uma maior demanda de energia elétrica \cite{Agency2016}, o que pode provocar ainda mais o aumento de gás carbônico. Haverá também efeitos na saúde causados pelas altas concentrações de \ce{CO2} no ar \cite{Allen2016,Stafford2015}. Esse aumento na concentração se deve ao fato de a população global, em média, passar mais tempo em ambientes fechados e, portanto, onde não há a devida "reciclagem" do ar respirado.
+
+Os efeitos se tornam visíveis a níveis tão baixos quanto \SI{1000}{\ppm} (perda de $ 15\% $ das funções cognitivas), facilmente encontrados em ambientes fechados mal-ventilados/climatizados \cite{Allen2016,Stafford2015}.
+
+
+\section{Objetivos}
+
+Esse projeto espera conscientizar o público geral dos efeitos do \ce{CO2} na saúde e como de fato ocorre o processo conhecido como \textit{efeito estufa}.
+
+% Materiais usados
+\section{Metodologia}
+
+\subsection{Materiais}
+
+Uma maquete representará dois ambientes (cidade e campo) e deve consistir de:
+\begin{itemize}
+	\item $ 2\times $ aquários pequenos;
+	\item Isolante térmico de E.V.A. laminado em alumínio refletivo;
+	\item $ 2\times $ lâmpadas incandescentes;
+	\item $ 2\times $ abajures;
+	\item Arduino Mega 2560 Rev3;
+	\item $ 3\times $ módulo LCD $ 16\times2 $ 1602 I2C;
+	\item $ 3\times $ sensores de temperatura e umidade DHT22;
+	\item $ 2\times $ sensores de dióxido de carbono (\ce{CO2}) MH-Z14A;
+	\item Planta;
+	\item \SI{150}{\gram} de bicarbonato de sódio (\ce{NaHCO3});
+	\item \SI{150}{\gram} de fermento biológico;
+	\item \SI{500}{\gram} de açúcar branco, e;
+	\item \SI{1}{\liter} de água;
+\end{itemize}
+além de materiais artísticos diversos para representação adequada dos ambientes, e cabos e conexões eletrônicas.
+
+A outra maquete será meramente a representação de um ambiente fechado.
+
+Haverá também cartazes decorados para auxílio na explicação.
+
+\subsection{Métodos}
+
+O projeto será montado sobre uma mesa com os aquários -- dispostos lado a lado e isolados entre si com o isolante térmico de E.V.A. -- representando os ambientes:
+\begin{enumerate}
+	\item \textbf{Cidade}
+
+	      Os níveis de \ce{CO2} serão elevados a níveis aprox. \SI{150}{\ppm} acima dos da atmosfera (\SI{411}{\ppm} na média global atual\footnote{Dado de maio de 2019, retirado de \url{https://climate.nasa.gov/vital-signs/carbon-dioxide/}.}) através da injeção do gás.
+
+	\item \textbf{Campo}
+
+	      Idealmente, os níveis de \ce{CO2} deverão ser reduzidos a níveis pré industriais (aprox. \SI{265}{\ppm} na média global \cite{Wigley1983}), utilizando o processo da fotossíntese.
+	      %	Por questões práticas, usar-se-á a concentração local de gás carbônico.
+\end{enumerate}
+
+Dentro dos aquários os sensores serão dispostos em pares, sendo o terceiro sensor DHT22 posicionado em outro local, para referência de zero. Ao lado dos aquários estarão os abajures com as lâmpadas incandescentes, uma para cada aquário, a fim de iluminá-los igualmente. A frente dos aquários estarão o Arduino Mega e os módulos LCD.
+
+A outra parte do projeto, que ilustra os malefícios do gás carbônico à saúde, também será montada ao lado dos aquários, com a maquete do ambiente fechado a frente dos cartazes, que deverão conter dados estatísticos e gráficos.
+
+
+\subsubsection{Preparo dos aquários}
+
+Estes procedimentos descrevem como os aquários serão preparados para apresentação e devem ser realizados, idealmente, uma vez, antes do começo das apresentações.
+
+\begin{itemize}
+	\item Geração de \ce{CO2}
+
+	      O \ce{CO2} para injeção será gerado através da reação resultante da mistura de:
+	      \begin{itemize}
+		      \item açúcar branco (1:2 \si{\kilo\gram} em relação ao volume de água em litro);
+		      \item bicarbonato de sódio -- \ce{NaHCO3} (1:150 gramas em relação ao volume de água em litro), e;
+		      \item fermento biológico (1:150 gramas em relação ao volume de água em litro);
+	      \end{itemize}
+	      em água num recipiente fechado (garrafa PET).
+
+	      A injeção será fracionada medindo a concentração dentro do recipiente a cada porção adicionada, até que se chegue a quantidade especificada acima.
+
+	\item Retirada de \ce{CO2}
+
+	      Através do processo de fotossíntese pretende-se remover o \ce{CO2} de um dos aquários. Esse processo será realizado introduzindo-se uma planta dentro do aquário, por baixo (aquário com abertura para baixo), a fim de que não entre o gás dentro do compartimento.
+
+	      O conjunto planta $ + $ aquário deverá ficar ao ar livre durante os dias não chuvosos antecedendo alguns dias à apresentação, a fim de permitir que haja o tempo devido para o procedimento ocorra.
+
+	      Os níveis de \ce{CO2} serão medidos durante todo o tempo até chegarem a quantidade especificada acima.
+\end{itemize}
+
+\subsubsection{Controle de variáveis}
+
+As aferições de \ce{CO2} dentro dos aquários serão feitas com o uso de sensores MH-Z14A, cada qual posicionado em altura média na parede de seu respectivo aquário. Ao lado dos sensores de gás carbônico serão posicionados sensores DHT22, que devem medir a temperatura (variável dependente) no projeto.
+
+A temperatura será controlada através de um sensor externo aos aquários, posicionado em local com interferência humana ou eletrônica mínima, para referência de zero da temperatura do ar.
+
+Não havendo alterações significativas em temperatura ou composição química do ar nos aquários, são dispensadas outras medições.
+
+Além disso, como o aquário será lacrado, não há necessidade do controle de \ce{CO2} externo.
+
+
+\subsubsection{Coleta de dados}
+
+Os dados disponibilizados pelos sensores no projeto serão coletados pelo Arduino Mega e serão mostrados ao público através dos sensores LCD, os quais ficarão a mostra e rotulados (de acordo com o que medem) para a visualização do público.
+
+
+
+\section{Resultados esperados}
+
+Espera-se que o público note a diferença entre as duas simulações de aquecimento, assim como sua conscientização do papel maléfico do excesso da concentração do gás carbônico em ambientes fechados em relação à saúde pública.
+
+
+
+% Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
+\bookmarksetup{startatroot}% 
+
+% Conclusão
+%\section{Considerações finais}
+
+
+
+\postextual
+
+\bibliography{biobib}
+
+
+% Glossário
+% Há diversas soluções prontas para glossário em LaTeX. 
+% Consulte o manual do abnTeX2 para obter sugestões.
+%
+%\glossary
+
+% Apêndices
+%\begin{apendicesenv}
+%
+%
+%\chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+%ac pretium ante justo a nulla curabitur tristique arcu eu metus}
+%
+%
+%\end{apendicesenv}
+
+% Anexos
+%\cftinserthook{toc}{AAA}
+
+%\anexos
+%\begin{anexosenv}
+%
+%\chapter{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
+%parturient montes nascetur ridiculus mus}
+%
+%
+%\end{anexosenv}
+
+
+% Agradecimentos
+%\section*{Agradecimentos}
+%Texto sucinto aprovado pelo periódico em que será publicado. Último 
+%elemento pós-textual.
+
+\end{document}

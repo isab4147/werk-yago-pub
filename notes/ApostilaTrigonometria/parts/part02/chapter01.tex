@@ -1,0 +1,128 @@
+\chapter{Arcos e ângulos}
+
+\section{Radianos}
+
+\begin{multi}
+
+	\noindent Denotamos por $\arc{AXB}$ o arco formado pelo ângulo $B\Hat{O}A$ passando pelo ponto $X$. Podemos medir arcos usando graus. O arco do exemplo mede $\SI{60}{\degree}$.
+
+	\nextcol
+
+	\begin{tikzscale}[0.8]
+		\tkzDefPoint(0,0){O}
+		\tkzDefPoint(3,0){R}
+		\begin{scope}[shift={(O)}]
+			\tkzDefPoint(30:3){X}
+			\tkzDefPoint(60:3){A}
+		\end{scope}
+
+		\tkzDrawArc[color=red, thick](O,R)(A)
+		\tkzDrawArc[color=black](O,A)(R)
+
+		\tkzDrawSegments(O,R O,A)
+
+		\tkzMarkAngle[size=1](R,O,A)
+
+		\tkzDrawPoints[fill=red!50, color=red!80!black](X)
+
+		\tkzLabelPoint[yshift=10pt](A){$A$}
+		\tkzLabelPoint[yshift=10pt](X){$X$}
+		\tkzLabelPoint[xshift=-17pt, yshift=5pt](O){$O$}
+		\tkzLabelPoint[yshift=5pt, xshift=0pt](R){$B$}
+
+		\tkzLabelPoint[xshift=19pt, yshift=21pt](O){$\SI{60}{\degree}$}
+
+	\end{tikzscale}
+\end{multi}
+
+
+\begin{multi}
+
+	\noindent Podemos medir um arco usando uma outra medida muito prática chamada \textbf{radiano} (denotada $\si{\radian}$).
+
+	\noindent O radiano é definido como a razão entre o comprimento do arco e o raio do círculo que o descreve:
+
+	$$\alpha~\si{\radian}=\frac{l}{r}$$
+
+	\nextcol
+
+	\begin{tikzscale}[0.8]
+		\tkzDefPoints{0/0/O,3/0/R}
+
+		\begin{scope}
+			\tkzDefPoint(55:3){A}
+		\end{scope}
+
+		\tkzDrawArc[color=red, thick](O,R)(A)
+
+		\tkzDrawArc[color=black](O,A)(R)
+
+		\tkzDrawSegments(O,R O,A)
+
+		\tkzMarkAngle[size=1](R,O,A)
+
+		\curlybrace[thick]{0}{55}{3.15}
+
+		\tkzLabelPoint[xshift=25, yshift=-15](A){$l$}
+
+		\tkzLabelPoint[xshift=-15pt, yshift=3pt](O){$O$}
+		\tkzLabelPoint[xshift=0pt, yshift=3pt](R){$R$}
+
+		\tkzLabelSegment[below](O,R){$r$}
+
+		\tkzLabelPoint[xshift=19pt, yshift=21pt](O){$\alpha~\si{\radian}$}
+	\end{tikzscale}
+\end{multi}
+
+\begin{multi}
+
+	\noindent A medida de $\SI{1}{\radian}$ na circunferência é mostrada ao lado.
+
+	\noindent Repare que, independentemente do raio da circunferência, $1~\si{\radian}$ equivale a um arco com a medida de um raio, pois só teremos $\SI{1}{\radian}$ quando $l=r$, já que $\si{\radian}=\sfrac{l}{r}$.
+
+	\nextcol
+
+	\begin{tikzscale}[0.8]
+		\tkzDefPoints{0/0/O,3/0/R,3/3/RU}
+
+		\tkzDefPointBy[rotation in rad= center O angle 1.05](R) \tkzGetPoint{RU'}
+
+		\tkzDrawArc[color=red, thick, dashed](O,R)(RU')
+
+		\tkzDrawArc[color=black](O,RU')(R)
+
+		\tkzDrawArc[dashed, color=black](R,RU)(RU')
+
+		\tkzDrawSegments(O,R R,RU O,RU')
+
+		\tkzMarkAngle[size=1](R,O,RU')
+
+		\tkzLabelPoint[xshift=-15pt, yshift=3pt](O){$O$}
+		\tkzLabelPoint[xshift=0pt, yshift=3pt](R){$R$}
+
+		\tkzLabelSegment[below](O,R){$r$}
+
+		\tkzLabelSegment[right](R,RU){$r$}
+
+		\tkzLabelPoint[xshift=19pt, yshift=21pt](O){$\SI{1}{\radian}$}
+
+	\end{tikzscale}
+\end{multi}
+
+\section{Medida da circunferência}
+
+Sabemos que a circunferência mede $\SI{360}{\degree}$, no total. Mas qual é esse valor em $\si{\radian}$?
+
+Primeiro, vamos nos lembrar que $\pi=\dfrac{c}{d}$ onde $c$ é o comprimento da circunferência e $d$ é seu diâmetro. Repare que a definição de $\pi$ se assemelha à definição de $\si{\radian}$, a única diferença sendo que $\pi$ usa o diâmetro ao invés do raio.
+
+Como $d=2r$, podemos fazer:
+
+$$
+	\pi=\frac{c}{d}=\frac{c}{2r}\Rightarrow 2\pi=\frac{c}{r}
+$$
+
+Sabendo que queremos achar o valor de $\dfrac{c}{r}$ em $\si{\radian}$, podemos fazer:
+
+$$
+	\alpha=\frac{l}{r}=\frac{c}{r}\Rightarrow\alpha=2\pi~\si{\radian}
+$$

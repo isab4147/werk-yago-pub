@@ -1,0 +1,97 @@
+\chapter{Matriz inversa}
+
+\section{Definição}
+
+Dada uma matriz quadrada $A$, chamamos de \textit{inversa} de $A$ (escreve-se $A^{-1}$) a matriz que obedece a relação:
+
+$$
+A\cdot A^{-1}=I_n
+\text{ onde $n$ é a dimensão da matriz quadrada $A$.}
+$$
+
+\section{Na prática}
+\Example
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+    2 & 3\\-2 & 1
+\end{bmatrix*} \text{, acharemos sua inversa resolvendo:}\\
+\begin{bmatrix*}[r]
+    2 & 3\\ -2 & 1
+\end{bmatrix*} \cdot A^{-1}=\begin{bmatrix*}[r]
+    1 & 0\\0 & 1
+\end{bmatrix*}
+$$
+
+Sabemos que $A^{-1}$ será \textbf{quadrada também} (com as mesmas dimensões da matriz original $A$), sabemos que ela terá quatro elementos, aos quais vamos denominar $a$, $b$, $c$ e $d$.
+
+\paragraph{Nota:} Os nomes de escolha pouco importam.
+
+\medskip
+
+Ficamos, então, com a equação:
+
+$$
+\begin{bmatrix*}[r]
+    2 & 3\\ -2 & 1
+\end{bmatrix*} \cdot \begin{bmatrix*}[r]
+    a & b\\c & d
+\end{bmatrix*} = \begin{bmatrix*}[r]
+    1 & 0 \\ 0 & 1
+\end{bmatrix*}
+$$
+
+Sabemos, por multiplicação de matrizes, que o produto $A\cdot A^{-1}$ resultará em:
+
+$$
+\begin{bmatrix*}[r]
+    2\cdot a + 3\cdot c & 2\cdot b + 3\cdot d\\
+    (-2)\cdot a + 1\cdot c & (-2)\cdot b + 1\cdot d
+\end{bmatrix*}=\begin{bmatrix*}[r]
+    1 & 0\\0 & 1
+\end{bmatrix*}
+$$
+
+E, por igualdade de matrizes, ficamos com:
+\begin{align}
+    2\cdot a + 3\cdot c &= 1 \label{s11} \\
+    2\cdot b + 3\cdot d &= 0\label{s12}\\
+    (-2)\cdot a + 1\cdot c &= 0 \label{s13} \\
+    (-2)\cdot b + 1\cdot d &= 1 \label{s14}
+\end{align}
+
+Agora basta resolver o sistema de equações para encontrar os valores de $A^{-1}$.
+
+\smallskip
+
+De \ref{s13} temos que $c=2a$, substituindo em \ref{s11} temos que: 
+
+$$2a+3\cdot (2a)=1\Rightarrow 2a+6a=1\Rightarrow a=\frac{1}{8}$$
+
+Como $a=\dfrac{1}{8}$ segue que: 
+
+$$c=2\cdot \frac{1}{8}=\frac{1}{4}$$
+
+Podemos encontrar $b$ e $d$ de forma similar:
+
+\smallskip
+
+De \ref{s12} temos que:
+
+$$2b=-3d\Rightarrow b=-\frac{3d}{2}$$
+
+substituindo em \ref{s14} temos:
+
+$$-2\cdot \left( -\frac{3d}{2} \right) + d=1\Rightarrow 3d+d=1\Rightarrow d=\frac{1}{4}$$
+    
+voltando a \ref{s12} temos que:
+
+$$b=-\frac{3}{2} \left( \frac{1}{4} \right) \Rightarrow b=-\frac{3}{8}$$
+
+Substituindo na matriz $A^{-1}$  temos:
+$$
+A^{-1}=
+\begin{bmatrix*}[r]
+    \sfrac{1}{8} & \sfrac{-3}{8} \\
+    \sfrac{1}{4} & \sfrac{1}{4}
+\end{bmatrix*}
+$$

@@ -1,0 +1,160 @@
+\chapter{Operações com matrizes}
+\label{chap:opermat}
+
+\section{Transposta}
+
+\paragraph{Definição}
+
+Dada a matriz $A$, a \textit{matriz transposta} de $A$ (dentoada por $A^t$) é a matriz que encontramos trocando as \textbf{linhas} da matriz $A$ por suas \textbf{colunas} e vice-versa (ordenadamente).
+
+\Example
+
+$$
+\text{Se } A=\begin{bmatrix*}[r]
+1 & 0 & -3 \\
+-1 & 7 & 2
+\end{bmatrix*}
+\Rightarrow A^t=\begin{bmatrix*}[r]
+1 & -1 \\
+0 & 7 \\
+-3 & 2
+\end{bmatrix*}
+$$
+
+\section{Igualdade}
+
+\paragraph{Definição:}
+
+Dadas duas matrizes $A$ e $B$, dizemos que $A=B$ se, e somente se, $A$ e $B$ possuírem as \textbf{mesmas dimensões} e se, para todo elemento $a_{mn}$ da matriz $A$ tivermos um elemento $b_{mn}$ da matriz $B$ tal que $a_{mn}=b_{mn}$.
+
+\Example
+
+\begin{gather*}
+\text{Dados } A=\begin{bmatrix*}[r]
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{bmatrix*}
+\text{ e }
+B=\begin{bmatrix*}[r]
+b_{11} & b_{12} \\
+b_{21} & b_{22}
+\end{bmatrix*}
+\text{, se } A=B \text{ segue que:} \\
+a_{11} = b_{11} \\
+a_{12} = b_{12} \\
+a_{21} = b_{21} \\
+a_{22} = b_{22}
+\end{gather*}
+
+\Example
+
+$$
+\text{Se } A=B \text{, então, se } A=\begin{bmatrix*}[r]
+-1 & 3 \\
+5 & 4
+\end{bmatrix*} \text{ sabemos que } B =\begin{bmatrix*}[r]
+-1 & 3 \\
+5 & 4
+\end{bmatrix*} \text{ também.}
+$$
+\centerline{\footnotesize{Repare que todos os elementos são iguais, em suas respectivas posições}}
+
+\section{Adição}
+
+\paragraph{Definição:}
+
+A adição de matrizes é a operação onde, dadas duas matrizes $A$ e $B$ com as mesmas dimensões, conseguimos uma matriz soma $(A+B)$ que será a matriz obtida adicionando-se os elementos correspondentes das matrizes $A$ e $B$.
+
+\Example
+
+\begin{gather*}
+    \text{Dadas } A=\begin{bmatrix*}[r]
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+    \end{bmatrix*}
+    \text{ e } B=\begin{bmatrix*}[r]
+    b_{11} & b_{12} \\
+    b_{21} & b_{22}
+    \end{bmatrix*}
+    \text{, a matriz } A+B \text{ será dada por:} \\
+    A+B=\begin{bmatrix*}[r]
+    a_{11} + b_{11} & a_{12} + b_{12} \\
+    a_{21} + b_{21} & a_{22} + b_{22}
+    \end{bmatrix*}    
+\end{gather*}
+
+\Example
+
+\begin{gather*}
+    \text{Se } A=\begin{bmatrix*}[r]
+    -1 & 3 \\
+    -4 & 7
+    \end{bmatrix*} \text{ e } B =\begin{bmatrix*}[r]
+    9 & 2\\
+    -4 & 5
+    \end{bmatrix*} \text{, segue que} \\
+    A+B=\begin{bmatrix*}[r]
+    -1+9 & 3+2 \\
+    -4-4 & 7+5
+    \end{bmatrix*}=\begin{bmatrix*}[r]
+    8 & 5 \\
+    -8 & 12
+    \end{bmatrix*}
+\end{gather*}
+
+A soma de matrizes pode ser realizada em qualquer ordem ($A+B=B+A$ ou \textit{“A ordem dos tratores não altera o viaduto”}), pode também ser realizada sem prioridade específica ($A+(B+C)=(A+B)+C$ ou \textit{“tanto faz somar A com B e depois com C ou fazer B com C primeiro”}).
+
+\section{Oposta}
+
+\paragraph{Definição:}
+
+Dada uma matriz $A$, sua \textit{matriz oposta} $X$ é a que satisfaz a condição:
+$$X+A=0\Rightarrow X=-A$$
+Encontramos a \textit{oposta} de $A$ (denotada por $-A$) \textbf{trocando os sinais de todos os elementos} da matriz $A$ original.
+
+\Example
+
+$$
+\text{Se }A=\begin{bmatrix*}[r]
+-1 & 3\\
+5 & 8\\
+-5 & -2
+\end{bmatrix*} \Rightarrow -A=\begin{bmatrix*}[r]
+1 & -3 \\
+-5 & -8\\
+5 & 2
+\end{bmatrix*}
+$$
+
+\section{Subtração}
+
+A \textit{subtração} de matrizes funciona de forma similar a adição, bastando apenas \textbf{trocar os sinais} da matriz que estamos subtraindo.
+
+\begin{gather*}
+    \text{Dadas }A=\begin{bmatrix*}[r]
+    -1 & 7 \\ -3 & 2
+    \end{bmatrix*} \text{ e }B=\begin{bmatrix*}[r]
+    5 & -5 \\ -2 & 3
+    \end{bmatrix*} \text{, a matriz }A-B \text{ será dada por} \\
+    A-B=\begin{bmatrix*}[r]
+    -1-5 & 7-(-5) \\ -3-(-2) & 2-3
+    \end{bmatrix*} = \begin{bmatrix*}[r]
+    -6 & 12 \\ -1 & -1
+    \end{bmatrix*}
+\end{gather*}
+
+\centerline{\footnotesize{Repare que primeiro trocamos os sinais dos elementos da matriz $B$ para depois somá-los.}}
+
+\section{Multiplicação por constante}
+
+Na multiplicação de uma matriz por um número real basta multiplicarmos cada um de seus elementos pelo número.
+
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+3 & 2 \\ -1 & 6
+\end{bmatrix*}\Rightarrow2A=\begin{bmatrix*}[r]
+2 \cdot 3 & 2 \cdot 2 \\ 2 \cdot (-1) & 2 \cdot 6
+\end{bmatrix*}=\begin{bmatrix*}[r]
+6 & 4 \\ -2 & 12
+\end{bmatrix*}
+$$

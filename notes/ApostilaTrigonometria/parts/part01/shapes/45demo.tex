@@ -1,0 +1,25 @@
+\begin{tikzscale}[1]
+	\tkzDefPoints{0/0/A,4/0/B}
+	\tkzDefPoint(45:5){C}
+	\tkzDefLine[perpendicular= through B](A,B) \tkzGetPoint{b}
+
+	\pgfresetboundingbox
+
+	\tkzInterLL(A,C)(B,b) \tkzGetPoint{C'}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,B,C')
+	\tkzLabelAngle[pos=0.15](A,B,C'){\small$\cdot$}
+
+	\tkzLabelSegment[below=2pt, xshift=3pt](A,B){$l=1$}
+	\tkzLabelSegment[right=2pt, yshift=-2pt](B,C'){$l=1$}
+	\tkzLabelSegment[above, rotate=45](A,C'){$h=\sqrt{2}$}
+
+	\tkzMarkAngle[size=1](B,A,C')
+	\tkzLabelPoint[xshift=0.85cm, yshift=19pt](A){$\SI{45}{\degree}$}
+
+	\tkzMarkAngle[size=1](A,C',B)
+	\tkzLabelPoint[xshift=-25pt, yshift=-25pt](C'){$\SI{45}{\degree}$}
+
+	\tkzDrawPolygon(A,B,C')
+
+\end{tikzscale}

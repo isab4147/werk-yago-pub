@@ -1,0 +1,290 @@
+\chapter{Razões trigonométricas}
+
+\section{Revisão}
+
+Podemos identificar alguns elementos importantes num triângulo retângulo como, por exemplo, os catetos e a hipotenusa.
+
+A hipotenusa é o lado que se opõe ao ângulo de $\SI{90}{\degree}$ (também conhecido como ângulo "reto") no triângulo retângulo.
+
+Os catetos são os lados que não são hipotenusa.
+
+Na figura abaixo, \textcolor{red!80}{$b$} é hipotenusa e \textcolor{blue!80}{$a$} e \textcolor{blue!80}{$c$} são catetos.
+
+\begin{tikzscale}[0.8]
+	\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+	\tkzDrawSegments[blue](A,B B,C)
+	\tkzDrawSegment[red](A,C)
+
+	\tkzLabelSegment[below=2pt, xshift=3pt, blue](A,B){$b$}
+	\tkzLabelSegment[right=2pt, yshift=-2pt, blue](B,C){$a$}
+	\tkzLabelSegment[above left, red](A,C){$c$}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+	\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+
+\end{tikzscale}
+
+\section{Teorema de pitágoras}
+
+\noindent Vale lembrar também o teorema de pitágoras, que estabelece que a soma do quadrado dos catetos é igual ao quadrado da hipotenusa, ou, em notação:
+
+$$
+	a^2+b^2=c^2
+$$
+
+Abaixo seguem duas provas desse fato, junto de suas visualizações geométricas.
+
+\subsection{1ª demonstração}
+
+\begin{multicols}{2}
+	\noindent Como os triângulos são semelhantes a razão entre a área de um deles e da sua hipotenusa ao quadrado é constante:
+
+	$$\frac{A_1}{\ell_1^2}=\frac{A_2}{\ell_2^2}=\frac{A_3}{\ell_3^2}=r$$
+
+	\input{parts/part01/shapes/triangle_pyt.tex}
+\end{multicols}
+
+Reescrevendo em função de $A_n$ temos que $A_n=r\cdot\ell_n^2$.
+Substituindo essa relação em $A_1=A_2+A_3$, temos que:
+
+\begin{gather*}
+	r\cdot\ell_1^2=r\cdot\ell_2^2+r\cdot\ell_3^2\\[0.5em]
+	\cancel{r}\cdot\ell_1^2=\cancel{r}\cdot\ell_2^2+\cancel{r}\cdot\ell_3^2\\[0.5em]
+	\boxed{\ell_1^2=\ell_2^2+\ell_3^2}
+\end{gather*}
+
+Outra maneira de demonstrar o teorema é apresentada a seguir:
+
+\subsection{2ª demonstração}
+
+\begin{multicols}{2}
+	A área ao lado pode ser expressa de duas formas:
+
+	\begin{enumerate}[label=(\Roman*), align=Center]
+		\item Pela soma dos lados dos triângulos: $A=(a+b)^2$, ou
+		\item Pela soma das áreas dos poligonos individuais (quatro trângulos e um quadrado no meio): $A=4\cdot\frac{1}{2}\cdot b \cdot a + c^2$
+	\end{enumerate}
+
+	\input{parts/part01/shapes/square_pyt.tex}
+\end{multicols}
+
+Como $A=A$ podemos igualar as duas expressões:
+
+\begin{gather*}
+	(a+b)^2=\frac{4}{2}\cdot ab+c^2\\
+	a^2+2ab+b^2=2ab+c^2\\
+	a^2+\cancel{2ab}+b^2=\cancel{2ab}+c^2\\
+	\boxed{a^2+b^2=c^2}
+\end{gather*}
+
+\section{\texorpdfstring{$\sen\alpha$ e $\cos\alpha$}{sen a e cos a}}
+
+Se pegarmos um ângulo $\alpha$ de um triângulo retângulo (que não seja o ângulo reto), podemos definir duas medidas básicas a partir deste:
+
+\vskip1em
+
+\begin{romanlistinline}
+	\item O seno (denotado $\sen \alpha$) e
+	\item o cosseno (denotado $\cos \alpha$).
+\end{romanlistinline}
+
+\vskip1em
+
+\begin{minipage}{\textwidth}
+	\begin{multicols}{2}
+		O seno do ângulo será definido como:
+
+		$$
+			\sen \alpha = \frac{\textcolor{blue}{CO}}{\textcolor{red}{H}}
+		$$
+
+		%\nopagebreak
+
+		Onde \textcolor{blue}{$CO$} é o cateto oposto ao ângulo e \textcolor{red}{$H$} é a hipotenusa do triângulo.
+
+		\vskip1em
+
+		O cosseno do ângulo será definido como:
+
+		$$
+			\cos \alpha = \frac{\textcolor{blue}{CA}}{\textcolor{red}{H}}
+		$$
+
+		Onde \textcolor{blue}{$CA$} é o cateto adjacente (próximo) ao ângulo e \textcolor{red}{$H$} é a hipotenusa do triângulo.
+
+		\columnbreak
+		\hskip5em
+		\begin{tikzscale}[0.8]
+			\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+			\tkzDrawSegment[blue](B,C)
+			\tkzDrawSegment(A,B)
+			\tkzDrawSegment[red](A,C)
+
+			\tkzLabelSegment[right=2pt, blue](B,C){$CO$}
+			\tkzLabelSegment[above left, red](A,C){$H$}
+
+			\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+			\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+
+			\tkzMarkAngle[size=1](B,A,C)
+			\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\alpha$}
+
+		\end{tikzscale}
+		\vskip5em
+		\hskip5em
+		\begin{tikzscale}[0.8]
+			\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+			\tkzDrawSegment(B,C)
+			\tkzDrawSegment[blue](A,B)
+			\tkzDrawSegment[red](A,C)
+
+			\tkzLabelSegment[below=2pt, xshift=5pt, blue](A,B){$CA$}
+			\tkzLabelSegment[above left, red](A,C){$H$}
+
+			\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+			\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+
+			\tkzMarkAngle[size=1](B,A,C)
+			\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\alpha$}
+
+		\end{tikzscale}
+
+	\end{multicols}
+
+\end{minipage}
+\vskip1em
+\begin{minipage}{\textwidth}
+
+	Podemos notar também que essas razões em função do ângulo não se alteram, independentemente do tamanho dos lados.
+
+	\paragraph{Exemplo:}
+
+	\begin{multicols}{2}
+
+		\begin{gather*}
+			\sen\SI{30}{\degree}=\frac{\textcolor{red}{a}}{\textcolor{red}{h}}=\frac{\textcolor{blue}{a'}}{\textcolor{blue}{h'}}=\frac{\textcolor{orange}{a''}}{\textcolor{orange}{h''}}\\
+			\cos\SI{30}{\degree}=\frac{\textcolor{red}{b}}{\textcolor{red}{h}}=\frac{\textcolor{blue}{b'}}{\textcolor{blue}{h'}}=\frac{\textcolor{orange}{b''}}{\textcolor{orange}{h''}}
+		\end{gather*}
+
+		O valor de $\sen\SI{30}{\degree}$ e $\cos\SI{30}{\degree}$ é o mesmo independente do tamanho do comprimento dos catetos ou da hipotenusa.
+
+		\input{parts/part01/shapes/sine_cosine_demo.tex}
+
+	\end{multicols}
+\end{minipage}
+
+\section{\texorpdfstring{$\tg\alpha$ e $\cotg\alpha$}{tg a e cotg a}}
+
+\begin{minipage}{\textwidth}
+	\begin{multicols}{2}
+		\noindent Temos também a tangente (denotada $\tg \alpha$), que será a relação:
+		\begin{align*}
+			\tg\alpha & = \frac{\sen\alpha}{\cos\alpha}                        \\
+			          & = \dfrac{\frac{CO}{H}}{\frac{CA}{H}}                   \\
+			          & = \dfrac{\frac{CO}{\cancel{H}}}{\frac{CA}{\cancel{H}}} \\
+			\tg\alpha & = \frac{\textcolor{blue}{CO}}{\textcolor{red}{CA}}
+		\end{align*}
+		\noindent E sua recíproca, a cotangente (denotada $\cotg\alpha$):
+		$$
+			\cotg\alpha=\frac{1}{\tg\alpha}=\frac{\cos\alpha}{\sen\alpha}=\frac{\textcolor{red}{CA}}{\textcolor{blue}{CO}}
+		$$
+		\begin{tikzscale}[0.8]
+			\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+			\tkzDrawSegment[red](A,B)
+			\tkzDrawSegment[blue](B,C)
+			\tkzDrawSegment(A,C)
+
+			\tkzLabelSegment[below=2pt, xshift=5pt, red](A,B){$CA$}
+			\tkzLabelSegment[right, blue](B,C){$CO$}
+
+			\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+			\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+
+			\tkzMarkAngle[size=1](B,A,C)
+			\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\alpha$}
+
+		\end{tikzscale}
+	\end{multicols}
+\end{minipage}
+
+\section{Relações básicas entre razões}
+
+Dizemos que dois ângulos quaisquer $\alpha$ e $\beta$ são complementares se sua soma resulta em $\SI{90}{\degree}$.
+
+Sabemos que a soma dos ângulos de um triângulo qualquer é $\SI{180}{\degree}$ (medida conhecida como "ângulo raso").
+
+Como um triângulo retângulo sempre terá um ângulo reto, os que sobram devem somar $\SI{90}{\degree}$, e, portanto, serão sempre complementares.
+
+Dado um triângulo retângulo $ABC$ qualquer
+
+\begin{multicols}{2}
+	\begin{gather*}
+		\alpha + \beta + \SI{90}{\degree}=\SI{180}{\degree}\\
+		\alpha + \beta = \SI{90}{\degree}
+	\end{gather*}
+
+	\vfill\null
+	\columnbreak
+
+	\begin{tikzscale}[0.8]
+		\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+		\tkzDrawTriangle[pythagore](A,B)
+
+		\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+		\tkzLabelAngle[pos=0.15](A,B,C){\small$\cdot$}
+
+		\tkzMarkAngle[size=1](B,A,C)
+		\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\alpha$}
+
+		\tkzMarkAngle[size=0.8](A,C,B)
+		\tkzLabelPoint[xshift=-18pt, yshift=-15pt](C){$\beta$}
+	\end{tikzscale}
+\end{multicols}
+
+Dado que dois ângulos $\alpha$ e $\beta$ são complementares, podemos verificar que
+
+$$
+	\sen \alpha=\frac{a}{b}=\cos\beta
+$$
+
+e o contrário ($\cos\alpha=\sen\beta$) também se verifica.
+
+Outra relação que surge dessa é que
+
+$$
+	\tg\alpha=\frac{\sen\alpha}{\cos\alpha}=\frac{\cos\beta}{\sen\beta}=\cotg\beta
+$$
+
+naturalmente, também vale que $\tg\beta=\cotg\alpha$.
+
+\section{Relação fundamental da trigonometria}
+
+\begin{minipage}{\textwidth}
+	Aplicando o teorema de pitágoras em um triângulo retângulo $ABC$ qualquer, temos que:
+	\nopagebreak
+	\begin{multicols}{2}
+		\begin{gather*}
+			a^2+b^2=c^2\\
+			\frac{a^2}{c^2}+\frac{b^2}{c^2}=\frac{\cancel{c^2}}{\cancel{c^2}}\\
+			\left(\vphantom{\dfrac{b}c}\dfrac{a}c\right)^2 +\left(\frac{b}{c}\right)^2=1\\
+			(\sen \alpha)^2+(\cos \alpha)^2=1\\
+			\boxed{\sen^2 \alpha + \cos^2 \alpha=1}
+		\end{gather*}
+		\vfill\null
+		\columnbreak
+		\vfill\null
+		\begin{tikzscale}[0.8]
+			\tkzDefPoints{0/0/A,4/0/B,4/3/C}
+			\tkzDrawTriangle[pythagore](A,B)
+
+			\tkzLabelSegment[below=2pt, xshift=3pt](A,B){$b$}
+			\tkzLabelSegment[right=2pt, yshift=-2pt](B,C){$a$}
+			\tkzLabelSegment[above left](A,C){$c$}
+
+			\tkzMarkRightAngle[line width=0.3pt](A,B,C)
+		\end{tikzscale}
+	\end{multicols}
+
+	A relação fundamental da trigonometria vale para qualquer ângulo $\alpha$.
+\end{minipage}
+

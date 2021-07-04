@@ -1,0 +1,109 @@
+\chapter{Ângulos notáveis}
+
+Existem ângulos cujos valores de seno e cosseno valem ser lembrados, pois são recorrentes e simples.
+
+\section{Razões trigonométricas para o ângulo de \texorpdfstring{$\SI{45}{\degree}$}{45º}}
+
+Um triângulo retângulo que possui um ângulo de $\SI{45}{\degree}$ é automaticamente isósceles (se $\alpha$ é o terceiro ângulo desse triângulo, segue que $\alpha + \SI{45}{\degree}=\SI{90}{\degree}\Rightarrow\alpha=\SI{45}{\degree}$)
+
+\paragraph{Nota:}
+Um triângulo isósceles é um triângulo que tem dois lados e dois ângulos iguais.
+
+Para encontrar os valores desejados vamos usar um triângulo isósceles com os lados iguais de valor $l=1$.
+
+\begin{multicols}{2}
+	Pelo teorema de pitágoras temos:
+	$$
+		l^2+l^2=h^2\Rightarrow1^2+1^2=h^2\Rightarrow2=h^2\Rightarrow h=\sqrt{2}
+	$$
+	Daí tiramos que:
+	\begin{gather*}
+		\sen\SI{45}{\degree}=\frac{1}{\sqrt{2}}=\frac{1}{\sqrt{2}}\cdot\frac{\sqrt{2}}{\sqrt{2}}=\frac{\sqrt{2}}{\left(\sqrt{2}\right)^2}=\frac{\sqrt{2}}{2}\\
+		\cos\SI{45}{\degree}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2}=\sen\SI{45}{\degree}
+	\end{gather*}
+
+	\input{parts/part01/shapes/45demo.tex}
+
+\end{multicols}
+
+\section{Razões trigonométricas para o ângulo de \texorpdfstring{$\SI{30}{\degree}$}{30º}}
+
+Vamos começar nossa demonstração com um triângulo equilátero, isso é, um triângulo que possui os três lados iguais (e, consequentemente, seus três ângulos também).
+
+Os ângulos do nosso triângulo vão medir $\alpha=\sfrac{\SI{180}{\degree}}{3}=\SI{60}{\degree}$ e seus lados vão medir $l=2$.
+
+\paragraph{Nota:}
+Repare que os tracinhos nos ângulos e nos lados do triângulo mostram que são iguais (mesma quantidade de traços equivale a ter o mesmo tamanho).
+
+\begin{minipage}{\textwidth}
+	\begin{multicols}{2}
+		Por pitágoras temos:
+		\begin{gather*}
+			h^2+c^2=l^2\Rightarrow h^2+1^2=2^2 \Rightarrow h^2=4-1\\
+			h^2=3 \Rightarrow h=\sqrt{3}
+		\end{gather*}
+		Daí segue que:
+		\begin{gather*}
+			\sen\SI{30}{\degree}=\frac{1}{2}\\
+			\cos\SI{30}{\degree}=\frac{\sqrt{3}}{2}
+		\end{gather*}
+		\vskip3em
+		\hskip5em
+		\input{parts/part01/shapes/3060demo.tex}
+
+	\end{multicols}
+\end{minipage}
+
+\section{Razões trigonométricas para o ângulo de \texorpdfstring{$\SI{60}{\degree}$}{60º}}
+
+Como $\SI{30}{\degree}$ e $\SI{60}{\degree}$ são ângulos complementares, vale que:
+
+\begin{gather*}
+	\sen\SI{30}{\degree}=\frac{1}{2}=\cos\SI{60}{\degree}\\[0.5em]
+	\cos\SI{30}{\degree}=\frac{\sqrt{3}}{2}=\sen\SI{60}{\degree}
+\end{gather*}
+
+\section{Outras razões trigonométricas para os ângulos notáveis}
+
+Vamos, agora, encontrar as relações básicas dos ângulos notáveis explorados anteriormente.
+
+Para o ângulo de $\SI{45}{\degree}$ temos que:
+
+\begin{gather*}
+	\tg\SI{45}{\degree}=\frac{\sen\SI{45}{\degree}}{\cos\SI{45}{\degree}}=\frac{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}}=\frac{\cancel{\frac{\sqrt{2}}{2}}}{\cancel{\frac{\sqrt{2}}{2}}}=1\\[0.5em]
+	\cotg\SI{45}{\degree}=\frac{1}{\tg\SI{45}{\degree}}=\frac{1}{1}=1=\tg\SI{45}{\degree}
+\end{gather*}
+
+Para os ângulos de $\SI{30}{\degree}$ e $\SI{60}{\degree}$ temos que:
+
+\begin{gather*}
+	\tg\SI{30}{\degree}=\frac{\sen\SI{30}{\degree}}{\cos\SI{30}{\degree}}=\frac{\frac{1}{2}}{\frac{\sqrt{3}}{2}}=\frac{1}{2}\div\frac{\sqrt{3}}{2}=\frac{1}{2}\cdot\frac{2}{\sqrt{3}}=\frac{1\cdot\cancel{2}}{\cancel{2}\cdot\sqrt{3}}=\frac{1}{\sqrt{3}}\cdot\frac{\sqrt{3}}{\sqrt{3}}=\frac{\sqrt{3}}{\left(\sqrt{3}\right)^2}=\frac{\sqrt{3}}{3}\\[0.5em]
+	\cotg\SI{30}{\degree}=\frac{1}{\tg\SI{30}{\degree}}=\frac{1}{\frac{\sqrt{3}}{3}}=1\div\frac{\sqrt{3}}{3}=1\cdot\frac{3}{\sqrt{3}}=\frac{3}{\sqrt{3}}\cdot\frac{\sqrt{3}}{\sqrt{3}}=\frac{3\cdot\sqrt{3}}{\left(\sqrt{3}\right)^2}=\frac{\cancel{3}\sqrt{3}}{\cancel{3}}=\sqrt{3}
+\end{gather*}
+
+Como $\tg\SI{30}{\degree}=\cotg\SI{60}{\degree}$ e vice-versa, temos:
+
+\begin{gather*}
+	\tg\SI{60}{\degree}=\cotg\SI{30}{\degree}=\sqrt{3}\\
+	\cotg\SI{60}{\degree}=\tg\SI{30}{\degree}=\frac{\sqrt{3}}{3}
+\end{gather*}
+
+Abaixo, segue uma tabela para refêrencia dos valores que encontramos.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{*{4}{c}}
+		\toprule
+		Razão   & \multicolumn{3}{c}{Ângulo}                                                 \\
+		\cmidrule(lr){2-4}
+		        & $\SI{30}{\degree}$         & $\SI{45}{\degree}$    & $\SI{60}{\degree}$    \\ \midrule
+		$\sen$  & $\dfrac{1}{2}$             & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ \\[5pt]
+		$\cos$  & $\dfrac{\sqrt{3}}{2}$      & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$        \\[5pt]
+		$\tg$   & $\dfrac{\sqrt{3}}{3}$      & $1$                   & $\sqrt{3}$            \\[5pt]
+		$\cotg$ & $\sqrt{3}$                 & $1$                   & $\dfrac{\sqrt{3}}{3}$ \\[5pt]
+		\bottomrule
+	\end{tabular}
+	\caption{Tabela dos valores dos ângulos notáveis}
+\end{table}
+
+

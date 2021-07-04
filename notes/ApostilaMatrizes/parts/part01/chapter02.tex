@@ -1,0 +1,241 @@
+\chapter{Matrizes Notáveis}
+Temos alguns tipos de matrizes com propriedades especiais, as quais vamos destacar nesta seção.
+
+\section{Matriz Quadrada}
+
+Denominamos \textit{quadrada} uma matriz onde o \textbf{número de linhas} é \textbf{igual} ao \textbf{número de colunas}. Nesse caso, ao invés de denotar seu tamanho pelos comprimentos $m \times n$ usamos somente uma de suas dimensões (dizemos então que a matriz é \textit{quadrada de ordem} $m$).
+
+\begin{minipage}{\textwidth}
+    $$
+    B=
+    \begin{bmatrix*}[r]
+        a & b\\
+        c & d
+    \end{bmatrix*}$$
+    \centerline{\footnotesize{Uma matriz $2 \times 2$ é quadrada, dizemos então que ela é \textit{quadrada de ordem} $2$.}}
+\end{minipage}
+
+Em toda matriz quadrada teremos duas \textbf{diagonais especiais}, chamadas \textit{principal} e \textit{secundária}.
+
+\subsection{Diagonal principal}
+A \textit{diagonal principal} será formada pelos elementos $a_{mn}$ onde ${m=n}$.
+
+\begin{tikzmatrix}
+        
+    \matrix (M) [matstyle]{
+    c_{11} \& c_{12} \& c_{13} \\
+    c_{21} \& c_{22} \& c_{23} \\
+    c_{31} \& c_{32} \& c_{33} \\
+    };
+    
+    \node [left=of M] {$C=$};
+    \scoped [on background layer]
+    \fill[blue!30,rounded corners] (M-1-1.east) to (M-3-3.north) to (M-3-3.east) to (M-3-3.south) to (M-1-1.west) to (M-1-1.north) -- cycle;
+        
+\end{tikzmatrix}
+
+\subsection{Diagonal secundária}
+A \textit{secundária} será formada pelos elementos $a_{mn}$ tais que ${m+n=\mathcal{O}+1}$ onde $\mathcal{O}$ é a ordem da matriz quadrada.
+
+\begin{tikzmatrix}
+    
+    \matrix (M) [matstyle]{
+    c_{11} \& c_{12} \& c_{13} \\
+    c_{21} \& c_{22} \& c_{23} \\
+    c_{31} \& c_{32} \& c_{33} \\
+    };
+    
+    \node [left=of M] {$C=$};
+    \scoped [on background layer]
+    \fill[blue!30,rounded corners] (M-1-3.west) to (M-3-1.north) to (M-3-1.west) to (M-3-1.south) to (M-1-3.east) to (M-1-3.north) -- cycle;
+        
+\end{tikzmatrix}
+
+\centerline{\footnotesize{Podemos ver a diagonal secundária grifada, onde os elementos obedecem a relação $m+n=3+1 \left(\mathcal{O}=3\right)$}}
+
+\section{Matriz identidade}
+As matrizes \textit{identidade} são outro tipo especial que consiste em uma matriz quadrada que possui $1$’s em sua diagonal principal e $0$’s em todas as outras posições. Denominamos \textit{matriz identidade de ordem} $n$ (denotada por $I_n$) uma matriz quadrada dessa ordem que satisfaz essas condições.
+
+Veremos mais a frente que essa matriz será equivalente ao número $1$ na operação de multiplicação de matrizes.
+
+$$
+I_2=
+\begin{bmatrix*}[r]
+    1 & 0 \\
+    0 & 1
+\end{bmatrix*}
+$$
+\centerline{\footnotesize{A matriz acima é uma \textit{matriz identidade de ordem} $2$}}
+
+\section{Matriz nula}
+Temos também as matrizes denominadas \textit{nulas}, as quais possuem todos os seus elementos igualando $0$ (nulos).
+
+Uma matriz $m\times n$ que satisfaça essa condição é denotada por $0_{m \times n}$.
+Caso essa matriz seja quadrada podemos denotá-la por $0_n$, onde $n$ é a ordem da matriz (a qual vamos chamar de \textit{matriz nula de ordem} $n$).
+
+$$
+0_{3 \times 2}=
+\begin{bmatrix*}[r]
+0 & 0 \\
+0 & 0 \\
+0 & 0
+\end{bmatrix*}
+$$
+\centerline{\footnotesize{Acima temos uma \textit{matriz nula} $3 \times 2$}}
+
+\section{Matriz linha/coluna}
+
+Podemos ter também matrizes \textit{linha} ou \textit{coluna}, as quais são matrizes que se resumem a uma \textbf{linha} ou \textbf{coluna}, respectivamente.
+
+\begin{alignat*}{3}
+    A=\begin{bmatrix*}[r] a & b \end{bmatrix*} & \hspace{50pt} & B=\begin{bmatrix}a \\ b\end{bmatrix}
+\end{alignat*}
+
+\begin{center}
+    \footnotesize{A matriz $A$ é uma \textit{matriz linha}, pois todos os seus elementos se\\ encontram em uma única linha, já a matriz $B$ é uma \textit{matriz coluna}}
+\end{center}
+
+\section{Matriz triangular}
+
+Dizemos que uma matriz é \textit{triangular} se esta, além de se quadrada, tiver todos os elementos acima ou abaixo da diagonal principal \textbf{nulos}.
+
+\subsection{Superior}
+Uma matriz triangular é dita \textit{superior} se a parte \textbf{abaixo} da diagonal principal for nula.
+
+$$
+A_3=\begin{bmatrix*}[c]
+a_{11} & a_{12} & a_{13}\\
+0 & a_{22} & a_{23}\\
+0 & 0 & a_{33}
+\end{bmatrix*}
+$$
+
+\begin{center}
+    \footnotesize{A matriz acima é triangular superior de ordem 3, pois todos os elementos abaixo da diagonal principal são nulos}
+\end{center}
+
+\subsection{Inferior}
+Uma matriz triangular é dita \textit{inferior} se a parte \textbf{acima} da diagonal principal for nula.
+
+
+$$
+A_3=\begin{bmatrix*}[c]
+a_{11} & 0 & 0\\
+a_{21} & a_{22} & 0\\
+a_{31} & a_{32} & a_{33}
+\end{bmatrix*}
+$$
+
+\begin{center}
+    \footnotesize{A matriz acima é triangular superior de ordem 3, pois todos os elementos abaixo da diagonal principal são nulos}
+\end{center}
+
+\section{Matriz diagonal}
+Chamamos de \textit{diagonal} uma matriz quadrada onde todos os elementos que não pertencem à diagonal principal são nulos.
+
+$$
+A_4=\begin{bmatrix*}[c]
+a_{11} & 0 & 0 & 0\\
+0 & a_{22} & 0 & 0\\
+0 & 0 & a_{33} & 0\\
+0 & 0 & 0 & a_{44}
+\end{bmatrix*}
+$$
+
+\begin{center}
+    \footnotesize{A matriz acima é diagonal de ordem 4}
+\end{center}
+
+\paragraph{Nota:}
+Repare que se uma matriz triangular for \textbf{simultaneamente} superior e inferior, esta será uma matriz chamada \textit{diagonal}.
+
+\section{Matriz de Vandermonde}
+
+Vamos analisar um pequeno exemplo:
+
+$$
+\begin{bmatrix*}[r]
+1 & 1 & 1\\
+3 & 5 & 2\\
+9 & 25 & 4
+\end{bmatrix*}
+$$
+
+Repare como a matriz acima pode ser escrita como:
+
+$$
+\begin{bmatrix*}[r]
+3^0 & 5^0 & 2^0\\
+3^1 & 5^1 & 2^1\\
+3^2 & 5^2 & 2^2
+\end{bmatrix*}
+$$
+
+As matrizes que têm essa propriedade são chamadas \textit{matrizes de Vandermonde}.
+
+\paragraph{Definição:}
+A matriz de \textit{Vandermonde} é aquela onde cada \textbf{linha} ou \textbf{coluna} representa um \textbf{termo} de uma \textbf{progressão geométrica} de base $a_n$.
+
+\vspace{-2em}
+
+\begin{multicols}{2}
+\null
+\noindent A matriz de \textit{Vandermonde} ao lado possui PG's em suas \textbf{linhas}. Podemos ver que os expoentes começam em $0$ e vão até $n-1$, aumentando para a direita.
+
+\vskip0.2em\null
+
+\columnbreak
+
+$$
+V_{m \times n} =
+\begin{bmatrix}
+    a_1^0 & a_1^1 & \cdots & a_1^{n-1}\tikzmark{mv1r1} \\[0.5em]
+    a_2^0 & a_2^1 & \cdots & a_2^{n-1}\tikzmark{mv1r2} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_m^0 & a_m^1 & \cdots & a_m^{n-1}\tikzmark{mv1r3}
+\end{bmatrix}
+$$
+\end{multicols}
+
+\begin{multicols}{2}
+
+\null
+
+\noindent A matriz de \textit{Vandermonde} ao lado possui PG's em suas \textbf{colunas}. Podemos ver que os expoentes começam em $0$ e vão até $n-1$, aumentando para baixo.
+
+\vskip1em\null
+
+\columnbreak
+
+\null\vskip1em
+
+$$
+V_{n \times m} =
+\begin{bmatrix}
+    \tikzmark{mv2c1}a_1^0 & \tikzmark{mv2c2}a_2^0 & \cdots & \tikzmark{mv2c3}a_m^0 \\[0.5em]
+    a_1^1 & a_2^1 & \cdots & a_m^1 \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_1^{n-1} & a_2^{n-1} & \cdots & a_m^{n-1}
+\end{bmatrix}
+$$
+
+\null
+
+\end{multicols}
+\begin{tikzoverlay}[]
+    \draw[latex-] (mv1r1) ++(5pt,2pt) -- +(0.5cm, 0) node[anchor=west] {PG de base $a_1$};
+    \draw[latex-] (mv1r2) ++(5pt,3pt) -- +(0.5cm, 0) node[anchor=west] {PG de base $a_2$};
+    \draw[latex-] (mv1r3) ++(5pt,4pt) -- +(0.5cm, 0) node[anchor=west] {PG de base $a_m$};
+    
+    \draw[latex-] (mv2c1) ++(5pt, 10pt) -- +(0, 0.5cm) node(a)[]{};
+    
+    \node at ($(a) +(20pt, -3pt)$) [above left] {PG de base $a_1$};
+    
+    \draw[latex-] (mv2c2) ++(5pt, 10pt) -- +(0, 1cm) node(b) [] {};
+    
+    \node at ($(b) +(10pt, -3pt)$) [above] {PG de base $a_2$};
+    
+    \draw[latex-] (mv2c3) ++(5pt, 10pt) -- +(0, 0.5cm) node(c)[] {};
+    
+    \node at ($(c) +(-20pt, -3pt)$)[above right]{PG de base $a_m$};
+\end{tikzoverlay}

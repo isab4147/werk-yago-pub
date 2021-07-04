@@ -1,0 +1,72 @@
+\begin{tikzscale}[0.8]
+	\tkzDefPoints{0/0/A,3/0/B,5/0/C,8/0/D}
+	\tkzDefPoint(30:9){E}
+
+	\tkzDefLine[perpendicular=through B](A,B) \tkzGetPoint{b}
+	\tkzDefLine[perpendicular=through C](A,C) \tkzGetPoint{c}
+	\tkzDefLine[perpendicular=through D](A,D) \tkzGetPoint{d}
+
+	\pgfresetboundingbox
+
+	\tkzDefPoints{0/-0.7/AB,0/-1.4/AC,0/-2.1/AD,3/-0.7/B',5/-1.4/C',8/-2.1/D'}
+
+	\tkzDrawSegment[red](AB,B')
+	\tkzDrawSegment[blue](AC,C')
+	\tkzDrawSegment[orange](AD,D')
+
+	\tkzInterLL(A,E)(B,b) \tkzGetPoint{I1}
+	\tkzInterLL(A,E)(C,c) \tkzGetPoint{I2}
+	\tkzInterLL(A,E)(D,d) \tkzGetPoint{I3}
+
+	\begin{scope}[rotate=30]
+		\tkzDefPoints{0/0.7/AI1,0/1.4/AI2,0/2.1/AI3}
+
+		\foreach \i in {1, 2, 3}{
+				\begin{scope}[shift={(I\i)}]
+					\tkzDefPoint(0, 0.7*\i){I\i '}
+				\end{scope}
+			}
+	\end{scope}
+
+	\tkzDrawSegment[red](AI1,I1')
+	\tkzDrawSegment[blue](AI2,I2')
+	\tkzDrawSegment[orange](AI3,I3')
+
+	\tkzLabelSegment[below, rotate=30, red](AI1,I1'){$h$}
+	\tkzLabelSegment[below, rotate=30, blue](AI2,I2'){$h'$}
+	\tkzLabelSegment[below, rotate=30, orange](AI3,I3'){$h''$}
+
+	\tkzDrawLines[add=0 and 0.1 ,style=dashed](A,AI3 I1,I1' I2,I2' I3,I3')
+
+	\tkzDrawLine[add=0 and 0.2](A,D)
+	\tkzDrawLine[add=0 and 0.2](A,E)
+
+	\tkzMarkAngle[size=1](B,A,I1)
+	\tkzLabelPoint[xshift=0.71cm, yshift=14pt](A){$\SI{30}{\degree}$}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,B,I1)
+	\tkzLabelAngle[pos=0.15](A,B,I1){\small$\cdot$}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,C,I2)
+	\tkzLabelAngle[pos=0.15](A,C,I2){\small$\cdot$}
+
+	\tkzMarkRightAngle[line width=0.3pt](A,D,I3)
+	\tkzLabelAngle[pos=0.15](A,D,I3){\small$\cdot$}
+
+	\tkzDrawSegment[red](B,I1)
+	\tkzDrawSegment[blue](C,I2)
+	\tkzDrawSegment[orange](D,I3)
+
+	\tkzLabelSegment[right, red](B,I1){$a$}
+	\tkzLabelSegment[right, blue](C,I2){$a'$}
+	\tkzLabelSegment[right, orange](D,I3){$a''$}
+
+	\tkzLabelSegment[above, red](AB,B'){$b$}
+	\tkzLabelSegment[above, blue](AC,C'){$b'$}
+	\tkzLabelSegment[above, orange](AD,D'){$b''$}
+
+	\tkzDrawLines[add=0 and 0.1 ,style=dashed](A,AD B,B' C,C' D,D')
+
+	\tkzDrawPoints(B,C,D,I1,I2,I3)
+
+\end{tikzscale}

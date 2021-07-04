@@ -1,0 +1,49 @@
+\documentclass{IMTbook}
+
+%\usepackage{fontspec} % specify font
+
+\usepackage{CJKutf8} %japanese char
+
+\usepackage{caption, multicol, empheq, booktabs}
+\usepackage[enums,externalize,weirdsymbols]{IMTtikz}
+\usetikzlibrary{matrix}
+
+\externalizefigs
+
+% define general tikz matrix style
+\tikzset{matstyle/.style={matrix of math nodes,inner sep=3pt, left delimiter={[}, right delimiter={]}}}
+
+
+%define new env for tikz matrix
+\NewEnvironx{tikzmatrix}[1][1=]{\begin{center}
+		\begin{tikzpicture}[node distance=0pt, every left delimiter/.style={xshift=.75em},
+		every right delimiter/.style={xshift=-.75em}, ampersand replacement=\&, #1]}{
+		\end{tikzpicture}
+	\end{center}}
+
+\newcommand{\myscale}{0.8}
+\newcommand{\myunit}{\myscale*1 cm}
+
+\tikzset{node style sp/.style={draw,circle,minimum size=\myunit}, 
+	node style ge/.style={circle,minimum size=\myunit},
+	arrow style mul/.style={draw,sloped,midway,fill=white},
+	arrow style plus/.style={midway,sloped,fill=white}}
+
+\title{Matrizes, Determinantes e Sistemas lineares}
+\subtitle{uma apostila para o ensino médio}
+\author{Isabella B.}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+%begin content inputting here
+
+\input{parts/part01.tex}
+\input{parts/part02.tex}
+\input{parts/part03.tex}
+
+\end{document}
+ 

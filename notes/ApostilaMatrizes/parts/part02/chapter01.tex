@@ -1,0 +1,137 @@
+\chapter{Introdução}
+
+\section{Um pouco de contexto}
+
+Historicamente, os determinantes eram usados muito anteriormente em relação às matrizes, e eram considerados uma propriedade dos sistemas lineares (abordados na \autoref{p:3}). Os determinantes "determinam"~se um sistema linear qualquer tem ou não solução única.
+
+O japonês \textit{Seki Takakazu} (\begin{CJK}{UTF8}{min}関 孝和\end{CJK}) leva o crédito da descoberta da resultante e do determinante (1683-1710) e, na Europa, depois que \textit{Leibniz} introduziu o estudo dos determinantes, \textit{Gabriel Cramer} expandiu a teoria relacionando-a à conjuntos de equações.
+
+\textit{Vandermonde} foi o primeiro a tratar os determinantes como funções independentes de sistemas lineares e \textit{Laplace} contribuiu com o método geral para escrever um determinante através de seus cofatores. \textit{Lagrange} e \textit{Gauss}, utilizando os determinantes na teoria dos números, fizeram avanços importantes na teoria, e \textit{Gauss} foi o primeiro a usar o nome \textit{determinante}, embora não no sentido atual.
+
+Foi \textit{Cauchy} quem primeiro introduziu o termo \textit{determinante} no sentido aceito atualmente, num trabalho publicado em 1812, anteriormente o termo \textit{resultante} havia sido utilizado por \textit{Laplace}.
+
+Quem mais contribuiu para a teoria de determinantes foi \textit{Carl G. J. Jacobi} (1804-1851). A simplicidade atual da apresentação dessa teoria se deve a ele.
+
+
+\section{Definição e resolução para \texorpdfstring{$n \leqslant 3$}{n <= 3}}
+
+Podemos dizer que o \textit{determinante} de uma matriz quadrada é o seu \textbf{valor numérico}.
+
+Denotamos o \textit{determinante} de uma matriz quadrada qualquer $A$ por
+
+\begin{center}
+    \begin{romanlistinline}
+        \item $\det A$ , ou \item $|A|$
+    \end{romanlistinline}
+\end{center}
+
+\Example
+
+$$
+\text{Seja a matriz }A=\begin{bmatrix*}[r]
+1 & 2\\ 3 & 4
+\end{bmatrix*}\text{, denotamos seu determinante por }\det A=\det\begin{bmatrix*}[r]
+1 & 2\\ 3 & 4
+\end{bmatrix*}=\begin{vmatrix}
+1 & 2\\ 3 & 4
+\end{vmatrix}
+$$
+
+\subsection{Caso \texorpdfstring{$n=1$}{n=1}}
+
+Quando temos uma matriz com um único elemento seu determinante será esse elemento. 
+
+\Example
+
+$$
+\text{Dada a matriz }A=[-2]\text{, }\det A=-2
+$$
+
+\subsection{Caso \texorpdfstring{$n=2$}{n=2}}
+
+Quando temos uma matriz quadrada de ordem 2 basta tomar o produto dos elementos da \textbf{diagonal principal} e \textbf{subtraí-lo} pelo produto dos elementos da \textbf{diagonal secundária}.
+
+\Example
+
+$$
+\text{Dada a matriz }A=\begin{bmatrix*}[r]
+    2 & 3\\ -3 & 1
+\end{bmatrix*}\text{, }\det A=2\cdot 1 -3\cdot (-3) \Rightarrow \det A=2+9=11 
+$$
+
+\subsection{Caso \texorpdfstring{$n=3$}{n=3}}
+
+Com uma matriz quadrada de grau 3 o processo é bastante similar ao do grau $2$ (descrito logo acima). 
+
+Primeiro devemos \textbf{repetir} a primeira e a segunda colunas da matriz à sua direita (como mostrado em \textcolor{red}{vermelho}):
+
+\begin{gather*}
+    A=\begin{bmatrix*}[r]
+        a_{11} & a_{12} & a_{13} \\
+        a_{21} & a_{22} & a_{23} \\
+        a_{31} & a_{32} & a_{33}
+    \end{bmatrix*} \Rightarrow \\
+    \det A= \begin{vmatrix*}[r]
+        a_{11} & a_{12} & a_{13} \\
+        a_{21} & a_{22} & a_{23} \\
+        a_{31} & a_{32} & a_{33}
+    \end{vmatrix*} \color{red} \begin{matrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22} \\
+        a_{31} & a_{32}
+    \end{matrix}
+\end{gather*}
+
+Em seguida devemos calcular o \textbf{produto} das diagonais formadas:
+
+\begin{center}
+        \begin{tikzpicture}[node distance=-6pt, every left delimiter/.style={xshift=.50em},
+        every right delimiter/.style={xshift=-.50em}, ampersand replacement=\&]
+        
+        \matrix(M1)[matstyle]{
+            a_{11} \& a_{12} \& a_{13} \\
+            a_{21} \& a_{22} \& a_{23} \\
+            a_{31} \& a_{32} \& a_{33} \\
+        };
+        \matrix(M2)[matrix of math nodes, right=of M1, nodes={color=red!80}]{
+            a_{11} \& a_{12} \\
+            a_{21} \& a_{22} \\
+            a_{31} \& a_{32} \\
+        };
+    
+        \begin{scope}[on background layer, every node/.style={fill=white, circle, draw, draw=white, minimum width=14pt}]
+            \draw[->, redAr!80] (M1-1-1.north west) -- (M1-3-3.south east);
+            \draw[->, redAr!80] (M1-1-2.north west) -- (M2-3-1.south east);
+            \draw[->, redAr!80] (M1-1-3.north west) -- (M2-3-2.south east);
+            \draw[->, greenAr!80] (M2-1-2.north east) -- (M1-3-3.south west);
+            \draw[->, greenAr!80] (M2-1-1.north east) -- (M1-3-2.south west);
+            \draw[->, greenAr!80] (M1-1-3.north east) -- (M1-3-1.south west);
+            
+            \foreach \i in {1,2,3}{
+                \foreach \j in {1,2,3}
+                    \node[] at (M1-\i -\j) {  };
+            }
+            \foreach \i in {1,2,3}{
+                \foreach \j in {1,2}
+                    \node [] at (M2-\i -\j) {  };
+            }
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+Ficamos com:
+
+\begin{gather*}
+    \det A=\\
+    a_{11} \cdot a_{22} \cdot a_{33} + 
+    a_{12} \cdot a_{23} \cdot a_{31} +
+    a_{13} \cdot a_{21} \cdot a_{32} \\
+    - a_{13} \cdot a_{22} \cdot a_{31}
+    - a_{22} \cdot a_{23} \cdot a_{32}
+    - a_{31} \cdot a_{21} \cdot a_{33}
+\end{gather*}
+
+Note que as diagonais na direção da principal devem ser \textbf{somadas} e as contrárias devem ser \textbf{subtraídas}.
+
+\paragraph{Nota:}
+Esse método é chamado de \textit{Regra de Sarrus}.

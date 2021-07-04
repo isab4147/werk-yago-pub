@@ -1,0 +1,33 @@
+\begin{tikzscale}[1]
+	\tkzDefPoints{0/0/A,4/0/B}
+	\tkzDefPoint(60:4){C}
+	\tkzDefMidPoint(A,B) \tkzGetPoint{mAB}
+
+	\tkzDrawSegment(mAB, C)
+
+	\tkzDrawPolygon(A,B,C)
+
+	\tkzMarkRightAngle[line width=0.3pt](B,mAB,C)
+	\tkzLabelAngle[pos=0.15](B,mAB,C){\small$\cdot$}
+
+	\tkzLabelSegment[below=2pt](mAB,B){$c=1$}
+	\tkzLabelSegment[above=2pt, rotate=-60](B,C){$l=2$}
+
+	\tkzMarkAngle[size=0.8,mark=|](B,A,C)
+	\tkzLabelPoint[xshift=23pt, yshift=20pt](A){$\SI{60}{\degree}$}
+
+	\tkzMarkAngle[size=0.8, mark=|](C,B,A)
+
+	\tkzMarkAngle[size=0.8,mark=||](A,C,mAB)
+	\tkzLabelPoint[xshift=-18pt, yshift=-24pt](C){$\SI{30}{\degree}$}
+
+	\tkzMarkAngle[size=0.8,mark=||](mAB,C,B)
+
+	\tkzLabelSegment[yshift=-10pt,rotate=90](mAB,C){$h=\sqrt{3}$}
+
+	\tkzMarkSegment[mark=|](A,C)
+	\tkzMarkSegment[mark=|](C,B)
+	\tkzMarkSegment[mark=||](A,mAB)
+	\tkzMarkSegment[mark=||](mAB,B)
+
+\end{tikzscale}

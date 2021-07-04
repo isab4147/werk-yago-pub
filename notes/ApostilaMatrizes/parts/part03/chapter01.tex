@@ -1,0 +1,61 @@
+\chapter{Introdução}
+
+Os sistemas lineares tem sua história emendada aos determinantes e às matrizes, sendo um tópico amplamente estudado e desenvolvido no ramo da álgebra linear, do qual é base e parte fundamental.
+
+\section{Definição}
+
+Um \textit{sistema linear} consiste em um tipo de equação onde temos diferentes incógnitas ($x$, $y$, $z$ ...), \textbf{multiplicadas} por valores \textbf{reais} (chamados \textit{coeficientes}) e \textbf{igualados} à um número que \textbf{não multiplica} nenhuma incógnita (chamado \textit{termo independente}) e que \textbf{também} é real.
+
+\Example
+
+\bigskip
+
+$$
+\tikzmark{c1}2\tikzmark{i1}x+\tikzmark{c2}3\tikzmark{i2}y=\tikzmark{yi}4
+$$
+
+\begin{tikzoverlay}[]
+        
+        \draw[thick, <-, greenAr!80] (c1.north) ++(3pt, 9pt) -- +(0, 10pt) node [above] {coeficientes};
+        
+        \draw[thick, <-, greenAr!80] (c2.north) ++(3pt, 9pt) -- +(0, 10pt);
+        
+        \draw[thick, <-, redAr!80] (yi.north) ++(3pt, 9pt) -- +(0, 10pt) node (yiAr) [above] {};
+        
+        \node at ($(yiAr.north) +(-10pt, -1pt)$) [redAr, right] {termo independente};
+        
+        \draw[thick, <-, orange!80] (i1.south) ++(3pt, -3pt) -- +(0, -10pt) node (inAr) [below] {};
+        
+        \node at ($(inAr.south) +(2pt, 0pt)$) [orange] {incógnitas};
+        
+        \draw[thick, <-, orange!80] (i2.south) ++(3pt, -3pt) -- +(0, -10pt);
+        
+\end{tikzoverlay}
+
+\bigskip
+
+Repare que o mesmo sistema pode ser reescrito como:
+
+$$
+2x+3y-4=0
+$$
+
+Se alguma das incógnitas estiver sendo multiplicada por \textbf{outra coisa} que \textbf{não seja} um número real, nosso sistema \textbf{não será} mais linear e, portanto, não nos interessa mais.
+
+\Example
+
+\begin{enumerate}
+    \item O sistema $x^2+2y=0$ não é linear, pois $x\cdot x$ foge da nossa definição.
+    \item O sistema $x\cdot y+y=3$ não é linear, pois $x\cdot y$ foge da nossa definição.
+    \item O sistema $x+\sqrt{y}=2$ não é linear, pois $\sqrt{y}$ foge da nossa definição.
+\end{enumerate}
+
+Para resolver um sistema linear dispomos de alguns métodos já estudados previamente, como, por exemplo:
+
+\begin{enumerate}[label=(\Roman*), align=Center]
+    \item Substituição
+    \item Adição
+    \item Escalonamento
+\end{enumerate}
+
+Aqui focaremos no terceiro método, juntamente de outros que nos permitem classificar um sistema de forma útil.
